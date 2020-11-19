@@ -18,3 +18,7 @@ module.exports.login = (req, res) => {
       res.cookie('token', token, { httpOnly: true }).sendStatus(200);
   })
 }
+
+module.exports.testAuth = (req, res) => {
+  res.status(200).send("If you can see this, you are authenticated");
+}
