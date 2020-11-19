@@ -1,3 +1,4 @@
+//All url routes should be directed in this file
 const express = require("express");
 const router = express.Router();
 
