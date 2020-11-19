@@ -19,4 +19,4 @@ app.use(cookieParser()); // Use cookieparser to read cookies for authentication.
 
 const server = http.createServer(app);
 
-server.listen(port, () => console.log(`ePCR backend istening on port ${port}`));
+server.listen(port, () => console.log(`ePCR backend listening on port ${port}`));
