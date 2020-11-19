@@ -8,6 +8,7 @@ require('dotenv').config(); // Loads variables from .env file into process.env o
 const port = process.env.PORT || 3000; // localhost:3000 unless specified otherwise.
 
 const app = express();
+const router = require("./routes/router");
 
 app.use(
     bodyParser.urlencoded({
@@ -16,6 +17,7 @@ app.use(
   );
 app.use(bodyParser.json()); // Be able to read the json body of POST requests
 app.use(cookieParser()); // Use cookieparser to read cookies for authentication.
+app.use(router); // Use /routes/router.js
 
 const server = http.createServer(app);
 
