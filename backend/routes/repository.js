@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.JWT_SECRET;
 const bcrypt = require('bcrypt');
 
-const db = require('../mysql');
+const db = require('../sql/database');
 
 // Can change this later, but will for now work with a login form:
 module.exports.login = (username, typedPassword, callback) => {
