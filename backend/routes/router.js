@@ -13,6 +13,4 @@ router.get("/", (req, res) => {
   res.status(200).send("test");
 });
 
-router.get("/test-auth", auth, (req, res) => {
-  res.status(200).send("If you can see this, you are authenticated");
-});
+router.get("/test-auth", auth, controller.testAuth);
