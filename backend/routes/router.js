@@ -13,17 +13,15 @@ router.post("/login", (req, res) => {
   if(!username || !password)
       return res.status(401).json({ error: 'Username or password field blank');
   
-  controller.login(username, password, (err, accountFound, token) => {
+  controller.login(username, password, (err, passwordMismatch, token) => {
     if (err){
       console.log(err);
       res.status(500).json({ error: 'Internal error please try again' });
     }
-    else if (!accountFound)
-      res.status(401).json({ error: 'Incorrect email or password' });
-    else {
-      res.cookie('token', token, { httpOnly: true })
-        .sendStatus(200);
-    }
+    else if (!passwordMismatch)
+      res.status(401).json({ error: 'Incorrect password' });
+    else
+      res.cookie('token', token, { httpOnly: true }).sendStatus(200);
   })
 })
 
