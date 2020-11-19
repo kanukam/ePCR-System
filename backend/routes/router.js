@@ -9,8 +9,9 @@ const controller = require('./controller');
 // Will work for login page for now, can change later:
 router.post("/login", controller.login)
 
+router.get("/test-auth", auth, controller.testAuth);
+
 router.get("/", (req, res) => {
   res.status(200).send("test");
 });
 
-router.get("/test-auth", auth, controller.testAuth);
