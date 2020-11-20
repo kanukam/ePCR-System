@@ -15,3 +15,4 @@ router.get("/", (req, res) => {
   res.status(200).send("test");
 });
 
+module.exports = router

@@ -1,8 +1,7 @@
 const express = require("express");
-
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-
+const http = require("http")
 require('dotenv').config(); // Loads variables from .env file into process.env object
 
 const port = process.env.PORT || 3000; // localhost:3000 unless specified otherwise.

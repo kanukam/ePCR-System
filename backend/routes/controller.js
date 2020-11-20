@@ -5,7 +5,7 @@ module.exports.login = (req, res) => {
   const { username, password } = req.body;
   
   if(!username || !password)
-      return res.status(401).json({ error: 'Username or password field blank');
+      return res.status(401).json({ error: 'Username or password field blank'});
   
   repo.login(username, password, (err, passwordMismatch, token) => {
     if (err){
