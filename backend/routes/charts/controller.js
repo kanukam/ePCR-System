@@ -1,10 +1,10 @@
 const db = require('../../sql/database');
 
-function viewAllCharts = (req, res) => {
+viewAllCharts = (req, res) => {
   //someone else can work on these if they want
 }
 
-function addChart = (req, res) => {
+addChart = (req, res) => {
  //someone else can work on these if they want
 }
 
