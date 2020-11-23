@@ -36,7 +36,7 @@ export default class App extends React.Component {
         throw Error("Failed");
       }
       console.log("Success");
-      this.setAuth({ authorized: true });
+      this.setAuth({ auth: true });
     }).catch((error) => {
       console.log("Error");
     })
