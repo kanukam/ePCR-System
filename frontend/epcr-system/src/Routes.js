@@ -8,7 +8,7 @@ export const ProtectedRoute = ({auth, component: Component, ...rest }) => {
         <Route
             {...rest}
             render={() => auth? (
-                <Component a="a"/>
+                <Component />
             ):
                 (
                     <Redirect to="/"/>
