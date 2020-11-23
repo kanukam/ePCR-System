@@ -7,7 +7,7 @@ const db = require('../sql/database');
 // Can change this later, but will for now work with a login form:
 module.exports.login = (username, typedPassword, callback) => {
     // Callback : callback(error, passwordMismatch?, token)
-    db.query(`SELECT * from main.accounts WHERE username='${username}'`, // !!! SET UP DATABASE AND THEN CHANGE THIS
+    db.query(`SELECT * from accounts WHERE username='${username}'`, // !!! SET UP DATABASE AND THEN CHANGE THIS
       (err, res) => {
           if(err) 
               return callback(err);
