@@ -16,7 +16,7 @@ app.use(
 app.use(bodyParser.json()); // Be able to read the json body of POST requests
 app.use(cookieParser()); // Use cookieparser to read cookies for authentication.
 app.use(cors({
-  origin: 'http://localhost:3001',
+  origin: 'http://localhost:3001',  // Example React server
   credentials: true
 }));
 app.use(router); // Use /routes/router.js
