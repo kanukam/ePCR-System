@@ -80,12 +80,12 @@ export default class Login extends Component {
 
                                 <Form onSubmit={this.handleSubmit}>
                                     {/* Username Field */}
-                                    <Form.Group controlId="formBasicEmail">
+                                    <Form.Group>
                                         <Form.Label>Username</Form.Label>
                                         <Form.Control type="text" placeholder="Enter username" value ={this.state.username} onChange={e => this.setState({ username: e.target.value }) }/>
                                     </Form.Group>
                                     {/* Password Field */}
-                                    <Form.Group controlId="formBasicPassword">
+                                    <Form.Group>
                                         <Form.Label>Password</Form.Label>
                                         <Form.Control type="password" placeholder="Password" value={this.state.password} onChange={e => this.setState({ password: e.target.value })}/>
                                     </Form.Group>

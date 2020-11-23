@@ -84,27 +84,27 @@ export default class Register extends Component {
 
                                 <Form onSubmit={this.handleSubmit}>
                                     {/* Name Field */}
-                                    <Form.Group controlId="formBasicPassword">
+                                    <Form.Group>
                                         <Form.Label>Enter Name</Form.Label>
                                         <Form.Control type="text" placeholder="Enter name" value={this.state.name} onChange={e => this.setState({ name: e.target.value })} />
                                     </Form.Group>
                                     {/* Name Field */}
-                                    <Form.Group controlId="formBasicEmail">
+                                    <Form.Group>
                                         <Form.Label>Enter Email</Form.Label>
                                         <Form.Control type="email" placeholder="Enter E-mail" value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
                                     </Form.Group>
                                     {/* Username Field */}
-                                    <Form.Group controlId="formBasicUsername">
+                                    <Form.Group>
                                         <Form.Label>Username</Form.Label>
                                         <Form.Control type="text" placeholder="Enter username" value ={this.state.username} onChange={e => this.setState({ username: e.target.value }) }/>
                                     </Form.Group>
                                     {/* Password Field */}
-                                    <Form.Group controlId="formBasicPassword">
+                                    <Form.Group>
                                         <Form.Label>Enter Password</Form.Label>
                                         <Form.Control type="password" placeholder="Password" value={this.state.password} onChange={e => this.setState({ password: e.target.value })}/>
                                     </Form.Group>
                                     {/* Phone Field */}
-                                    <Form.Group controlId="formBasicPhone">
+                                    <Form.Group>
                                         <Form.Label>Enter Phone Number</Form.Label>
                                         <Form.Control type="tel" placeholder="Enter phone number" value={this.state.phone} onChange={e => this.setState({ phone: e.target.value })} />
                                     </Form.Group>
