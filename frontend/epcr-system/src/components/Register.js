@@ -6,12 +6,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Jumbotron from 'react-bootstrap/Jumbotron';
-import { Redirect } from 'react-router-dom';
-import { MainContext } from '../Auth';
 import { Link } from "react-router-dom";
 
 export default class Register extends Component {
-    static contextType = MainContext;
     constructor(props) {
         super(props);
         this.state = {
@@ -20,7 +17,7 @@ export default class Register extends Component {
             email: "",
             phone: "",
             name: "",
-            errorMessage: "",
+            message: "",
             authorized: false
         };
 
@@ -28,38 +25,33 @@ export default class Register extends Component {
     
     handleSubmit = (event => {
         event.preventDefault();
-        /*
         const username = this.state.username;
         const password = this.state.password;
-        const url = 'http://localhost:3000/login';
+        const email = this.state.email;
+        const phone = this.state.phone;
+        const name = this.state.name;
+        const url = 'http://localhost:3000/register';
         const options = {
             method: 'POST',
-            body: JSON.stringify({username, password}),
+            body: JSON.stringify({username, password, email, phone, name}),
             headers: {
                 'Content-Type': 'application/json'
             },
             credentials: 'include'
         }
-        // Check if login is successful, redirect to dashbaord on success
+        // Check if registration is successful, redirect to login on success
         fetch(url, options).then((response) => {
             if(!response.ok)
             {
-                throw Error("Failed");
+                throw Error;
             }
-            this.setState({ errorMessage: "" });
-            this.setState({ authorized: true })
-            this.context.setAuth(true);
-            console.log("Success");
+            this.setState({ message: "Registration Successful" });
         }).catch((error) => {
-            this.setState({errorMessage: "Invalid Username or password"});
+            this.setState({ message: "Registration Failed, Unauthorized"});
         })
-        */
 })
 
     render() {
-        if(this.state.authorized) {
-            return <Redirect to="/Dashboard" />
-        }
 
         return (
             <React.Fragment>
@@ -118,8 +110,8 @@ export default class Register extends Component {
                                     </Button>
                                 </Form>
 
-                                {/* Error Message displayed if invalid register attempt */}
-                                {this.state.errorMessage && <p class="text-danger"> { this.state.errorMessage } </p>}
+                                {/* Message displayed telling results of registration */}
+                                {this.state.message && <p className="text-dark"> { this.state.message } </p>}
                                 
                             </Col>
                         </Row>
