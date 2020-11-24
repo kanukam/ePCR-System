@@ -27,35 +27,41 @@ export default class Login extends Component {
         event.preventDefault();
         const username = this.state.username;
         const password = this.state.password;
-        const url = 'http://localhost:3000/login';
-        const options = {
-            method: 'POST',
-            body: JSON.stringify({username, password}),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-        }
-        // Check if login is successful, redirect to dashbaord on success
-        fetch(url, options).then((response) => {
-            if(!response.ok)
-            {
-                throw Error("Failed");
+        if(username && password)
+        {
+            const url = 'http://localhost:3000/login';
+            const options = {
+                method: 'POST',
+                body: JSON.stringify({ username, password }),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include'
             }
-            this.setState({ errorMessage: "" });
-            this.setState({ authorized: true })
-            this.context.setAuth(true);
-            console.log("Success");
-        }).catch((error) => {
-            this.setState({errorMessage: "Invalid Username or password"});
-        })
-        
+            // Check if login is successful, redirect to dashbaord on success
+            fetch(url, options).then((response) => {
+                if (!response.ok) {
+                    throw Error("Failed");
+                }
+                this.setState({ errorMessage: "" });
+                this.setState({ authorized: true })
+                this.context.setAuth(true);
+                console.log("Success");
+            }).catch((error) => {
+                this.setState({ errorMessage: "Invalid Username or password" });
+            })
+        }
+        else
+        {
+            this.setState({ errorMessage: "Enter all fields" });
+        } 
 })
 
     render() {
         if(this.state.authorized) {
             return <Redirect to="/Dashboard" />
         }
+
 
         return (
             <React.Fragment>

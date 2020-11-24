@@ -18,7 +18,6 @@ export default class Register extends Component {
             phone: "",
             name: "",
             message: "",
-            authorized: false
         };
 
     }
@@ -30,25 +29,30 @@ export default class Register extends Component {
         const email = this.state.email;
         const phone = this.state.phone;
         const name = this.state.name;
-        const url = 'http://localhost:3000/register';
-        const options = {
-            method: 'POST',
-            body: JSON.stringify({username, password, email, phone, name}),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-        }
-        // Check if registration is successful, redirect to login on success
-        fetch(url, options).then((response) => {
-            if(!response.ok)
-            {
-                throw Error;
+        if(username && password && email)
+        {
+            const url = 'http://localhost:3000/register';
+            const options = {
+                method: 'POST',
+                body: JSON.stringify({ username, password, email, phone, name }),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include'
             }
-            this.setState({ message: "Registration Successful" });
-        }).catch((error) => {
-            this.setState({ message: "Registration Failed, Unauthorized"});
-        })
+            // Check if registration is successful, redirect to login on success
+            fetch(url, options).then((response) => {
+                if (!response.ok) {
+                    throw Error;
+                }
+                this.setState({ message: "Registration Successful" });
+            }).catch((error) => {
+                this.setState({ message: "Registration Failed, Unauthorized" });
+            })
+        }
+        else{
+            this.setState({ message: "Enter all required fields [Username, Email, Password]" });
+        }
 })
 
     render() {
@@ -111,7 +115,7 @@ export default class Register extends Component {
                                 </Form>
 
                                 {/* Message displayed telling results of registration */}
-                                {this.state.message && <p className="text-dark"> { this.state.message } </p>}
+                                {this.state.message && <p className="text-dark mt-1"> { this.state.message } </p>}
                                 
                             </Col>
                         </Row>
