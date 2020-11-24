@@ -10,7 +10,9 @@ const charts = require('./charts/router');
 router.use('/charts', charts);
 
 // Will work for login page for now, can change later:
-router.post("/login", controller.login)
+router.post("/login", controller.login);
+
+router.post("/register", controller.register);
 
 router.get("/test-auth", auth, controller.testAuth);
 
