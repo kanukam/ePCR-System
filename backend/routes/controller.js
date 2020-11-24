@@ -1,7 +1,7 @@
 const repo = require('./repository');
 
 // Can change this later, but will for now work with a login form:
-module.exports.login = (req, res) => {
+function login(req, res){
   const { username, password } = req.body;
   
   if(!username || !password)
@@ -19,6 +19,16 @@ module.exports.login = (req, res) => {
   })
 }
 
-module.exports.testAuth = (req, res) => {
+function register(req, res){
+
+}
+
+function testAuth(req, res){
   res.status(200).send("If you can see this, you are authenticated");
+}
+
+module.exports = {
+  login,
+  register,
+  testAuth
 }
