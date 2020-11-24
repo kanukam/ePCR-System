@@ -7,7 +7,6 @@ const port = process.env.PORT || 3000; // localhost:3000 unless specified otherw
 const cors = require('cors');
 const app = express();
 const router = require("./routes/router");
-
 app.use(
     bodyParser.urlencoded({
       extended: false

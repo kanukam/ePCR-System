@@ -5,9 +5,11 @@ const auth = require('../middleware/auth');
 
 const controller = require('./controller');
 
+const routerController = require('./registration/controller');
 const charts = require('./charts/router');
 
 router.use('/charts', charts);
+router.post("/register", routerController.register); // Register user
 
 // Will work for login page for now, can change later:
 router.post("/login", controller.login);

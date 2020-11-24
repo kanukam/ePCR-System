@@ -33,11 +33,14 @@ export default class App extends React.Component {
     }
 
     fetch(url, options).then((response) => {
+      console.log(response);
       if (!response.ok) {
         throw Error("Failed");
       }
-      console.log("Success");
-      this.setAuth({ auth: true });
+      if(response.ok){
+        console.log("Success");
+        this.setAuth({ auth: true });
+      }
     }).catch((error) => {
       console.log("Error");
     })
