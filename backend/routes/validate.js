@@ -1,4 +1,4 @@
-const db = require('../../sql/database');
+const db = require('../sql/database');
 const bcrypt = require('bcrypt');
 
 module.exports.register = (typedEmail, typedPassword, callback) => {
