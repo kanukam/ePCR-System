@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { MainContext } from '../Auth'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import { Link, NavLink } from 'react-router-dom'
 import '../Sidebar.css'
 
 export default class Chart extends Component {
@@ -80,7 +81,7 @@ export default class Chart extends Component {
                 {/* Navigation Bar */}
                 <Navbar bg="light">
                         <Nav className="ml-auto">
-                            <Navbar.Brand href="#home"> {/*take them to the edit profile page or have a toggle that shows more options*/}
+                            <Navbar.Brand href="#"> {/*take them to the edit profile page or have a toggle that shows more options*/}
                                 {this.state.username}
                                 <img
                                     src="/profile.png"
@@ -95,14 +96,14 @@ export default class Chart extends Component {
                 </Navbar>
 
                 {/* Sidebar */}
-                <Nav className="d-none d-md-block bg-light sidebar">
+                <Nav className="col-md-1 d-none d-md-block bg-light sidebar">
                     <Nav.Item>
-                        <Nav.Link href="/Dashboard">
+                        <Nav.Link as={Link} to="/Dashboard">
                             Home
                         </Nav.Link>
                     </Nav.Item>
                     <Nav.Item className="sidebar-section active">
-                        <Nav.Link style={{color:'white'}}>
+                        <Nav.Link style={{color:'white'}} as={Link} to="/Chart">
                             Chart
                         </Nav.Link>
                     </Nav.Item>

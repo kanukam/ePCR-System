@@ -55,7 +55,7 @@ export default class App extends React.Component {
           <Switch>
             <ProtectedLogin exact path="/" auth={this.state.auth} component={Login}/>
             <ProtectedRoute exact path="/Dashboard" auth={this.state.auth} component={Dashboard} />
-            <ProtectedRoute exact path="/Chart" auth={this.state.auth} componenet={Chart} />
+            <ProtectedRoute exact path="/Chart" auth={this.state.auth} component={Chart} />
             <Route exact path="/Register" component={Register} />
           </Switch>
         </BrowserRouter>

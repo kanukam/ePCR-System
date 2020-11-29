@@ -60,9 +60,9 @@ export default class Dashboard extends Component {
                 </Navbar>
 
             	{/* Sidebar */}
-            	<Nav className="d-none d-md-block bg-light sidebar">
+            	<Nav className="col-md-1 d-none d-md-block bg-light sidebar">
 		            <Nav.Item className="sidebar-section active">
-		                <Nav.Link style={{color:'white'}} as={NavLink} to="/Dashboard">
+		                <Nav.Link style={{color:'white'}} as={Link} to="/Dashboard">
 		                	Home
 		                </Nav.Link>
 		            </Nav.Item>
