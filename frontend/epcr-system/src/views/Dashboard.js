@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import { MainContext } from '../Auth'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import '../Sidebar.css'
 
 export class Dashboard extends Component {
 	static contextType = MainContext;
     constructor(props){
     	super(props);
     	this.state = {
-    		username: ""
+    		username: "",
     	};
     }
 
@@ -56,6 +57,30 @@ export class Dashboard extends Component {
 						    </Navbar.Brand>
                 		</Nav>
                 </Navbar>
+
+            	{/* Sidebar */}
+            	<Nav className="d-none d-md-block bg-light sidebar">
+		            <Nav.Item className="sidebar-section active">
+		                <Nav.Link style={{color:'white'}} href="/Dashboard">
+		                	Home
+		                </Nav.Link>
+		            </Nav.Item>
+		            <Nav.Item>
+		                <Nav.Link>
+		                	Patients
+		                </Nav.Link>
+		            </Nav.Item>
+		            <Nav.Item>
+		                <Nav.Link>
+		                	Link
+		                </Nav.Link>
+		            </Nav.Item>
+		            <Nav.Item>
+		                <Nav.Link>
+		                	Link
+		               	</Nav.Link>
+		            </Nav.Item>
+	            </Nav>
             </React.Fragment>
         )
     }
