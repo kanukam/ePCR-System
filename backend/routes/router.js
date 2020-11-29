@@ -16,6 +16,8 @@ router.post("/register", controller.register); // Register user
 
 router.get("/test-auth", auth, controller.testAuth);
 
+router.get("/getUsername", auth, controller.getUsername);
+
 router.get("/", (req, res) => {
   res.status(200).send("test");
 });

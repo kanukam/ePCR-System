@@ -49,8 +49,15 @@ function testAuth(req, res){
   res.status(200).send("If you can see this, you are authenticated");
 }
 
+function getUsername(req, res){
+  let username = req.user['username'];
+  console.log(username);
+  res.json(username);
+}
+
 module.exports = {
   login,
   register,
-  testAuth
+  testAuth,
+  getUsername,
 }
