@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter, Switch, Route, } from "react-router-dom";
 import React from 'react';
 import {MainContext} from './Auth';
+import Chart from './components/Chart'
 import Login from "./views/Login";
 import Register from './components/Register'
 import Dashboard from "./views/Dashboard";
@@ -54,6 +55,7 @@ export default class App extends React.Component {
           <Switch>
             <ProtectedLogin exact path="/" auth={this.state.auth} component={Login}/>
             <ProtectedRoute exact path="/Dashboard" auth={this.state.auth} component={Dashboard} />
+            <ProtectedRoute exact path="/Chart" auth={this.state.auth} componenet={Chart} />
             <Route exact path="/Register" component={Register} />
           </Switch>
         </BrowserRouter>

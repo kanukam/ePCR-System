@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { MainContext } from '../Auth'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import { Link, NavLink } from 'react-router-dom'
 import '../Sidebar.css'
 
-export class Dashboard extends Component {
+export default class Dashboard extends Component {
 	static contextType = MainContext;
     constructor(props){
     	super(props);
@@ -61,13 +62,13 @@ export class Dashboard extends Component {
             	{/* Sidebar */}
             	<Nav className="d-none d-md-block bg-light sidebar">
 		            <Nav.Item className="sidebar-section active">
-		                <Nav.Link style={{color:'white'}} href="/Dashboard">
+		                <Nav.Link style={{color:'white'}} as={NavLink} to="/Dashboard">
 		                	Home
 		                </Nav.Link>
 		            </Nav.Item>
 		            <Nav.Item>
-		                <Nav.Link>
-		                	Patients
+		                <Nav.Link as={Link} to="/Chart">
+		                	Chart
 		                </Nav.Link>
 		            </Nav.Item>
 		            <Nav.Item>
@@ -85,5 +86,3 @@ export class Dashboard extends Component {
         )
     }
 }
-
-export default Dashboard
