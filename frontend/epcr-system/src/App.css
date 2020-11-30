@@ -1,0 +1,17 @@
+body { font-size:15px; }
+:focus { outline:none; }
+
+.navbar { background-color:#16A8DC; color:#fff !important; }
+
+.chart { width:1000px; height:800px; margin:30px auto; padding:25px; background:#fff; box-shadow:0 12px 15px rgba(0,0,0,0.15), 0 0 3.5px rgba(0,0,0,0.15), 0 2px 2px rgba(0,0,0,0.25); }
+.chart h2, .chart h3 { margin-bottom:10px; font-size:20px; display:flex; text-transform:uppercase; text-align:center; }
+.chart h3 { font-size:15px; line-height:20px; }
+.chart span { display:inline-block; min-width:100px; height:30px; line-height:30px; color:#3C5B66; }
+.chart label {display:block; }
+.chart input, .chart select { height:30px; line-height:30px; }
+.chart input[type="text"], .chart input[type="date"], .chart input[type="datetime-local"] { width:150px; border:none; border-bottom:2px solid #3C5B66; }
+.chart input[type="datetime-local"] {width:200px; }
+.chart select { width:150px; background:#E5E5E5; border:none; }
+.chart .row { margin:0; }
+
+.bigchecks { width:100px; height:35px; line-height:35px; color:#4C8DA4; background-color:#E5E5E5; text-align:center; }
