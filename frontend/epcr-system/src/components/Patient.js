@@ -5,16 +5,16 @@ import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import { Link } from 'react-router-dom'
-import AddCall from './Add-call'
+import AddPatient from './AddPatient'
 import '../App.css'
 import '../Sidebar.css'
 
-export default class Chart extends Component {
+//THIS FILE IS TEMPORARY
+
+export default class Patient extends Component {
     static contextType = MainContext;
     constructor(props) {
         super(props);
-        var today = new Date(),
-        currentDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         this.state = {
             username: "",
             message: "",
@@ -22,7 +22,6 @@ export default class Chart extends Component {
             sidebarHide: true,
             showAdd: false
         };
-        this.handleAdd = this.handleAdd.bind(this);
     }
 
     componentDidMount(){
@@ -49,11 +48,11 @@ export default class Chart extends Component {
             });
     }
 
-    handleAdd() {
+    handleAdd = (event =>  {
         this.setState({
             showAdd: true
         });
-    }
+    });
 
     toggleSidebar = (event=> {
         console.log('toggle');
@@ -103,13 +102,13 @@ export default class Chart extends Component {
                             Home
                         </Nav.Link>
                     </Nav.Item>
-                    <Nav.Item  className="sidebar-section active">
-                        <Nav.Link style={{color:'white'}} as={Link} to="/Chart">
+                    <Nav.Item>
+                        <Nav.Link as={Link} to="/Chart">
                             Chart
                         </Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link as={Link} to="/Patient">
+                    <Nav.Item className="sidebar-section active">
+                        <Nav.Link style={{color:'white'}} as={Link} to="/Patient">
                             Patient
                         </Nav.Link>
                     </Nav.Item>
@@ -124,8 +123,7 @@ export default class Chart extends Component {
                 {/* Form */}  
                 <Container style={{padding: '0 0 0 150px'}}>             
                     <Container className="chart">
-                        <Button onClick={this.handleAdd}>Add Chart</Button>
-                        {this.state.showAdd ? <AddCall /> : null}
+                        <AddPatient />
                     </Container>
                 </Container>
             </React.Fragment>

@@ -96,8 +96,8 @@ export default class Dashboard extends Component {
 		                </Nav.Link>
 		            </Nav.Item>
 		            <Nav.Item>
-		                <Nav.Link>
-		                	Link
+		                <Nav.Link as={Link} to="/Patient">
+		                	Patient
 		                </Nav.Link>
 		            </Nav.Item>
 		            <Nav.Item>
