@@ -44,19 +44,22 @@ export default class Dashboard extends Component {
         	<React.Fragment>
                 {/* Navigation Bar */}
                 <Navbar bg="light">
-                		<Nav className="ml-auto">
-                			<Navbar.Brand href="#home"> {/*take them to the edit profile page or have a toggle that shows more options*/}
-                				{this.state.username}
-						     	<img
-						        	src="/profile.png"
-						        	width="30"
-						        	height="30"
-						        	className="d-inline-block align-top"
-						        	style={{marginLeft: 10, marginRight: 0}}
-						        	alt="profile"
-						      	/>{' '}
-						    </Navbar.Brand>
-                		</Nav>
+                    <Nav.Item style={{padding: '0 0 0 10vw'}}>
+                        Hamburger
+                    </Nav.Item>
+            		<Nav className="ml-auto">
+            			<Navbar.Brand href="#home"> {/*take them to the edit profile page or have a toggle that shows more options*/}
+            				{this.state.username}
+					     	<img
+					        	src="/profile.png"
+					        	width="30"
+					        	height="30"
+					        	className="d-inline-block align-top"
+					        	style={{marginLeft: 10, marginRight: 0}}
+					        	alt="profile"
+					      	/>{' '}
+					    </Navbar.Brand>
+            		</Nav>
                 </Navbar>
 
             	{/* Sidebar */}
