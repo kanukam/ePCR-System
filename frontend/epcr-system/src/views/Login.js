@@ -105,7 +105,7 @@ export default class Login extends Component {
                                     <Link to="/Register">Register</Link>
                                 </div>
                                 {/* Error Message displayed if invalid login attempt */}
-                                {this.state.errorMessage && <p class="text-danger"> { this.state.errorMessage } </p>}
+                                {this.state.errorMessage && <p className="text-danger"> { this.state.errorMessage } </p>}
                                 <Jumbotron className='mt-3' fluid>
                                     <Container>
                                     </Container>
