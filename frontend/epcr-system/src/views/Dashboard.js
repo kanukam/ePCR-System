@@ -57,15 +57,23 @@ export default class Dashboard extends Component {
                 {/* Navigation Bar */}
                 <Navbar bg="light">
                     <Nav.Item style={{padding: this.state.sidebarSpacing}} className="hamburger-shift">
-                        <Button onClick={this.toggleSidebar}>Hamburger</Button>
+                        <Button onClick={this.toggleSidebar}>
+                            <img 
+                                src="/hamburger.png" 
+                                alt="hamburger" 
+                                width="30" 
+                                height="30" 
+                                style={{marginLef:0, marginRight: 0}}
+                            />
+                        </Button>
                     </Nav.Item>
             		<Nav className="ml-auto">
             			<Navbar.Brand href="#home"> {/*take them to the edit profile page or have a toggle that shows more options*/}
             				{this.state.username}
 					     	<img
 					        	src="/profile.png"
-					        	width="30"
-					        	height="30"
+					        	width="25"
+					        	height="25"
 					        	className="d-inline-block align-top"
 					        	style={{marginLeft: 10, marginRight: 0}}
 					        	alt="profile"
