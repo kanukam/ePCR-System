@@ -10,4 +10,6 @@ router.get("/", auth, controller.viewAllCharts); // View all charts
 
 router.post("/add", auth, controller.addChart);
 
+router.post("/update", auth, controller.updateChart);
+
 module.exports = router;
