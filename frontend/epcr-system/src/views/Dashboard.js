@@ -72,8 +72,8 @@ export default class Dashboard extends Component {
             				{this.state.username}
 					     	<img
 					        	src="/profile.png"
-					        	width="25"
-					        	height="25"
+					        	width="30"
+					        	height="30"
 					        	className="d-inline-block align-top"
 					        	style={{marginLeft: 10, marginRight: 0}}
 					        	alt="profile"
