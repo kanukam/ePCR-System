@@ -1,4 +1,4 @@
-const db = require('./validate');
+//const db = require('./validate');
 const db = require('../../sql/database');
 
 viewAllCharts = (req, res) => {

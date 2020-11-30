@@ -12,7 +12,7 @@ export default class Dashboard extends Component {
     	super(props);
     	this.state = {
     		username: "",
-            sidebarSpacing: '0 0 0 10vw',
+            sidebarSpacing: '0 0 0 150px',
             sidebarHide: true,
     	};
     }
@@ -43,7 +43,7 @@ export default class Dashboard extends Component {
 
     toggleSidebar = (event=> {
         console.log('toggle');
-        this.setState({sidebarSpacing : (this.state.sidebarHide ? '0 0 0 0' : '0 0 0 10vw')})
+        this.setState({sidebarSpacing : (this.state.sidebarHide ? '0 0 0 0' : '0 0 0 150px')})
         this.setState({sidebarHide : !this.state.sidebarHide});
     });
 
@@ -56,7 +56,7 @@ export default class Dashboard extends Component {
         	<React.Fragment>
                 {/* Navigation Bar */}
                 <Navbar bg="light">
-                    <Nav.Item style={{padding: this.state.sidebarSpacing}}>
+                    <Nav.Item style={{padding: this.state.sidebarSpacing}} className="hamburger-shift">
                         <Button onClick={this.toggleSidebar}>Hamburger</Button>
                     </Nav.Item>
             		<Nav className="ml-auto">
