@@ -18,7 +18,7 @@ export default class Chart extends Component {
         this.state = {
             username: "",
             message: "",
-            sidebarSpacing: '0 0 0 10vw',
+            sidebarSpacing: '0 0 0 150px',
             sidebarHide: true,
             showAdd: false
         };
@@ -57,7 +57,7 @@ export default class Chart extends Component {
 
     toggleSidebar = (event=> {
         console.log('toggle');
-        this.setState({sidebarSpacing : (this.state.sidebarHide ? '0 0 0 0' : '0 0 0 10vw')})
+        this.setState({sidebarSpacing : (this.state.sidebarHide ? '0 0 0 0' : '0 0 0 150px')})
         this.setState({sidebarHide : !this.state.sidebarHide});
     });
 
