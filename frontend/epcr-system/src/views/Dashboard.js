@@ -59,7 +59,7 @@ export default class Dashboard extends Component {
                     <Nav.Item style={{padding: this.state.sidebarSpacing}} className="hamburger-shift">
                         <Button onClick={this.toggleSidebar}>
                             <img 
-                                src="/hamburger.png" 
+                                src="/hamburger.svg" 
                                 alt="hamburger" 
                                 width="30" 
                                 height="30" 
