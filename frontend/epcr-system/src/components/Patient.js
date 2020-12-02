@@ -5,7 +5,6 @@ import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import { Link } from 'react-router-dom'
-import AddPatient from './AddPatient'
 import '../App.css'
 import '../Sidebar.css'
 
@@ -19,8 +18,7 @@ export default class Patient extends Component {
             username: "",
             message: "",
             sidebarSpacing: '0 0 0 150px',
-            sidebarHide: true,
-            showAdd: false
+            sidebarHide: true
         };
     }
 
@@ -48,11 +46,22 @@ export default class Patient extends Component {
             });
     }
 
-    handleAdd = (event =>  {
-        this.setState({
-            showAdd: true
-        });
-    });
+    viewCharts() {
+        const url = 'http://localhost:3000/charts/';
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        }
+        fetch(url, options).then((response) => {
+            if (!response.ok) {
+                throw Error;
+            }
+        })
+        
+    }
 
     toggleSidebar = (event=> {
         console.log('toggle');
@@ -122,9 +131,8 @@ export default class Patient extends Component {
 
                 {/* Form */}  
                 <Container style={{padding: '0 0 0 150px'}}>             
-                    <Container className="chart">
-                        <AddPatient />
-                    </Container>
+                    Note: This page should render existing charts made by user, viewChart function should be used somewhere
+                    
                 </Container>
             </React.Fragment>
         )
