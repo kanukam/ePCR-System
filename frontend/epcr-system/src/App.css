@@ -9,7 +9,7 @@ body { font-size:15px; }
 .chart span { display:inline-block; min-width:100px; height:30px; line-height:30px; color:#3C5B66; }
 .chart label {display:block; }
 .chart input, .chart select { height:30px; line-height:30px; }
-.chart input[type="text"], .chart input[type="date"], .chart input[type="datetime-local"] { width:150px; border:none; border-bottom:2px solid #3C5B66; }
+.chart input[type="text"], .chart input[type="number"], .chart input[type="date"], .chart input[type="datetime-local"] { width:150px; border:none; border-bottom:2px solid #3C5B66; }
 .chart input[type="datetime-local"] {width:200px; }
 .chart select { width:150px; background:#E5E5E5; border:none; }
 .chart .row { margin:0; }
