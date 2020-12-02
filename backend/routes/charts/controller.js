@@ -1,26 +1,40 @@
-//const db = require('./validate');
 const db = require('../../sql/database');
 
-viewAllCharts = (req, res) => {
-  //someone else can work on these if they want
+function viewAllCharts(req, res) {
+  // currently using user id of 1,
+  // need a get function to get the current user's id
+  // should be similar to the getUsername function
+  db.query('SELECT * FROM charts WHERE userID = 1', (err, results, fields) => {
+    if (err) throw err;
+    res.send(results);
+    //console.log("hello" + results.data['date']);
+  });
 }
 
-addChart = (req, res) => {
-  //someone else can work on these if they want
-  const { no, type, date, patient } = req.body;
-  validate.insert(no, type, date, patient, (err, completed) => {
-    if (err) {
-      console.log(err);
-      res.status(500).json({ error: 'Internal error please try again' });
-    }
+function addChart(req, res) {
+  const { call, date, times, patient, birth, weight, address, procedure } = req.body;
+  var pid = 0;
+  // insert into patient table first
+  var body = { name: patient, birth: birth, weight: weight, address: address };
+  var sql = 'INSERT INTO patients SET ?'
+  db.query(sql, body, (err, res) => {
+    if (err) throw err;
     else {
-      res.status(200).json({ status: 'Successful' });
+      // if successful, save patient id
+      pid = res.insertId;
+      console.log(res);
+      // insert into chart table associated with patient
+      var pbody = { call: call, date: date, times: times, patientID: pid, procedures: procedure };
+      var sql = 'INSERT INTO charts SET ?';
+      db.query(sql, pbody, (err, res) => {
+        if (err) throw err;
+        else console.log(res);
+      })
     }
   })
-
 }
 
-updateChart = (req, res) => {
+function updateChart(req, res) {
 
 }
 
