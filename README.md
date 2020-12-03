@@ -17,6 +17,10 @@ charts table
   `patientID` VARCHAR(45) NULL,
   `userID` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
+  
+  patient table
+  
+-- CREATE TABLE rescatedb.patients ( id INT(11) NOT NULL, name VARCHAR(255) NULL, birth VARCHAR(45), gender VARCHAR(10), weight VARCHAR(10) NULL, address VARCHAR(255) NULL, phone VARCHAR(12) NULL, history MEDIUMTEXT NULL, PRIMARY KEY (id));
 
 Temporary note:
 
