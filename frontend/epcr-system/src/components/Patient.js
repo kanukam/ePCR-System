@@ -58,11 +58,14 @@ export default class Patient extends Component {
         return (
             <React.Fragment>
                 <MainNav username={this.state.username} patient={true}/>
-
-                {/* Form */}  
-                <Container style={{padding: '0 0 0 150px'}}>             
-                    Note: This page should render existing charts made by user, viewChart function should be used somewhere
-                    
+ 
+                <Container className="main-content">  
+                    <Container className="chart">           
+                        Note: This page should render existing charts made by user, viewChart function should be used somewhere
+                    </Container>
+                    <Container className="chart">
+                        Testing
+                    </Container>
                 </Container>
             </React.Fragment>
         )

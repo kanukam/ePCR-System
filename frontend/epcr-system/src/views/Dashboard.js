@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { MainContext } from '../Auth'
-import Button from 'react-bootstrap/Button'
 import MainNav from '../components/MainNav'
+import Container from 'react-bootstrap/Container'
 
 export default class Dashboard extends Component {
 	static contextType = MainContext;
@@ -40,6 +40,12 @@ export default class Dashboard extends Component {
         return (
         	<React.Fragment>
                 <MainNav username={this.state.username} dashboard={true}/>
+
+                <Container className="main-content">
+                    <Container className="chart">
+                        Note: Something will go here eventually
+                    </Container>
+                </Container>
             </React.Fragment>
         )
     }

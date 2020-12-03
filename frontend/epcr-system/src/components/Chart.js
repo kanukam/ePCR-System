@@ -54,9 +54,11 @@ export default class Chart extends Component {
             <React.Fragment>
                 <MainNav username={this.state.username} chart={true}/>
 
-                {/* Form */}                
-                <Container className="chart">
-                    <ChartForm />
+                {/* Form */}
+                <Container  className="main-content">              
+                    <Container className="chart">
+                        <ChartForm />
+                    </Container>
                 </Container>
             </React.Fragment>
         )
