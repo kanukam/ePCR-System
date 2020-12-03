@@ -26,7 +26,7 @@ charts table
   
   patient table
   
--- CREATE TABLE rescatedb.patients ( id INT(11) NOT NULL, name VARCHAR(255) NULL, birth VARCHAR(45), gender VARCHAR(10), weight VARCHAR(10) NULL, address VARCHAR(255) NULL, phone VARCHAR(12) NULL, history MEDIUMTEXT NULL, PRIMARY KEY (id));
+-- CREATE TABLE rescatedb.patients ( id INT(11) AUTO_INCREMENT, name VARCHAR(255) NULL, birth VARCHAR(45), gender VARCHAR(10), weight VARCHAR(10) NULL, address VARCHAR(255) NULL, phone VARCHAR(12) NULL, history MEDIUMTEXT NULL, PRIMARY KEY (id));
 
 Charts
 
