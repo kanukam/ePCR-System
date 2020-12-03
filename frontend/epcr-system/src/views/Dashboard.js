@@ -9,7 +9,10 @@ export default class Dashboard extends Component {
     	super(props);
     	this.state = {
     		username: "",
+            contentSpacing: '0 0 0 150px',
+            sidebarHide: true,
     	};
+        this.toggleCollapse = this.toggleCollapse.bind(this);
     }
 
     componentDidMount(){
@@ -36,12 +39,23 @@ export default class Dashboard extends Component {
     		});
     }
 
+    toggleCollapse (){
+        this.setState({contentSpacing : (this.state.sidebarHide ? '0 0 0 0' : '0 0 0 150px')})
+        this.setState({sidebarHide : !this.state.sidebarHide});
+    }
+
     render() {
         return (
         	<React.Fragment>
-                <MainNav username={this.state.username} dashboard={true}/>
+                <MainNav 
+                    username={this.state.username} 
+                    dashboard={true} 
+                    sidebarHide={this.state.sidebarHide} 
+                    contentSpacing={this.state.contentSpacing}
+                    toggleCollapse={this.toggleCollapse}
+                />
 
-                <Container className="main-content">
+                <Container className="main-content" style={{padding: this.state.contentSpacing}}>
                     <Container className="chart">
                         Note: Something will go here eventually
                     </Container>

@@ -11,8 +11,11 @@ export default class Chart extends Component {
         super(props);
         this.state = {
             username: '',
-            showAdd: false
+            showAdd: false,
+            contentSpacing: '0 0 0 150px',
+            sidebarHide: true
         };
+        this.toggleCollapse = this.toggleCollapse.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
     }
 
@@ -46,16 +49,27 @@ export default class Chart extends Component {
         });
     }
 
+    toggleCollapse (){
+        this.setState({contentSpacing : (this.state.sidebarHide ? '0 0 0 0' : '0 0 0 150px')})
+        this.setState({sidebarHide : !this.state.sidebarHide});
+    }
+
     render() {
         const {step} = this.state;
         const { no, date, type, patient } = this.state;
         const values = { no, date, type, patient };
         return (
             <React.Fragment>
-                <MainNav username={this.state.username} chart={true}/>
+                <MainNav 
+                    username={this.state.username} 
+                    chart={true} 
+                    sidebarHide={this.state.sidebarHide} 
+                    contentSpacing={this.state.contentSpacing}
+                    toggleCollapse={this.toggleCollapse}
+                />
 
                 {/* Form */}
-                <Container  className="main-content">              
+                <Container  className="main-content" style={{padding: this.state.contentSpacing}}>              
                     <Container className="chart">
                         <ChartForm />
                     </Container>

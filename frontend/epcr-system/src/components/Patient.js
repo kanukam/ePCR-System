@@ -11,7 +11,10 @@ export default class Patient extends Component {
         super(props);
         this.state = {
             username: "",
+            contentSpacing: '0 0 0 150px',
+            sidebarHide: true
         };
+        this.toggleCollapse = this.toggleCollapse.bind(this);
     }
 
     componentDidMount(){
@@ -55,14 +58,26 @@ export default class Patient extends Component {
         
     }
 
+    toggleCollapse (){
+        this.setState({contentSpacing : (this.state.sidebarHide ? '0 0 0 0' : '0 0 0 150px')})
+        this.setState({sidebarHide : !this.state.sidebarHide});
+        console.log('working');
+    }
+
     render() {
         return (
             <React.Fragment>
-                <MainNav username={this.state.username} patient={true}/>
+                <MainNav 
+                    username={this.state.username} 
+                    patient={true} 
+                    sidebarHide={this.state.sidebarHide} 
+                    contentSpacing={this.state.contentSpacing}
+                    toggleCollapse={this.toggleCollapse}
+                />
  
-                <Container className="main-content">
-                    <PatientEntry patient="john"/>  
-                    <PatientEntry patient="smith"/>
+                <Container className="main-content" style={{padding: this.state.contentSpacing}}>
+                    <PatientEntry patient="john" dob="12/3/2020" notes="additional info"/>  
+                    <PatientEntry patient="smith" dob="03/11/2000" notes="additional info"/>
                 </Container>
             </React.Fragment>
         )

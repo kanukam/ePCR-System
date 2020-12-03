@@ -7,26 +7,14 @@ import '../App.css'
 import '../Sidebar.css'
 
 export default class MainNav extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            sidebarSpacing: '0 0 0 150px',
-            sidebarHide: true
-        };
-    }
-
-    toggleSidebar = (event=> {
-        this.setState({sidebarSpacing : (this.state.sidebarHide ? '0 0 0 0' : '0 0 0 150px')})
-        this.setState({sidebarHide : !this.state.sidebarHide});
-    });
 
     render(){
     	return(
     		<div>
 		    	{/* Navigation Bar */}
 		        <Navbar bg="light">
-		            <Nav.Item style={{padding: this.state.sidebarSpacing}} className="hamburger-shift">
-		                <Button onClick={this.toggleSidebar}>
+		            <Nav.Item style={{padding: this.props.contentSpacing}} className="hamburger-shift">
+		                <Button onClick={this.props.toggleCollapse}>
 		                    <img 
 		                        src="/hamburger.svg" 
 		                        alt="hamburger" 
@@ -52,7 +40,7 @@ export default class MainNav extends Component {
 		        </Navbar>
 
 		        {/* Sidebar */}
-		        { this.state.sidebarHide ?
+		        { this.props.sidebarHide ?
 			        <Navbar className="col-md-1 d-none d-md-block bg-light sidebar">
 			        	{this.props.dashboard ?
 				            <Nav.Item className="sidebar-section active">
