@@ -61,10 +61,8 @@ export default class Patient extends Component {
                 <MainNav username={this.state.username} patient={true}/>
  
                 <Container className="main-content">
-                    <PatientEntry/>  
-                    <Container className="chart">           
-                        Note: This page should render existing charts made by user, viewChart function should be used somewhere
-                    </Container>
+                    <PatientEntry patient="john"/>  
+                    <PatientEntry patient="smith"/>
                 </Container>
             </React.Fragment>
         )
