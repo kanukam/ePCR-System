@@ -15,16 +15,23 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       auth: false,
-      setAuth: this.setAuth
+      username: "",
+      setAuth: this.setAuth,
+      setUsername: this.setUsername
     }
+    this.jwtCookie = this.jwtCookie.bind(this);
+    this.getUsername = this.getUsername.bind(this);
   }
-  
-  setAuth = auth => {
-    this.setState({ auth });
+
+  setAuth = value => {
+    this.setState({ auth: value });
   };
 
-  // Check if user has jwt cookie on application startup
-  componentDidMount(){
+  setUsername = value => {
+    this.setState({ username: value });
+  };
+
+  jwtCookie() {
     const url = 'http://localhost:3000/test-auth';
     const options = {
       method: 'GET',
@@ -39,13 +46,43 @@ export default class App extends React.Component {
       if (!response.ok) {
         throw Error("Failed");
       }
-      if(response.ok){
+      if (response.ok) {
         console.log("Success");
-        this.setAuth({ auth: true });
+        this.setAuth(true);
       }
     }).catch((error) => {
       console.log("Error");
     })
+  }
+
+  getUsername() {
+    const url = 'http://localhost:3000/getUsername';
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    }
+    fetch(url, options)
+      .then((response) => {
+        if (response.ok)
+          return response.json();
+        else
+          throw Error("Failed");
+      })
+      .then((username) => {
+        this.setUsername(username);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  componentDidMount(){
+    // Check if user has jwt cookie on application startup
+    this.jwtCookie();
+    this.getUsername();
   }
 
   // Components go in Protected routes
