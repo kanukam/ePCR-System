@@ -1,4 +1,6 @@
 const db = require('../../sql/database');
+const jwt = require('jsonwebtoken');
+const secret = process.env.JWT_SECRET;
 
 module.exports.insert = (myno, mytype, mydate, mypatient, callback) => {
     //Optional Fields
@@ -13,5 +15,39 @@ module.exports.insert = (myno, mytype, mydate, mypatient, callback) => {
             //return callback(err)
         else console.log(result);
             //callback(null, true)
+    })
+}
+
+// Get ID of current user
+module.exports.getId = (token, callback) => {
+    // Decode JWT cookie
+    jwt.verify(token, secret, (err, decoded) => {
+        if (err)
+        {
+            return callback(err);
+        }
+        else 
+        {
+            username = decoded.username;
+            db.query(`SELECT * from users WHERE username='${username}'`,
+                (err, res) => {
+                    if (err)
+                    {
+                        return callback(err);
+                    }
+                    // No rows found
+                    if(res.length === 0)
+                    {
+                        return callback("404: Account does not exist.");
+                    }
+                    // User id of user
+                    const { id } = res[0];
+                    if(id)
+                    {
+                        return callback(null, id);
+                    }
+                });
+
+        }
     })
 }
