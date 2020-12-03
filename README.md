@@ -4,6 +4,21 @@ users table
 
 -- CREATE TABLE users (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(255), password VARCHAR(255), email VARCHAR(255), phone VARCHAR(12), name VARCHAR(50));
 
+charts table
+
+-- CREATE TABLE `rescatedb`.`charts` (
+  `id` INT(11) NOT NULL,
+  `date` VARCHAR(45) NULL,
+  `call` TINYTEXT NULL,
+  `detail` TINYTEXT NULL,
+  `medications` VARCHAR(45) NULL,
+  `procedures` VARCHAR(45) NULL,
+  `notes` MEDIUMTEXT NULL,
+  `patientID` VARCHAR(45) NULL,
+  `userID` VARCHAR(45) NULL,
+  `chartscol` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
 Temporary note:
 
 Havng troubles with being authorized in the remote database on MySQL Workbench, so cannot update the database tables.
