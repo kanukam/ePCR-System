@@ -68,7 +68,6 @@ function createAccount(username, hash, email, phone, name, callback){
 }
 
 module.exports = {
-    createAccount,
     register,
     login
 }
