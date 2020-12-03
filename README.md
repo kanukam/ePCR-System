@@ -22,7 +22,7 @@ charts table
   `notes` MEDIUMTEXT NULL,
   `patientID` VARCHAR(45) NULL,
   `userID` VARCHAR(45) NULL,
-  `times` ARCHAR(45) NULL,
+  `times` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
   
   patient table
