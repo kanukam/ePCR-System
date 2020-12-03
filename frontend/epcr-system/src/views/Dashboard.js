@@ -107,11 +107,6 @@ export default class Dashboard extends Component {
 		            </Nav.Item>
 	            </Navbar>
                 : null}
-
-				<div>
-					{this.props.children}
-				</div>
-				
             </React.Fragment>
         )
     }
