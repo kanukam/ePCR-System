@@ -1,5 +1,11 @@
 # ePCR-System
 
+Temporary note:
+
+Havng troubles with being authorized in the remote database on MySQL Workbench, so cannot update the database tables.
+
+Please update to the following before trying to test charts.
+
 users table
 
 -- CREATE TABLE users (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(255), password VARCHAR(255), email VARCHAR(255), phone VARCHAR(12), name VARCHAR(50));
@@ -21,12 +27,6 @@ charts table
   patient table
   
 -- CREATE TABLE rescatedb.patients ( id INT(11) NOT NULL, name VARCHAR(255) NULL, birth VARCHAR(45), gender VARCHAR(10), weight VARCHAR(10) NULL, address VARCHAR(255) NULL, phone VARCHAR(12) NULL, history MEDIUMTEXT NULL, PRIMARY KEY (id));
-
-Temporary note:
-
-Havng troubles with being authorized in the remote database on MySQL Workbench, so cannot update the database tables.
-
-Please update to the following before trying to test charts.
 
 Charts
 
