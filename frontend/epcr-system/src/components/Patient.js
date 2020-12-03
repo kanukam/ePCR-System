@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { MainContext } from '../Auth'
 import Container from 'react-bootstrap/Container'
 import MainNav from './MainNav'
+import PatientEntry from './PatientEntry'
 import '../App.css'
 
 export default class Patient extends Component {
@@ -59,12 +60,10 @@ export default class Patient extends Component {
             <React.Fragment>
                 <MainNav username={this.state.username} patient={true}/>
  
-                <Container className="main-content">  
+                <Container className="main-content">
+                    <PatientEntry/>  
                     <Container className="chart">           
                         Note: This page should render existing charts made by user, viewChart function should be used somewhere
-                    </Container>
-                    <Container className="chart">
-                        Testing
                     </Container>
                 </Container>
             </React.Fragment>

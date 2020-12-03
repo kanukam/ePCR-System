@@ -3,7 +3,6 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import '../App.css'
-import '../Sidebar.css'
 
 /*
 this should probably be renamed to add-call,

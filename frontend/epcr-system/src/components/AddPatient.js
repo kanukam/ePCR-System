@@ -4,7 +4,6 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import { throws } from 'assert'
 import '../App.css'
-import '../Sidebar.css'
 
 export default class AddPatient extends Component {
     constructor(props) {
