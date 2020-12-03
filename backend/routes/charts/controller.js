@@ -56,7 +56,7 @@ function addChart(req, resp) {
 }
 
 function updateChart(req, res) {
-
+  const chartId = req.params;
 }
 
 module.exports = { viewAllCharts, addChart, updateChart };
