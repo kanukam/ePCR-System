@@ -1,6 +1,4 @@
 const db = require('../../sql/database');
-const jwt = require('jsonwebtoken');
-const secret = process.env.JWT_SECRET;
 const validate = require('./validate');
 
 function viewAllCharts(req, res) {
@@ -14,13 +12,11 @@ function viewAllCharts(req, res) {
   });
 }
 
-function addChart(req, res) {
-
+function addChart(req, resp) {
   const { call, date, times, patient, birth, weight, address, procedure } = req.body;
   var pid = 0;
-  token = req.cookies.token;
   // insert into patient table first
-  validate.getId(token, (err, uId) => {
+  validate.getId(req.user.username, (err, uId) => {
     if(err)
     {
       console.log(err);
@@ -31,7 +27,10 @@ function addChart(req, res) {
       var sql = 'INSERT INTO patients SET ?'
       db.query(sql, body, (err, res) => {
         if (err) 
-          throw err;
+        {
+          console.log(err);
+          return resp.status(500).json({ error: 'Internal error please try again' });
+        }
         else {
           // if successful, save patient id
           pid = res.insertId;
@@ -41,8 +40,14 @@ function addChart(req, res) {
           var pbody = { call: call, date: date, times: times, patientID: pid, procedures: procedure, userID: user };
           var sql = 'INSERT INTO charts SET ?';
           db.query(sql, pbody, (err, res) => {
-            if (err) throw err;
-            else console.log(res);
+            if (err){
+              console.log(err);
+              return resp.status(500).json({ error: 'Internal error please try again' });
+            }
+            else{
+              resp.status(200).json({ status: 'Successfully added to chart' });
+              console.log(res);
+            }
           })
         }
       });
