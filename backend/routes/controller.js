@@ -1,5 +1,4 @@
 const repo = require('./repository');
-const validate = require('./validate');
 
 // Can change this later, but will for now work with a login form:
 function login(req, res){
@@ -26,21 +25,13 @@ function register(req, res) {
   if (!username || !password || !email)
     return res.status(401).json({ error: 'Username, password, or email field are blank' });
 
-  validate.register(email, password, (err, hash) => {
+  repo.register(username, password, email, phone, name, err => {
     if (err) {
       console.log(err);
       res.status(500).json({ error: 'Internal error please try again' });
     }
     else {
-      validate.insert(username, hash, email, phone, name, (err, completed) => {
-        if (err) {
-          console.log(err);
-          res.status(500).json({ error: 'Internal error please try again' });
-        }
-        else {
-          res.status(200).json({ status: 'Successful registration' });
-        }
-      })
+      res.status(200).json({ status: 'Successful registration' });
     }
   })
 }
@@ -58,5 +49,5 @@ module.exports = {
   login,
   register,
   testAuth,
-  getUsername,
+  getUsername
 }

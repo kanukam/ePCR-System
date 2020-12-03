@@ -5,7 +5,10 @@ function viewAllCharts(req, res) {
   // currently using user id of 1,
   // need a get function to get the current user's id
   // should be similar to the getUsername function
+  const userID = req.user.userID;
+  
   db.query('SELECT * FROM charts WHERE userID = 1', (err, results, fields) => {
+  //db.query(`SELECT * FROM charts WHERE userID = ${userID}`, (err, results, fields) => {
     if (err) throw err;
     res.send(results);
     //console.log("hello" + results.data['date']);
@@ -56,7 +59,7 @@ function addChart(req, resp) {
 }
 
 function updateChart(req, res) {
-
+  const chartId = req.params;
 }
 
 module.exports = { viewAllCharts, addChart, updateChart };
