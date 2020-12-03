@@ -14,14 +14,14 @@ function login(username, typedPassword, callback){
           if(res.length === 0) // No rows found
               return callback("404: Account does not exist.");
               
-          const { username, password, userID } = res[0]; // 'password' is the hashed password
+          const { username, password, id } = res[0]; // 'password' is the hashed password
           bcrypt.compare(typedPassword, password, // we must hash 'typedPassword' and compare it to 'password' via the bcrypt compare function
             (err, auth) => {
                 if(err)
                     callback(err);
                 else if(auth){ // Success, password match
                     // We put 'username' in the cookie so we can decode it later for authentication.
-                    const token = jwt.sign({ username, userID }, jwtSecret, { expiresIn: 86400 }); 
+                    const token = jwt.sign({ username, id }, jwtSecret, { expiresIn: 86400 }); 
                     callback(null, true, token);
                 }
                 else

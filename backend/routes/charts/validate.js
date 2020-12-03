@@ -16,26 +16,3 @@ module.exports.insert = (myno, mytype, mydate, mypatient, callback) => {
             //callback(null, true)
     })
 }
-
-// Get ID of current user
-module.exports.getId = (username, callback) => {
-    
-    db.query(`SELECT * from users WHERE username='${username}'`,
-        (err, res) => {
-            if (err)
-            {
-                return callback(err);
-            }
-            // No rows found
-            if(res.length === 0)
-            {
-                return callback("404: Account does not exist.");
-            }
-            // User id of user
-            const { id } = res[0];
-            if(id)
-            {
-                return callback(null, id);
-            }
-        });
-}
