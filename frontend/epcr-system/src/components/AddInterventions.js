@@ -1,47 +1,17 @@
 import React, { Component } from 'react'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import { throws } from 'assert'
 import '../App.css'
 
 export default class AddInterventions extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "",
             message: "",
             // only variables for current section of form!
             procedure: ""
         };
     }
 
-    componentDidMount(){
-        const url = 'http://localhost:3000/getUsername';
-        const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-        }
-        fetch(url, options)
-            .then((response) => {
-                if(response.ok)
-                    return response.json();
-                else
-                    throw Error("Failed");
-            })
-            .then((data) => {
-                this.setState({username: data});
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
-
-    
-    
     saveAndContinue = (e) => {
         e.preventDefault();
         this.props.nextStep();

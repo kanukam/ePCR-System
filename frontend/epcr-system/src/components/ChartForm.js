@@ -16,7 +16,6 @@ export default class ChartForm extends Component {
         var today = new Date(),
             currentDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         this.state = {
-            username: "",
             message: "",
             success: false,
             step: 1,
@@ -38,30 +37,6 @@ export default class ChartForm extends Component {
             history: "", // subject to change
             procedure: ""
         };
-    }
-
-    componentDidMount() {
-        const url = 'http://localhost:3000/getUsername';
-        const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-        }
-        fetch(url, options)
-            .then((response) => {
-                if (response.ok)
-                    return response.json();
-                else
-                    throw Error("Failed");
-            })
-            .then((data) => {
-                this.setState({ username: data });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
     }
 
     handleChange = input => event => {

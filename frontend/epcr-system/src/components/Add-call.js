@@ -17,7 +17,6 @@ export default class AddCall extends React.Component {
         var today = new Date(),
         currentDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         this.state = {
-            username: "",
             message: "",
             no: 0,
             type: "Clinic",
@@ -26,30 +25,6 @@ export default class AddCall extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    componentDidMount(){
-        const url = 'http://localhost:3000/getUsername';
-        const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-        }
-        fetch(url, options)
-            .then((response) => {
-                if(response.ok)
-                    return response.json();
-                else
-                    throw Error("Failed");
-            })
-            .then((data) => {
-                this.setState({username: data});
-            })
-            .catch((error) => {
-                console.log(error);
-            });
     }
 
     handleChange = (event => {

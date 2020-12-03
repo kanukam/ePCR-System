@@ -6,15 +6,6 @@ import Row from 'react-bootstrap/Row'
 import '../App.css'
 
 export default class PatientEntry extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: "",
-        };
-    }
-
-    componentDidMount(){
-    }
 
     render() {
         return (

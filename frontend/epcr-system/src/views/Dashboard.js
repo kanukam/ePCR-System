@@ -8,35 +8,10 @@ export default class Dashboard extends Component {
     constructor(props){
     	super(props);
     	this.state = {
-    		username: "",
             contentSpacing: '0 0 0 150px',
             sidebarHide: true,
     	};
         this.toggleCollapse = this.toggleCollapse.bind(this);
-    }
-
-    componentDidMount(){
-    	const url = 'http://localhost:3000/getUsername';
-        const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-        }
-    	fetch(url, options)
-    		.then((response) => {
-    			if(response.ok)
-    				return response.json();
-    			else
-    				throw Error("Failed");
-    		})
-    		.then((data) => {
-    			this.setState({username: data});
-    		})
-    		.catch((error) => {
-    			console.log(error);
-    		});
     }
 
     toggleCollapse (){
@@ -48,7 +23,7 @@ export default class Dashboard extends Component {
         return (
         	<React.Fragment>
                 <MainNav 
-                    username={this.state.username} 
+                    username={this.context.username} 
                     dashboard={true} 
                     sidebarHide={this.state.sidebarHide} 
                     contentSpacing={this.state.contentSpacing}

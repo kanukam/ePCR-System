@@ -19,30 +19,6 @@ export default class Chart extends Component {
         this.handleAdd = this.handleAdd.bind(this);
     }
 
-    componentDidMount(){
-        const url = 'http://localhost:3000/getUsername';
-        const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-        }
-        fetch(url, options)
-            .then((response) => {
-                if(response.ok)
-                    return response.json();
-                else
-                    throw Error("Failed");
-            })
-            .then((data) => {
-                this.setState({username: data});
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
-
     handleAdd() {
         this.setState({
             showAdd: true
@@ -61,7 +37,7 @@ export default class Chart extends Component {
         return (
             <React.Fragment>
                 <MainNav 
-                    username={this.state.username} 
+                    username={this.context.username} 
                     chart={true} 
                     sidebarHide={this.state.sidebarHide} 
                     contentSpacing={this.state.contentSpacing}

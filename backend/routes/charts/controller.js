@@ -19,43 +19,33 @@ function addChart(req, resp) {
   const { call, date, times, patient, birth, weight, address, procedure } = req.body;
   var pid = 0;
   // insert into patient table first
-  validate.getId(req.user.username, (err, uId) => {
-    if(err)
+  var body = { name: patient, birth: birth, weight: weight, address: address };
+  var sql = 'INSERT INTO patients SET ?'
+  db.query(sql, body, (err, res) => {
+    if (err) 
     {
       console.log(err);
+      return resp.status(500).json({ error: 'Internal error please try again' });
     }
-    else
-    {
-      var body = { name: patient, birth: birth, weight: weight, address: address };
-      var sql = 'INSERT INTO patients SET ?'
-      db.query(sql, body, (err, res) => {
-        if (err) 
-        {
+    else {
+      console.log(req);
+      // if successful, save patient id
+      pid = res.insertId;
+      // insert into chart table associated with patient
+      var pbody = { call: call, date: date, times: times, patientID: pid, procedures: procedure, userID: req.user.id };
+      var sql = 'INSERT INTO charts SET ?';
+      db.query(sql, pbody, (err, res) => {
+        if (err){
           console.log(err);
           return resp.status(500).json({ error: 'Internal error please try again' });
         }
-        else {
-          // if successful, save patient id
-          pid = res.insertId;
-          // ID of user
-          user = uId;
-          // insert into chart table associated with patient
-          var pbody = { call: call, date: date, times: times, patientID: pid, procedures: procedure, userID: user };
-          var sql = 'INSERT INTO charts SET ?';
-          db.query(sql, pbody, (err, res) => {
-            if (err){
-              console.log(err);
-              return resp.status(500).json({ error: 'Internal error please try again' });
-            }
-            else{
-              resp.status(200).json({ status: 'Successfully added to chart' });
-              console.log(res);
-            }
-          })
+        else{
+          resp.status(200).json({ status: 'Successfully added to chart' });
+          console.log(res);
         }
-      });
+      })
     }
-    });
+  });
 }
 
 function updateChart(req, res) {

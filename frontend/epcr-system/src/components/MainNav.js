@@ -7,7 +7,6 @@ import '../App.css'
 import '../Sidebar.css'
 
 export default class MainNav extends Component {
-
     render(){
     	return(
     		<div>
