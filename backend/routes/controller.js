@@ -51,7 +51,6 @@ function testAuth(req, res){
 
 function getUsername(req, res){
   let username = req.user['username'];
-  console.log(username);
   res.json(username);
 }
 
