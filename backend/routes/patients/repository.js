@@ -1,8 +1,9 @@
 const db = require('../../sql/database');
 
-function addPatient(body, callback){
+function addPatient(userID, body, callback){
+    const bodyWithID = { ...body, userID };
     const sql = 'INSERT INTO patients SET ?'
-    db.query(sql, body, (err, res) => {
+    db.query(sql, bodyWithID, (err, res) => {
       if (err)
         callback(err);
       else {
