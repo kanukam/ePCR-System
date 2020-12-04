@@ -30,7 +30,7 @@ function login(username, typedPassword, callback){
       });
 }
 
-function register(username, typedPassword, typedEmail, phone, name){
+function register(username, typedPassword, typedEmail, phone, name, callback){
     // Check database for existence of email
     db.query(`SELECT * from users WHERE email='${typedEmail}'`,
         (err, res) => {
