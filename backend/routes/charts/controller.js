@@ -55,10 +55,11 @@ function updateChart(req, res) {
     call, 
     date, 
     times, 
-    procedure 
+    procedure,
+    patientID //This probably needs to be in the URL later
   } = req.body;
   db.query(`UPDATE charts SET call='${call}, date='${date}', times='${times}', procedures='${procedure}' 
-            WHERE (userID=${userID} AND id=${chartID} AND patientID=${})`, err => {
+            WHERE (userID=${userID} AND id=${chartID} AND patientID=${patientID})`, err => {
     err 
       ? res.status(500).json({ error: err }) 
       : res.status(200).json({ status: 'Successfully updated.' });
