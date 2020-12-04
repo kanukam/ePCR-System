@@ -49,7 +49,21 @@ function addChart(req, resp) {
 }
 
 function updateChart(req, res) {
-  const chartId = req.params;
+  const chartID = req.params;
+  const userID = req.user.id;
+  const  { 
+    call, 
+    date, 
+    times, 
+    procedure 
+  } = req.body;
+  db.query(`UPDATE charts SET call='${call}, date='${date}', times='${times}', procedures='${procedure}' 
+            WHERE (userID=${userID} AND id=${chartID} AND patientID=${})`, err => {
+    err 
+      ? res.status(500).json({ error: err }) 
+      : res.status(200).json({ status: 'Successfully updated.' });
+    
+  })
 }
 
 module.exports = { viewAllCharts, addChart, updateChart };
