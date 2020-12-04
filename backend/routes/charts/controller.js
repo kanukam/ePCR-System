@@ -5,7 +5,7 @@ function viewAllCharts(req, res) {
   // currently using user id of 1,
   // need a get function to get the current user's id
   // should be similar to the getUsername function
-  const userID = req.user.userID;
+  const userID = req.user.id;
   
   db.query('SELECT * FROM charts WHERE userID = 1', (err, results, fields) => {
   //db.query(`SELECT * FROM charts WHERE userID = ${userID}`, (err, results, fields) => {
