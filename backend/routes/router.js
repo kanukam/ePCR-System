@@ -6,8 +6,11 @@ const auth = require('../middleware/auth');
 const controller = require('./controller');
 
 const charts = require('./charts/router');
+const patients = require('./patients/router');
 
 router.use('/charts', charts);
+
+router.use('/patients', patients);
 
 // Will work for login page for now, can change later:
 router.post("/login", controller.login);
