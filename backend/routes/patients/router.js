@@ -6,7 +6,7 @@ const auth = require('../../middleware/auth');
 const controller = require('./controller');
 
 // These will be prefixed with /patients/ :
-router.get("/", auth, controller.viewAllPatients); // View all charts
+router.get("/", auth, controller.viewAllPatients); // View all patients
 
 router.post("/add", auth, controller.addPatient);
 
