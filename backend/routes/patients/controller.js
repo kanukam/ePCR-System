@@ -34,6 +34,7 @@ function updatePatient(req, res) {
 }
 
 function addPatient(req, res) {
+  const userID = req.user.id;
   const { patient, birth, weight, address } = req.body;
   const body = { 
     name: patient, 
@@ -42,7 +43,7 @@ function addPatient(req, res) {
     address 
   };
 
-  repo.addPatient(body, (err, patientID) => {
+  repo.addPatient(userID, body, (err, patientID) => {
     err
       ? res.status(500).json({ error: err })
       : res.status(200).json({ newPatientID: patientID });
