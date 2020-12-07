@@ -24,7 +24,18 @@ export default class ChartForm extends Component {
             no: "",
             date: currentDate,
             type: "Clinic",
+            mci: "",
+            pt: "",
+            care: "BLS",
+            triage: "Green",
+            loc: "",
+            loctype: "Clinic",
             dispatch: "",
+            enroute: "",
+            scene: "",
+            contact: "",
+            enroute2: "",
+            arrive: "",
             patient: "",
             birth: "", // datetime, age is calculated based on this
             gender: "Male",
@@ -47,6 +58,10 @@ export default class ChartForm extends Component {
         this.setState({ [input]: event.target.value })
     }
 
+    handleToggle = input => event => {
+        this.setState({loctype: event})
+    }
+
     handleGender = input => event => {
         this.setState({
             gender: event.currentTarget.value
@@ -56,9 +71,9 @@ export default class ChartForm extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         // call variables
-        const call = this.state.no + " | " + this.state.type;
+        const call = this.state.no + " | " + this.state.type + " | " + this.state.mci + " | " + this.state.pt + " | " + this.state.care + " | " + this.state.triage + " | " + this.state.loc + " | " + this.state.loctype;
         const date = this.state.date;
-        const times = this.state.dispatch;
+        const times = this.state.dispatch + " | " + this.state.enroute + " | " + this.state.scene + " | " + this.state.contact + " | " + this.state.enroute2 + " | " + this.state.arrive;
         // patient variables
         const patient = this.state.patient;
         const birth = this.state.birth;
@@ -110,7 +125,18 @@ export default class ChartForm extends Component {
             no,
             date,
             type,
+            mci,
+            pt,
+            care,
+            triage,
+            loc,
+            loctype,
             dispatch,
+            enroute,
+            scene,
+            contact,
+            enroute2,
+            arrive,
             patient,
             birth,
             weight,
@@ -124,7 +150,18 @@ export default class ChartForm extends Component {
             no,
             date,
             type,
+            mci,
+            pt,
+            care,
+            triage,
+            loc,
+            loctype,
             dispatch,
+            enroute,
+            scene,
+            contact,
+            enroute2,
+            arrive,
             patient,
             birth,
             weight,

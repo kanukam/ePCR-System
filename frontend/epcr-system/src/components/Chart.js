@@ -11,18 +11,10 @@ export default class Chart extends Component {
         super(props);
         this.state = {
             username: '',
-            showAdd: false,
             contentSpacing: '0 0 0 150px',
             sidebarHide: true
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
-        this.handleAdd = this.handleAdd.bind(this);
-    }
-
-    handleAdd() {
-        this.setState({
-            showAdd: true
-        });
     }
 
     toggleCollapse (){
