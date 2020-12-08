@@ -30,7 +30,12 @@ function updatePatient(patientID, userID, body, callback){
 }
 
 function getAllPatients(userID, callback){
-    db.query(`SELECT * FROM patients WHERE userID=${userID}`, (err, results) => {
+    /*db.query(`SELECT * FROM patients WHERE userID=${userID}`, (err, results) => {
+        if(err)
+            callback(err);
+        else callback(false, results);
+      });*/
+      db.query(`SELECT * FROM patients`, (err, results) => {
         if(err)
             callback(err);
         else callback(false, results);

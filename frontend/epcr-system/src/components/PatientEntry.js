@@ -19,7 +19,7 @@ export default class PatientEntry extends Component {
 		            	<br />
 		            	{this.props.dob}
 		            	<br />
-		            	<b>Additional Info:</b>
+		            	<b>Patient Address:</b>
 		            	<br />
 		            	{this.props.notes}
 		            </Col>

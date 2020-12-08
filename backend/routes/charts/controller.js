@@ -7,7 +7,7 @@ function viewAllCharts(req, res) {
   // should be similar to the getUsername function
   const userID = req.user.id;
   
-  db.query('SELECT * FROM charts WHERE userID = 1', (err, results, fields) => {
+  db.query('SELECT * FROM charts;', (err, results, fields) => {
   //db.query(`SELECT * FROM charts WHERE userID = ${userID}`, (err, results, fields) => {
     if (err) throw err;
     res.send(results);

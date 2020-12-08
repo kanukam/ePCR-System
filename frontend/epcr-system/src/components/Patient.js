@@ -10,15 +10,15 @@ export default class Patient extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "",
+            patients: [],
             contentSpacing: '0 0 0 150px',
             sidebarHide: true
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
     }
 
-    viewCharts() {
-        const url = 'http://localhost:3000/charts/';
+    componentDidMount() {
+        const url = 'http://localhost:3000/patients/';
         const options = {
             method: 'GET',
             headers: {
@@ -26,21 +26,36 @@ export default class Patient extends Component {
             },
             credentials: 'include'
         }
-        fetch(url, options).then((response) => {
-            if (!response.ok) {
-                throw Error;
-            }
-        })
-        
+        fetch(url, options)
+            .then((response) => {
+                if(response.ok)
+                    return response.json();
+                else
+                    throw Error("Failed");
+            })
+            .then((data) => {
+                this.setState({patients: data['patients']});
+            })
+            .catch((error) => {
+                console.log(error);
+            }); 
     }
 
     toggleCollapse (){
         this.setState({contentSpacing : (this.state.sidebarHide ? '0 0 0 0' : '0 0 0 150px')})
         this.setState({sidebarHide : !this.state.sidebarHide});
-        console.log('working');
     }
 
     render() {
+        var patientComponents = [];
+        for(var i = 0; i < this.state.patients.length; i++){
+            patientComponents.push(<PatientEntry 
+                                        patient={this.state.patients[i]["name"]}
+                                        dob={this.state.patients[i]["birth"]}
+                                        notes={this.state.patients[i]["address"]}
+                                        key ={this.state.patients[i].id}
+                                    />)
+        }
         return (
             <React.Fragment>
                 <MainNav 
@@ -50,10 +65,8 @@ export default class Patient extends Component {
                     contentSpacing={this.state.contentSpacing}
                     toggleCollapse={this.toggleCollapse}
                 />
- 
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
-                    <PatientEntry patient="john" dob="12/3/2020" notes="additional info"/>  
-                    <PatientEntry patient="smith" dob="03/11/2000" notes="additional info"/>
+                    {patientComponents}
                 </Container>
             </React.Fragment>
         )
