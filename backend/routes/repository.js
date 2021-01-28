@@ -38,7 +38,7 @@ function register(username, typedPassword, typedEmail, phone, name, callback){
                 return callback(err)
             // username exists in database
             if (res.length != 0) {
-                return callback("400: username already exists in database");
+                return callback(null, true);
             }
         })
 
@@ -59,7 +59,7 @@ function register(username, typedPassword, typedEmail, phone, name, callback){
                 if(err)
                     return callback(err);
                 createAccount(username, hash, typedEmail, phone, name, err => {
-                    callback(err);  
+                    callback(err, false);  
                 })
                  
             }) 
