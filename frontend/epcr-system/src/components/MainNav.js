@@ -24,7 +24,7 @@ export default class MainNav extends Component {
 		                </Button>
 		            </Nav.Item>
 		            <Nav className="ml-auto">
-		                <Navbar.Brand href="#home"> {/*take them to the edit profile page or have a toggle that shows more options*/}
+						<Navbar.Brand as={Link} to="/Settings"> {/*take them to the edit profile page or have a toggle that shows more options*/}
 		                    {this.props.username}
 		                    <img
 		                        src="/profile.png"

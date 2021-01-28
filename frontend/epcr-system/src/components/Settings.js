@@ -17,12 +17,18 @@ export default class Settings extends Component {
         super(props);
         this.state = {
             username: '',
+            name: ' ',
+            email: ' ',
+            phone: ' ',
             contentSpacing: '0 0 0 150px',
             sidebarHide: true
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
     }
 
+    componentDidMount(){
+        // Getting User data from database
+    }
     toggleCollapse() {
         this.setState({ contentSpacing: (this.state.sidebarHide ? '0 0 0 0' : '0 0 0 150px') })
         this.setState({ sidebarHide: !this.state.sidebarHide });
