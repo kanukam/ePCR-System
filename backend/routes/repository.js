@@ -31,6 +31,17 @@ function login(username, typedPassword, callback){
 }
 
 function register(username, typedPassword, typedEmail, phone, name, callback){
+    // Guarantee Username isnt in database
+    db.query(`SELECT * from users WHERE username='${username}'`,
+        (err, res) => {
+            if (err)
+                return callback(err)
+            // username exists in database
+            if (res.length != 0) {
+                return callback("400: username already exists in database");
+            }
+        })
+
     // Check database for existence of email
     db.query(`SELECT * from users WHERE email='${typedEmail}'`,
         (err, res) => {
