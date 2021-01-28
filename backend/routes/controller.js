@@ -25,10 +25,12 @@ function register(req, res) {
   if (!username || !password || !email)
     return res.status(401).json({ error: 'Username, password, or email field are blank' });
 
-  repo.register(username, password, email, phone, name, err => {
+  repo.register(username, password, email, phone, name, (err, duplicate) => {
     if (err) {
-      console.log(err);
       res.status(500).json({ error: 'Internal error please try again' });
+    }
+    else if(duplicate){
+      res.status(401).json({ error: 'Username already exists' });
     }
     else {
       res.status(200).json({ status: 'Successful registration' });
