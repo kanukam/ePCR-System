@@ -7,6 +7,7 @@ import Login from "./views/Login";
 import Register from './components/Register'
 import Dashboard from "./views/Dashboard";
 import Patient from './components/Patient';
+import Settings from './components/Settings';
 import {ProtectedRoute, ProtectedLogin} from "./Routes";
 
 
@@ -95,6 +96,7 @@ export default class App extends React.Component {
             <ProtectedRoute exact path="/Dashboard" auth={this.state.auth} component={Dashboard} />
             <ProtectedRoute exact path="/Chart" auth={this.state.auth} component={Chart} />
             <ProtectedRoute exact path="/Patient" auth={this.state.auth} component={Patient} />
+            <ProtectedRoute exact path="/Settings" auth={this.state.auth} component={Settings} />
             <Route exact path="/Register" component={Register} />
           </Switch>
         </BrowserRouter>
