@@ -35,10 +35,6 @@ export default class Settings extends Component {
     }
 
     render() {
-        if (this.state.authorized) {
-            return <Redirect to="/Dashboard" />
-        }
-
 
         return (
             <React.Fragment>
@@ -49,7 +45,7 @@ export default class Settings extends Component {
                     contentSpacing={this.state.contentSpacing}
                     toggleCollapse={this.toggleCollapse}
                 />
-                <Container>
+                <Container className='main-content' style={{ padding: this.state.contentSpacing}}>
                     <Row>
                         <Col>
                             <Card className='mt-4'>
