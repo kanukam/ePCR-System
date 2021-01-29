@@ -49,7 +49,7 @@ export default class Settings extends Component {
                     contentSpacing={this.state.contentSpacing}
                     toggleCollapse={this.toggleCollapse}
                 />
-                <Container>
+                <Container className='main-content' style={{ padding: this.state.contentSpacing }}>
                     <Row>
                         <Col>
                             <Card className='mt-4'>
