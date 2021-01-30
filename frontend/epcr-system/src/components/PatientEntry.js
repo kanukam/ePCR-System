@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
+import {Link} from 'react-router-dom'
 import '../App.css'
 
 export default class PatientEntry extends Component {
@@ -25,7 +26,7 @@ export default class PatientEntry extends Component {
 		            </Col>
 		            <div >
 		            	<br/><br/><br/>
-		        		<Button>View</Button>
+		        		<Button as={Link} to={{pathname: '/Patient', search: '?id='+this.props.id}}>View</Button>
 		        	</div>
 		        </Row>
             </Container>

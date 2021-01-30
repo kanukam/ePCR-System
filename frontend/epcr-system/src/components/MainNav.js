@@ -69,13 +69,13 @@ export default class MainNav extends Component {
 				        }
 			            {this.props.patient ?
 				            <Nav.Item className="sidebar-section active">
-				                <Nav.Link style={{color:'white'}} as={Link} to="/Patient">
+				                <Nav.Link style={{color:'white'}} as={Link} to="/PatientList">
 				                    Patient
 				                </Nav.Link>
 				            </Nav.Item>
 			            	:
 			            	<Nav.Item>
-				                <Nav.Link as={Link} to="/Patient">
+				                <Nav.Link as={Link} to="/PatientList">
 				                    Patient
 				                </Nav.Link>
 				            </Nav.Item>

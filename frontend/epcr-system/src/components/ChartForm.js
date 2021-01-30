@@ -19,7 +19,7 @@ export default class ChartForm extends Component {
             message: "",
             success: false,
             step: 1,
-            redirect: "/Patient",
+            redirect: "/PatientList",
             // all variables across section forms!
             no: "",
             date: currentDate,
