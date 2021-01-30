@@ -7,5 +7,6 @@ const controller = require('./controller');
 
 // These will be prefixed with /settings/ :
 router.get("/:username", auth, controller.viewUser); // View user details
+router.post("/update", auth, controller.updateUser); // Update user account
 
 module.exports = router;

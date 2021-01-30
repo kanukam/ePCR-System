@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
-import Navbar from 'react-bootstrap/Navbar'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Jumbotron from 'react-bootstrap/Jumbotron'
-import { Redirect } from 'react-router-dom'
 import { MainContext } from '../Auth'
 import MainNav from './MainNav'
 import Card from 'react-bootstrap/Card'
@@ -16,11 +13,11 @@ export default class Settings extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
             name: ' ',
             email: ' ',
             phone: ' ',
             contentSpacing: '0 0 0 150px',
+            message: "",
             sidebarHide: true
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
@@ -28,18 +25,65 @@ export default class Settings extends Component {
 
     componentDidMount(){
         // Getting User data from database
+        const url = 'http://localhost:3000/settings/' + this.context.username;
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include'
+        }
+        // Get request
+        fetch(url, options).then(response => response.json())
+            .then(data => {
+                const temp = data['userInfo'][0];
+                const {name, email, phone} = temp;
+                this.setState({ name: name, email: email, phone: phone });
+            })
+                .catch((error) => {
+                    this.setState({ errorMessage: "Error" });
+                })
     }
+
+    // Function to update user account information
+    handleUpdate = (event => {
+        event.preventDefault();
+        const email = this.state.email;
+        const phone = this.state.phone;
+        const name = this.state.name;
+
+        if (name && phone && email) {
+            const url = 'http://localhost:3000/settings/update';
+            const options = {
+                method: 'POST',
+                body: JSON.stringify({ email, phone, name}),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include'
+            }
+            // Check if update is successful
+            fetch(url, options).then((response) => {
+                if (!response.ok) {
+                    throw Error("Failed");
+                }
+                this.setState({ message: "Success" });
+            }).catch((error) => {
+                this.setState({ errorMessage: "Failed" });
+            })
+        }
+        else {
+            this.setState({ errorMessage: "Enter all fields" });
+        }
+    })
+
     toggleCollapse() {
         this.setState({ contentSpacing: (this.state.sidebarHide ? '0 0 0 0' : '0 0 0 150px') })
         this.setState({ sidebarHide: !this.state.sidebarHide });
     }
 
+    
     render() {
-        if (this.state.authorized) {
-            return <Redirect to="/Dashboard" />
-        }
-
-
         return (
             <React.Fragment>
                 <MainNav
@@ -56,26 +100,26 @@ export default class Settings extends Component {
                                 <Card.Body>
                                     <Card.Title>Account Settings</Card.Title>
                                     <hr></hr>
-
+                                    {this.state.message && <p className="text-info"> {this.state.message} </p>}
                                     <Form>
                                         <Form.Row>
                                             <Form.Group as={Col}>
                                                 <Form.Label>Name</Form.Label>
-                                                <Form.Control placeholder="1234 Main St" />
+                                                <Form.Control type="text" value={this.state.name} onChange={e => this.setState({ name: e.target.value })}/>
                                             </Form.Group>
 
                                             <Form.Group as={Col}>
                                                 <Form.Label>Email</Form.Label>
-                                                <Form.Control type="email" placeholder="Enter email" />
+                                                <Form.Control type="email" placeholder="Enter email" value={this.state.email} onChange={e => this.setState({ email: e.target.value })}/>
                                             </Form.Group>
                                         </Form.Row>
 
                                         <Form.Group>
                                             <Form.Label>Phone Number</Form.Label>
-                                            <Form.Control type ="tel" placeholder="Apartment, studio, or floor" />
+                                            <Form.Control type="tel" value={this.state.phone} onChange={e => this.setState({ name: e.target.value })} />
                                         </Form.Group>
 
-                                        <Button variant="primary" type="submit">
+                                        <Button variant="primary" onClick={this.handleUpdate}>
                                             Save
                                         </Button>
                                     </Form>
@@ -100,7 +144,7 @@ export default class Settings extends Component {
                                             </Form.Group>
                                         </Form.Row>
 
-                                        <Button variant="primary" type="submit">
+                                        <Button variant="primary">
                                             Change
                                         </Button>
                                     </Form>
