@@ -69,11 +69,11 @@ export default class Settings extends Component {
                 }
                 this.setState({ message: "Success" });
             }).catch((error) => {
-                this.setState({ errorMessage: "Failed" });
+                this.setState({ message: "Failed" });
             })
         }
         else {
-            this.setState({ errorMessage: "Enter all fields" });
+            this.setState({ message: "Enter all fields" });
         }
     })
 
