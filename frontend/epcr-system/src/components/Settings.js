@@ -116,7 +116,7 @@ export default class Settings extends Component {
 
                                         <Form.Group>
                                             <Form.Label>Phone Number</Form.Label>
-                                            <Form.Control type="tel" value={this.state.phone} onChange={e => this.setState({ name: e.target.value })} />
+                                            <Form.Control type="tel" value={this.state.phone} onChange={e => this.setState({ phone: e.target.value })} />
                                         </Form.Group>
 
                                         <Button variant="primary" onClick={this.handleUpdate}>
