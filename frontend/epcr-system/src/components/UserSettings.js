@@ -1,15 +1,11 @@
 import React, { Component } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { MainContext } from '../Auth'
-import MainNav from './MainNav'
 import Card from 'react-bootstrap/Card'
 
-export default class UserSettings extends Component {
-    static contextType = MainContext;
+export default class Settings extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,11 +15,8 @@ export default class UserSettings extends Component {
             oldPassword: "",
             newPassword: "",
             confirmedPassword: "",
-            contentSpacing: '0 0 0 150px',
             message: "",
-            sidebarHide: true
         };
-        this.toggleCollapse = this.toggleCollapse.bind(this);
     }
 
     componentDidMount() {
@@ -112,83 +105,69 @@ export default class UserSettings extends Component {
             this.setState({ message: "Enter all fields" })
         }
     }
-    toggleCollapse() {
-        this.setState({ contentSpacing: (this.state.sidebarHide ? '0 0 0 0' : '0 0 0 150px') })
-        this.setState({ sidebarHide: !this.state.sidebarHide });
-    }
 
 
     render() {
         return (
             <React.Fragment>
-                <MainNav
-                    username={this.context.username}
-                    settings={true}
-                    sidebarHide={this.state.sidebarHide}
-                    contentSpacing={this.state.contentSpacing}
-                    toggleCollapse={this.toggleCollapse}
-                />
-                <Container className='main-content' style={{ padding: this.state.contentSpacing }}>
-                    <Row>
-                        <Col>
-                            <Card className='mt-4'>
-                                <Card.Body>
-                                    <Card.Title>Account Settings</Card.Title>
-                                    <hr></hr>
-                                    {this.state.message && <p className="text-info"> {this.state.message} </p>}
-                                    <Form>
-                                        <Form.Row>
-                                            <Form.Group as={Col}>
-                                                <Form.Label>Name</Form.Label>
-                                                <Form.Control type="text" value={this.state.name} onChange={e => this.setState({ name: e.target.value })} />
-                                            </Form.Group>
-
-                                            <Form.Group as={Col}>
-                                                <Form.Label>Email</Form.Label>
-                                                <Form.Control type="email" placeholder="Enter email" value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
-                                            </Form.Group>
-                                        </Form.Row>
-
-                                        <Form.Group>
-                                            <Form.Label>Phone Number</Form.Label>
-                                            <Form.Control type="tel" value={this.state.phone} onChange={e => this.setState({ phone: e.target.value })} />
+                <Row>
+                    <Col>
+                        <Card className='mt-4'>
+                            <Card.Body>
+                                <Card.Title>Account Settings</Card.Title>
+                                <hr></hr>
+                                {this.state.message && <p className="text-info"> {this.state.message} </p>}
+                                <Form>
+                                    <Form.Row>
+                                        <Form.Group as={Col}>
+                                            <Form.Label>Name</Form.Label>
+                                            <Form.Control type="text" value={this.state.name} onChange={e => this.setState({ name: e.target.value })} />
                                         </Form.Group>
 
-                                        <Button variant="primary" onClick={this.handleUpdate}>
-                                            Save
-                                        </Button>
-                                    </Form>
+                                        <Form.Group as={Col}>
+                                            <Form.Label>Email</Form.Label>
+                                            <Form.Control type="email" placeholder="Enter email" value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
+                                        </Form.Group>
+                                    </Form.Row>
 
-                                    <Card.Title className='mt-4'>Change Password</Card.Title>
-                                    <hr></hr>
-                                    <Form>
-                                        <Form.Row>
-                                            <Form.Group as={Col}>
-                                                <Form.Label>Old Password</Form.Label>
-                                                <Form.Control type="password" value={this.state.oldPassword} onChange={e => this.setState({ oldPassword: e.target.value })} />
-                                            </Form.Group>
+                                    <Form.Group>
+                                        <Form.Label>Phone Number</Form.Label>
+                                        <Form.Control type="tel" value={this.state.phone} onChange={e => this.setState({ phone: e.target.value })} />
+                                    </Form.Group>
 
-                                            <Form.Group as={Col}>
-                                                <Form.Label>New Password</Form.Label>
-                                                <Form.Control type="password" value={this.state.newPassword} onChange={e => this.setState({ newPassword: e.target.value })} />
-                                            </Form.Group>
+                                    <Button variant="primary" onClick={this.handleUpdate}>
+                                        Save
+                                    </Button>
+                                </Form>
 
-                                            <Form.Group as={Col}>
-                                                <Form.Label>Confirm</Form.Label>
-                                                <Form.Control type="password" value={this.state.confirmedPassword} onChange={e => this.setState({ confirmedPassword: e.target.value })} />
-                                            </Form.Group>
-                                        </Form.Row>
+                                <Card.Title className='mt-4'>Change Password</Card.Title>
+                                <hr></hr>
+                                <Form>
+                                    <Form.Row>
+                                        <Form.Group as={Col}>
+                                            <Form.Label>Old Password</Form.Label>
+                                            <Form.Control type="password" value={this.state.oldPassword} onChange={e => this.setState({ oldPassword: e.target.value })} />
+                                        </Form.Group>
 
-                                        <Button variant="primary" onClick={this.handlePassword}>
-                                            Change
-                                        </Button>
-                                    </Form>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                </Container>
+                                        <Form.Group as={Col}>
+                                            <Form.Label>New Password</Form.Label>
+                                            <Form.Control type="password" value={this.state.newPassword} onChange={e => this.setState({ newPassword: e.target.value })} />
+                                        </Form.Group>
 
+                                        <Form.Group as={Col}>
+                                            <Form.Label>Confirm</Form.Label>
+                                            <Form.Control type="password" value={this.state.confirmedPassword} onChange={e => this.setState({ confirmedPassword: e.target.value })} />
+                                        </Form.Group>
+                                    </Form.Row>
+
+                                    <Button variant="primary" onClick={this.handlePassword}>
+                                        Change
+                                    </Button>
+                                </Form>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
             </React.Fragment>
         )
     }
