@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { MainContext } from '../Auth'
 import Container from 'react-bootstrap/Container'
 import MainNav from './MainNav'
-import {useLocation} from 'react-router-dom'
+import {useLocation, withRouter, useParams} from 'react-router-dom'
 import '../App.css'
 
 export default class Patient extends Component {
@@ -12,35 +12,16 @@ export default class Patient extends Component {
         this.state = {
             sidebarHide: true,
             contentSpacing: '0 0 0 150px',
-            id: (new URLSearchParams(window.location.search)).get('id'),
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
     }
-/*
+
     componentDidMount() {
-        const url = 'http://localhost:3000/patients/';
-        const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-        }
-        fetch(url, options)
-            .then((response) => {
-                if(response.ok)
-                    return response.json();
-                else
-                    throw Error("Failed");
-            })
-            .then((data) => {
-                this.setState({patients: data['patients']});
-            })
-            .catch((error) => {
-                console.log(error);
-            }); 
+        console.log(this.props);
+        console.log(this.props.match); 
+        console.log(this.state);
     }
-*/
+
     toggleCollapse (){
         this.setState({contentSpacing : (this.state.sidebarHide ? '0 0 0 0' : '0 0 0 150px')})
         this.setState({sidebarHide : !this.state.sidebarHide});
@@ -57,7 +38,7 @@ export default class Patient extends Component {
                     toggleCollapse={this.toggleCollapse}
                 />
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
-                    <h1>{this.state.id}</h1>
+                    <h1>{}</h1>
                 </Container>
             </React.Fragment>
         )

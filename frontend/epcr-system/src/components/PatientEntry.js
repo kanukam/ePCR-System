@@ -26,7 +26,7 @@ export default class PatientEntry extends Component {
 		            </Col>
 		            <div >
 		            	<br/><br/><br/>
-		        		<Button as={Link} to={{pathname: '/Patient', search: '?id='+this.props.id}}>View</Button>
+		        		<Button as={Link} to={'/Patient/'+this.props.id}>View</Button>
 		        	</div>
 		        </Row>
             </Container>

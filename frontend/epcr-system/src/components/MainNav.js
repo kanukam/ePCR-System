@@ -76,7 +76,7 @@ export default class MainNav extends Component {
 			            	:
 			            	<Nav.Item>
 				                <Nav.Link as={Link} to="/PatientList">
-				                    Patient
+				                    Patients
 				                </Nav.Link>
 				            </Nav.Item>
 				        }

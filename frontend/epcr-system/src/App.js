@@ -97,7 +97,7 @@ export default class App extends React.Component {
             <ProtectedRoute exact path="/Dashboard" auth={this.state.auth} component={Dashboard} />
             <ProtectedRoute exact path="/Chart" auth={this.state.auth} component={Chart} />
             <ProtectedRoute exact path="/PatientList" auth={this.state.auth} component={PatientList} />
-            <ProtectedRoute exact path="/Patient" auth={this.state.auth} component={Patient} />
+            <ProtectedRoute exact path="/Patient/:id" auth={this.state.auth} component={Patient} />
             <ProtectedRoute exact path="/Settings" auth={this.state.auth} component={Settings} />
             <Route exact path="/Register" component={Register} />
           </Switch>
