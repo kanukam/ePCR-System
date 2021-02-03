@@ -8,7 +8,7 @@ import Register from './components/Register'
 import Dashboard from "./views/Dashboard";
 import Patient from "./components/Patient";
 import PatientList from './components/PatientList';
-import Settings from './components/Settings';
+import Settings from './views/Settings';
 import {ProtectedRoute, ProtectedLogin} from "./Routes";
 
 

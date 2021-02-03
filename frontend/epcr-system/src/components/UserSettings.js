@@ -8,7 +8,7 @@ import { MainContext } from '../Auth'
 import MainNav from './MainNav'
 import Card from 'react-bootstrap/Card'
 
-export default class Settings extends Component {
+export default class UserSettings extends Component {
     static contextType = MainContext;
     constructor(props) {
         super(props);
@@ -26,7 +26,7 @@ export default class Settings extends Component {
         this.toggleCollapse = this.toggleCollapse.bind(this);
     }
 
-    componentDidMount(){
+    componentDidMount() {
         // Getting User data from database
         const url = 'http://localhost:3000/settings/' + this.context.username;
         const options = {
@@ -40,12 +40,12 @@ export default class Settings extends Component {
         fetch(url, options).then(response => response.json())
             .then(data => {
                 const temp = data['userInfo'][0];
-                const {name, email, phone} = temp;
+                const { name, email, phone } = temp;
                 this.setState({ name: name, email: email, phone: phone });
             })
-                .catch((error) => {
-                    this.setState({ errorMessage: "Error" });
-                })
+            .catch((error) => {
+                this.setState({ errorMessage: "Error" });
+            })
     }
 
     // Function to update user account information
@@ -59,7 +59,7 @@ export default class Settings extends Component {
             const url = 'http://localhost:3000/settings/update';
             const options = {
                 method: 'POST',
-                body: JSON.stringify({ email, phone, name}),
+                body: JSON.stringify({ email, phone, name }),
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -81,14 +81,14 @@ export default class Settings extends Component {
     })
     // Function to change Password
     handlePassword = () => {
-        const {oldPassword, newPassword, confirmedPassword} = this.state
-        if(oldPassword && newPassword && confirmedPassword){
+        const { oldPassword, newPassword, confirmedPassword } = this.state
+        if (oldPassword && newPassword && confirmedPassword) {
             // Send Request if passwords match
-            if(newPassword === confirmedPassword){
+            if (newPassword === confirmedPassword) {
                 const url = 'http://localhost:3000/settings/password';
                 const options = {
                     method: 'POST',
-                    body: JSON.stringify({ oldPassword, newPassword}),
+                    body: JSON.stringify({ oldPassword, newPassword }),
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -104,12 +104,12 @@ export default class Settings extends Component {
                     this.setState({ message: "Failed" });
                 })
             }
-            else{
+            else {
                 this.setState({ message: "Passwords don't match" })
             }
         }
-        else{
-            this.setState({ message: "Enter all fields"})
+        else {
+            this.setState({ message: "Enter all fields" })
         }
     }
     toggleCollapse() {
@@ -117,7 +117,7 @@ export default class Settings extends Component {
         this.setState({ sidebarHide: !this.state.sidebarHide });
     }
 
-    
+
     render() {
         return (
             <React.Fragment>
@@ -140,12 +140,12 @@ export default class Settings extends Component {
                                         <Form.Row>
                                             <Form.Group as={Col}>
                                                 <Form.Label>Name</Form.Label>
-                                                <Form.Control type="text" value={this.state.name} onChange={e => this.setState({ name: e.target.value })}/>
+                                                <Form.Control type="text" value={this.state.name} onChange={e => this.setState({ name: e.target.value })} />
                                             </Form.Group>
 
                                             <Form.Group as={Col}>
                                                 <Form.Label>Email</Form.Label>
-                                                <Form.Control type="email" placeholder="Enter email" value={this.state.email} onChange={e => this.setState({ email: e.target.value })}/>
+                                                <Form.Control type="email" placeholder="Enter email" value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
                                             </Form.Group>
                                         </Form.Row>
 
@@ -165,17 +165,17 @@ export default class Settings extends Component {
                                         <Form.Row>
                                             <Form.Group as={Col}>
                                                 <Form.Label>Old Password</Form.Label>
-                                                <Form.Control type="password" value={this.state.oldPassword} onChange={e => this.setState({ oldPassword: e.target.value })}/>
+                                                <Form.Control type="password" value={this.state.oldPassword} onChange={e => this.setState({ oldPassword: e.target.value })} />
                                             </Form.Group>
 
                                             <Form.Group as={Col}>
                                                 <Form.Label>New Password</Form.Label>
-                                                <Form.Control type="password" value={this.state.newPassword} onChange={e => this.setState({ newPassword: e.target.value })}/>
+                                                <Form.Control type="password" value={this.state.newPassword} onChange={e => this.setState({ newPassword: e.target.value })} />
                                             </Form.Group>
 
                                             <Form.Group as={Col}>
                                                 <Form.Label>Confirm</Form.Label>
-                                                <Form.Control type="password" value={this.state.confirmedPassword} onChange={e => this.setState({ confirmedPassword: e.target.value })}/>
+                                                <Form.Control type="password" value={this.state.confirmedPassword} onChange={e => this.setState({ confirmedPassword: e.target.value })} />
                                             </Form.Group>
                                         </Form.Row>
 
