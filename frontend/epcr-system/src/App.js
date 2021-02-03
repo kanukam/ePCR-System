@@ -44,7 +44,6 @@ export default class App extends React.Component {
     }
 
     fetch(url, options).then((response) => {
-      console.log(response);
       if (!response.ok) {
         throw Error("Failed");
       }

@@ -18,8 +18,6 @@ export default class Patient extends Component {
 
     componentDidMount() {
         console.log(this.props);
-        console.log(this.props.match); 
-        console.log(this.state);
     }
 
     toggleCollapse (){
