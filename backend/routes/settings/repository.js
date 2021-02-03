@@ -1,4 +1,5 @@
 const db = require('../../sql/database');
+const bcrypt = require('bcrypt');
 
 function viewUser(userName, callback){
     const sql = `SELECT users.name, users.email, users.phone FROM users WHERE username='${userName}'`;
@@ -24,6 +25,53 @@ function updateUser(username, name, phone, email, callback) {
     });
 }
 
+
+// Update user account information
+function changePassword(username, oldPassword, newPassword) {
+    //
+    db.query(`SELECT * from users WHERE username='${username}'`,
+        (err, res) => {
+            if (err)
+                return callback(err);
+            if (res.length === 0) // No rows found
+                return callback("404: Account does not exist.");
+            //Hashed password
+            const { password } = res[0]; 
+            // Comparing nhashed password with new password
+            bcrypt.compare(oldPassword, password,
+                (err, auth) => {
+                    if (err){
+                        return callback(err);
+                    }
+                    else if (auth) 
+                    { 
+                        // Hash and set new password
+                        bcrypt.hash(typedPassword, 10, (err, hash) => {
+                            if (err)
+                            {
+                                return callback(err);
+                            }
+                            let sql = 'UPDATE users SET password = ? WHERE username = ?';
+                            // Update password
+                            db.query(sql, [hash, username], err => {
+                                if(err){
+                                    return callback(err);
+                                }
+                                else{
+                                    return callback(null, true);
+                                }
+                            })
+                        })
+                    }
+                    else
+                    {
+                        return callback(null, false);
+                    }
+                })
+            })
+        }    
+                    
+
 module.exports = {
-    viewUser, updateUser
+    viewUser, updateUser, changePassword
 }

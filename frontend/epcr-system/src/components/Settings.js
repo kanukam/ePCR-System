@@ -16,6 +16,9 @@ export default class Settings extends Component {
             name: ' ',
             email: ' ',
             phone: ' ',
+            oldPassword: "",
+            newPassword: "",
+            confirmedPassword: "",
             contentSpacing: '0 0 0 150px',
             message: "",
             sidebarHide: true
@@ -76,7 +79,39 @@ export default class Settings extends Component {
             this.setState({ message: "Enter all fields" });
         }
     })
-
+    // Function to change Password
+    handlePassword = () => {
+        const {oldPassword, newPassword, confirmedPassword} = this.state
+        if(oldPassword && newPassword && confirmedPassword){
+            // Send Request if passwords match
+            if(newPassword === confirmedPassword){
+                const url = 'http://localhost:3000/settings/password';
+                const options = {
+                    method: 'POST',
+                    body: JSON.stringify({ oldPassword, newPassword}),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include'
+                }
+                // Check if update is successful
+                fetch(url, options).then((response) => {
+                    if (!response.ok) {
+                        throw Error("Failed");
+                    }
+                    this.setState({ message: "Password Changed" });
+                }).catch((error) => {
+                    this.setState({ message: "Failed" });
+                })
+            }
+            else{
+                this.setState({ message: "Passwords don't match" })
+            }
+        }
+        else{
+            this.setState({ message: "Enter all fields"})
+        }
+    }
     toggleCollapse() {
         this.setState({ contentSpacing: (this.state.sidebarHide ? '0 0 0 0' : '0 0 0 150px') })
         this.setState({ sidebarHide: !this.state.sidebarHide });

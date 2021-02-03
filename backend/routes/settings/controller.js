@@ -34,4 +34,26 @@ function updateUser(req, response) {
   }
 }
 
-module.exports = { viewUser, updateUser };
+// Update user account information
+function changePassword(req, res) {
+  // Mandatory Fields
+  const { oldPassword, newPassword } = req.body;
+  if (!oldPassword || !newPassword){
+    return res.status(401).json({ error: 'Password fields are blank' });
+  }
+  repo.changePassword(req.user.username, oldPassword, newPassword, (err, passwordMismatch) => {
+    if(err){
+      res.status(500).json({ error: "Internal Server Error, try again" })
+    }
+    else if(passwordMismatch)
+    {
+      res.status(401).json({ status: "unauthorized" });
+    }
+    else
+    {
+      response.status(200).json({ status: "success" });
+    }
+  })
+}
+
+module.exports = { viewUser, updateUser, changePassword };
