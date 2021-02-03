@@ -99,7 +99,7 @@ export default class Settings extends Component {
                     if (!response.ok) {
                         throw Error("Failed");
                     }
-                    this.setState({ message: "Password Changed" });
+                    this.setState({ message: "Password Successfully Changed" });
                 }).catch((error) => {
                     this.setState({ message: "Failed" });
                 })
@@ -165,21 +165,21 @@ export default class Settings extends Component {
                                         <Form.Row>
                                             <Form.Group as={Col}>
                                                 <Form.Label>Old Password</Form.Label>
-                                                <Form.Control type="password"/>
+                                                <Form.Control type="password" value={this.state.oldPassword} onChange={e => this.setState({ oldPassword: e.target.value })}/>
                                             </Form.Group>
 
                                             <Form.Group as={Col}>
                                                 <Form.Label>New Password</Form.Label>
-                                                <Form.Control type="password"/>
+                                                <Form.Control type="password" value={this.state.newPassword} onChange={e => this.setState({ newPassword: e.target.value })}/>
                                             </Form.Group>
 
                                             <Form.Group as={Col}>
                                                 <Form.Label>Confirm</Form.Label>
-                                                <Form.Control type="password"/>
+                                                <Form.Control type="password" value={this.state.confirmedPassword} onChange={e => this.setState({ confirmedPassword: e.target.value })}/>
                                             </Form.Group>
                                         </Form.Row>
 
-                                        <Button variant="primary">
+                                        <Button variant="primary" onClick={this.handlePassword}>
                                             Change
                                         </Button>
                                     </Form>

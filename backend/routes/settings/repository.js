@@ -27,7 +27,7 @@ function updateUser(username, name, phone, email, callback) {
 
 
 // Update user account information
-function changePassword(username, oldPassword, newPassword) {
+function changePassword(username, oldPassword, newPassword, callback) {
     //
     db.query(`SELECT * from users WHERE username='${username}'`,
         (err, res) => {
@@ -37,7 +37,7 @@ function changePassword(username, oldPassword, newPassword) {
                 return callback("404: Account does not exist.");
             //Hashed password
             const { password } = res[0]; 
-            // Comparing nhashed password with new password
+            // Comparing hashed password with new password
             bcrypt.compare(oldPassword, password,
                 (err, auth) => {
                     if (err){
@@ -46,7 +46,7 @@ function changePassword(username, oldPassword, newPassword) {
                     else if (auth) 
                     { 
                         // Hash and set new password
-                        bcrypt.hash(typedPassword, 10, (err, hash) => {
+                        bcrypt.hash(newPassword, 10, (err, hash) => {
                             if (err)
                             {
                                 return callback(err);
@@ -58,14 +58,14 @@ function changePassword(username, oldPassword, newPassword) {
                                     return callback(err);
                                 }
                                 else{
-                                    return callback(null, true);
+                                    return callback(null, false);
                                 }
                             })
                         })
                     }
                     else
                     {
-                        return callback(null, false);
+                        return callback(null, true);
                     }
                 })
             })

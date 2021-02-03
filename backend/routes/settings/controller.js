@@ -51,7 +51,7 @@ function changePassword(req, res) {
     }
     else
     {
-      response.status(200).json({ status: "success" });
+      res.status(200).json({ status: "success" });
     }
   })
 }
