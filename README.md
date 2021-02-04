@@ -10,6 +10,7 @@ users table
 
 -- CREATE TABLE users (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(255), password VARCHAR(255), email VARCHAR(255), phone VARCHAR(12), name VARCHAR(50));
 -- ALTER TABLE users ADD privilege varchar(10) DEFAULT 'standard';
+
 charts table
 
 -- CREATE TABLE `charts` (
