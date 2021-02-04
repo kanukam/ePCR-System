@@ -3,8 +3,6 @@ const repo = require('./repository');
 // Get user account information
 function viewUser(req, response) {
   // Check if the user is viewing their own account info
-  console.log(req.user.username);
-  console.log(req.params.username);
   if(req.user.username === req.params.username){
     repo.viewUser(req.user.username, (err, res) => {
       err
@@ -14,6 +12,21 @@ function viewUser(req, response) {
   }
   else{
     response.status(401).json({ status: "unauthorized"});
+  }
+}
+
+// Get all users account information
+function viewUsers(req, response) {
+  // Check if the user is viewing their own account info
+  if (req.user.privilege == "admin") {
+    repo.viewUsers((err, res) => {
+      err
+        ? response.status(500).json({ error: "Internal Server Error, try again" })
+        : response.status(200).json({ userInfo: res });
+    })
+  }
+  else {
+    response.status(401).json({ status: "unauthorized" });
   }
 }
 
@@ -58,4 +71,4 @@ function changePassword(req, res) {
   })
 }
 
-module.exports = { viewUser, updateUser, changePassword };
+  module.exports = { viewUser, updateUser, changePassword, viewUsers };

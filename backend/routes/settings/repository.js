@@ -13,6 +13,18 @@ function viewUser(userName, callback){
     });
 }
 
+function viewUsers(callback) {
+    const sql = 'SELECT users.name, users.email, users.phone, users.username, users.privilege FROM users';
+    db.query(sql, (err, res) => {
+        if (err) {
+            callback(err);
+        }
+        else {
+            callback(err, res);
+        }
+    });
+}
+
 function updateUser(username, name, phone, email, callback) {
     const sql = 'UPDATE users SET users.name = ?, users.phone = ?, users.email = ? WHERE username = ?';
     db.query(sql, [name, phone, email, username], (err, res) => {
@@ -73,5 +85,5 @@ function changePassword(username, oldPassword, newPassword, callback) {
                     
 
 module.exports = {
-    viewUser, updateUser, changePassword
+    viewUser, updateUser, changePassword, viewUsers
 }

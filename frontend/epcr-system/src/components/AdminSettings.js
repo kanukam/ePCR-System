@@ -5,7 +5,33 @@ import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 
 export default class Settings extends Component {
-    default = [{ u: 1, x: 2, a: 3 }, { u: 1, x: 2, a: 3 }, { u: 1, x: 2, a: 3 }, { u: 1, x: 2, a: 3 }]
+    constructor(props) {
+        super(props);
+        this.state = {
+            users: [],
+            error: ""
+        };
+    }
+
+    componentDidMount() {
+        // Getting all user data from database
+        const url = 'http://localhost:3000/settings/admin';
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include'
+        }
+        // Get request
+        fetch(url, options).then(response => response.json())
+            .then(data => {
+                this.setState({ users: data["userInfo"] });
+            })
+            .catch((error) => {
+                this.setState({ errorMessage: "Error" });
+            })
+    }
     render() {
         return (
             <React.Fragment>
@@ -27,29 +53,38 @@ export default class Settings extends Component {
                                     </thead>
                                     <tbody>
                                         {
-                                            this.default.map( ( {u, x, a} ) => {
+                                            this.state.users.map( ( {name, username, email, phone, privilege}, idx) => {
                                                 return(
                                                     <tr>
                                                         <td>
-                                                            {u}
+                                                            {idx}
                                                         </td>
                                                         <td>
-                                                            {x}
+                                                            {name}
                                                         </td>
                                                         <td>
-                                                            {x}
+                                                            {username}
+                                                        </td>
+                                                        <td>
+                                                            {email}
+                                                        </td>
+                                                        <td>
+                                                            {phone}
+                                                        </td>
+                                                        <td>
+                                                            {privilege}
                                                         </td>
                                                     </tr>
                                                 )
                                             })
                                         }
-
                                     </tbody>
                                 </Table>
                             </Card.Body>
                         </Card>
                     </Col>
                 </Row>
+                <div className="mb-4"></div>
             </React.Fragment>
         )
     }
