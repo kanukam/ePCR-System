@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 
 export default class Settings extends Component {
+    default = [{ u: 1, x: 2, a: 3 }, { u: 1, x: 2, a: 3 }, { u: 1, x: 2, a: 3 }, { u: 1, x: 2, a: 3 }]
     render() {
         return (
             <React.Fragment>
@@ -21,18 +22,27 @@ export default class Settings extends Component {
                                             <th>Username</th>
                                             <th>E-mail</th>
                                             <th>Phone</th>
+                                            <th>Role</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-
-                                        </tr>
-                                        <tr>
-
-                                        </tr>
-                                        <tr>
-
-                                        </tr>
+                                        {
+                                            this.default.map( ( {u, x, a} ) => {
+                                                return(
+                                                    <tr>
+                                                        <td>
+                                                            {u}
+                                                        </td>
+                                                        <td>
+                                                            {x}
+                                                        </td>
+                                                        <td>
+                                                            {x}
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            })
+                                        }
 
                                     </tbody>
                                 </Table>
