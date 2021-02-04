@@ -3,6 +3,8 @@ const repo = require('./repository');
 // Get user account information
 function viewUser(req, response) {
   // Check if the user is viewing their own account info
+  console.log(req.user.username);
+  console.log(req.params.username);
   if(req.user.username === req.params.username){
     repo.viewUser(req.user.username, (err, res) => {
       err
