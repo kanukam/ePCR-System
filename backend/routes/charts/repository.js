@@ -12,6 +12,7 @@ function addChart(body, pbody, callback) {
         else {
             // if successful, save patient id
             pid = res.insertId;
+            body["patientID"] = pid;
             var sql = 'INSERT INTO charts SET ?';
             db.query(sql, body, (err, res) => {
                 if (err) {
