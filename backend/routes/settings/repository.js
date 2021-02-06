@@ -83,7 +83,27 @@ function changePassword(username, oldPassword, newPassword, callback) {
             })
         }    
                     
+// Update user account information
+function deleteUser(email, callback) {
+    db.query(`DELETE from users WHERE email='${email}'`, (err, res) => { 
+        if (err) {
+            callback(err);
+        }
+        else {
+            const sql = 'SELECT users.name, users.email, users.phone, users.username, users.privilege FROM users';
+            db.query(sql, (err, res) => {
+                if (err) {
+                    callback(err);
+                }
+                else {
+                    callback(err, res);
+                }
+            });
+        }
+    })
+
+}
 
 module.exports = {
-    viewUser, updateUser, changePassword, viewUsers
+    viewUser, updateUser, changePassword, viewUsers, deleteUser
 }

@@ -3,13 +3,15 @@ import Table from 'react-bootstrap/Table'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
+import UserDetails from './UserDetails'
 
 export default class Settings extends Component {
     constructor(props) {
         super(props);
         this.state = {
             users: [],
-            error: ""
+            error: "",
+            message: ""
         };
     }
 
@@ -23,7 +25,7 @@ export default class Settings extends Component {
             },
             credentials: 'include'
         }
-        // Get request
+        // Post request
         fetch(url, options).then(response => response.json())
             .then(data => {
                 this.setState({ users: data["userInfo"] });
@@ -32,6 +34,34 @@ export default class Settings extends Component {
                 this.setState({ errorMessage: "Error" });
             })
     }
+
+    // Delete user, must be an admin fro it to work.
+    deleteUser = (email) => event => {
+        event.preventDefault();
+        if(window.confirm("Are you sure you would like to delete the user?"))
+        {
+            // Deleting user
+            const url = 'http://localhost:3000/settings/delete';
+            const options = {
+                method: 'POST',
+                body: JSON.stringify({ email }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include'
+            }
+            // Post request to delete user, updated table sent back
+            fetch(url, options).then(response => response.json())
+                .then(data => {
+                    this.setState({ users: data["userInfo"], message:"Success"});
+                })
+                .catch((error) => {
+                    this.setState({ message: "Failed" });
+                })
+        }
+    }
+
+
     render() {
         return (
             <React.Fragment>
@@ -40,7 +70,8 @@ export default class Settings extends Component {
                         <Card className='mt-5'>
                             <Card.Body>
                                 <Card.Title>Admin Settings</Card.Title>
-                                <Table responsive className="mt-5">
+                                {this.state.message && <p className="text-info"> {this.state.message} </p>}
+                                <Table responsive className="mt-3">
                                     <thead>
                                         <tr>
                                             <th>id</th>
@@ -49,32 +80,14 @@ export default class Settings extends Component {
                                             <th>E-mail</th>
                                             <th>Phone</th>
                                             <th>Role</th>
+                                            <th> </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {
                                             this.state.users.map( ( {name, username, email, phone, privilege}, idx) => {
                                                 return(
-                                                    <tr>
-                                                        <td>
-                                                            {idx}
-                                                        </td>
-                                                        <td>
-                                                            {name}
-                                                        </td>
-                                                        <td>
-                                                            {username}
-                                                        </td>
-                                                        <td>
-                                                            {email}
-                                                        </td>
-                                                        <td>
-                                                            {phone}
-                                                        </td>
-                                                        <td>
-                                                            {privilege}
-                                                        </td>
-                                                    </tr>
+                                                    <UserDetails name={name} username={username} email={email} phone={phone} privilege={privilege} key={idx} idx={idx} delete={this.deleteUser}/>
                                                 )
                                             })
                                         }

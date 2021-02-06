@@ -71,4 +71,20 @@ function changePassword(req, res) {
   })
 }
 
-  module.exports = { viewUser, updateUser, changePassword, viewUsers };
+// Update user account information
+function deleteUser(req, res) {
+  const { email } = req.body;
+  if (req.user.privilege == "admin") {
+    repo.deleteUser(email, (err, data) => {
+      err
+        ? res.status(500).json({ error: "Internal Server Error, try again" })
+        : res.status(200).json({ userInfo: data });
+    })
+  }
+  else {
+    res.status(401).json({ status: "unauthorized" });
+  }
+
+}
+
+  module.exports = { viewUser, updateUser, changePassword, viewUsers, deleteUser };
