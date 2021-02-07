@@ -63,42 +63,47 @@ export default class Settings extends Component {
 
 
     render() {
-        return (
-            <React.Fragment>
-                <Row>
-                    <Col>
-                        <Card className='mt-5'>
-                            <Card.Body>
-                                <Card.Title>Admin Settings</Card.Title>
-                                {this.state.message && <p className="text-info"> {this.state.message} </p>}
-                                <Table responsive className="mt-3">
-                                    <thead>
-                                        <tr>
-                                            <th>id</th>
-                                            <th>Name</th>
-                                            <th>Username</th>
-                                            <th>E-mail</th>
-                                            <th>Phone</th>
-                                            <th>Role</th>
-                                            <th> </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            this.state.users && this.state.users.map( ( {name, username, email, phone, privilege}, idx) => {
-                                                return(
-                                                    <UserDetails name={name} username={username} email={email} phone={phone} privilege={privilege} key={idx} idx={idx} delete={this.deleteUser}/>
-                                                )
-                                            })
-                                        }
-                                    </tbody>
-                                </Table>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
-                <div className="mb-4"></div>
-            </React.Fragment>
-        )
+        if(this.state.users) {
+            return (
+                <React.Fragment>
+                    <Row>
+                        <Col>
+                            <Card className='mt-5'>
+                                <Card.Body>
+                                    <Card.Title>Admin Settings</Card.Title>
+                                    {this.state.message && <p className="text-info"> {this.state.message} </p>}
+                                    <Table responsive className="mt-3">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Name</th>
+                                                <th>Username</th>
+                                                <th>E-mail</th>
+                                                <th>Phone</th>
+                                                <th>Role</th>
+                                                <th> </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                this.state.users.map(({ name, username, email, phone, privilege }, idx) => {
+                                                    return (
+                                                        <UserDetails name={name} username={username} email={email} phone={phone} privilege={privilege} key={idx} idx={idx} delete={this.deleteUser} />
+                                                    )
+                                                })
+                                            }
+                                        </tbody>
+                                    </Table>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                    <div className="mb-4"></div>
+                </React.Fragment>
+            );
+        }
+        else{
+            return null;
+        }
     }
 }
