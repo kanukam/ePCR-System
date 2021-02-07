@@ -29,7 +29,7 @@ function addChart(body, pbody, callback) {
 function viewAllCharts(callback) {
     db.query('SELECT * FROM charts;', (err, results) => {
         if (err) {
-            return callback(err );
+            return callback(err);
         }
         callback(null, results);
     });
