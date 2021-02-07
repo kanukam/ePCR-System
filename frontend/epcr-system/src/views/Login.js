@@ -56,7 +56,7 @@ export default class Login extends Component {
         {
             this.setState({ errorMessage: "Enter all fields" });
         } 
-})
+    })
 
     render() {
         if(this.state.authorized) {

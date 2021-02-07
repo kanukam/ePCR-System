@@ -53,7 +53,7 @@ export default class Register extends Component {
         else{
             this.setState({ message: "Enter all required fields [Username, Email, Password]" });
         }
-})
+    })
 
     render() {
 
