@@ -85,7 +85,7 @@ export default class Settings extends Component {
                                     </thead>
                                     <tbody>
                                         {
-                                            this.state.users.map( ( {name, username, email, phone, privilege}, idx) => {
+                                            this.state.users && this.state.users.map( ( {name, username, email, phone, privilege}, idx) => {
                                                 return(
                                                     <UserDetails name={name} username={username} email={email} phone={phone} privilege={privilege} key={idx} idx={idx} delete={this.deleteUser}/>
                                                 )
