@@ -11,7 +11,7 @@ users table
 -- CREATE TABLE users (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(255), password VARCHAR(255), email VARCHAR(255), phone VARCHAR(12), name VARCHAR(50));
 
 
--- ALTER TABLE users ADD privilege varchar(10) DEFAULT 'standard';
+**-- ALTER TABLE users ADD privilege varchar(10) DEFAULT 'standard';**
 
 charts table
 
@@ -32,8 +32,8 @@ charts table
   
 -- CREATE TABLE patients ( id INT(11) AUTO_INCREMENT, name VARCHAR(255) NULL, birth VARCHAR(45), gender VARCHAR(10), weight VARCHAR(10) NULL, address VARCHAR(255) NULL, phone VARCHAR(12) NULL, history MEDIUMTEXT NULL, PRIMARY KEY (id));
 
--- ALTER TABLE `patients` 
+**-- ALTER TABLE `patients` 
 ADD COLUMN `lname` VARCHAR(255) NULL AFTER `fname`,
 ADD COLUMN `classify` VARCHAR(45) NULL DEFAULT 'Adult' AFTER `weight`,
 ADD COLUMN `bcolor` VARCHAR(45) NULL AFTER `classify`,
-CHANGE COLUMN `name` `fname` VARCHAR(255) NULL DEFAULT NULL ;
+CHANGE COLUMN `name` `fname` VARCHAR(255) NULL DEFAULT NULL ;**
