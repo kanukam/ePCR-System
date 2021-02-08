@@ -77,7 +77,7 @@ export default class Popup extends Component {
                                 <div className="group">
                                     <span>Dosage</span>
                                     <input type="number" style={{ width:'27%', marginRight:'10px' }} />
-                                    <select name="unit" style={{ width:'20%' }}>
+                                    <select name="unit" style={{ width:'30%' }}>
                                         <option value="GMS">GMS</option>
                                         <option value="in.">Inches (in.)</option>
                                         <option value="L">Liters (L)</option>

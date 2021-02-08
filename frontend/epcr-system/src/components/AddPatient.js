@@ -95,7 +95,7 @@ export default class AddPatient extends Component {
                                     <label><input type="checkbox" name="bcolor" /> Green</label>
                                 </div>
                             </div>
-                            <small>Note: Braslow color not yet handled.</small> 
+                            <small>Note: Name split into first and last for easy search results sorted either by first or last name &amp;&amp; Braslow color not yet handled.</small> 
                         </Col>
                     </Row>
                     <h3>Address &amp; Contact</h3>
