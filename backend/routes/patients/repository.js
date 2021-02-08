@@ -14,7 +14,13 @@ function addPatient(userID, body, callback){
 }
 
 function getPatient(id, userID, callback){
-    db.query(`SELECT * FROM patients WHERE (id=${id} AND userID=${userID})`, (err, results) => {
+    /*db.query(`SELECT * FROM patients WHERE (id=${id} AND userID=${userID})`, (err, results) => {
+        if (err) 
+            callback(err);
+        else 
+            callback(false, results[0]);
+      });*/
+      db.query(`SELECT * FROM patients WHERE id=${id}`, (err, results) => {
         if (err) 
             callback(err);
         else 

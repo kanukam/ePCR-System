@@ -1,6 +1,6 @@
 const repo = require('./repository');
 
-function viewAllPatients(req, res) {
+function getAllPatients(req, res) {
   const userID = req.user.userID;
   repo.getAllPatients(userID, (err, patients) => {
     err
@@ -51,7 +51,7 @@ function addPatient(req, res) {
 }
 
 function getPatient(req, res){
-  const patientID = req.params;
+  const patientID = req.params['patientId'];
   const userID = req.user.id;
   repo.getPatient(patientID, userID, (err, patient) => {
     err
@@ -60,4 +60,4 @@ function getPatient(req, res){
   })
 }
 
-module.exports = { viewAllPatients, getPatient, addPatient, updatePatient };
+module.exports = { getAllPatients, getPatient, addPatient, updatePatient };

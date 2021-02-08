@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { MainContext } from '../Auth'
 import Container from 'react-bootstrap/Container'
 import MainNav from './MainNav'
-import {useLocation, withRouter, useParams} from 'react-router-dom'
 import '../App.css'
 
 export default class Patient extends Component {
@@ -17,7 +16,27 @@ export default class Patient extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props);
+        const url = 'http://localhost:3000/patients/' + this.props.match.params.id;
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        }
+        fetch(url, options)
+            .then((response) => {
+                if(response.ok)
+                    return response.json();
+                else
+                    throw Error("Failed");
+            })
+            .then((data) => {
+                this.setState({patient: data['patient']});
+            })
+            .catch((error) => {
+                console.log(error);
+            }); 
     }
 
     toggleCollapse (){
@@ -26,6 +45,7 @@ export default class Patient extends Component {
     }
 
     render() {
+        console.log(this.state.patient);
         return (
             <React.Fragment>
                 <MainNav 
@@ -36,7 +56,7 @@ export default class Patient extends Component {
                     toggleCollapse={this.toggleCollapse}
                 />
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
-                    <h1>{}</h1>
+                    <h1>Hello</h1>
                 </Container>
             </React.Fragment>
         )
