@@ -14,7 +14,7 @@ export default class PatientEntry extends Component {
             	<Row>
             		<Col>         
 		            	<b>Patient Name: </b>
-		            	{this.props.patient}
+		            	{this.props.fname} {this.props.lname}
 		            	<br />
 		            	<b>D.O.B.:</b>
 		            	<br />

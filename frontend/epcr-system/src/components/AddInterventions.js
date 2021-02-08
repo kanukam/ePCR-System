@@ -47,10 +47,10 @@ export default class AddInterventions extends Component {
                     {this.showTable}
                     <Button onClick={this.toggleProc}>Add</Button>
                     {this.state.showProc ? <Popup text="Add Procedure" closePopup={this.toggleProc}/> : null}
-                    <label>
+                    <div className="group">
                         <span>Procedure</span>
                         <input type="text" name="procedure" value={values.procedure} onChange={this.props.handleChange('procedure')} />
-                    </label>
+                    </div>
                     <h3>Medications</h3>
                     <Button onClick={this.toggleMed}>Add</Button>
                     {this.state.showMed ? <Popup text="Add Medication" closePopup={this.toggleMed}/> : null}

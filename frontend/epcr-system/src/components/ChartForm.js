@@ -36,8 +36,11 @@ export default class ChartForm extends Component {
             contact: "",
             enroute2: "",
             arrive: "",
-            patient: "",
+            /* patient */
+            fname: "",
+            lname: "",
             birth: "", // datetime, age is calculated based on this
+            classify: "",
             gender: "Male",
             weight: "", // in kg
             address: "",
@@ -46,6 +49,7 @@ export default class ChartForm extends Component {
             zip: "",
             phone: "",
             history: "", // subject to change
+            /* */
             procedure: ""
         };
     }
@@ -55,37 +59,52 @@ export default class ChartForm extends Component {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
         this.setState({[name]: value});*/
-        this.setState({ [input]: event.target.value })
+        /*const target = event.target;
+        if(target.name === "birth") {
+            let date = event.target.value;
+            let newDate = date.substring(8, 10) + "/" + date.substring(5, 7) + "/" + date.substring(0, 4);
+            this.setState({ birth: newDate })
+            alert(this.state.birth);
+        } else {*/
+            this.setState({ [input]: event.target.value })
+        //}
     }
 
     handleToggle = input => event => {
         this.setState({loctype: event})
     }
 
-    handleGender = input => event => {
-        this.setState({
-            gender: event.currentTarget.value
-        })
+    handleDate = input => event => {
+        let date = event.target.value;
+        let newDate = date.substring(8, 10) + "/" + date.substring(5, 7) + "/" + date.substring(0, 4);
+        this.setState({ [input]: newDate })
+        alert(this.state.birth);
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
         // call variables
         const call = this.state.no + " | " + this.state.type + " | " + this.state.mci + " | " + this.state.pt + " | " + this.state.care + " | " + this.state.triage + " | " + this.state.loc + " | " + this.state.loctype;
-        const date = this.state.date;
+        const olddate = this.state.date;
+        const date =  olddate.substring(8, 10) + "/" + olddate.substring(5, 7) + "/" + olddate.substring(0, 4);
         const times = this.state.dispatch + " | " + this.state.enroute + " | " + this.state.scene + " | " + this.state.contact + " | " + this.state.enroute2 + " | " + this.state.arrive;
         // patient variables
-        const patient = this.state.patient;
-        const birth = this.state.birth;
+        const fname = this.state.fname;
+        const lname = this.state.lname;
+        const dob = this.state.birth;
+        const birth = dob.substring(8, 10) + "/" + dob.substring(5, 7) + "/" + dob.substring(0, 4);
+        const classify = this.state.classify;
+        const gender = this.state.gender;
         const weight = this.state.weight;
         const address = this.state.address + ", " + this.state.city + ", " + this.state.country + ", " + this.state.zip;
+        const phone = this.state.phone;
         // interventions variables
         const procedure = this.state.procedure;
         // send to backend
         const url = 'http://localhost:3000/charts/add';
         const options = {
             method: 'POST',
-            body: JSON.stringify({ call, date, times, patient, birth, weight, address, procedure }),
+            body: JSON.stringify({ call, date, times, fname, lname, birth, classify, gender, weight, address, phone, procedure }),
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -137,8 +156,10 @@ export default class ChartForm extends Component {
             contact,
             enroute2,
             arrive,
-            patient,
+            fname,
+            lname,
             birth,
+            classify,
             weight,
             address,
             city,
@@ -162,8 +183,10 @@ export default class ChartForm extends Component {
             contact,
             enroute2,
             arrive,
-            patient,
+            fname,
+            lname,
             birth,
+            classify,
             weight,
             address,
             city,
@@ -183,7 +206,7 @@ export default class ChartForm extends Component {
                     nextStep={this.nextStep}
                     prevStep={this.prevStep}
                     handleChange={this.handleChange}
-                    handleGender={this.handleGender}
+                    handleDate={this.handleDate}
                     values={values}
                 />
             case 3:

@@ -27,7 +27,7 @@ export default class Popup extends Component {
                     <form>
                         <Row>
                             <Col>
-                                <label>
+                                <div className="group">
                                     <span>Procedure</span>
                                     <select className="multiple" name="proc" style={{height:'150px'}} multiple>
                                         <option value="TBA">TBA</option>
@@ -37,15 +37,15 @@ export default class Popup extends Component {
                                         <option value="TBA">TBA</option>
                                         <option value="TBA">TBA</option>
                                     </select>
-                                </label>
-                                <label>
+                                </div>
+                                <div className="group">
                                     <span>Time</span>
                                     <input type="datetime-local" />
-                                </label>
-                                <label>
+                                </div>
+                                <div className="group">
                                     <span>Crew</span>
                                     <input type="text" value="John Doe" disabled />
-                                </label>
+                                </div>
                                 <small>Note: Crew member name should be selected from current user's information. Currently, the below buttons do nothing yet.</small>
                                 <div className="bottom">
                                     <Button className="left" onClick={this.props.closePopup}>Add</Button>
@@ -59,7 +59,7 @@ export default class Popup extends Component {
                     <form>
                         <Row>
                             <Col>
-                                <label>
+                                <div className="group">
                                     <span>Medication</span>
                                     <select className="multiple" name="med" style={{height:'150px'}} multiple>
                                         <option value="Nitroglycerine">Nitroglycerine</option>
@@ -69,23 +69,23 @@ export default class Popup extends Component {
                                         <option value="Procardia">Procardia</option>
                                         <option value="Propanalol">Propanalol</option>
                                     </select>
-                                </label>
-                                <label>
+                                </div>
+                                <div className="group">
                                     <span>Time</span>
                                     <input type="datetime-local" />
-                                </label>
-                                <label>
+                                </div>
+                                <div className="group">
                                     <span>Dosage</span>
-                                    <input type="number" style={{ width: '28%', marginRight: '9px' }} />
-                                    <select name="unit" style={{ width: '40%' }}>
+                                    <input type="number" style={{ width:'27%', marginRight:'10px' }} />
+                                    <select name="unit" style={{ width:'20%' }}>
                                         <option value="GMS">GMS</option>
                                         <option value="in.">Inches (in.)</option>
                                         <option value="L">Liters (L)</option>
                                         <option value="kg">Kilograms (kg)</option>
                                         <option value="tablet">Tablets</option>
                                     </select>
-                                </label>
-                                <label>
+                                </div>
+                                <div className="group">
                                     <span>Route</span>
                                     <select name="route">
                                         <option value="Oral">Oral</option>
@@ -99,11 +99,11 @@ export default class Popup extends Component {
                                         <option value="Otic">Otic</option>
                                         <option value="Rectal">Rectal</option>
                                     </select>
-                                </label>
-                                <label>
+                                </div>
+                                <div className="group">
                                     <span>Crew</span>
                                     <input type="text" value="John Doe" disabled />
-                                </label>
+                                </div>
                                 <small>Note: Crew member name should be selected from current user's information. Currently, the below buttons do nothing yet.</small>
                                 <div className="bottom">
                                     <Button className="left" onClick={this.props.closePopup}>Add</Button>

@@ -10,8 +10,10 @@ export default class AddPatient extends Component {
         this.state = {
             message: "",
             // only variables for current section of form!
-            patient: "",
+            fname: "",
+            lname: "",
             birth: "", // datetime, age is calculated based on this
+            classify: "",
             gender: "Male",
             weight: "", // in kg
             address: "",
@@ -36,61 +38,94 @@ export default class AddPatient extends Component {
     render() {
         const { values } = this.props;
         return (
-            <div>
+            <div className="chartp">
                 <form>
                     <h2>Patient Information</h2>
-                    <h3>Demographics</h3>
+                    <h3>Demographics &amp; Personal</h3>
                     <Row>
                         <Col>
-                            <label>
+                            <div className="group">
                                 <span>Full Name</span>
-                                <input type="text" name="patient" value={values.patient} onChange={this.props.handleChange('patient')} />
-                            </label>
-                            <label>
+                                <div>
+                                    <input type="text" name="fname" value={values.fname} onChange={this.props.handleChange('fname')} />
+                                    <strong>First</strong>
+                                </div>
+                                <div>
+                                    <input type="text" name="lname" value={values.lname} onChange={this.props.handleChange('lname')} />
+                                    <strong>Last</strong>
+                                </div>
+                            </div>
+                            <div className="group">
                                 <span>Date of Birth</span>
-                                <input type="date" name="birth" value={values.birth} onChange={this.props.handleChange('birth')} />
-                            </label>
-                        </Col>
-                        <Col>
-                            <label>
+                                <input type="date" name="birth" placeholder="DD/MM/YYYY" value={values.birth} onChange={this.props.handleChange('birth')} />
+                            </div>
+                            <div className="group">
+                                <span>Classification</span>
+                                <div>
+                                    <select name="classify" value={values.class} onChange={this.props.handleChange('classify')}>
+                                        <option value="Adult">Adult</option>
+                                        <option value="Senior Adult">Senior Adult</option>
+                                        <option value="Pediatric">Pediatric</option>
+                                        <option value="Neonatal">Neonatal</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="group" onChange={this.props.handleChange('gender')}>
                                 <span>Gender</span>
-                                <input type="radio" name="gender" value="Male" checked={values.gender === "Male"} onChange={this.props.handleGender('gender')} defaultChecked /> Male
-                            <input type="radio" name="gender" value="Female" checked={values.gender === "Female"} /> Female
-                        </label>
-                            <label>
+                                <div>
+                                    <label><input type="radio" name="gender" value="Male" defaultChecked /> Male</label>
+                                    <label><input type="radio" name="gender" value="Female" /> Female</label>
+                                </div>
+                            </div>
+                            <div className="group">
                                 <span>Weight</span>
-                                <input style={{width:'80px'}} type="number" name="weight" value={values.weight} onChange={this.props.handleChange('weight')} /> kg
-                        </label>
-                            <small>Note: Gender is not yet handled.</small>
+                                <input style={{width:'80px', marginRight:'0px'}} type="number" name="weight" value={values.weight} min="0" onChange={this.props.handleChange('weight')} /> kg
+                            </div>
+                            <div className="group">
+                                <span style={{width:'15%'}}>Braslow Color</span>
+                                <div>
+                                    <label><input type="checkbox" name="bcolor" /> Gray</label>
+                                    <label><input type="checkbox" name="bcolor" /> Pink</label>
+                                    <label><input type="checkbox" name="bcolor" /> Red</label>
+                                    <label><input type="checkbox" name="bcolor" /> Purple</label>
+                                    <label><input type="checkbox" name="bcolor" /> Yellow</label>
+                                    <label><input type="checkbox" name="bcolor" /> White</label>
+                                    <label><input type="checkbox" name="bcolor" /> Blue</label>
+                                    <label><input type="checkbox" name="bcolor" /> Orange</label>
+                                    <label><input type="checkbox" name="bcolor" /> Green</label>
+                                </div>
+                            </div>
+                            <small>Note: Braslow color not yet handled.</small> 
                         </Col>
                     </Row>
-                    <h3>Address</h3>
+                    <h3>Address &amp; Contact</h3>
                     <Row>
                         <Col>
-                            <label>
-                                <input className="block" type="text" name="address" value={values.address} onChange={this.props.handleChange('address')} />
-                                <span className="block">Address</span>
-                            </label>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <label>
-                                <input className="block" type="text" name="city" value={values.city} onChange={this.props.handleChange('city')} />
-                                <span className="block">City</span>
-                            </label>
-                        </Col>
-                        <Col>
-                            <label>
-                                <input className="block" type="text" name="country" value={values.country} onChange={this.props.handleChange('country')} />
-                                <span className="block">Country</span>
-                            </label>
-                        </Col>
-                        <Col>
-                            <label>
-                                <input className="block" type="number" name="zip" value={values.zip} onChange={this.props.handleChange('zip')} />
-                                <span className="block">Zip</span>
-                            </label>
+                            <div className="group">
+                                <span>Address</span>
+                                <div style={{width:'80%'}}>
+                                    <div style={{width:'100%'}}>
+                                        <input className="block" type="text" name="address" value={values.address} onChange={this.props.handleChange('address')} />
+                                        <strong>Street Address</strong>
+                                    </div>
+                                    <div>
+                                        <input type="text" name="city" value={values.city} onChange={this.props.handleChange('city')} />
+                                        <strong>City</strong>
+                                    </div>
+                                    <div>
+                                        <input type="text" name="country" value={values.country} onChange={this.props.handleChange('country')} />
+                                        <strong>Country</strong>
+                                    </div>
+                                    <div>
+                                        <input style={{marginRight:'0px'}} type="number" name="zip" value={values.zip} onChange={this.props.handleChange('zip')} />
+                                        <strong>Zip</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="group">
+                                <span>Phone</span>
+                                <input type="number" name="phone" value={values.phone} onChange={this.props.handleChange('phone')} />
+                            </div>
                         </Col>
                     </Row>
                     <Button className="left" onClick={this.back}>Previous</Button>

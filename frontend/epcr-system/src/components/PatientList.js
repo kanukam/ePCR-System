@@ -50,7 +50,8 @@ export default class PatientList extends Component {
         var patientComponents = [];
         for(var i = 0; i < this.state.patients.length; i++){
             patientComponents.push(<PatientEntry 
-                                        patient={this.state.patients[i]["name"]}
+                                        fname={this.state.patients[i]["fname"]}
+                                        lname={this.state.patients[i]["lname"]}
                                         dob={this.state.patients[i]["birth"]}
                                         notes={this.state.patients[i]["address"]}
                                         id={this.state.patients[i].id}
