@@ -32,7 +32,9 @@ export default class Dashboard extends Component {
 
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
                     <Container className="chart">
-                        Note: Something will go here eventually
+                        <h2>Messages</h2>
+                        <h2>Reports</h2>
+                        Testing, something will go here eventually
                     </Container>
                 </Container>
             </React.Fragment>
