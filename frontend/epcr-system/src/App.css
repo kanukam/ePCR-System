@@ -6,7 +6,7 @@ hr { margin:30px 0; height:1px; }
 /* content styles */
 .block { display:block !important; width:100% !important; }
 .shadow { box-shadow:0 12px 15px rgba(0,0,0,0.15), 0 0 3.5px rgba(0,0,0,0.15), 0 2px 2px rgba(0,0,0,0.25); }
-.multiple { box-shadow:0px 1px 1px 1px rgba(0,0,0,0.25); }
+.multiple { box-shadow:0px 1px 1px 1px rgba(0,0,0,0.25); margin:0; }
 .left { float:left; }
 .right { float:right; }
 
@@ -14,7 +14,7 @@ hr { margin:30px 0; height:1px; }
 .navbar { background-color:#16A8DC; color:#fff !important; }
 
 /* chart styles */
-.chart { width:1000px; min-height:200px; margin:30px auto; padding:25px; background:#fff; font-size:18px; }
+/*.chart { width:900px; min-height:200px; margin:30px auto; padding:25px; background:#fff; font-size:18px; }
 .chart h2, .chart h3 { margin-bottom:10px; font-size:25px; display:flex; text-transform:uppercase; text-align:center; }
 .chart h3 { margin:10px 0; padding:0 10px; font-size:18px; line-height:40px; background:#E5E5E5; }
 .chart span { display:inline-flex; vertical-align:top; width:30%; height:40px; line-height:40px; color:#3C5B66; }
@@ -24,12 +24,29 @@ hr { margin:30px 0; height:1px; }
 .chart input[type="radio"], .chart input[type="checkbox"] { width:auto; height:auto; }
 .chart input[type="text"]:disabled { background:none; border:none; }
 .chart select { background:#E5E5E5; border:none; }
-.chart .row { margin:0; }
+.chart .row { margin:0; }*/
+
+.chart { width:850px; min-height:200px; margin:30px auto; padding:25px; background:#fff; font-size:16px; }
+.chart h2, .chart h3 { margin-bottom:10px; font-size:25px; display:flex; text-transform:uppercase; text-align:center; }
+.chart h3 { margin:10px 0; padding:0 10px; font-size:16px; line-height:40px; background:#E5E5E5; }
+.chart span { display:inline-flex; padding:0 10px; vertical-align:top; min-width:30%; height:40px; line-height:40px; color:#3C5B66; }
+.chartp span { min-width:20%; }
+.chart strong { display:table-cell; font-weight:normal; font-size:smaller; color:#888; }
+.chart .group { display:block; padding:5px 0; }
+.chart .group div { display:inline-block; width:auto; }
+.chart label { margin:0 10px 0 0 !important; line-height:40px; }
+.chart input, .chart select { display:inline-flex; margin:5px 0; width:203px; height:30px; line-height:30px; }
+.chart input[type="text"], .chart input[type="number"], .chart input[type="date"], .chart input[type="datetime-local"] { margin:5px 15px 5px 0; border:1px solid #C4C4C4; }
+.chart input:focus { border:1px solid #888; }
+.chart input[type="radio"], .chart input[type="checkbox"] { width:auto; height:auto; }
+.chart input[type="text"]:disabled { background:none; border:none; }
+.chart select { margin:5px 5px 5px 0; background:#E5E5E5; border:none; }
 
 /* popup styles */
 .overlay { display:block; position:fixed; width:100%; height:100%; background:rgba(0,0,0,0.25); z-index:1; }
 .popup { position:absolute; top:20%; left:35%; width:30%; padding-bottom:15px; background:#fff; }
 .popup h2 { padding:10px; background:#C4C4C4; color:#000; }
+.popup input, .popup select { width:243px; }
 .popup option { background:#FFF; color:#888; height:30px; line-height:30px; }
 .popup option:hover, .popup option:checked { color:#000; }
 .popup ::-webkit-scrollbar { width:10px; height:10px; padding:3px 3px 3px 15px }
