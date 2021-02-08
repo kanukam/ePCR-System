@@ -31,3 +31,9 @@ charts table
   patient table
   
 -- CREATE TABLE patients ( id INT(11) AUTO_INCREMENT, name VARCHAR(255) NULL, birth VARCHAR(45), gender VARCHAR(10), weight VARCHAR(10) NULL, address VARCHAR(255) NULL, phone VARCHAR(12) NULL, history MEDIUMTEXT NULL, PRIMARY KEY (id));
+
+-- ALTER TABLE `patients` 
+ADD COLUMN `lname` VARCHAR(255) NULL AFTER `fname`,
+ADD COLUMN `classify` VARCHAR(45) NULL DEFAULT 'Adult' AFTER `weight`,
+ADD COLUMN `bcolor` VARCHAR(45) NULL AFTER `classify`,
+CHANGE COLUMN `name` `fname` VARCHAR(255) NULL DEFAULT NULL ;
