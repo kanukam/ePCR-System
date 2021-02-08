@@ -10,10 +10,10 @@ function viewAllCharts(req, res) {
 }
 
 function addChart(req, res) {
-  const { call, date, times, patient, birth, weight, address, procedure } = req.body;
+  const { call, date, times, fname, lname, birth, classify, gender, weight, address, phone, procedure } = req.body;
   var pid = 0;
   // insert into patient table first
-  var pbody= { name: patient, birth: birth, weight: weight, address: address };
+  var pbody= { fname: fname, lname: lname, birth: birth, classify: classify, gender: gender, weight: weight, address: address, phone: phone };
   var body = { call: call, date: date, times: times, patientID: pid, procedures: procedure, userID: req.user.id };
   repo.addChart(body, pbody, (err) => {
     err
