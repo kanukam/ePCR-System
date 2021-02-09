@@ -17,7 +17,7 @@ export default class Settings extends Component {
 
     componentDidMount() {
         // Getting all user data from database
-        const url = 'http://localhost:3000/settings/admin';
+        const url = 'http://localhost:3000/users';
         const options = {
             method: 'POST',
             headers: {
@@ -36,15 +36,14 @@ export default class Settings extends Component {
     }
 
     // Delete user, must be an admin fro it to work.
-    deleteUser = (email) => event => {
+    deleteUser = (username) => event => {
         event.preventDefault();
         if(window.confirm("Are you sure you would like to delete the user?"))
         {
             // Deleting user
-            const url = 'http://localhost:3000/settings/delete';
+            const url = `http://localhost:3000/users/${username}/delete`;
             const options = {
                 method: 'POST',
-                body: JSON.stringify({ email }),
                 headers: {
                     'Content-Type': 'application/json',
                 },

@@ -23,7 +23,7 @@ export default class Settings extends Component {
 
     componentDidMount() {
         // Getting User data from database
-        const url = 'http://localhost:3000/settings/' + this.context.username;
+        const url = `http://localhost:3000/users/${this.context.username}`;
         const options = {
             method: 'GET',
             headers: {
@@ -36,7 +36,7 @@ export default class Settings extends Component {
             .then(data => {
                 const temp = data['userInfo'][0];
                 const { name, email, phone } = temp;
-                this.setState({ name: name, email: email, phone: phone });
+                this.setState({ name, email, phone });
             })
             .catch((error) => {
                 this.setState({ errorMessage: "Error" });
@@ -51,7 +51,7 @@ export default class Settings extends Component {
         const name = this.state.name;
 
         if (name && phone && email) {
-            const url = 'http://localhost:3000/settings/update';
+            const url = `http://localhost:3000/users/${this.context.username}/update`;
             const options = {
                 method: 'POST',
                 body: JSON.stringify({ email, phone, name }),
@@ -80,7 +80,7 @@ export default class Settings extends Component {
         if (oldPassword && newPassword && confirmedPassword) {
             // Send Request if passwords match
             if (newPassword === confirmedPassword) {
-                const url = 'http://localhost:3000/settings/password';
+                const url = `http://localhost:3000/users/${this.context.username}/password`;
                 const options = {
                     method: 'POST',
                     body: JSON.stringify({ oldPassword, newPassword }),

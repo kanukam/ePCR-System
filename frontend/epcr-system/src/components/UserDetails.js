@@ -26,7 +26,7 @@ export class UserDetails extends Component {
                         {this.props.privilege}
                     </td>
                     <td>
-                        {this.props.privilege === "standard" && <Button onClick={this.props.delete(this.props.email)}>Delete</Button>}
+                        {this.props.privilege === "standard" && <Button onClick={this.props.delete(this.props.username)}>Delete</Button>}
                     </td>
                 </tr>
             </React.Fragment>
