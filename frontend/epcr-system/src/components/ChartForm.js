@@ -19,7 +19,7 @@ export default class ChartForm extends Component {
             message: "",
             success: false,
             step: 1,
-            redirect: "/Patients",
+            redirect: "/PatientList",
             // all variables across section forms!
             no: "",
             date: currentDate,
@@ -40,7 +40,7 @@ export default class ChartForm extends Component {
             fname: "",
             lname: "",
             birth: "", // datetime, age is calculated based on this
-            classify: "",
+            classify: "Adult",
             gender: "Male",
             weight: "", // in kg
             address: "",
@@ -138,6 +138,12 @@ export default class ChartForm extends Component {
         })
     }
 
+    navigate = (input) => {
+        this.setState({
+            step: input
+        })
+    }
+
     render() {
         const { step } = this.state;
         const {
@@ -160,6 +166,7 @@ export default class ChartForm extends Component {
             lname,
             birth,
             classify,
+            gender,
             weight,
             address,
             city,
@@ -187,6 +194,7 @@ export default class ChartForm extends Component {
             lname,
             birth,
             classify,
+            gender,
             weight,
             address,
             city,
@@ -198,6 +206,7 @@ export default class ChartForm extends Component {
             case 1:
                 return <AddCall
                     nextStep={this.nextStep}
+                    navigate={this.navigate}
                     handleChange={this.handleChange}
                     values={values}
                 />
@@ -205,6 +214,7 @@ export default class ChartForm extends Component {
                 return <AddPatient
                     nextStep={this.nextStep}
                     prevStep={this.prevStep}
+                    navigate={this.navigate}
                     handleChange={this.handleChange}
                     handleDate={this.handleDate}
                     values={values}
@@ -213,6 +223,7 @@ export default class ChartForm extends Component {
                 return <AddInterventions
                     nextStep={this.nextStep}
                     prevStep={this.prevStep}
+                    navigate={this.navigate}
                     handleChange={this.handleChange}
                     values={values}
                 />
@@ -220,6 +231,7 @@ export default class ChartForm extends Component {
                 return <Confirm
                     nextStep={this.nextStep}
                     prevStep={this.prevStep}
+                    navigate={this.navigate}
                     handleSubmit={this.handleSubmit}
                     values={values}
                 />

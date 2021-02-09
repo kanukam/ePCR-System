@@ -27,6 +27,11 @@ export default class AddInterventions extends Component {
         });
     }
 
+    navigate = step => (e) => {
+        e.preventDefault();
+        this.props.navigate(step);
+    }
+
     saveAndContinue = (e) => {
         e.preventDefault();
         this.props.nextStep();
@@ -58,6 +63,25 @@ export default class AddInterventions extends Component {
                     <Button className="left" onClick={this.back}>Previous</Button>
                     <Button className="right" onClick={this.saveAndContinue}>Next</Button>
                 </form>
+                {/* Bottom chart navigation */}
+                <div className="chartnav">
+                    <div className="tab" onClick={this.navigate(1)}>
+                        <img src="/profile.png"/>
+                        <b>Call</b>
+                    </div>
+                    <div className="tab" onClick={this.navigate(2)}>
+                        <img src="/profile.png"/>
+                        <b>Patient</b>
+                    </div>
+                    <div className="tab active" onClick={this.navigate(3)}>
+                        <img src="/profile.png"/>
+                        <b>Interventions</b>
+                    </div>
+                    <div className="tab" onClick={this.navigate(4)}>
+                        <img src="/profile.png"/>
+                        <b>Confirm</b>
+                    </div>
+                </div>
             </div>
         )
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
+import ChartNav from './ChartNav'
 import '../App.css'
 
 export default class AddCall extends Component {
@@ -28,6 +29,11 @@ export default class AddCall extends Component {
             enroute2: "",
             arrive: ""
         };
+    }
+
+    navigate = step => (e) => {
+        e.preventDefault();
+        this.props.navigate(step);
     }
 
     saveAndContinue = (e) => {
@@ -146,7 +152,25 @@ export default class AddCall extends Component {
                     </Row>
                     <Button className="right" onClick={this.saveAndContinue}>Next</Button>
                 </form>
-                <div>Bottom navigation will be implemented soon.</div>
+                {/* Bottom chart navigation */}
+                <div className="chartnav">
+                    <div className="tab active" onClick={this.navigate(1)}>
+                        <img src="/profile.png"/>
+                        <b>Call</b>
+                    </div>
+                    <div className="tab" onClick={this.navigate(2)}>
+                        <img src="/profile.png"/>
+                        <b>Patient</b>
+                    </div>
+                    <div className="tab" onClick={this.navigate(3)}>
+                        <img src="/profile.png"/>
+                        <b>Interventions</b>
+                    </div>
+                    <div className="tab" onClick={this.navigate(4)}>
+                        <img src="/profile.png"/>
+                        <b>Confirm</b>
+                    </div>
+                </div>
             </div>
         )
     }

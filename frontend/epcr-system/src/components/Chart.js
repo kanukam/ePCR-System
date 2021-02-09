@@ -23,9 +23,6 @@ export default class Chart extends Component {
     }
 
     render() {
-        const {step} = this.state;
-        const { no, date, type, patient } = this.state;
-        const values = { no, date, type, patient };
         return (
             <React.Fragment>
                 <MainNav 
@@ -37,7 +34,7 @@ export default class Chart extends Component {
                 />
 
                 {/* Form */}
-                <Container  className="main-content" style={{padding: this.state.contentSpacing}}>              
+                <Container  className="main-content" style={{padding:this.state.contentSpacing}}>              
                     <Container className="chart">
                         <ChartForm />
                     </Container>
