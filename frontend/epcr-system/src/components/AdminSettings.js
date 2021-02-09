@@ -36,14 +36,15 @@ export default class Settings extends Component {
     }
 
     // Delete user, must be an admin fro it to work.
-    deleteUser = (username) => event => {
+    deleteUser = (email) => event => {
         event.preventDefault();
         if(window.confirm("Are you sure you would like to delete the user?"))
         {
             // Deleting user
-            const url = `http://localhost:3000/users/${username}/delete`;
+            const url = `http://localhost:3000/users/0/delete`;
             const options = {
                 method: 'POST',
+                body: JSON.stringify({ email }),
                 headers: {
                     'Content-Type': 'application/json',
                 },
