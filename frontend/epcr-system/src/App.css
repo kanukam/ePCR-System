@@ -5,7 +5,8 @@ hr { margin:30px 0; height:1px; }
 
 /* content styles */
 .block { display:block !important; width:100% !important; }
-.shadow { box-shadow:0 12px 15px rgba(0,0,0,0.15), 0 0 3.5px rgba(0,0,0,0.15), 0 2px 2px rgba(0,0,0,0.25); }
+.shadow { margin:30px auto; padding:25px; box-shadow:0 12px 15px rgba(0,0,0,0.15), 0 0 3.5px rgba(0,0,0,0.15), 0 2px 2px rgba(0,0,0,0.25); }
+.multiple { box-shadow:0px 1px 1px 1px rgba(0,0,0,0.25); margin:0; }
 .left { float:left; }
 .right { float:right; }
 
@@ -13,7 +14,7 @@ hr { margin:30px 0; height:1px; }
 .navbar { background-color:#16A8DC; color:#fff !important; }
 
 /* chart styles */
-.chart { width:1000px; min-height:200px; margin:30px auto; padding:25px; background:#fff; font-size:18px; }
+/*.chart { width:900px; min-height:200px; margin:30px auto; padding:25px; background:#fff; font-size:18px; }
 .chart h2, .chart h3 { margin-bottom:10px; font-size:25px; display:flex; text-transform:uppercase; text-align:center; }
 .chart h3 { margin:10px 0; padding:0 10px; font-size:18px; line-height:40px; background:#E5E5E5; }
 .chart span { display:inline-flex; vertical-align:top; width:30%; height:40px; line-height:40px; color:#3C5B66; }
@@ -23,19 +24,49 @@ hr { margin:30px 0; height:1px; }
 .chart input[type="radio"], .chart input[type="checkbox"] { width:auto; height:auto; }
 .chart input[type="text"]:disabled { background:none; border:none; }
 .chart select { background:#E5E5E5; border:none; }
+.chart .row { margin:0; }*/
+
+.chart { position:relative; }
+.chart form { width:850px; min-height:900px; margin:30px auto 0; padding:25px; background:#fff; font-size:16px; }
+.chart h2, .chart h3 { margin-bottom:10px; font-size:25px; display:flex; text-transform:uppercase; text-align:center; }
+.chart h3 { margin:10px 0; padding:0 10px; font-size:16px; line-height:40px; background:#E5E5E5; }
+.chart span { display:inline-flex; padding:0 10px; vertical-align:top; min-width:30%; height:40px; line-height:40px; color:#3C5B66; }
+.chartp span { min-width:20%; }
+.chart strong { display:table-cell; font-weight:normal; font-size:smaller; color:#888; }
+.chart .group { display:block; padding:5px 0; }
+.chart .group div { display:inline-block; width:auto; }
+.chart label { margin:0 10px 0 0 !important; line-height:40px; }
+.chart input, .chart select { display:inline-flex; margin:5px 0; width:203px; height:30px; line-height:30px; }
+.chart input[type="text"], .chart input[type="number"], .chart input[type="date"], .chart input[type="datetime-local"] { margin:5px 15px 5px 0; border:1px solid #C4C4C4; }
+.chart input:focus { border:1px solid #888; }
+.chart input[type="radio"], .chart input[type="checkbox"] { width:auto; height:auto; }
+.chart input[type="text"]:disabled { background:none; border:none; }
+.chart select { margin:5px 5px 5px 0; background:#E5E5E5; border:none; }
 .chart .row { margin:0; }
+.chartnav { position:fixed; bottom:0; display:flex; clear:both; margin-top:50px; padding:0 50px; width:960px; background:#fff; border-top:1px solid #ddd; font-size:12px; }
+.chartnav .tab { padding:5px; width:100px; height:80px; text-align:center; cursor:pointer; }
+.chartnav .tab.active { background:#eee; }
+.chartnav .tab img { width:50px; height:50px; background:#007bff; border:2px solid #80bdff; border-radius:50%; }
+.chartnav .tab b { display:block; font-weight:normal; color:#117a8b; }
+.chartnav .tab.active b { font-weight:bold; }
 
 /* popup styles */
 .overlay { display:block; position:fixed; width:100%; height:100%; background:rgba(0,0,0,0.25); z-index:1; }
 .popup { position:absolute; top:20%; left:35%; width:30%; padding-bottom:15px; background:#fff; }
 .popup h2 { padding:10px; background:#C4C4C4; color:#000; }
+.popup input, .popup select { width:243px; }
+.popup option { background:#FFF; color:#888; height:30px; line-height:30px; }
+.popup option:hover, .popup option:checked { color:#000; }
 .popup ::-webkit-scrollbar { width:10px; height:10px; padding:3px 3px 3px 15px }
 .popup ::-webkit-scrollbar-track { background:#FFF; }
 .popup ::-webkit-scrollbar-thumb { background:#E5E5E5; }
 .popup .bottom { margin:0 auto; width:150px; height:40px; }
-.multiple { box-shadow:0px 1px 1px 1px rgba(0,0,0,0.25); }
-.multiple option { background:#FFF; color:#888; height:30px; line-height:30px; }
-.multiple option:hover, .popup option:checked { color:#000; }
+
+/* confirm styles */
+table, table.info { width:100%; }
+table th, table.info th { text-align:center; background:#ddd; border:1px solid #ddd; }
+table td, table.info td { padding:0 3px; vertical-align:top; border:1px solid #ddd; font-size:smaller; }
+table.info td:nth-child(odd) { font-weight:bold; text-align:right; }
 
 .bigchecks { width:100px; height:35px; line-height:35px; color:#4C8DA4; background-color:#E5E5E5; text-align:center; }
 
