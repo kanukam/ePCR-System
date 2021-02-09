@@ -84,8 +84,27 @@ function changePassword(username, oldPassword, newPassword, callback) {
         }    
                     
 // Update user account information
-function deleteUser(username, callback) {
+function deleteUserByUsername(username, callback) {
     db.query(`DELETE from users WHERE username='${username}'`, (err, res) => { 
+        if (err) {
+            callback(err);
+        }
+        else {
+            const sql = 'SELECT users.name, users.email, users.phone, users.username, users.privilege FROM users';
+            db.query(sql, (err, res) => {
+                if (err) {
+                    callback(err);
+                }
+                else {
+                    callback(err, res);
+                }
+            });
+        }
+    })
+}
+
+function deleteUserByEmail(email, callback) {
+    db.query(`DELETE from users WHERE email='${email}'`, (err, res) => { 
         if (err) {
             callback(err);
         }
@@ -109,5 +128,6 @@ module.exports = {
     updateUser, 
     changePassword, 
     viewUsers, 
-    deleteUser
+    deleteUserByUsername,
+    deleteUserByEmail
 }

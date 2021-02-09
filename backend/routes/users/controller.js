@@ -86,11 +86,20 @@ function changePassword(req, res) {
 function deleteUser(req, res) {
   const { username } = req.params;
   if (req.user.privilege == "admin") {
-    repo.deleteUser(username, (err, data) => {
-      err
-        ? res.status(500).json({ error: "Internal Server Error, try again" })
-        : res.status(200).json({ userInfo: data });
-    })
+    if(username && username != '0')
+      repo.deleteUserByUsername(username, (err, data) => {
+        err
+          ? res.status(500).json({ error: "Internal Server Error, try again" })
+          : res.status(200).json({ userInfo: data });
+      })
+    else if(req.body.email)
+      repo.deleteUserByEmail(req.body.email, (err, data) => {
+        err
+          ? res.status(500).json({ error: "Internal Server Error, try again" })
+          : res.status(200).json({ userInfo: data });
+      })
+    else
+      res.status(401).json({ status: "Invalid user" });
   }
   else {
     res.status(401).json({ status: "unauthorized" });
