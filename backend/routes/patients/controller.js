@@ -1,4 +1,5 @@
 const repo = require('./repository');
+const chartRepo = require('../charts/repository');
 
 function getAllPatients(req, res) {
   const userID = req.user.userID;
@@ -60,4 +61,13 @@ function getPatient(req, res){
   })
 }
 
-module.exports = { getAllPatients, getPatient, addPatient, updatePatient };
+function getPatientCharts(req, res){
+  const { patientId } = req.params;
+  chartRepo.viewAllChartsFromPatientID(patientId, (err, charts) => {
+    err
+      ? res.status(500).json({ error: err })
+      : res.status(200).json({ charts });
+  })
+}
+
+module.exports = { getAllPatients, getPatient, addPatient, updatePatient, getPatientCharts };

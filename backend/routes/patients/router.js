@@ -12,6 +12,8 @@ router.post("/add", auth, controller.addPatient);
 
 router.get("/:patientId", auth, controller.getPatient);
 
+router.get("/:patientId/charts", auth, controller.getPatientCharts);
+
 router.post("/:patientId/update", auth, controller.updatePatient);
 
 module.exports = router;
