@@ -41,4 +41,12 @@ function viewChart(id, callback){
     })
 }
 
-module.exports = { viewChart, viewAllCharts, addChart};
+function viewAllChartsFromPatientID(patientID, callback){
+    db.query(`SELECT * FROM charts where patientID=${patientID}`, (err, res) => {
+        return err
+            ? callback(err)
+            : callback(false, res);
+    }) 
+}
+
+module.exports = { viewChart, viewAllCharts, viewAllChartsFromPatientID, addChart};

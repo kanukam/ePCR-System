@@ -14,6 +14,6 @@ router.get("/:chartId", auth, controller.viewChart);
 
 //router.get("/")
 
-router.post("/:chartId/update", auth, controller.updateChart); // TODO later: PatientID should probably be in url?
+router.post("/:chartId/update", auth, controller.updateChart);
 
 module.exports = router;

@@ -39,7 +39,7 @@ function updateChart(req, res) {
     date, 
     times, 
     procedure,
-    patientID //This probably needs to be in the URL later
+    patientID
   } = req.body;
   db.query(`UPDATE charts SET call='${call}, date='${date}', times='${times}', procedures='${procedure}' 
             WHERE (userID=${userID} AND id=${chartID} AND patientID=${patientID})`, err => {
