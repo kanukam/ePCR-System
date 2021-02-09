@@ -69,7 +69,7 @@ export default class Patients extends Component {
                         </Col>
                         <div >
                             <br/><br/><br/>
-                            <Button as={Link} to={`/Patient/${ this.state.patients[i].id }`}>View</Button>
+                            <Button variant="primary" as={Link} to={`/Patient/${ this.state.patients[i].id }`}>View</Button>
                         </div>
                     </Row>
                 </Container>);
