@@ -7,13 +7,13 @@ const controller = require('./controller');
 
 const charts = require('./charts/router');
 const patients = require('./patients/router');
-const settings = require('./settings/router');
+const users = require('./users/router');
 
 router.use('/charts', charts);
 
 router.use('/patients', patients);
 
-router.use('/settings', settings);
+router.use('/users', users);
 
 // Will work for login page for now, can change later:
 router.post("/login", controller.login);
