@@ -1,11 +1,20 @@
 const db = require('../../sql/database');
 const repo = require('./repository');
 
+function viewChart(req, res){
+  const id = req.params.chartId;
+  repo.viewChart(id, (err, data) => {
+    err 
+      ? res.status(500).json({error: err})
+      : res.status(200).send(data)
+  })
+}
+
 function viewAllCharts(req, res) {
   repo.viewAllCharts((err, data) => {
     err
       ? res.status(500).json({ error: err })
-      : res.send(data);
+      : res.status(200).send(data);
   })
 }
 
@@ -41,4 +50,4 @@ function updateChart(req, res) {
   })
 }
 
-module.exports = { viewAllCharts, addChart, updateChart };
+module.exports = { viewChart, viewAllCharts, addChart, updateChart };

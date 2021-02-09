@@ -10,6 +10,10 @@ router.get("/", auth, controller.viewAllCharts); // View all charts
 
 router.post("/add", auth, controller.addChart);
 
-router.post("/:chartId/update", auth, controller.updateChart); // TODO later: PatientID should probably be in url
+router.get("/:chartId", auth, controller.viewChart);
+
+//router.get("/")
+
+router.post("/:chartId/update", auth, controller.updateChart); // TODO later: PatientID should probably be in url?
 
 module.exports = router;

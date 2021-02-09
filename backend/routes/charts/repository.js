@@ -1,10 +1,8 @@
 const db = require('../../sql/database');
-const secret = process.env.JWT_SECRET;
-
 
 function addChart(body, pbody, callback) {
     // insert into patient table first
-    var sql = 'INSERT INTO patients SET ?';
+    const sql = 'INSERT INTO patients SET ?';
     db.query(sql, pbody, (err, res) => {
         if (err) {
             return callback(err);
@@ -27,7 +25,7 @@ function addChart(body, pbody, callback) {
 }
 
 function viewAllCharts(callback) {
-    db.query('SELECT * FROM charts;', (err, results) => {
+    db.query('SELECT * FROM charts', (err, results) => {
         if (err) {
             return callback(err);
         }
@@ -35,4 +33,12 @@ function viewAllCharts(callback) {
     });
 }
 
-module.exports = { viewAllCharts, addChart};
+function viewChart(id, callback){
+    db.query(`SELECT * FROM charts where id=${id}`, (err, res) => {
+        return err
+            ? callback(err)
+            : callback(false, res[0]);
+    })
+}
+
+module.exports = { viewChart, viewAllCharts, addChart};
