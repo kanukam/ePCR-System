@@ -143,7 +143,7 @@ export default class Confirm extends Component {
                             <td>{arrive}</td>
                         </tr>
                     </table>
-                    <table border="1">
+                    <table className="info" border="1">
                         <tr><th colspan="4">Unit Personnel</th></tr>
                         <tr>
                             <td><b>Crew Member</b></td>

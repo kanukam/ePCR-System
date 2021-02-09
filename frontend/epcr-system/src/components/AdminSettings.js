@@ -72,7 +72,7 @@ export default class Settings extends Component {
                                 <Card.Body>
                                     <Card.Title>Admin Settings</Card.Title>
                                     {this.state.message && <p className="text-info"> {this.state.message} </p>}
-                                    <Table responsive className="mt-3">
+                                    <Table responsive bordered className="mt-3">
                                         <thead>
                                             <tr>
                                                 <th>id</th>
