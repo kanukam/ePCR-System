@@ -27,41 +27,19 @@ export default class Confirm extends Component {
         this.props.prevStep();
     }
 
-    render() {
-        const { values: {
-            no,
-            date,
-            type,
-            mci,
-            pt,
-            care,
-            triage,
-            loc,
-            loctype,
-            dispatch,
-            enroute,
-            scene,
-            contact,
-            enroute2,
-            arrive,
-            fname,
-            lname,
-            birth,
-            classify,
-            gender,
-            weight,
-            address,
-            city,
-            country,
-            zip,
-            phone,
+    render() {        
+        const { callinfo: { ino, idate, ctype, nature, care, loctype, loc,
+            disp, dest, agency, trauma,
+            mci, ptct, triage, va, vatype, vasafe, vaimpact, vaspd, vaeject,
+            dispatch, enroute, arrscn, contact, dptscn, arrdes, trcare,
             procedure
         } } = this.props;
+        const { values: { fname, lname, birth, classify, gender, weight, address, city, country, zip } } = this.props;
         return (
             <div>
                 <form>
                     <h2>Confirm Chart Report</h2>
-                    <b>Date:</b> {date}
+                    <b>Date:</b> {idate}
                     <table className="info" border="1">
                         <tr><th colspan="8">Patient Information</th></tr>
                         <tr>
@@ -74,7 +52,7 @@ export default class Confirm extends Component {
                         </tr>
                         <tr>
                             <td>Address</td>
-                            <td>{address}, {city}, {country}, {zip}</td>
+                            <td>{address}, {city}, {country} {zip}</td>
                             <td>Gender</td>
                             <td>{gender}</td>
                             <td>Weight</td>
@@ -82,14 +60,14 @@ export default class Confirm extends Component {
                         </tr>
                         <tr>
                             <td>Number of Patients at Scene</td>
-                            <td colspan="7">{pt}</td>
+                            <td colspan="7">{ptct}</td>
                         </tr>
                     </table>
                     <table className="info" border="1">
                         <tr><th colspan="4">Call Information</th></tr>
                         <tr>
-                            <td width="15%">Call/Incident #</td>
-                            <td width="35%">{no}</td>
+                            <td width="15%">Incident #</td>
+                            <td width="35%">{ino}</td>
                             <td width="15%">MCI</td>
                             <td width="35%">{mci}</td>
                         </tr>
@@ -101,15 +79,15 @@ export default class Confirm extends Component {
                         </tr>
                         <tr>
                             <td>Call Type</td>
-                            <td>{type}</td>
+                            <td>{ctype}</td>
                             <td>Disposition</td>
-                            <td></td>
+                            <td>{disp}</td>
                         </tr>
                         <tr>
                             <td>Location Type</td>
                             <td>{loctype}</td>
                             <td>Destination Type</td>
-                            <td></td>
+                            <td>{dest}</td>
                         </tr>
                         <tr>
                             <td>Location</td>
@@ -134,16 +112,16 @@ export default class Confirm extends Component {
                             <td>Enroute</td>
                             <td>{enroute}</td>
                             <td>Enroute</td>
-                            <td>{enroute2}</td>
+                            <td>{arrdes}</td>
                         </tr>
                         <tr>
                             <td>Scene</td>
-                            <td>{scene}</td>
+                            <td>{arrscn}</td>
                             <td>Arrive</td>
-                            <td>{arrive}</td>
+                            <td>{arrscn}</td>
                         </tr>
                     </table>
-                    <table className="info" border="1">
+                    <table className="crew" order="1">
                         <tr><th colspan="4">Unit Personnel</th></tr>
                         <tr>
                             <td><b>Crew Member</b></td>

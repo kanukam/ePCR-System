@@ -20,36 +20,54 @@ export default class ChartForm extends Component {
             success: false,
             step: 1,
             redirect: "/Patients",
-            // all variables across section forms!
-            no: "",
-            date: currentDate,
-            type: "Clinic",
-            mci: "",
-            pt: "",
+            callinfo: [],
+            // all default variables across section forms!
+            /* call */
+            ino: "",
+            idate: currentDate,
+            unit: "M-01",
+            ctype: "Clinic",
+            nature: "B/P check",
             care: "BLS",
-            triage: "Green",
             loc: "",
-            loctype: "Clinic",
+            loctype: "Rescate clinic",
+            disp: "Treat and release",
+            dest: "Rescate clinic",
+            agency: "",
+            trauma: "Animal",
+            fallht: "",
+            // this section must be blank by default
+            mci: "",
+            ptct: "",
+            triage: "",
+            va: "",
+            vatype: "",
+            vasafe: "",
+            vaimpact: "",
+            vaspd: "",
+            vaeject: "",
+            //
             dispatch: "",
             enroute: "",
-            scene: "",
+            arrscn: "",
             contact: "",
-            enroute2: "",
-            arrive: "",
+            dptscn: "",
+            arrdes: "",
+            trcare: "",
             /* patient */
             fname: "",
             lname: "",
-            birth: "", // datetime, age is calculated based on this
+            birth: "",
             classify: "Adult",
             gender: "Male",
-            weight: "", // in kg
+            weight: "",
             address: "",
             city: "",
             country: "",
             zip: "",
             phone: "",
             history: "", // subject to change
-            /* */
+            /* interventions */
             procedure: ""
         };
     }
@@ -58,7 +76,7 @@ export default class ChartForm extends Component {
         /*const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-        this.setState({[name]: value});*/
+        this.setState({[name]: value});
         /*const target = event.target;
         if(target.name === "birth") {
             let date = event.target.value;
@@ -70,41 +88,59 @@ export default class ChartForm extends Component {
         //}
     }
 
-    handleToggle = input => event => {
-        this.setState({loctype: event})
-    }
-
-    handleDate = input => event => {
+    /*handleDate = input => event => {
         let date = event.target.value;
         let newDate = date.substring(8, 10) + "/" + date.substring(5, 7) + "/" + date.substring(0, 4);
         this.setState({ [input]: newDate })
         alert(this.state.birth);
-    }
+    }*/
 
     handleSubmit = (event) => {
         event.preventDefault();
+
+        /* variables used for monthly/yearly reporting */
         // call variables
-        const call = this.state.no + " | " + this.state.type + " | " + this.state.mci + " | " + this.state.pt + " | " + this.state.care + " | " + this.state.triage + " | " + this.state.loc + " | " + this.state.loctype;
-        const olddate = this.state.date;
+        const olddate = this.state.callinfo.idate;
         const date =  olddate.substring(8, 10) + "/" + olddate.substring(5, 7) + "/" + olddate.substring(0, 4);
-        const times = this.state.dispatch + " | " + this.state.enroute + " | " + this.state.scene + " | " + this.state.contact + " | " + this.state.enroute2 + " | " + this.state.arrive;
+        const nature = this.state.callinfo.nature;
+        const loctype = this.state.callinfo.loctype;
+        const disp = this.state.callinfo.disp;
+        const dest = this.state.callinfo.dest;
+        const trauma = this.state.callinfo.trauma;
         // patient variables
         const fname = this.state.fname;
         const lname = this.state.lname;
-        const dob = this.state.birth;
-        const birth = dob.substring(8, 10) + "/" + dob.substring(5, 7) + "/" + dob.substring(0, 4);
         const classify = this.state.classify;
         const gender = this.state.gender;
+
+        /* variables used to reduce fields */
+        // call variables
+        let incident = this.state.callinfo.ino + " | " + this.state.callinfo.unit + " | " + this.state.callinfo.ctype + " | " + this.state.callinfo.care + " | " + this.state.callinfo.loc;
+        if(this.state.callinfo.fallht) { incident += " | " + this.state.callinfo.fallht; }
+        let agency = this.state.agency;
+        let mci = "";
+        let va = "";
+        if(this.state.callinfo.triage) {
+            mci = this.state.callinfo.ptct + " | " + this.state.callinfo.triage;
+        }
+        if(this.state.callinfo.vatype) {
+            va = this.state.callinfo.vatype + " | " + this.state.callinfo.vaimpact + " | " + this.state.callinfo.vasafe + " | " + this.state.callinfo.vaspd + " mph | " + this.state.callinfo.vaeject;
+        }
+        const times = this.state.callinfo.dispatch + " | " + this.state.callinfo.enroute + " | " + this.state.callinfo.arrscn + " | " + this.state.callinfo.contact + " | " + this.state.callinfo.dptscn + " | " + this.state.callinfo.arrdes + " | " + this.state.callinfo.trcare;
+        // patient variables
+        const dob = this.state.birth;
+        const birth = dob.substring(8, 10) + "/" + dob.substring(5, 7) + "/" + dob.substring(0, 4);
         const weight = this.state.weight;
-        const address = this.state.address + ", " + this.state.city + ", " + this.state.country + ", " + this.state.zip;
+        const address = this.state.address + ", " + this.state.city + ", " + this.state.country + " " + this.state.zip;
         const phone = this.state.phone;
         // interventions variables
         const procedure = this.state.procedure;
-        // send to backend
+
+        /* send to backend */
         const url = 'http://localhost:3000/charts/add';
         const options = {
             method: 'POST',
-            body: JSON.stringify({ call, date, times, fname, lname, birth, classify, gender, weight, address, phone, procedure }),
+            body: JSON.stringify({ date, incident, loctype, nature, disp, dest, agency, trauma, mci, va, times, fname, lname, birth, classify, gender, weight, address, phone, procedure }),
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -144,62 +180,26 @@ export default class ChartForm extends Component {
         })
     }
 
+    fetchNewInput = (input, num) => {
+        var obj = JSON.parse(input);
+        if(num == 1) { this.setState({callinfo: obj}); }
+    }
+
     render() {
         const { step } = this.state;
-        const {
-            no,
-            date,
-            type,
-            mci,
-            pt,
-            care,
-            triage,
-            loc,
-            loctype,
-            dispatch,
-            enroute,
-            scene,
-            contact,
-            enroute2,
-            arrive,
-            fname,
-            lname,
-            birth,
-            classify,
-            gender,
-            weight,
-            address,
-            city,
-            country,
-            zip,
-            procedure
+        const { ino, idate, unit, ctype, nature, care, loctype, loc,
+            disp, dest, agency, trauma, fallht,
+            mci, ptct, triage, va, vatype, vasafe, vaimpact, vaspd, vaeject,
+            dispatch, enroute, arrscn, contact, dptscn, arrdes, trcare,
+            fname, lname, birth, classify, gender, weight, address, city, country, zip,
+            procedure,
+            callinfo
         } = this.state;
-        const values = {
-            no,
-            date,
-            type,
-            mci,
-            pt,
-            care,
-            triage,
-            loc,
-            loctype,
-            dispatch,
-            enroute,
-            scene,
-            contact,
-            enroute2,
-            arrive,
-            fname,
-            lname,
-            birth,
-            classify,
-            gender,
-            weight,
-            address,
-            city,
-            country,
-            zip,
+        const values = { ino, idate, unit, ctype, nature, care, loctype, loc,
+            disp, dest, agency, trauma, fallht,
+            mci, ptct, triage, va, vatype, vasafe, vaimpact, vaspd, vaeject,
+            dispatch, enroute, arrscn, contact, dptscn, arrdes, trcare,
+            fname, lname, birth, classify, gender, weight, address, city, country, zip,
             procedure
         };
         switch (step) {
@@ -208,7 +208,9 @@ export default class ChartForm extends Component {
                     nextStep={this.nextStep}
                     navigate={this.navigate}
                     handleChange={this.handleChange}
+                    fetchNewInput={this.fetchNewInput}
                     values={values}
+                    callinfo={callinfo}
                 />
             case 2:
                 return <AddPatient
@@ -216,7 +218,6 @@ export default class ChartForm extends Component {
                     prevStep={this.prevStep}
                     navigate={this.navigate}
                     handleChange={this.handleChange}
-                    handleDate={this.handleDate}
                     values={values}
                 />
             case 3:
@@ -234,6 +235,7 @@ export default class ChartForm extends Component {
                     navigate={this.navigate}
                     handleSubmit={this.handleSubmit}
                     values={values}
+                    callinfo={callinfo}
                 />
             case 5:
                 return <Redirect to={this.state.redirect}/>

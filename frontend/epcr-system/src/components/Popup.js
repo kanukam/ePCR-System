@@ -23,6 +23,9 @@ export default class Popup extends Component {
         return (
             <div className="popup shadow">
                 <h2>{this.props.text}</h2>
+                {this.props.text.includes("Patient") ?
+                    <div>Search for patient and then use those values to populate to form fields.</div>
+                : null}
                 {this.props.text.includes("Procedure") ?
                     <form>
                         <Row>
@@ -76,8 +79,8 @@ export default class Popup extends Component {
                                 </div>
                                 <div className="group">
                                     <span>Dosage</span>
-                                    <input type="number" style={{ width:'27%', marginRight:'10px' }} />
-                                    <select name="unit" style={{ width:'30%' }}>
+                                    <input type="number" style={{ width:'27%', marginRight:'10px' }} min="0" />
+                                    <select name="unit" style={{ width:'32%' }}>
                                         <option value="GMS">GMS</option>
                                         <option value="in.">Inches (in.)</option>
                                         <option value="L">Liters (L)</option>

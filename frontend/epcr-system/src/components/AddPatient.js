@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
+import Popup from './Popup'
 import '../App.css'
 
 export default class AddPatient extends Component {
@@ -22,6 +23,7 @@ export default class AddPatient extends Component {
             zip: "",
             phone: "",
             history: "", // subject to change
+            showPop: false
         };
     }
 
@@ -40,12 +42,27 @@ export default class AddPatient extends Component {
         this.props.prevStep();
     }
 
+    toggleAdd = () => {
+        this.setState({
+            showPop: !this.state.showPop
+        });
+    }
+
+    testing = (e) => {
+        e.preventDefault();
+        var text = document.getElementById("inputt").value;
+        text = text + '5';
+        document.getElementById("inputt").value = text;
+    }
+
     render() {
         const { values } = this.props;
         return (
             <div className="chartp">
                 <form>
                     <h2>Patient Information</h2>
+                    <Button onClick={this.toggleAdd}>Previous Patient Search</Button>
+                    {this.state.showPop ? <Popup text="Search Patient" closePopup={this.togglePop}/> : null}
                     <h3>Demographics &amp; Personal</h3>
                     <Row>
                         <Col>
@@ -80,6 +97,7 @@ export default class AddPatient extends Component {
                                 <div>
                                     <label><input type="radio" name="gender" value="Male" defaultChecked /> Male</label>
                                     <label><input type="radio" name="gender" value="Female" /> Female</label>
+                                    <label><input type="radio" name="gender" value="Other" /> Other</label>
                                 </div>
                             </div>
                             <div className="group">
@@ -116,6 +134,10 @@ export default class AddPatient extends Component {
                                     <div>
                                         <input type="text" name="city" value={values.city} onChange={this.props.handleChange('city')} />
                                         <strong>City</strong>
+                                    </div>
+                                    <div>
+                                        <input type="text" name="state" value={values.state} onChange={this.props.handleChange('state')} />
+                                        <strong>State</strong>
                                     </div>
                                     <div>
                                         <input type="text" name="country" value={values.country} onChange={this.props.handleChange('country')} />
