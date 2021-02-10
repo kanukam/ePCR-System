@@ -5,7 +5,7 @@ hr { margin:30px 0; height:1px; }
 
 /* content styles */
 .block { display:block !important; width:100% !important; }
-.shadow { margin:30px auto; padding:25px; box-shadow:0 12px 15px rgba(0,0,0,0.15), 0 0 3.5px rgba(0,0,0,0.15), 0 2px 2px rgba(0,0,0,0.25); }
+.shadow { margin:30px auto; box-shadow:0 12px 15px rgba(0,0,0,0.15), 0 0 3.5px rgba(0,0,0,0.15), 0 2px 2px rgba(0,0,0,0.25); }
 .multiple { box-shadow:0px 1px 1px 1px rgba(0,0,0,0.25); margin:0; }
 .left { float:left; }
 .right { float:right; }
@@ -14,35 +14,25 @@ hr { margin:30px 0; height:1px; }
 .navbar { background-color:#16A8DC; color:#fff !important; }
 
 /* chart styles */
-/*.chart { width:900px; min-height:200px; margin:30px auto; padding:25px; background:#fff; font-size:18px; }
-.chart h2, .chart h3 { margin-bottom:10px; font-size:25px; display:flex; text-transform:uppercase; text-align:center; }
-.chart h3 { margin:10px 0; padding:0 10px; font-size:18px; line-height:40px; background:#E5E5E5; }
-.chart span { display:inline-flex; vertical-align:top; width:30%; height:40px; line-height:40px; color:#3C5B66; }
-.chart label { display:block; padding:5px 0; }
-.chart input, .chart select { display:inline-flex; width:70%; height:40px; line-height:40px; }
-.chart input[type="text"], .chart input[type="number"], .chart input[type="date"], .chart input[type="datetime-local"] { border:none; border-bottom:2px solid #8E9CA0; }
-.chart input[type="radio"], .chart input[type="checkbox"] { width:auto; height:auto; }
-.chart input[type="text"]:disabled { background:none; border:none; }
-.chart select { background:#E5E5E5; border:none; }
-.chart .row { margin:0; }*/
-
-.chart { position:relative; }
-.chart form { width:850px; min-height:900px; margin:30px auto 0; padding:25px; background:#fff; font-size:16px; }
+.chart { position:relative; padding:25px; }
+.chart form { width:900px; min-height:200px; margin:30px auto 100px; padding:25px; background:#fff; font-size:14px; }
 .chart h2, .chart h3 { margin-bottom:10px; font-size:25px; display:flex; text-transform:uppercase; text-align:center; }
 .chart h3 { margin:10px 0; padding:0 10px; font-size:16px; line-height:40px; background:#E5E5E5; }
-.chart span { display:inline-flex; padding:0 10px; vertical-align:top; min-width:30%; height:40px; line-height:40px; color:#3C5B66; }
-.chartp span { min-width:20%; }
+.chart span { display:inline-flex; padding:0 10px; vertical-align:top; min-width:35%; height:40px; line-height:40px; color:#3C5B66; }
 .chart strong { display:table-cell; font-weight:normal; font-size:smaller; color:#888; }
-.chart .group { display:block; padding:5px 0; }
+.chart .group { display:block; }
 .chart .group div { display:inline-block; width:auto; }
-.chart label { margin:0 10px 0 0 !important; line-height:40px; }
-.chart input, .chart select { display:inline-flex; margin:5px 0; width:203px; height:30px; line-height:30px; }
+.chart input, .chart select { display:inline-flex; margin:5px 0; width:208px; height:30px; line-height:30px; }
 .chart input[type="text"], .chart input[type="number"], .chart input[type="date"], .chart input[type="datetime-local"] { margin:5px 15px 5px 0; border:1px solid #C4C4C4; }
 .chart input:focus { border:1px solid #888; }
 .chart input[type="radio"], .chart input[type="checkbox"] { width:auto; height:auto; }
 .chart input[type="text"]:disabled { background:none; border:none; }
 .chart select { margin:5px 5px 5px 0; background:#E5E5E5; border:none; }
 .chart .row { margin:0; }
+.chartp span { min-width:20%; }
+.charto span { width:100px; line-height:20px; }
+.charto div { width:150px !important; }
+.charto label { line-height:20px !important; }
 .chartnav { position:fixed; bottom:0; display:flex; clear:both; margin-top:50px; padding:0 50px; width:960px; background:#fff; border-top:1px solid #ddd; font-size:12px; }
 .chartnav .tab { padding:5px; width:100px; height:80px; text-align:center; cursor:pointer; }
 .chartnav .tab.active { background:#eee; }
@@ -50,12 +40,18 @@ hr { margin:30px 0; height:1px; }
 .chartnav .tab b { display:block; font-weight:normal; color:#117a8b; }
 .chartnav .tab.active b { font-weight:bold; }
 
+table.cform { width:100%; }
+table.cform th, table.cform td { padding:0 20px; }
+table.cform th { color:#3C5B66; font-weight:normal; }
+.chart label { margin:0 10px 0 0 !important; width:120px; line-height:25px; }
+
 /* popup styles */
 .overlay { display:block; position:fixed; width:100%; height:100%; background:rgba(0,0,0,0.25); z-index:1; }
-.popup { position:absolute; top:20%; left:35%; width:30%; padding-bottom:15px; background:#fff; }
+.popup { position:absolute; top:20%; left:27.5%; width:45%; padding-bottom:15px; background:#fff; z-index:2; }
 .popup h2 { padding:10px; background:#C4C4C4; color:#000; }
-.popup input, .popup select { width:243px; }
-.popup option { background:#FFF; color:#888; height:30px; line-height:30px; }
+.popup form { width:100%; margin:0; padding:0; }
+.popup input, .popup select { width:255px; }
+.popup option { padding:5px; height:30px; background:#FFF; color:#888; }
 .popup option:hover, .popup option:checked { color:#000; }
 .popup ::-webkit-scrollbar { width:10px; height:10px; padding:3px 3px 3px 15px }
 .popup ::-webkit-scrollbar-track { background:#FFF; }
@@ -63,10 +59,12 @@ hr { margin:30px 0; height:1px; }
 .popup .bottom { margin:0 auto; width:150px; height:40px; }
 
 /* confirm styles */
-table, table.info { width:100%; }
-table.info th, table.info th { text-align:center; background:#ddd; border:1px solid #ddd; }
-table.info td, table.info td { padding:0 3px; vertical-align:top; border:1px solid #ddd; font-size:smaller; }
+table.info, table.crew { width:100%; }
+table.info th, table.crew th { text-align:center; background:#ddd; border:1px solid #ddd; }
+table.info td, table.crew td { padding:0 3px; vertical-align:top; border:1px solid #ddd; font-size:smaller; }
 table.info td:nth-child(odd) { font-weight:bold; text-align:right; }
+table.crew { margin-bottom:50px; }
+.top { padding:10px 20px !important; vertical-align:top; }
 
 .bigchecks { width:100px; height:35px; line-height:35px; color:#4C8DA4; background-color:#E5E5E5; text-align:center; }
 
