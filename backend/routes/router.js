@@ -18,6 +18,8 @@ router.use('/users', users);
 // Will work for login page for now, can change later:
 router.post("/login", controller.login);
 
+router.post("/logout", controller.logout);
+
 router.post("/register", controller.register); // Register user
 
 router.get("/test-auth", auth, controller.testAuth);
