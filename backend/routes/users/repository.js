@@ -120,7 +120,36 @@ function deleteUserByEmail(email, callback) {
             });
         }
     })
+}
 
+function addUser(email, callback) { // Guarantee Username isnt in database
+    db.query(`SELECT * from users WHERE email='${email}'`,
+        (err, res) => {
+            if (err) {
+                return callback(err)
+            }
+            // email exists in database
+            if (res.length != 0) {
+                return callback(null, true);
+            }
+            db.query('INSERT INTO users (email) VALUES (?)', [email],
+                (err, res) => {
+                    if (err) {
+                        return callback(err)
+                    }
+                    else{
+                        const sql = 'SELECT users.name, users.email, users.phone, users.username, users.privilege FROM users';
+                        db.query(sql, (err, res) => {
+                            if (err) {
+                                callback(err);
+                            }
+                            else {
+                                callback(err, false, res);
+                            }
+                        });
+                    }
+                });
+        });
 }
 
 module.exports = {
@@ -129,5 +158,6 @@ module.exports = {
     changePassword, 
     viewUsers, 
     deleteUserByUsername,
-    deleteUserByEmail
+    deleteUserByEmail,
+    addUser
 }

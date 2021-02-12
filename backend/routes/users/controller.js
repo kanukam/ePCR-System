@@ -107,4 +107,20 @@ function deleteUser(req, res) {
 
 }
 
-  module.exports = { viewUser, updateUser, changePassword, viewUsers, deleteUser };
+function addUser(req, res) {
+  const { email } = req.body;
+  if (req.user.privilege == "admin" && email) {
+    repo.addUser(email, (err, exists, data) => {
+      if(err)
+        res.status(500).json({ error: "Internal Server Error, try again" })
+      else if(exists)
+        res.status(401).json({ status: "Email Already exists" });
+      else
+        res.status(200).json({ userInfo: data });
+    });
+
+  }
+}
+
+
+module.exports = { viewUser, updateUser, changePassword, viewUsers, deleteUser, addUser };
