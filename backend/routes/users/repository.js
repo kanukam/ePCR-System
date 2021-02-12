@@ -122,7 +122,7 @@ function deleteUserByEmail(email, callback) {
     })
 }
 
-function addUser(email, callback) { // Guarantee Username isnt in database
+function addUser(email, callback) { // Guarantee Email isnt in database
     db.query(`SELECT * from users WHERE email='${email}'`,
         (err, res) => {
             if (err) {
