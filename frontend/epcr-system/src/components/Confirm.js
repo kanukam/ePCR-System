@@ -41,7 +41,7 @@ export default class Confirm extends Component {
                     <h2>Confirm Chart Report</h2>
                     <b>Date:</b> {idate}
                     <table className="info" border="1">
-                        <tr><th colspan="8">Patient Information</th></tr>
+                        <tr><th colSpan="8">Patient Information</th></tr>
                         <tr>
                             <td width="10%">Name</td>
                             <td width="30%">{lname}, {fname}</td>
@@ -60,11 +60,11 @@ export default class Confirm extends Component {
                         </tr>
                         <tr>
                             <td>Number of Patients at Scene</td>
-                            <td colspan="7">{ptct}</td>
+                            <td colSpan="7">{ptct}</td>
                         </tr>
                     </table>
                     <table className="info" border="1">
-                        <tr><th colspan="4">Call Information</th></tr>
+                        <tr><th colSpan="4">Call Information</th></tr>
                         <tr>
                             <td width="15%">Incident #</td>
                             <td width="35%">{ino}</td>
@@ -101,7 +101,7 @@ export default class Confirm extends Component {
                             <td>Transport Mode</td>
                             <td></td>
                         </tr>
-                        <tr><th colspan="4">Response Times</th></tr>
+                        <tr><th colSpan="4">Response Times</th></tr>
                         <tr>
                             <td>Dispatch</td>
                             <td>{dispatch}</td>
@@ -122,7 +122,7 @@ export default class Confirm extends Component {
                         </tr>
                     </table>
                     <table className="crew" order="1">
-                        <tr><th colspan="4">Unit Personnel</th></tr>
+                        <tr><th colSpan="4">Unit Personnel</th></tr>
                         <tr>
                             <td><b>Crew Member</b></td>
                             <td><b>Certification</b></td>

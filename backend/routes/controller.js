@@ -19,6 +19,10 @@ function login(req, res){
   })
 }
 
+function logout(req, res){
+  res.cookie("token", "", { httpOnly: true }).clearCookie("token").sendStatus(200);
+}
+
 function register(req, res) {
   const { username, password, email, phone, name } = req.body;
   // Mandatory Fields
@@ -49,6 +53,7 @@ function getUsername(req, res){
 
 module.exports = {
   login,
+  logout,
   register,
   testAuth,
   getUsername
