@@ -50,29 +50,34 @@ export default class Patients extends Component {
     }
 
     render() {
+        console.log(this.state.patients);
         var patientComponents = [];
         for(var i = 0; i < this.state.patients.length; i++){
             patientComponents.push(
-                <Container key={this.state.patients[i].id} className="chart shadow" style={{height: '150px'}}>  
+                <Container key={this.state.patients[i].id} className='chart shadow'>  
                     <Row>
                         <Col>         
                             <b>Patient Name: </b>
                             {this.state.patients[i]["fname"]} {this.state.patients[i]["lname"]}
                             <br />
-                            <b>D.O.B.:</b>
-                            <br />
+                            <b>D.O.B.: </b>
                             {this.state.patients[i]["birth"]}
-                            <br />
-                            <b>Patient Address:</b>
-                            <br />
+                            <br /><br />
+                            <b>Patient Address: </b>
                             {this.state.patients[i]["address"]}
+                            <br />
+                            <b>Patient Phone: </b>
+                            {this.state.patients[i]["phone"]}
+                            <br />
+                            {this.state.patients[i]["history"]}
                         </Col>
                         <div >
                             <br/><br/><br/>
                             <Button variant="primary" as={Link} to={`/Patient/${ this.state.patients[i].id }`}>View</Button>
                         </div>
                     </Row>
-                </Container>);
+                </Container>
+            );
         }
         return (
             <React.Fragment>
