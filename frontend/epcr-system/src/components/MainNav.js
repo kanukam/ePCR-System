@@ -10,9 +10,6 @@ import '../Sidebar.css'
 
 export default class MainNav extends Component {
 	static contextType = MainContext;
-	constructor(props) {
-		super(props);
-	}
 	logout = () => {
 		const url = 'http://localhost:3000/logout';
 		const options = {
