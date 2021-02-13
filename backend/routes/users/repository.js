@@ -152,6 +152,36 @@ function addUser(email, callback) { // Guarantee Email isnt in database
         });
 }
 
+function elevateUser(email, callback) {
+    db.query(`SELECT * from users WHERE email='${email}'`,
+        (err, res) => {
+            if (err) {
+                return callback(err)
+            }
+            // email does not exist in database
+            if (res.length == 0) {
+                return callback("Does Not Exist");
+            }
+            db.query(`UPDATE users SET privilege ='admin' WHERE email='${email}'`,
+                (err, res) => {
+                    if (err) {
+                        return callback(err)
+                    }
+                    else {
+                        const sql = 'SELECT users.name, users.email, users.phone, users.username, users.privilege FROM users';
+                        db.query(sql, (err, res) => {
+                            if (err) {
+                                callback(err);
+                            }
+                            else {
+                                callback(err, res);
+                            }
+                        });
+                    }
+                });          
+        });
+}
+
 module.exports = {
     viewUser, 
     updateUser, 
@@ -159,5 +189,6 @@ module.exports = {
     viewUsers, 
     deleteUserByUsername,
     deleteUserByEmail,
-    addUser
+    addUser,
+    elevateUser
 }

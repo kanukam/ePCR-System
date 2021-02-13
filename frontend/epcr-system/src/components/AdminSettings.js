@@ -89,7 +89,6 @@ export default class Settings extends Component {
         // Post request to delete user, updated table sent back
         fetch(url, options).then(response => {
             if (!response.ok) {
-                console.log("A");
                 throw Error("Failed");
             }
             return response.json()
@@ -102,6 +101,34 @@ export default class Settings extends Component {
             })
     }
 
+    // Elevating User, must be an admin for it to work.
+    elevateUser = event => {
+        event.preventDefault();
+        const email = this.state.elevatedUser;
+        // Deleting user
+        const url = `http://localhost:3000/users/0/elevate`;
+        const options = {
+            method: 'POST',
+            body: JSON.stringify({ email }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include'
+        }
+        // Post request to delete user, updated table sent back
+        fetch(url, options).then(response => {
+            if (!response.ok) {
+                throw Error("Failed");
+            }
+            return response.json()
+        })
+            .then(data => {
+                this.setState({ users: data["userInfo"], userMessage: "Success" });
+            })
+            .catch((error) => {
+                this.setState({ userMessage: "Failed" });
+            })
+    }
 
     render() {
         if(this.state.users) {
@@ -156,7 +183,7 @@ export default class Settings extends Component {
                                         <Form.Control type="email" autocomplete="off" placeholder="Enter Email..." value={this.state.elevatedUser} onChange={e => this.setState({ elevatedUser: e.target.value })}/>
                                     </Col>
                                     <Col sm="4">
-                                        <Button variant="primary">Elevate</Button>{' '}
+                                        <Button variant="primary" onClick={this.elevateUser}>Elevate</Button>{' '}
                                     </Col>
                                 </Form.Group>
 

@@ -118,9 +118,28 @@ function addUser(req, res) {
       else
         res.status(200).json({ userInfo: data });
     });
-
+  }
+  else {
+    res.status(401).json({ status: "unauthorized" });
   }
 }
 
+function elevateUser(req, res) {
+  const { email } = req.body;
+  if (req.user.privilege == "admin" && email) {
+    repo.elevateUser(email, (err, data) => {
+      if (err)
+        res.status(500).json({ error: "Internal Server Error, try again" });
+      else
+        res.status(200).json({ userInfo: data });
+    });
+  }
+  else {
+    res.status(401).json({ status: "unauthorized" });
+  }
 
-module.exports = { viewUser, updateUser, changePassword, viewUsers, deleteUser, addUser };
+}
+
+
+
+module.exports = { viewUser, updateUser, changePassword, viewUsers, deleteUser, addUser, elevateUser };
