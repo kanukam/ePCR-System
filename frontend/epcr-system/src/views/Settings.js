@@ -58,7 +58,9 @@ export default class Settings extends Component {
                 <Container className='main-content' style={{ padding: this.state.contentSpacing }}>
                     <UserSettings />
                     <AdminSettings />
-                    <Button variant="danger" type="submit" className="mb-5" onClick={this.remove}>Delete Account</Button>
+                    <div className="text-center">
+                        <Button variant="danger" type="submit" className="mb-5 mt-5" onClick={this.remove}>Delete Account</Button>
+                    </div>
                     {this.state.message && <p className="text-info"> {this.state.message} </p>}
                 </Container>  
             </React.Fragment>
