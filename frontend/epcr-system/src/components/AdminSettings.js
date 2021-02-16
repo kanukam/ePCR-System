@@ -58,7 +58,6 @@ export default class Settings extends Component {
             // Post request to delete user, updated table sent back
             fetch(url, options).then(response => {
                 if(!response.ok){
-                    console.log("A");
                     throw Error("Failed");
                 }
                 return response.json()
@@ -180,7 +179,7 @@ export default class Settings extends Component {
                                         Elevate User To Admin
                                     </Form.Label>
                                     <Col sm="4">
-                                        <Form.Control type="email" autocomplete="off" placeholder="Enter Email..." value={this.state.elevatedUser} onChange={e => this.setState({ elevatedUser: e.target.value })}/>
+                                        <Form.Control type="email" placeholder="Enter Email..." value={this.state.elevatedUser} onChange={e => this.setState({ elevatedUser: e.target.value })}/>
                                     </Col>
                                     <Col sm="4">
                                         <Button variant="primary" onClick={this.elevateUser}>Elevate</Button>{' '}
@@ -190,7 +189,6 @@ export default class Settings extends Component {
                             </Form>
                         </Card.Body>
                     </Card>
-
                     <div className="mb-4"></div>
                 </React.Fragment>
             );

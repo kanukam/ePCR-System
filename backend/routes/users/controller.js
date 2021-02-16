@@ -140,6 +140,20 @@ function elevateUser(req, res) {
 
 }
 
+function deleteSelf(req, res) {
+  const { username } = req.user;
+  if(username){
+    repo.deleteUserByUsername(username, (err) => {
+      err
+        ? res.status(500).json({ error: "Internal Server Error, try again" })
+        : res.cookie("token", "", { httpOnly: true }).clearCookie("token").sendStatus(200);
+    });
+  }
+  else {
+    res.status(401).json({ status: "unauthorized" });
+  }
+}
 
 
-module.exports = { viewUser, updateUser, changePassword, viewUsers, deleteUser, addUser, elevateUser };
+
+module.exports = { viewUser, updateUser, changePassword, viewUsers, deleteUser, addUser, elevateUser, deleteSelf };
