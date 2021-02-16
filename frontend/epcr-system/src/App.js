@@ -52,7 +52,7 @@ export default class App extends React.Component {
         this.setAuth(true);
       }
     }).catch((error) => {
-      console.log("Error");
+
     })
   }
 
@@ -76,7 +76,7 @@ export default class App extends React.Component {
         this.setUsername(username);
       })
       .catch((error) => {
-        console.log(error);
+        
       });
   }
 
