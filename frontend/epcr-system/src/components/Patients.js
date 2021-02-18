@@ -1,3 +1,4 @@
+import 'date-fns'
 import React, { Component } from 'react'
 import { MainContext } from '../Auth'
 import Container from 'react-bootstrap/Container'
@@ -6,6 +7,13 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
 import {Link} from 'react-router-dom'
+import TextField from '@material-ui/core/TextField'
+import MatButton from '@material-ui/core/Button'
+import DateFnsUtils from '@date-io/date-fns'
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers'
 import '../App.css'
 
 export default class Patients extends Component {
@@ -61,7 +69,7 @@ export default class Patients extends Component {
     }
 
     render() {
-        let searchPadding = '15px 0 5px ' + this.state.contentSpacing.slice(6);
+        let searchPadding = '0px 0 5px ' + this.state.contentSpacing.slice(6);
         console.log(searchPadding);
         let patientComponents = [];
         for(let i = 0; i < this.state.patients.length; i++){
@@ -100,17 +108,29 @@ export default class Patients extends Component {
                     contentSpacing={this.state.contentSpacing}
                     toggleCollapse={this.toggleCollapse}
                 />
-                <div style={{padding: searchPadding, backgroundColor: '#C4C4C4', display: 'flex', justifyContent: 'center'}}> 
+                <div style={{padding: searchPadding, backgroundColor: '#EDEDED', display: 'flex', justifyContent: 'center'}}> 
                     <form onSubmit={this.search}>      
-                        <label htmlFor='firstname'>First Name:</label>
+                        <TextField id="firstname" size="small" label="First Name" type="search" onChange={this.searchChange('firstname')} />
                         &nbsp;
-                        <input id='firstname' type='text' onChange={this.searchChange('firstname')}/>
-                        
-                        <label htmlFor='lastname'>Last Name:</label>
+                        <TextField id="lastname" size="small" label="Last Name" type="search" onChange={this.searchChange('lastname')} />
                         &nbsp;
-                        <TextField id='lastname' onChange={this.searchChange('lastname')}/>
-                        &nbsp;
-                        <input type='submit' value='search'/>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDatePicker
+                                disableToolbar
+                                variant="outlined"
+                                size="small"
+                                format="MM/dd/yyyy"
+                                margin="normal"
+                                id="startdate"
+                                label="Start Date"
+                                onChange={this.searchChange('startdate')}
+                                style={{maxWidth: '140px', margin: '0 0 0 0'}}
+                                KeyboardButtonProps={{
+                                    'aria-label': 'change date',
+                                }}
+                            />
+                        </MuiPickersUtilsProvider>
+                        <MatButton style={{marginTop: '10px'}} type='submit' color="primary">search</MatButton>
                     </form>
                 </div>
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
