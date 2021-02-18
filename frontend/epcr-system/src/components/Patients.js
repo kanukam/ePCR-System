@@ -18,6 +18,8 @@ export default class Patients extends Component {
             sidebarHide: true
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
+        this.search = this.search.bind(this);
+        this.searchChange = this.searchChange.bind(this);
     }
 
     componentDidMount() {
@@ -49,10 +51,20 @@ export default class Patients extends Component {
         this.setState({sidebarHide : !this.state.sidebarHide});
     }
 
+    search(event){
+        event.preventDefault();
+        console.log(this.state);
+    }
+
+    searchChange = field => event =>{
+        this.setState({[field]: event.target.value});
+    }
+
     render() {
-        console.log(this.state.patients);
-        var patientComponents = [];
-        for(var i = 0; i < this.state.patients.length; i++){
+        let searchPadding = '15px 0 5px ' + this.state.contentSpacing.slice(6);
+        console.log(searchPadding);
+        let patientComponents = [];
+        for(let i = 0; i < this.state.patients.length; i++){
             patientComponents.push(
                 <Container key={this.state.patients[i].id} className='chart shadow'>  
                     <Row>
@@ -88,6 +100,19 @@ export default class Patients extends Component {
                     contentSpacing={this.state.contentSpacing}
                     toggleCollapse={this.toggleCollapse}
                 />
+                <div style={{padding: searchPadding, backgroundColor: '#C4C4C4', display: 'flex', justifyContent: 'center'}}> 
+                    <form onSubmit={this.search}>      
+                        <label htmlFor='firstname'>First Name:</label>
+                        &nbsp;
+                        <input id='firstname' type='text' onChange={this.searchChange('firstname')}/>
+                        
+                        <label htmlFor='lastname'>Last Name:</label>
+                        &nbsp;
+                        <TextField id='lastname' onChange={this.searchChange('lastname')}/>
+                        &nbsp;
+                        <input type='submit' value='search'/>
+                    </form>
+                </div>
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
                     {patientComponents}
                 </Container>
