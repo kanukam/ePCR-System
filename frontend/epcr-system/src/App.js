@@ -10,19 +10,24 @@ import Patient from "./components/Patient";
 import Patients from './components/Patients';
 import Settings from './views/Settings';
 import {ProtectedRoute, ProtectedLogin} from "./Routes";
+import i18next from 'i18next';
+import {withTranslation} from 'react-i18next'
 
-
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       auth: false,
       username: "",
       setAuth: this.setAuth,
-      setUsername: this.setUsername
+      setUsername: this.setUsername,
+      setLanguage: this.setLanguage,
+      language: "",
+      translate: this.props.t
     }
     this.jwtCookie = this.jwtCookie.bind(this);
     this.getUsername = this.getUsername.bind(this);
+    this.getLanguage = this.getLanguage.bind(this);
   }
 
   setAuth = value => {
@@ -32,6 +37,16 @@ export default class App extends React.Component {
   setUsername = value => {
     this.setState({ username: value });
   };
+
+  setLanguage = value => {
+    this.setState({language: value});
+    i18next.changeLanguage(value);
+  }
+
+  getLanguage(username){
+    //get request for users preferred language from db
+    this.setLanguage('es');
+  }
 
   jwtCookie() {
     const url = 'http://localhost:3000/test-auth';
@@ -74,6 +89,7 @@ export default class App extends React.Component {
       })
       .then((username) => {
         this.setUsername(username);
+        this.getLanguage(username);
       })
       .catch((error) => {
         
@@ -84,6 +100,7 @@ export default class App extends React.Component {
     // Check if user has jwt cookie on application startup
     this.jwtCookie();
     this.getUsername();
+    this.getLanguage();
   }
 
   // Components go in Protected routes
@@ -106,3 +123,4 @@ export default class App extends React.Component {
   }
 }
 
+export default withTranslation()(App);

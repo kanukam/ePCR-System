@@ -1,20 +1,20 @@
 import 'date-fns';
 import React, { Component } from 'react';
-import { MainContext } from '../Auth'
-import Container from 'react-bootstrap/Container'
-import MainNav from './MainNav'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
-import Button from 'react-bootstrap/Button'
-import {Link} from 'react-router-dom'
-import TextField from '@material-ui/core/TextField'
-import MatButton from '@material-ui/core/Button'
-import DateFnsUtils from '@date-io/date-fns'
+import { MainContext } from '../Auth';
+import Container from 'react-bootstrap/Container';
+import MainNav from './MainNav';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
+import {Link} from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
+import MatButton from '@material-ui/core/Button';
+import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
-} from '@material-ui/pickers'
-import '../App.css'
+} from '@material-ui/pickers';
+import '../App.css';
 
 export default class Patients extends Component {
     static contextType = MainContext;

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import App from './App';
+import './i18nextConf';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
