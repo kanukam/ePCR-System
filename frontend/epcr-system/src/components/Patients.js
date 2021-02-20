@@ -74,7 +74,7 @@ export default class Patients extends Component {
     };
 
     render() {
-        let searchPadding = '0px 0 5px ' + this.state.contentSpacing.slice(6);
+        let searchPadding = '5px 0 5px ' + this.state.contentSpacing.slice(6);
         let patientComponents = [];
         for(let i = 0; i < this.state.patients.length; i++){
             patientComponents.push(
@@ -112,11 +112,25 @@ export default class Patients extends Component {
                     contentSpacing={this.state.contentSpacing}
                     toggleCollapse={this.toggleCollapse}
                 />
-                <div style={{padding: searchPadding, backgroundColor: '#EDEDED', display: 'flex', justifyContent: 'center'}}> 
+                <div style={{padding: searchPadding, backgroundColor: '#EFEFEF', display: 'flex', justifyContent: 'center'}}> 
                     <form onSubmit={this.search}>      
-                        <TextField id="firstname" size="small" label="First Name" type="search" onChange={this.searchChange('firstname')} />
+                        <TextField 
+                            id="firstname" 
+                            size="small"
+                            label="First Name" 
+                            type="search" 
+                            style={{maxWidth: '50%'}}
+                            onChange={this.searchChange('firstname')} 
+                        />
                         &nbsp;
-                        <TextField id="lastname" size="small" label="Last Name" type="search" onChange={this.searchChange('lastname')} />
+                        <TextField 
+                            id="lastname" 
+                            size="small" 
+                            label="Last Name" 
+                            type="search" 
+                            style={{maxWidth: '50%'}}
+                            onChange={this.searchChange('lastname')} 
+                        />
                         &nbsp;
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <KeyboardDatePicker
@@ -153,7 +167,7 @@ export default class Patients extends Component {
                                 }}
                             />
                         </MuiPickersUtilsProvider>
-                        <MatButton style={{marginTop: '10px'}} type='submit' color="primary">search</MatButton>
+                        <MatButton style={{marginTop: '10px'}} type='submit' color="default">search</MatButton>
                     </form>
                 </div>
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
