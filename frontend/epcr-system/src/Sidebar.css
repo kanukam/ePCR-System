@@ -8,14 +8,16 @@
         padding: 0 0 0;
         box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
         font-size: 24px;
+        display: block !important;
 }
 
 .active{
     background-color: #C4C4C4;
 }
-
+/*
 @media (max-width: 768px){
     .hamburger-shift{
         padding: 0 0 0 0 !important;
     }
 }
+*/

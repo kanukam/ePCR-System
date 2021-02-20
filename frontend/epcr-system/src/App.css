@@ -71,9 +71,10 @@ table.crew { margin-bottom:50px; }
 .main-content{
 	padding: 0 0 0 150px;
 }
-
+/*
 @media (max-width: 768px){
     .main-content{
         padding: 0 0 0 0 !important;
     }
 }
+*/
