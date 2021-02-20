@@ -1,5 +1,5 @@
-import 'date-fns'
-import React, { Component } from 'react'
+import 'date-fns';
+import React, { Component } from 'react';
 import { MainContext } from '../Auth'
 import Container from 'react-bootstrap/Container'
 import MainNav from './MainNav'
@@ -28,6 +28,7 @@ export default class Patients extends Component {
         this.toggleCollapse = this.toggleCollapse.bind(this);
         this.search = this.search.bind(this);
         this.searchChange = this.searchChange.bind(this);
+        this.dateChange = this.dateChange.bind(this);
     }
 
     componentDidMount() {
@@ -68,9 +69,12 @@ export default class Patients extends Component {
         this.setState({[field]: event.target.value});
     }
 
+    dateChange = field => date => {
+      this.setState({[field]: date});
+    };
+
     render() {
         let searchPadding = '0px 0 5px ' + this.state.contentSpacing.slice(6);
-        console.log(searchPadding);
         let patientComponents = [];
         for(let i = 0; i < this.state.patients.length; i++){
             patientComponents.push(
@@ -117,13 +121,32 @@ export default class Patients extends Component {
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <KeyboardDatePicker
                                 disableToolbar
-                                variant="outlined"
+                                variant="inline"
                                 size="small"
                                 format="MM/dd/yyyy"
                                 margin="normal"
                                 id="startdate"
                                 label="Start Date"
-                                onChange={this.searchChange('startdate')}
+                                value={this.state.startdate}
+                                onChange={this.dateChange('startdate')}
+                                style={{maxWidth: '140px', margin: '0 0 0 0'}}
+                                KeyboardButtonProps={{
+                                    'aria-label': 'change date',
+                                }}
+                            />
+                        </MuiPickersUtilsProvider>
+                        &nbsp;
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDatePicker
+                                disableToolbar
+                                variant="inline"
+                                size="small"
+                                format="MM/dd/yyyy"
+                                margin="normal"
+                                id="enddate"
+                                label="End Date"
+                                value={this.state.enddate}
+                                onChange={this.dateChange('enddate')}
                                 style={{maxWidth: '140px', margin: '0 0 0 0'}}
                                 KeyboardButtonProps={{
                                     'aria-label': 'change date',
