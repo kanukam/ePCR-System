@@ -23,15 +23,18 @@ export default class Patients extends Component {
         this.state = {
             patients: [],
             contentSpacing: '0 0 0 150px',
-            sidebarHide: true
+            sidebarHide: true,
+            language: ""
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
         this.search = this.search.bind(this);
         this.searchChange = this.searchChange.bind(this);
         this.dateChange = this.dateChange.bind(this);
+        this.languageChange = this.languageChange.bind(this);
     }
 
     componentDidMount() {
+        this.setState({language: this.context.language});
         const url = 'http://localhost:3000/patients/';
         const options = {
             method: 'GET',
@@ -73,6 +76,12 @@ export default class Patients extends Component {
       this.setState({[field]: date});
     };
 
+    languageChange(event) {
+        console.log(event.target.value);
+        this.setState({language: event.target.value});
+        this.context.setLanguage(event.target.value);
+    }
+
     render() {
         let searchPadding = '5px 0 5px ' + this.state.contentSpacing.slice(6);
         let patientComponents = [];
@@ -81,16 +90,16 @@ export default class Patients extends Component {
                 <Container key={this.state.patients[i].id} className='chart shadow'>  
                     <Row>
                         <Col>         
-                            <b>Patient Name: </b>
+                            <b>{this.context.translate('name')}: </b>
                             {this.state.patients[i]["fname"]} {this.state.patients[i]["lname"]}
                             <br />
-                            <b>D.O.B.: </b>
+                            <b>{this.context.translate('dob')}: </b>
                             {this.state.patients[i]["birth"]}
                             <br /><br />
-                            <b>Patient Address: </b>
+                            <b>{this.context.translate('address')}: </b>
                             {this.state.patients[i]["address"]}
                             <br />
-                            <b>Patient Phone: </b>
+                            <b>{this.context.translate('phone')}: </b>
                             {this.state.patients[i]["phone"]}
                             <br />
                             {this.state.patients[i]["history"]}
@@ -173,6 +182,10 @@ export default class Patients extends Component {
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
                     {patientComponents}
                 </Container>
+                <select style={{position: 'absolute', bottom: '5px', right: '5px'}} value={this.state.language} onChange={this.languageChange}>
+                    <option value='en'>en</option>
+                    <option value='es'>es</option>
+                </select>
             </React.Fragment>
         )
     }
