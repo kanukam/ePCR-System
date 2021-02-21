@@ -24,7 +24,8 @@ export default class Patients extends Component {
             patients: [],
             contentSpacing: '0 0 0 150px',
             sidebarHide: true,
-            language: ""
+            language: "",
+            dob: null
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
         this.search = this.search.bind(this);
@@ -128,7 +129,7 @@ export default class Patients extends Component {
                             size="small"
                             label="First Name" 
                             type="search" 
-                            style={{maxWidth: '50%'}}
+                            style={{width: '100px'}}
                             onChange={this.searchChange('firstname')} 
                         />
                         &nbsp;
@@ -137,9 +138,27 @@ export default class Patients extends Component {
                             size="small" 
                             label="Last Name" 
                             type="search" 
-                            style={{maxWidth: '50%'}}
+                            style={{width: '100px'}}
                             onChange={this.searchChange('lastname')} 
                         />
+                        &nbsp;
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDatePicker
+                                disableToolbar
+                                variant="inline"
+                                size="small"
+                                format="MM/dd/yyyy"
+                                margin="normal"
+                                id="dob"
+                                label="DOB"
+                                value={this.state.dob}
+                                onChange={this.dateChange('dob')}
+                                style={{maxWidth: '140px', margin: '0 0 0 0'}}
+                                KeyboardButtonProps={{
+                                    'aria-label': 'change date',
+                                }}
+                            />
+                        </MuiPickersUtilsProvider>
                         &nbsp;
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <KeyboardDatePicker
