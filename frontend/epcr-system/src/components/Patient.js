@@ -1,8 +1,11 @@
-import React, { Component } from 'react'
-import { MainContext } from '../Auth'
-import Container from 'react-bootstrap/Container'
-import MainNav from './MainNav'
-import '../App.css'
+import React, { Component } from 'react';
+import { MainContext } from '../Auth';
+import Container from 'react-bootstrap/Container';
+import MainNav from './MainNav';
+import Notes from './Notes';
+import '../App.css';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 export default class Patient extends Component {
     static contextType = MainContext;
@@ -56,7 +59,14 @@ export default class Patient extends Component {
                     toggleCollapse={this.toggleCollapse}
                 />
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
-                    <h1>Hello</h1>
+                    <Container className="chart shadow">
+                        <Row>
+                            <Col>
+                                <h1>Hello</h1>
+                            </Col>
+                        </Row>
+                    </Container>
+                    <Notes />
                 </Container>
             </React.Fragment>
         )
