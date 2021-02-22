@@ -1,3 +1,4 @@
+// @ts-check
 const express = require("express");
 const router = express.Router();
 
@@ -11,8 +12,6 @@ router.get("/", auth, controller.viewAllCharts); // View all charts
 router.post("/add", auth, controller.addChart);
 
 router.get("/:chartId", auth, controller.viewChart);
-
-//router.get("/")
 
 router.post("/:chartId/update", auth, controller.updateChart);
 
