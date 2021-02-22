@@ -70,4 +70,25 @@ function getPatientCharts(req, res){
   })
 }
 
-module.exports = { getAllPatients, getPatient, addPatient, updatePatient, getPatientCharts };
+function createNote(req, res){
+  const { chartId, patientId } = req.params;
+  const { note } = req.body;
+
+  chartRepo.addNote(chartId, patientId, note, err => {
+    err
+      ? res.status(500).json({ error: err })
+      : res.status(200).json({});
+  })
+
+}
+
+function viewNotes(req, res){
+  const { chartId, patientId } = req.params;
+  chartRepo.viewAllNotes(chartId, patientId, (err, notes) => {
+    err
+      ? res.status(500).json({ error: err })
+      : res.status(200).send(notes);
+  })
+}
+
+module.exports = { getAllPatients, getPatient, addPatient, updatePatient, getPatientCharts, viewNotes, createNote };
