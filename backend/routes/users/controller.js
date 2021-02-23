@@ -45,7 +45,7 @@ function updateUser(req, response) {
   const { name, email, phone} = req.body;
   // Mandatory Fields
   if (!name || !email || !phone)
-    return res.status(401).json({ error: 'Username, password, or email field are blank' });
+    return response.status(401).json({ error: 'Username, password, or email field are blank' });
 
   if (username) {
     repo.updateUser(username, name, phone, email, (err, res) => {
