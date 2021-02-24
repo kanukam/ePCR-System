@@ -25,7 +25,7 @@ export default class Settings extends Component {
 
     remove = event => {
         event.preventDefault();
-        if (window.confirm("Are you sure you would like to delete your account?")){
+        if (window.confirm(this.context.translate('delete-self'))){
             const url = 'http://localhost:3000/users/0/remove';
             const options = {
                 method: 'GET',
@@ -40,7 +40,7 @@ export default class Settings extends Component {
                 }
                 this.context.setAuth(false);
             }).catch((error) => {
-                this.setState({ message: "Failed" });
+                this.setState({ message: this.context.translate('failed') });
             })
         }
     }
@@ -59,7 +59,7 @@ export default class Settings extends Component {
                     <UserSettings />
                     <AdminSettings />
                     <div className="text-center">
-                        <Button variant="danger" type="submit" className="mb-5 mt-5" onClick={this.remove}>Delete Account</Button>
+                        <Button variant="danger" type="submit" className="mb-5 mt-5" onClick={this.remove}>{this.context.translate('delete-account')}</Button>
                     </div>
                     {this.state.message && <p className="text-info"> {this.state.message} </p>}
                 </Container>  

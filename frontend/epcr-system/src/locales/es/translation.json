@@ -48,5 +48,7 @@
     "passwordMismatch": "Las contraseñas no coinciden",
     "delete-user": "¿Estás seguro de que deseas eliminar al usuario?",
     "error": "Error",
-    "success": "éxito"
+    "success": "éxito",
+    "delete-account": "Borrar Cuenta",
+    "delete-self": "¿Está seguro de que desea eliminar su cuenta?"
 }
