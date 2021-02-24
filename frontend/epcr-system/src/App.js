@@ -89,7 +89,6 @@ class App extends React.Component {
       })
       .then((username) => {
         this.setUsername(username);
-        this.getLanguage(username);
       })
       .catch((error) => {
         
