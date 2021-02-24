@@ -9,7 +9,6 @@ function login(req, res){
   
   repo.login(username, password, (err, passwordMismatch, token) => {
     if (err){
-      console.log(err);
       res.status(500).json({ error: 'Internal error please try again' });
     }
     else if (!passwordMismatch)

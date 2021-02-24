@@ -6,8 +6,10 @@ import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import UserDetails from './UserDetails'
 import Button from 'react-bootstrap/Button'
+import { MainContext } from '../Auth'
 
 export default class Settings extends Component {
+    static contextType = MainContext;
     constructor(props) {
         super(props);
         this.state = {
@@ -36,14 +38,14 @@ export default class Settings extends Component {
                 this.setState({ users: data["userInfo"] });
             })
             .catch((error) => {
-                this.setState({ errorMessage: "Error" });
+                this.setState({ errorMessage: this.context.translate('error') });
             })
     }
 
     // Delete user, must be an admin for it to work.
     deleteUser = (email) => event => {
         event.preventDefault();
-        if(window.confirm("Are you sure you would like to delete the user?"))
+        if (window.confirm(this.context.translate('delete-user')))
         {
             // Deleting user
             const url = `http://localhost:3000/users/0/delete`;
@@ -66,7 +68,7 @@ export default class Settings extends Component {
                 this.setState({ users: data["userInfo"], message:"Success"});
             })
             .catch((error) => {
-                this.setState({ message: "Failed" });
+                this.setState({ message: this.context.translate('failed') });
             })
         }
     }
@@ -93,10 +95,10 @@ export default class Settings extends Component {
             return response.json()
             })
             .then(data => {
-                this.setState({ users: data["userInfo"], userMessage: "Success" });
+                this.setState({ users: data["userInfo"], userMessage: this.context.translate('success') });
             })
             .catch((error) => {
-                this.setState({ userMessage: "Failed" });
+                this.setState({ userMessage: this.context.translate('failed') });
             })
     }
 
@@ -122,10 +124,10 @@ export default class Settings extends Component {
             return response.json()
         })
             .then(data => {
-                this.setState({ users: data["userInfo"], userMessage: "Success" });
+                this.setState({ users: data["userInfo"], userMessage: this.context.translate('success') });
             })
             .catch((error) => {
-                this.setState({ userMessage: "Failed" });
+                this.setState({ userMessage: this.context.translate('failed') });
             })
     }
 
@@ -135,17 +137,17 @@ export default class Settings extends Component {
                 <React.Fragment>
                     <Card className='mt-5 mb-5'>
                         <Card.Body>
-                            <Card.Title>Admin Settings</Card.Title>
+                            <Card.Title>{this.context.translate('admin-settings')}</Card.Title>
                             {this.state.message && <p className="text-info"> {this.state.message} </p>}
                             <Table responsive bordered className="mt-3">
                                 <thead>
                                     <tr>
                                         <th>id</th>
-                                        <th>Name</th>
-                                        <th>Username</th>
-                                        <th>E-mail</th>
-                                        <th>Phone</th>
-                                        <th>Role</th>
+                                        <th>{this.context.translate('name')}</th>
+                                        <th>{this.context.translate('username')}</th>
+                                        <th>{this.context.translate('email')}</th>
+                                        <th>{this.context.translate('phone')}</th>
+                                        <th>{this.context.translate('role')}</th>
                                         <th> </th>
                                     </tr>
                                 </thead>
@@ -159,30 +161,30 @@ export default class Settings extends Component {
                                     }
                                 </tbody>
                             </Table>
-                            <Card.Title className="mt-4">Add/Elevate Users</Card.Title>
+                            <Card.Title className="mt-4">{this.context.translate('add-elevate')}</Card.Title>
                             {this.state.userMessage && <p className="text-info"> {this.state.userMessage} </p>}
                             <Form>
                                 <Form.Group as={Row}>
                                     <Form.Label column sm="4">
-                                        Add User
+                                        {this.context.translate('add-user')}
                                     </Form.Label>
                                     <Col sm="4">
-                                        <Form.Control type="email" placeholder="Enter Email..." value={this.state.addedUser} onChange={e => this.setState({ addedUser: e.target.value })}/>
+                                        <Form.Control type="email" placeholder={this.context.translate('enter-email')} value={this.state.addedUser} onChange={e => this.setState({ addedUser: e.target.value })}/>
                                     </Col>
                                     <Col sm="4">
-                                        <Button variant="primary" onClick={this.addUser}>Add</Button>{' '}
+                                        <Button variant="primary" onClick={this.addUser}>{this.context.translate('add')}</Button>{' '}
                                     </Col>
                                 </Form.Group>
 
                                 <Form.Group as={Row}>
                                     <Form.Label column sm="4">
-                                        Elevate User To Admin
+                                        {this.context.translate('elevate-user')}
                                     </Form.Label>
                                     <Col sm="4">
-                                        <Form.Control type="email" placeholder="Enter Email..." value={this.state.elevatedUser} onChange={e => this.setState({ elevatedUser: e.target.value })}/>
+                                        <Form.Control type="email" placeholder={this.context.translate('enter-email')} value={this.state.elevatedUser} onChange={e => this.setState({ elevatedUser: e.target.value })}/>
                                     </Col>
                                     <Col sm="4">
-                                        <Button variant="primary" onClick={this.elevateUser}>Elevate</Button>{' '}
+                                        <Button variant="primary" onClick={this.elevateUser}>{this.context.translate('elevate')}</Button>{' '}
                                     </Col>
                                 </Form.Group>
 

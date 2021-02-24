@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button'
+import { MainContext } from '../Auth'
 
 export class UserDetails extends Component {
-
+    static contextType = MainContext;
     render() {
         return (
             <React.Fragment>
@@ -23,10 +24,10 @@ export class UserDetails extends Component {
                         {this.props.phone}
                     </td>
                     <td>
-                        {this.props.privilege}
+                        {this.context.translate(this.props.privilege)}
                     </td>
                     <td>
-                        {this.props.privilege === "standard" && <Button onClick={this.props.delete(this.props.email)}>Delete</Button>}
+                        {this.props.privilege === "standard" && <Button onClick={this.props.delete(this.props.email)}>{this.context.translate('delete')}</Button>}
                     </td>
                 </tr>
             </React.Fragment>

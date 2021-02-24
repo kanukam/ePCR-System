@@ -65,13 +65,13 @@ export default class Settings extends Component {
                 if (!response.ok) {
                     throw Error("Failed");
                 }
-                this.setState({ message: "Success" });
+                this.setState({ message: this.context.translate('success') });
             }).catch((error) => {
-                this.setState({ message: "Failed" });
+                this.setState({ message: this.context.translate('failed') });
             })
         }
         else {
-            this.setState({ message: "Enter all fields" });
+            this.setState({ message: this.context.translate('all-fields') });
         }
     })
     // Function to change Password
@@ -94,17 +94,17 @@ export default class Settings extends Component {
                     if (!response.ok) {
                         throw Error("Failed");
                     }
-                    this.setState({ message: "Password Successfully Changed" });
+                    this.setState({ message: this.context.translate('passwordChange') });
                 }).catch((error) => {
-                    this.setState({ message: "Failed" });
+                    this.setState({ message: this.context.translate('failed') });
                 })
             }
             else {
-                this.setState({ message: "Passwords don't match" })
+                this.setState({ message: this.context.translate('passwordMismatch') })
             }
         }
         else {
-            this.setState({ message: "Enter all fields" })
+            this.setState({ message: this.context.translate('all-fields')  })
         }
     }
 
@@ -116,54 +116,54 @@ export default class Settings extends Component {
                     <Col>
                         <Card className='mt-4'>
                             <Card.Body>
-                                <Card.Title>Account Settings</Card.Title>
+                                <Card.Title>{this.context.translate('account-settings')}</Card.Title>
                                 <hr></hr>
                                 {this.state.message && <p className="text-info"> {this.state.message} </p>}
                                 <Form>
                                     <Form.Row>
                                         <Form.Group as={Col}>
-                                            <Form.Label>Name</Form.Label>
+                                            <Form.Label>{this.context.translate('name')}</Form.Label>
                                             <Form.Control type="text" value={this.state.name} onChange={e => this.setState({ name: e.target.value })} />
                                         </Form.Group>
 
                                         <Form.Group as={Col}>
-                                            <Form.Label>Email</Form.Label>
-                                            <Form.Control type="email" placeholder="Enter email" value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
+                                            <Form.Label>{this.context.translate('email')}</Form.Label>
+                                            <Form.Control type="email" placeholder={this.context.translate('enter-email')} value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
                                         </Form.Group>
                                     </Form.Row>
 
                                     <Form.Group>
-                                        <Form.Label>Phone Number</Form.Label>
+                                        <Form.Label>{this.context.translate('phone-number')}</Form.Label>
                                         <Form.Control type="tel" value={this.state.phone} onChange={e => this.setState({ phone: e.target.value })} />
                                     </Form.Group>
 
                                     <Button variant="primary" onClick={this.handleUpdate}>
-                                        Save
+                                        {this.context.translate('save')}
                                     </Button>
                                 </Form>
 
-                                <Card.Title className='mt-4'>Change Password</Card.Title>
+                                <Card.Title className='mt-4'>{this.context.translate('change-pw')}</Card.Title>
                                 <hr></hr>
                                 <Form>
                                     <Form.Row>
                                         <Form.Group as={Col}>
-                                            <Form.Label>Old Password</Form.Label>
+                                            <Form.Label>{this.context.translate('old-pw')}</Form.Label>
                                             <Form.Control type="password" value={this.state.oldPassword} onChange={e => this.setState({ oldPassword: e.target.value })} />
                                         </Form.Group>
 
                                         <Form.Group as={Col}>
-                                            <Form.Label>New Password</Form.Label>
+                                            <Form.Label>{this.context.translate('new-pw')}</Form.Label>
                                             <Form.Control type="password" value={this.state.newPassword} onChange={e => this.setState({ newPassword: e.target.value })} />
                                         </Form.Group>
 
                                         <Form.Group as={Col}>
-                                            <Form.Label>Confirm</Form.Label>
+                                            <Form.Label>{this.context.translate('confirm')}</Form.Label>
                                             <Form.Control type="password" value={this.state.confirmedPassword} onChange={e => this.setState({ confirmedPassword: e.target.value })} />
                                         </Form.Group>
                                     </Form.Row>
 
                                     <Button variant="primary" onClick={this.handlePassword}>
-                                        Change
+                                        {this.context.translate('change')}
                                     </Button>
                                 </Form>
                             </Card.Body>

@@ -8,6 +8,7 @@ import { MainContext } from '../Auth'
 import '../App.css'
 import '../Sidebar.css'
 
+
 export default class MainNav extends Component {
 	static contextType = MainContext;
 	logout = () => {
@@ -29,7 +30,11 @@ export default class MainNav extends Component {
 			console.log("Logout Failed");
 		})
 	}
-	
+
+	toggleLanguage = (language) => event => {
+		this.context.setLanguage(language);
+	}
+
     render(){
     	return(
     		<div>
@@ -49,9 +54,12 @@ export default class MainNav extends Component {
 
 		            <Nav className="ml-auto">
 						<NavDropdown title={this.props.username} id="basic-nav-dropdown">
-							<NavDropdown.Item as={Link} to="/Settings">Settings</NavDropdown.Item>
+							<NavDropdown.Item as={Link} to="/Settings">{this.context.translate('settings')}</NavDropdown.Item>
 							<NavDropdown.Divider />
-							<NavDropdown.Item onClick={this.logout}>Logout</NavDropdown.Item>
+							<NavDropdown.Item onClick={this.logout}>{this.context.translate('logout')}</NavDropdown.Item>
+							<NavDropdown.Divider />
+							<NavDropdown.Item onClick={this.toggleLanguage("en")}>English</NavDropdown.Item>
+							<NavDropdown.Item onClick={this.toggleLanguage("es")}>Espanol</NavDropdown.Item>
 						</NavDropdown>
 						<Navbar.Brand as={Link} to="/Settings"> {/*take them to the edit profile page or have a toggle that shows more options*/}
 		                    <img
@@ -72,52 +80,52 @@ export default class MainNav extends Component {
 			        	{this.props.dashboard ?
 				            <Nav.Item className="sidebar-section active">
 				                <Nav.Link style={{color:'white'}} as={Link} to="/Dashboard">
-				                    Home
+									{this.context.translate('home')}
 				                </Nav.Link>
 				            </Nav.Item>
 				            :
 				            <Nav.Item>
 				                <Nav.Link as={Link} to="/Dashboard">
-				                    Home
+									{this.context.translate('home')}
 				                </Nav.Link>
 				            </Nav.Item>
 				        }
 			            {this.props.chart ?
 				            <Nav.Item className="sidebar-section active">
 				                <Nav.Link style={{color:'white'}} as={Link} to="/Chart">
-				                    Chart
+									{this.context.translate('chart')}
 				                </Nav.Link>
 				            </Nav.Item>
 				            :
 				            <Nav.Item>
 				                <Nav.Link as={Link} to="/Chart">
-				                    Chart
+									{this.context.translate('chart')}
 				                </Nav.Link>
 				            </Nav.Item>
 				        }
 			            {this.props.patient ?
 				            <Nav.Item className="sidebar-section active">
 				                <Nav.Link style={{color:'white'}} as={Link} to="/Patients">
-				                    Patients
+									{this.context.translate('patients')}
 				                </Nav.Link>
 				            </Nav.Item>
 			            	:
 			            	<Nav.Item>
 				                <Nav.Link as={Link} to="/Patients">
-				                    Patients
+									{this.context.translate('patients')}
 				                </Nav.Link>
 				            </Nav.Item>
 				        }
 						{this.props.settings ?
 							<Nav.Item className="sidebar-section active">
 								<Nav.Link style={{ color: 'white' }} as={Link} to="/Settings">
-									Settings
+									{this.context.translate('settings')}
 				                </Nav.Link>
 							</Nav.Item>
 							:
 							<Nav.Item>
 								<Nav.Link as={Link} to="/Settings">
-									Settings
+									{this.context.translate('settings')}
 				                </Nav.Link>
 							</Nav.Item>
 						}
