@@ -26,8 +26,6 @@ export default class Login extends Component {
     
     toggleLanguage = (language) => event => {
         this.context.setLanguage(language);
-        console.log(language);
-        console.log(this.context);
     }
 
     handleSubmit = (event => {
