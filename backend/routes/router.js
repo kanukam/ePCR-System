@@ -8,12 +8,15 @@ const controller = require('./controller');
 const charts = require('./charts/router');
 const patients = require('./patients/router');
 const users = require('./users/router');
+const notes = require('./notes/router')
 
 router.use('/charts', charts);
 
 router.use('/patients', patients);
 
 router.use('/users', users);
+
+router.use('/notes', notes);
 
 // Will work for login page for now, can change later:
 router.post("/login", controller.login);
