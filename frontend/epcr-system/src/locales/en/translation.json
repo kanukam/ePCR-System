@@ -48,5 +48,7 @@
     "passwordMismatch": "Passwords don't match",
     "delete-user": "Are you sure you would like to delete the user?",
     "error": "Error",
-    "success": "Success"
+    "success": "Success",
+    "delete-account": "Delete Account",
+    "delete-self": "Are you sure you would like to delete your account?"
 }
