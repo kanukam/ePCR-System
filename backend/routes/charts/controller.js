@@ -19,11 +19,14 @@ function viewAllCharts(req, res) {
 }
 
 function addChart(req, res) {
-  const { call, date, times, fname, lname, birth, classify, gender, weight, address, phone, procedure } = req.body;
+  const { date, times, fname, lname, classify, gender, weight, address, phone, procedure } = req.body;
+  // Empty string won't work for dates
+  var { birth } = req.body;
+  birth = birth || null;
   var pid = 0;
   // insert into patient table first
   var pbody= { fname: fname, lname: lname, birth: birth, classify: classify, gender: gender, weight: weight, address: address, phone: phone };
-  var body = { call: call, date: date, times: times, patientID: pid, procedures: procedure, userID: req.user.id };
+  var body = { date: date, times: times, patientID: pid, procedures: procedure, userID: req.user.id };
   repo.addChart(body, pbody, (err) => {
     err
       ? res.status(500).json({ error: err })

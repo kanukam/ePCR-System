@@ -59,7 +59,7 @@ con.connect(err => {
         id INT(11) UNSIGNED AUTO_INCREMENT, 
         fname VARCHAR(255) NULL, 
         lname VARCHAR(255) NULL, 
-        birth DATE, 
+        birth DATE NULL, 
         gender VARCHAR(10), 
         weight VARCHAR(10) NULL, 
         classify VARCHAR(45) NULL DEFAULT 'Adult', 
