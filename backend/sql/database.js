@@ -16,7 +16,7 @@ con.connect(err => {
     console.log("Checking tables...");
 
     con.query(`CREATE TABLE IF NOT EXISTS users (
-        id INT(11) AUTO_INCREMENT, 
+        id INT(11) UNSIGNED AUTO_INCREMENT, 
         username VARCHAR(255), 
         password VARCHAR(255), 
         email VARCHAR(255), 
@@ -31,7 +31,7 @@ con.connect(err => {
     });
 
     con.query(`CREATE TABLE IF NOT EXISTS charts (
-        id INT(11) AUTO_INCREMENT, 
+        id INT(11) UNSIGNED AUTO_INCREMENT, 
         date VARCHAR(45) NULL,
         incident TINYTEXT NULL DEFAULT NULL,
         location VARCHAR(45) NULL DEFAULT NULL,
@@ -46,7 +46,7 @@ con.connect(err => {
         procedures VARCHAR(45) NULL,
         notes MEDIUMTEXT NULL,
         patientID VARCHAR(45) NULL,
-        userID VARCHAR(45) NULL,
+        userID INT(11) UNSIGNED NULL,
         times TINYTEXT NULL DEFAULT NULL,
         PRIMARY KEY (id)
         )`, (err, res) => {
@@ -56,7 +56,7 @@ con.connect(err => {
     });
 
     con.query(`CREATE TABLE IF NOT EXISTS patients (
-        id INT(11) AUTO_INCREMENT, 
+        id INT(11) UNSIGNED AUTO_INCREMENT, 
         fname VARCHAR(255) NULL, 
         lname VARCHAR(255) NULL, 
         birth DATE, 
@@ -75,10 +75,10 @@ con.connect(err => {
     });
 
     con.query(`CREATE TABLE IF NOT EXISTS notes (
-        id INT(11) AUTO_INCREMENT, 
-        patientID INT(11), 
-        chartID INT(11), 
-        userID INT(11), 
+        id INT(11) UNSIGNED AUTO_INCREMENT, 
+        patientID INT(11) UNSIGNED, 
+        chartID INT(11) UNSIGNED, 
+        userID INT(11) UNSIGNED, 
         body MEDIUMTEXT, 
         PRIMARY KEY (id)
         )`, (err, res) => {
