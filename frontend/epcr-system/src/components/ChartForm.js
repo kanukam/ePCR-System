@@ -129,8 +129,8 @@ export default class ChartForm extends Component {
         const times = this.state.callinfo.dispatch + " | " + this.state.callinfo.enroute + " | " + this.state.callinfo.arrscn + " | " + this.state.callinfo.contact + " | " + this.state.callinfo.dptscn + " | " + this.state.callinfo.arrdes + " | " + this.state.callinfo.trcare;
         // patient variables
         const dob = this.state.birth;
-        // Testing date
-        const birth = dob;
+        // Testing date,empty string dates will trigger an error on backend
+        const birth = dob || null;
         const weight = this.state.weight;
         const address = this.state.address + ", " + this.state.city + ", " + this.state.country + " " + this.state.zip;
         const phone = this.state.phone;
@@ -183,7 +183,7 @@ export default class ChartForm extends Component {
 
     fetchNewInput = (input, num) => {
         var obj = JSON.parse(input);
-        if(num == 1) { this.setState({callinfo: obj}); }
+        if(num === 1) { this.setState({callinfo: obj}); }
     }
 
     render() {

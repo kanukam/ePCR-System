@@ -19,10 +19,7 @@ function viewAllCharts(req, res) {
 }
 
 function addChart(req, res) {
-  const { date, times, fname, lname, classify, gender, weight, address, phone, procedure } = req.body;
-  // Empty string won't work for dates
-  var { birth } = req.body;
-  birth = birth || null;
+  const { birth, date, times, fname, lname, classify, gender, weight, address, phone, procedure } = req.body;
   var pid = 0;
   // insert into patient table first
   var pbody= { fname: fname, lname: lname, birth: birth, classify: classify, gender: gender, weight: weight, address: address, phone: phone };

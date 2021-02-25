@@ -2,7 +2,6 @@
 const db = require('../../sql/database');
 
 function addChart(body, pbody, callback) {
-    console.log(pbody);
     // insert into patient table first
     const sql = 'INSERT INTO patients SET ?';
     db.query(sql, pbody, (err, res) => {
