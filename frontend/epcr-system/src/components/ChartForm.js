@@ -129,7 +129,8 @@ export default class ChartForm extends Component {
         const times = this.state.callinfo.dispatch + " | " + this.state.callinfo.enroute + " | " + this.state.callinfo.arrscn + " | " + this.state.callinfo.contact + " | " + this.state.callinfo.dptscn + " | " + this.state.callinfo.arrdes + " | " + this.state.callinfo.trcare;
         // patient variables
         const dob = this.state.birth;
-        const birth = dob.substring(8, 10) + "/" + dob.substring(5, 7) + "/" + dob.substring(0, 4);
+        // Testing date
+        const birth = dob;
         const weight = this.state.weight;
         const address = this.state.address + ", " + this.state.city + ", " + this.state.country + " " + this.state.zip;
         const phone = this.state.phone;
