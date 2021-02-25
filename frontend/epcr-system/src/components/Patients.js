@@ -52,7 +52,7 @@ export default class Patients extends Component {
                     throw Error("Failed");
             })
             .then((data) => {
-                this.setState({patients: data['patients']});
+                this.setState({patients: data['patients'].reverse()});
             })
             .catch((error) => {
                 console.log(error);
