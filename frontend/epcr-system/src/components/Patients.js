@@ -204,10 +204,6 @@ export default class Patients extends Component {
                         )
                     })}
                 </Container>
-                <select style={{position: 'absolute', bottom: '5px', right: '5px'}} value={this.state.language} onChange={this.languageChange}>
-                    <option value='en'>en</option>
-                    <option value='es'>es</option>
-                </select>
             </React.Fragment>
         )
     }
