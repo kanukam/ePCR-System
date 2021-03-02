@@ -76,6 +76,7 @@ export default class Patients extends Component {
       this.setState({[field]: date});
     };
 
+    // Clear button+Function needed to set filter to False
     search(event){
         event.preventDefault();
         // filter first name
