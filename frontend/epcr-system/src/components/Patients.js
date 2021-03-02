@@ -32,6 +32,7 @@ export default class Patients extends Component {
 
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
+        this.search = this.search.bind(this);
         this.searchChange = this.searchChange.bind(this);
         this.dateChange = this.dateChange.bind(this);
         this.languageChange = this.languageChange.bind(this);
@@ -75,11 +76,10 @@ export default class Patients extends Component {
       this.setState({[field]: date});
     };
 
-    searchPatients = event => {
+    search(event){
         event.preventDefault();
         // filter first name
         let filtered = this.state.patients;
-        console.log("a");
         if(this.state.firstname){
             filtered = filtered.filter(patient => patient.fname === this.state.firstname);
         }
@@ -112,7 +112,7 @@ export default class Patients extends Component {
                     toggleCollapse={this.toggleCollapse}
                 />
                 <div className="main-content" style={{padding: searchPadding, backgroundColor: '#EFEFEF', display: 'flex', justifyContent: 'center'}}> 
-                    <form onSubmit={this.search}>      
+                    <form onSubmit={this.state.search}>      
                         <TextField 
                             id="firstname" 
                             size="small"
@@ -186,7 +186,7 @@ export default class Patients extends Component {
                                 }}
                             />
                         </MuiPickersUtilsProvider>
-                        <MatButton style={{ marginTop: '10px' }} color="default" onClick={this.state.searchPatients}>search</MatButton>
+                        <MatButton style={{ marginTop: '10px' }} type="submit" color="default">search</MatButton>
                     </form>
                 </div>
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
