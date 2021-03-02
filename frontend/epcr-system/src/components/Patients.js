@@ -88,9 +88,16 @@ export default class Patients extends Component {
         if (this.state.lname) {
             filtered = filtered.filter(patient => patient.lname === this.state.lastname);
         }
+        // filter birth
+        if (this.state.dob) {
+            var a = new Date(this.state.dob);
+            filtered = filtered.filter(patient => {
+                var b = new Date(patient.birth);
+                return (a.getDate() === b.getDate()) && (a.getDay() === b.getDay()) && ((a.getFullYear() === b.getFullYear()));
+            })
+        }
         // set filtered bool to true, assign filtered state array
         this.setState({filter: true, filtered: filtered});
-        // filter DOB
         // filter start date
         // filter end date
     }
