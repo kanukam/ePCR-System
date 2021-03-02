@@ -19,13 +19,19 @@ export default class Patients extends Component {
         super(props);
         this.state = {
             patients: [],
+            filtered: [],
+            filter: false,
             contentSpacing: '0 0 0 150px',
             sidebarHide: true,
             language: "",
-            dob: null
+            dob: null,
+            startdate: null,
+            enddate: null,
+            firstname: "",
+            lastname: "",
+
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
-        this.search = this.search.bind(this);
         this.searchChange = this.searchChange.bind(this);
         this.dateChange = this.dateChange.bind(this);
         this.languageChange = this.languageChange.bind(this);
@@ -61,11 +67,6 @@ export default class Patients extends Component {
         this.setState({sidebarHide : !this.state.sidebarHide});
     }
 
-    search(event){
-        event.preventDefault();
-        console.log(this.state);
-    }
-
     searchChange = field => event =>{
         this.setState({[field]: event.target.value});
     }
@@ -73,6 +74,25 @@ export default class Patients extends Component {
     dateChange = field => date => {
       this.setState({[field]: date});
     };
+
+    searchPatients = event => {
+        event.preventDefault();
+        // filter first name
+        let filtered = this.state.patients;
+        console.log("a");
+        if(this.state.firstname){
+            filtered = filtered.filter(patient => patient.fname === this.state.firstname);
+        }
+        // filter last name
+        if (this.state.lname) {
+            filtered = filtered.filter(patient => patient.lname === this.state.lastname);
+        }
+        // set filtered bool to true, assign filtered state array
+        this.setState({filter: true, filtered: filtered});
+        // filter DOB
+        // filter start date
+        // filter end date
+    }
 
     languageChange(event) {
         console.log(event.target.value);
@@ -99,6 +119,7 @@ export default class Patients extends Component {
                             label="First Name" 
                             type="search" 
                             style={{width: '100px'}}
+                            value={this.state.firstname}
                             onChange={this.searchChange('firstname')} 
                         />
                         &nbsp;
@@ -108,6 +129,7 @@ export default class Patients extends Component {
                             label="Last Name" 
                             type="search" 
                             style={{width: '100px'}}
+                            value={this.state.lastname}
                             onChange={this.searchChange('lastname')} 
                         />
                         &nbsp;
@@ -164,13 +186,19 @@ export default class Patients extends Component {
                                 }}
                             />
                         </MuiPickersUtilsProvider>
-                        <MatButton style={{marginTop: '10px'}} type='submit' color="default">search</MatButton>
+                        <MatButton style={{ marginTop: '10px' }} color="default" onClick={this.state.searchPatients}>search</MatButton>
                     </form>
                 </div>
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
-                    {this.state.patients && this.state.patients.map(({ name, fname, dob, birth, address, phone, history, id }, idx) => {
+                    {this.state.patients && !this.state.filter && this.state.patients.map(({ fname, lname, dob, birth, address, phone, history, id }, idx) => {
                         return (
-                            <ChartPreview name={name} fname={fname} dob={dob} birth={birth} address={address} phone={phone} history={history} id={id} key={idx}/>
+                            <ChartPreview fname={fname} lname={lname} dob={dob} birth={birth} address={address} phone={phone} history={history} id={id} key={idx}/>
+                        )
+                    })}
+
+                    {this.state.filtered && this.state.filter && this.state.filtered.map(({ fname, lname, dob, birth, address, phone, history, id }, idx) => {
+                        return (
+                            <ChartPreview fname={fname} lname={lname} dob={dob} birth={birth} address={address} phone={phone} history={history} id={id} key={idx} />
                         )
                     })}
                 </Container>
