@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import '../App.css'
 
@@ -162,8 +160,8 @@ export default class AddCall extends Component {
                             </td>
                         </tr>
                         <tr>
-                            <th className="top" rowspan="2">Other agencies on scene</th>
-                            <td rowspan="2">
+                            <th className="top" rowSpan="2">Other agencies on scene</th>
+                            <td rowSpan="2">
                                 <div>
                                     <label><input type="checkbox" name="agency" /> Local Police</label>
                                     <label><input type="checkbox" name="agency" /> State Police</label><br/>
@@ -201,9 +199,9 @@ export default class AddCall extends Component {
                             <th className="top" height="28%">Height</th>
                             <td valign="top"><input style={{width:'80px', marginRight:'0px'}} type="number" name="fallht" value={values.fallht} min="0" onChange={this.props.handleChange('fallht')} /> m</td>
                         </tr>
-                        : <tr><td className="top" colspan="2" height="28%"></td></tr>}
+                        : <tr><td className="top" colSpan="2" height="28%"></td></tr>}
                         <tr style={{borderTop:'1px solid #ddd'}}>
-                            <th colspan="4">
+                            <th colSpan="4">
                                 <b style={{display:'inline-block', paddingRight:'10px'}}>MCI</b>
                                 <input type="checkbox" name="mci" id="mci" onClick={this.showMCI} />
                             </th>
@@ -224,7 +222,7 @@ export default class AddCall extends Component {
                         </tr>
                         : null}
                         <tr>
-                            <th colspan="4">
+                            <th colSpan="4">
                                 <b style={{display:'inline-block', paddingRight:'10px'}}>Vehicle Accident</b>
                                 <input type="checkbox" name="va" id="va" value={values.va} onClick={this.showVA} />
                             </th>
@@ -257,8 +255,8 @@ export default class AddCall extends Component {
                         : null}
                         {this.state.va ?
                         <tr>
-                            <th rowspan="2" valign="top">Impact</th>
-                            <td rowspan="2">
+                            <th rowSpan="2" valign="top">Impact</th>
+                            <td rowSpan="2">
                                 <div>
                                     <label><input type="checkbox" name="vaimpact" /> Head on</label>
                                     <label><input type="checkbox" name="vaimpact" /> Side</label><br/>
