@@ -76,7 +76,7 @@ export default class Patients extends Component {
       this.setState({[field]: date});
     };
 
-    // Clear button+Function needed to set filter to False
+    
     search(event){
         event.preventDefault();
         // filter first name
@@ -188,6 +188,7 @@ export default class Patients extends Component {
                             />
                         </MuiPickersUtilsProvider>
                         <MatButton style={{ marginTop: '10px' }} type="submit" color="default">search</MatButton>
+                        <MatButton style={{ marginTop: '10px' }} color="default" onClick={e => this.setState({ filter: false })}>Clear</MatButton>
                     </form>
                 </div>
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
