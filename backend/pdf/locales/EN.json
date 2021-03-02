@@ -1,0 +1,81 @@
+{
+    "patientName": "Patient Name",
+    "callInformation": "Call Information",
+    "ePCR": "Patient Care Record",
+    "demographics": "Demographics",
+    "callSpecifics": "Call Specifics",
+    "history": "History",
+    "HPI": "HPI",
+    "assessment": "Assessment",
+    "vitalSigns": "Vital Signs",
+    "medication": "Meication",
+    "interventions": "Interventions",
+    "IO": "I & O",
+    "timeNotes": "Time Notes",
+    "cardiac": "Cardiac",
+    "OB": "OB",
+    "intubation": "Intubation/LMA",
+    "patientConsent": "Patient Consent",
+    "physicianContact": "Physician Contact",
+
+    "fName": "First Name",
+    "lName": "Last  Name",
+    "DOB": "DOB",
+    "sex": "Sex",
+    "address": "Address",
+    "phone": "Phone",
+    "weight": "Weight",
+
+    "specificMedical": "Specific Medical",
+    "specificTrauma": "Specific Trauma",
+    "vehicleAccident": "Vehicle Accident",
+    "location": "Location",
+    "locations":{
+        "Rescate clinic": "Rescate clinic",
+        "Home": "Home",
+        "Business": "Business",
+        "Road / Hwy": "Road / Hwy",
+        "Construction site": "Construction site",
+        "Ocean / Bay": "Ocean / Bay",
+        "Beach": "Beach",
+        "Marina": "Marina",
+        "Medical office": "Medical office",
+        "School": "School",
+        "Other": "Other"
+    },
+
+
+    "classificationText": "Patient Classification",
+    "classifications": {
+        "Adult": "Adult - 15 yr to 65 yr",
+        "Senior Adult": "Senior Adult - >65 yr",
+        "Pediatric": "Pediatric - 28 days to 15 yr",
+        "Neonatal": "Neonatal - 0 to 28 days"
+    },
+    "callType": "Call Type",
+    "callTypes": {
+        "Clinic": "Clinic",
+        "Scene": "Scene",
+        "Transfer": "Transfer"
+    },
+    "callNature": "Nature of Call",
+    "callNatures":{
+        "B/P check": "B/P check",
+        "Injection": "Injection",
+        "Medical other": "Medical other",
+        "Cardiac": "Cardiac",
+        "Pulmonary": "Pulmonary",
+        "Trauma": "Trauma",
+        "OB": "OB"
+    },
+    "disposition": "Disposition",
+    "dispositions": {
+        "Treat and release": "Treat and release",
+        "Transport": "Transport",
+        "Unable to locate": "Unable to locate",
+        "DOA": "DOA",
+        "AMA": "AMA"
+    }
+
+    
+}
