@@ -194,7 +194,7 @@ export default class Patients extends Component {
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
                     {this.state.patients && !this.state.filter && this.state.patients.map(({ fname, lname, dob, birth, address, phone, history, id }, idx) => {
                         return (
-                            <ChartPreview fname={fname} lname={lname} dob={dob} birth={birth} address={address} phone={phone} history={history} id={id} key={idx}/>
+                            <ChartPreview fname={fname} lname={lname} birth={birth} address={address} phone={phone} history={history} id={id} key={idx}/>
                         )
                     })}
 

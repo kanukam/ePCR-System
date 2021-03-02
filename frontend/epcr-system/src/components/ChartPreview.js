@@ -8,6 +8,15 @@ import Container from 'react-bootstrap/Container'
 
 export class ChartPreview extends Component {
     static contextType = MainContext;
+    year(date){
+        let temp = date.split('T')[0]
+        temp = temp.split('-');
+        let year = temp[0];
+        let month = temp[1];
+        let day = temp[2];
+        return day + '-' + month + '-' + year;
+        
+    }
     render() {
         return (
             <Container className='chart shadow'>
@@ -17,7 +26,7 @@ export class ChartPreview extends Component {
                         {this.props.fname} {this.props.lname}
                         <br />
                         <b>{this.context.translate('dob')}: </b>
-                        {this.props.birth}
+                        {this.props.birth && this.year(this.props.birth)}
                         <br /><br />
                         <b>{this.context.translate('address')}: </b>
                         {this.props.address}
