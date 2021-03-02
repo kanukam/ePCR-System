@@ -72,6 +72,17 @@ export default class Patients extends Component {
         this.setState({[field]: event.target.value});
     }
 
+    searchClear = event => {
+        event.preventDefault();
+        this.setState({
+            filter: false,
+            dob: null,
+            startdate: null,
+            enddate: null,
+            firstname: "",
+            lastname: "" });
+    }
+
     dateChange = field => date => {
       this.setState({[field]: date});
     };
@@ -195,7 +206,7 @@ export default class Patients extends Component {
                             />
                         </MuiPickersUtilsProvider>
                         <MatButton style={{ marginTop: '10px' }} type="submit" color="default">search</MatButton>
-                        <MatButton style={{ marginTop: '10px' }} color="default" onClick={e => this.setState({ filter: false })}>Clear</MatButton>
+                        <MatButton style={{ marginTop: '10px' }} color="default" onClick={this.searchClear}>Clear</MatButton>
                     </form>
                 </div>
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
