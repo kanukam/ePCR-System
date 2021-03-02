@@ -112,7 +112,7 @@ export default class Patients extends Component {
                     toggleCollapse={this.toggleCollapse}
                 />
                 <div className="main-content" style={{padding: searchPadding, backgroundColor: '#EFEFEF', display: 'flex', justifyContent: 'center'}}> 
-                    <form onSubmit={this.state.search}>      
+                    <form onSubmit={this.search}>      
                         <TextField 
                             id="firstname" 
                             size="small"
