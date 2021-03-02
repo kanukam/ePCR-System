@@ -139,7 +139,7 @@ export default class Patients extends Component {
                                 disableToolbar
                                 variant="inline"
                                 size="small"
-                                format="MM/dd/yyyy"
+                                format="dd-MM-yyyy"
                                 margin="normal"
                                 id="dob"
                                 label="DOB"
@@ -157,7 +157,7 @@ export default class Patients extends Component {
                                 disableToolbar
                                 variant="inline"
                                 size="small"
-                                format="MM/dd/yyyy"
+                                format="dd-MM-yyyy"
                                 margin="normal"
                                 id="startdate"
                                 label="Start Date"
@@ -175,7 +175,7 @@ export default class Patients extends Component {
                                 disableToolbar
                                 variant="inline"
                                 size="small"
-                                format="MM/dd/yyyy"
+                                format="dd-MM-yyyy"
                                 margin="normal"
                                 id="enddate"
                                 label="End Date"
