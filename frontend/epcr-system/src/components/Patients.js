@@ -3,10 +3,7 @@ import React, { Component } from 'react';
 import { MainContext } from '../Auth';
 import Container from 'react-bootstrap/Container';
 import MainNav from './MainNav';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
-import {Link} from 'react-router-dom';
+import ChartPreview from './ChartPreview';
 import TextField from '@material-ui/core/TextField';
 import MatButton from '@material-ui/core/Button';
 import DateFnsUtils from '@date-io/date-fns';
@@ -85,34 +82,6 @@ export default class Patients extends Component {
 
     render() {
         let searchPadding = '5px 0 5px ' + this.state.contentSpacing.slice(6);
-        let patientComponents = [];
-        for(let i = 0; i < this.state.patients.length; i++){
-            patientComponents.push(
-                <Container key={this.state.patients[i].id} className='chart shadow'>  
-                    <Row>
-                        <Col>         
-                            <b>{this.context.translate('name')}: </b>
-                            {this.state.patients[i]["fname"]} {this.state.patients[i]["lname"]}
-                            <br />
-                            <b>{this.context.translate('dob')}: </b>
-                            {this.state.patients[i]["birth"]}
-                            <br /><br />
-                            <b>{this.context.translate('address')}: </b>
-                            {this.state.patients[i]["address"]}
-                            <br />
-                            <b>{this.context.translate('phone')}: </b>
-                            {this.state.patients[i]["phone"]}
-                            <br />
-                            {this.state.patients[i]["history"]}
-                        </Col>
-                        <div >
-                            <br/><br/><br/>
-                            <Button variant="primary" as={Link} to={`/Patient/${ this.state.patients[i].id }`}>View</Button>
-                        </div>
-                    </Row>
-                </Container>
-            );
-        }
         return (
             <React.Fragment>
                 <MainNav 
@@ -199,7 +168,11 @@ export default class Patients extends Component {
                     </form>
                 </div>
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
-                    {patientComponents}
+                    {this.state.patients && this.state.patients.map(({ name, fname, dob, birth, address, phone, history, id }, idx) => {
+                        return (
+                            <ChartPreview name={name} fname={fname} dob={dob} birth={birth} address={address} phone={phone} history={history} id={id} key={idx}/>
+                        )
+                    })}
                 </Container>
                 <select style={{position: 'absolute', bottom: '5px', right: '5px'}} value={this.state.language} onChange={this.languageChange}>
                     <option value='en'>en</option>
