@@ -13,8 +13,6 @@ export default class ChartForm extends Component {
     static contextType = MainContext;
     constructor(props) {
         super(props);
-        var today = new Date(),
-            currentDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         this.state = {
             message: "",
             success: false,
@@ -24,7 +22,8 @@ export default class ChartForm extends Component {
             // all default variables across section forms!
             /* call */
             ino: "",
-            idate: currentDate,
+            idate: "",
+            idateDisplay: "",
             unit: "M-01",
             ctype: "Clinic",
             nature: "B/P check",
@@ -198,14 +197,15 @@ export default class ChartForm extends Component {
         const { step } = this.state;
         const { ino, idate, unit, ctype, nature, care, loctype, loc,
             disp, dest, agency, trauma, fallht, enrouteDisplay, arcscnDisplay, contactDisplay,
-            dptscnDisplay, arrdesDisplay, trcareDisplay, dispatchDisplay,
+            dptscnDisplay, arrdesDisplay, trcareDisplay, dispatchDisplay, idateDisplay,
             mci, ptct, triage, va, vatype, vasafe, vaimpact, vaspd, vaeject,
             dispatch, enroute, arrscn, contact, dptscn, arrdes, trcare,
             fname, lname, birth, classify, gender, weight, address, city, country, zip,
             procedure,
             callinfo
         } = this.state;
-        const values = { ino, idate, unit, ctype, nature, care, loctype, loc,
+        const values = {
+            ino, idate, idateDisplay, unit, ctype, nature, care, loctype, loc,
             disp, dest, agency, trauma, fallht,
             mci, ptct, triage, va, vatype, vasafe, vaimpact, vaspd, vaeject,
             dispatch, enrouteDisplay, arcscnDisplay, contactDisplay,

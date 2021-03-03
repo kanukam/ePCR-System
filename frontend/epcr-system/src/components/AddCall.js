@@ -79,7 +79,15 @@ export default class AddCall extends Component {
                         </tr>
                         <tr>
                             <th>Incident date</th>
-                            <td><input type="date" name="idate" value={values.idate} onChange={this.props.handleChange('idate')} /></td>
+                            <td>
+                                <DatePicker
+                                    selected={values.idateDisplay ? values.idateDisplay : false}
+                                    placeholderText="dd/mm/yyyy"
+                                    onChange={this.props.handleDate('idate')}
+                                    timeInputLabel="Time:"
+                                    dateFormat="dd/MM/yyyy"
+                                />
+                            </td>
                             <th width="20%">Call type</th>
                             <td width="30%">
                                 <select name="ctype" value={values.ctype} onChange={this.props.handleChange('ctype')}>
@@ -287,6 +295,7 @@ export default class AddCall extends Component {
                             <td>
                                 <DatePicker
                                     selected={values.dispatchDisplay ? values.dispatchDisplay : false}
+                                    placeholderText="dd/mm/yyyy --:-- --"
                                     onChange={this.props.handleDate('dispatch')}
                                     timeInputLabel="Time:"
                                     dateFormat="dd/MM/yyyy h:mm aa"
@@ -298,6 +307,7 @@ export default class AddCall extends Component {
                                 <td>
                                     <DatePicker
                                     selected={values.enrouteDisplay ? values.enrouteDisplay : false }
+                                    placeholderText="dd/mm/yyyy --:-- --"
                                     onChange={this.props.handleDate('enroute')}
                                     timeInputLabel="Time:"
                                     dateFormat="dd/MM/yyyy h:mm aa"
@@ -309,6 +319,7 @@ export default class AddCall extends Component {
                             <td>
                                 <DatePicker
                                     selected={values.arcscnDisplay ? values.arcscnDisplay : false}
+                                    placeholderText="dd/mm/yyyy --:-- --"
                                     onChange={this.props.handleDate('arcscn')}
                                     timeInputLabel="Time:"
                                     dateFormat="dd/MM/yyyy h:mm aa"
@@ -320,6 +331,7 @@ export default class AddCall extends Component {
                             <td>
                                 <DatePicker
                                     selected={values.contactDisplay ? values.contactDisplay : false}
+                                    placeholderText="dd/mm/yyyy --:-- --"
                                     onChange={this.props.handleDate('contact')}
                                     timeInputLabel="Time:"
                                     dateFormat="dd/MM/yyyy h:mm aa"
@@ -331,6 +343,7 @@ export default class AddCall extends Component {
                             <td>
                                 <DatePicker
                                     selected={values.dptscnDisplay ? values.dptscnDisplay : false}
+                                    placeholderText="dd/mm/yyyy --:-- --"
                                     onChange={this.props.handleDate('dptscn')}
                                     timeInputLabel="Time:"
                                     dateFormat="dd/MM/yyyy h:mm aa"
@@ -342,6 +355,7 @@ export default class AddCall extends Component {
                             <td>
                                 <DatePicker
                                     selected={values.arrdesDisplay ? values.arrdesDisplay : false}
+                                    placeholderText="dd/mm/yyyy --:-- --"
                                     onChange={this.props.handleDate('arrdes')}
                                     timeInputLabel="Time:"
                                     dateFormat="dd/MM/yyyy h:mm aa"
@@ -353,6 +367,7 @@ export default class AddCall extends Component {
                             <td>
                                 <DatePicker
                                     selected={values.trcareDisplay ? values.trcareDisplay : false}
+                                    placeholderText="dd/mm/yyyy --:-- --"
                                     onChange={this.props.handleDate('trcare')}
                                     timeInputLabel="Time:"
                                     dateFormat="dd/MM/yyyy h:mm aa"
