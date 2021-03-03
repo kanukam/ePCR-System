@@ -48,12 +48,19 @@ export default class ChartForm extends Component {
             vaeject: "",
             //
             dispatch: "",
+            dispatchDisplay: "",
             enroute: "",
+            enrouteDisplay: "",
             arrscn: "",
+            arcscnDisplay: "",
             contact: "",
+            contactDisplay: "",
             dptscn: "",
+            dptscnDisplay: "",
             arrdes: "",
+            arrdesDisplay: "",
             trcare: "",
+            trcareDisplay:"",
             /* patient */
             fname: "",
             lname: "",
@@ -84,20 +91,21 @@ export default class ChartForm extends Component {
             this.setState({ birth: newDate })
             alert(this.state.birth);
         } else {*/
+            console.log(event.toISOString());
             this.setState({ [input]: event.target.value })
         //}
     }
 
-    /*handleDate = input => event => {
-        let date = event.target.value;
-        let newDate = date.substring(8, 10) + "/" + date.substring(5, 7) + "/" + date.substring(0, 4);
-        this.setState({ [input]: newDate })
-        alert(this.state.birth);
-    }*/
+    handleDate = input => date => {
+        var displayedDate = input + "Display";
+        console.log(date);
+        this.setState({ [displayedDate]: date });
+        date = date.toISOString();
+        this.setState({ [input]: date });
+    }
 
     handleSubmit = (event) => {
         event.preventDefault();
-
         /* variables used for monthly/yearly reporting */
         // call variables
         const olddate = this.state.callinfo.idate;
@@ -189,7 +197,8 @@ export default class ChartForm extends Component {
     render() {
         const { step } = this.state;
         const { ino, idate, unit, ctype, nature, care, loctype, loc,
-            disp, dest, agency, trauma, fallht,
+            disp, dest, agency, trauma, fallht, enrouteDisplay, arcscnDisplay, contactDisplay,
+            dptscnDisplay, arrdesDisplay, trcareDisplay, dispatchDisplay,
             mci, ptct, triage, va, vatype, vasafe, vaimpact, vaspd, vaeject,
             dispatch, enroute, arrscn, contact, dptscn, arrdes, trcare,
             fname, lname, birth, classify, gender, weight, address, city, country, zip,
@@ -199,7 +208,8 @@ export default class ChartForm extends Component {
         const values = { ino, idate, unit, ctype, nature, care, loctype, loc,
             disp, dest, agency, trauma, fallht,
             mci, ptct, triage, va, vatype, vasafe, vaimpact, vaspd, vaeject,
-            dispatch, enroute, arrscn, contact, dptscn, arrdes, trcare,
+            dispatch, enrouteDisplay, arcscnDisplay, contactDisplay,
+            dptscnDisplay, arrdesDisplay, trcareDisplay, dispatchDisplay,
             fname, lname, birth, classify, gender, weight, address, city, country, zip,
             procedure
         };
@@ -209,6 +219,7 @@ export default class ChartForm extends Component {
                     nextStep={this.nextStep}
                     navigate={this.navigate}
                     handleChange={this.handleChange}
+                    handleDate={this.handleDate}
                     fetchNewInput={this.fetchNewInput}
                     values={values}
                     callinfo={callinfo}

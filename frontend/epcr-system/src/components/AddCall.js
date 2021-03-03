@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button'
 import '../App.css'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default class AddCall extends Component {
     constructor(props) {
         super(props);
-        var today = new Date(),
-            currentDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         this.state = {
             message: "",
             mci: "",
@@ -284,31 +284,80 @@ export default class AddCall extends Component {
                     <table className="cform">
                         <tr>
                             <th width="20%">Dispatch</th>
-                            <td><input type="datetime-local" name="dispatch" value={values.dispatch} onChange={this.props.handleChange('dispatch')} /></td>
+                            <td>
+                                <DatePicker
+                                    selected={values.dispatchDisplay ? values.dispatchDisplay : false}
+                                    onChange={this.props.handleDate('dispatch')}
+                                    timeInputLabel="Time:"
+                                    dateFormat="dd/MM/yyyy h:mm aa"
+                                    showTimeInput />
+                            </td>
                         </tr>
                         <tr>
                             <th>Enroute</th>
-                            <td><input type="datetime-local" name="enroute" value={values.enroute} onChange={this.props.handleChange('enroute')} /></td>
+                                <td>
+                                    <DatePicker
+                                    selected={values.enrouteDisplay ? values.enrouteDisplay : false }
+                                    onChange={this.props.handleDate('enroute')}
+                                    timeInputLabel="Time:"
+                                    dateFormat="dd/MM/yyyy h:mm aa"
+                                    showTimeInput/>
+                                </td>
                         </tr>
                         <tr>
                             <th>Arrive scene</th>
-                            <td><input type="datetime-local" name="arrscn" value={values.arrscn} onChange={this.props.handleChange('arrscn')} /></td>
+                            <td>
+                                <DatePicker
+                                    selected={values.arcscnDisplay ? values.arcscnDisplay : false}
+                                    onChange={this.props.handleDate('arcscn')}
+                                    timeInputLabel="Time:"
+                                    dateFormat="dd/MM/yyyy h:mm aa"
+                                    showTimeInput />
+                            </td>
                         </tr>
                         <tr>
                             <th>Patient contact</th>
-                            <td><input type="datetime-local" name="contact" value={values.contact} onChange={this.props.handleChange('contact')} /></td>
+                            <td>
+                                <DatePicker
+                                    selected={values.contactDisplay ? values.contactDisplay : false}
+                                    onChange={this.props.handleDate('contact')}
+                                    timeInputLabel="Time:"
+                                    dateFormat="dd/MM/yyyy h:mm aa"
+                                    showTimeInput />
+                            </td>
                         </tr>
                         <tr>
                             <th>Depart scene</th>
-                            <td><input type="datetime-local" name="dptscn" value={values.dptscn} onChange={this.props.handleChange('dptscn')} /></td>
+                            <td>
+                                <DatePicker
+                                    selected={values.dptscnDisplay ? values.dptscnDisplay : false}
+                                    onChange={this.props.handleDate('dptscn')}
+                                    timeInputLabel="Time:"
+                                    dateFormat="dd/MM/yyyy h:mm aa"
+                                    showTimeInput />
+                            </td>
                         </tr>
                         <tr>
                             <th>Arrive destination</th>
-                            <td><input type="datetime-local" name="arrdes" value={values.arrdes} onChange={this.props.handleChange('arrdes')} /></td>
+                            <td>
+                                <DatePicker
+                                    selected={values.arrdesDisplay ? values.arrdesDisplay : false}
+                                    onChange={this.props.handleDate('arrdes')}
+                                    timeInputLabel="Time:"
+                                    dateFormat="dd/MM/yyyy h:mm aa"
+                                    showTimeInput />
+                            </td>
                         </tr>
                         <tr>
                             <th>Transfer of care</th>
-                            <td><input type="datetime-local" name="trcare" value={values.trcare} onChange={this.props.handleChange('trcare')} /></td>
+                            <td>
+                                <DatePicker
+                                    selected={values.trcareDisplay ? values.trcareDisplay : false}
+                                    onChange={this.props.handleDate('trcare')}
+                                    timeInputLabel="Time:"
+                                    dateFormat="dd/MM/yyyy h:mm aa"
+                                    showTimeInput />
+                            </td>
                         </tr>
                     </table>
                     <Button className="right" onClick={this.saveAndContinue}>Next</Button>
