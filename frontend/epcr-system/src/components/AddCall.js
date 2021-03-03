@@ -19,7 +19,6 @@ export default class AddCall extends Component {
 
     navigate = step => (e) => {
         e.preventDefault();
-        this.fetchInput();
         this.props.navigate(step);
     }
 
