@@ -46,8 +46,8 @@ function testAuth(req, res){
 }
 
 function getUsername(req, res){
-  let username = req.user['username'];
-  res.json(username);
+  const {username, id} = req.user;
+  res.status(200).json({ "username": username, "id": id });
 }
 
 module.exports = {

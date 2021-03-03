@@ -2,9 +2,11 @@ import React from 'react';
 
 export const MainContext = React.createContext({
     username: "",
-    setUsername: () => {},
+    id: "",
     auth: false,
     language: "es",
+    setUsername: () => {},
+    setId: () => { },
     setLanguage: () => {},
     setAuth: () => {}
 })
