@@ -10,7 +10,7 @@ function viewAllNotes(userID, chartID, callback){
 }
 
 function addNote(userID, chartID, note, callback){
-    db.query(`INSERT INTO notes SET userID=${userID} AND chartID=${chartID} AND dateAdded=CURDATE() AND note='${note}'`, callback);
+    db.query(`INSERT INTO notes (userID, chartID, dateAdded, note) values (${userID}, ${chartID}, CURDATE(), '${note}');`, callback);
 }
 
 module.exports = { viewAllNotes, addNote };
