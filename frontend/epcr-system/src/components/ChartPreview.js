@@ -14,7 +14,7 @@ export class ChartPreview extends Component {
         let year = temp[0];
         let month = temp[1];
         let day = temp[2];
-        return day + '-' + month + '-' + year;
+        return day + '/' + month + '/' + year;
         
     }
     render() {
