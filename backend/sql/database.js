@@ -76,10 +76,10 @@ con.connect(err => {
 
     con.query(`CREATE TABLE IF NOT EXISTS notes (
         id INT(11) UNSIGNED AUTO_INCREMENT, 
-        patientID INT(11) UNSIGNED, 
         chartID INT(11) UNSIGNED, 
         userID INT(11) UNSIGNED, 
-        body MEDIUMTEXT, 
+        dateAdded DATE,
+        note MEDIUMTEXT, 
         PRIMARY KEY (id)
         )`, (err, res) => {
         if(err) return console.log(err);

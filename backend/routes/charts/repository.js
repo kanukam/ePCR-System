@@ -55,16 +55,4 @@ function updateChart(userID, chartID, patientID, body, callback){
     WHERE (userID=${userID} AND id=${chartID} AND patientID=${patientID})`, body, callback);
 }
 
-function viewAllNotes(chartID, patientID, callback){
-    db.query(`SELECT * FROM notes where (chartID=${chartID} AND patientID=${patientID})`, (err, res) => {
-        return err
-            ? callback(err)
-            : callback(false, res);
-    }) 
-}
-
-function addNote(chartID, patientID, note, callback){
-    db.query(`INSERT INTO notes SET patientID=${patientID} AND chartID=${chartID} AND body='${note}'`, callback);
-}
-
-module.exports = { viewChart, viewAllCharts, viewAllChartsFromPatientID, viewAllNotes, addNote, addChart, updateChart };
+module.exports = { viewChart, viewAllCharts, viewAllChartsFromPatientID, addChart, updateChart };

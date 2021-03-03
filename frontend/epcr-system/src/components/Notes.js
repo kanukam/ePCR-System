@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { MainContext } from '../Auth'
 import Container from 'react-bootstrap/Container'
+import Button from 'react-bootstrap/Button'
 import '../App.css'
 
 export default class Notes extends Component {
@@ -10,8 +11,11 @@ export default class Notes extends Component {
         this.state = {
             sidebarHide: true,
             contentSpacing: '0 0 0 150px',
+            message: '',
+            success: null,
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
+        this.addNote = this.addNote.bind(this);
     }
 
     componentDidMount() {
@@ -23,8 +27,33 @@ export default class Notes extends Component {
         this.setState({sidebarHide : !this.state.sidebarHide});
     }
 
+    addNote(){
+        const note = "TESTING";
+        /* send to backend */
+        const url = 'http://localhost:3000/notes/0/chart/1/add';
+        const options = {
+            method: 'POST',
+            body: JSON.stringify({ note }),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        }
+        fetch(url, options).then((response) => {
+            if (!response.ok) {
+                throw Error;
+            }
+            this.setState({ message: "Add Successful" });
+        }).catch((error) => {
+            console.log(error);
+        })
+        this.setState({
+            success: true
+        })
+        console.log(this.state.message);
+    }
+
     render() {
-        console.log(this.state.patient);
         return (
             <React.Fragment>
                 <Container className="chart shadow">
@@ -38,6 +67,7 @@ export default class Notes extends Component {
                     <Container className="chart shadow">
                         <h4>Note</h4>
                     </Container>
+                    <Button onClick={this.addNote}>Add Note</Button>
                 </Container>
             </React.Fragment>
         )
