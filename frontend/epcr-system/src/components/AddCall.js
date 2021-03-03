@@ -24,7 +24,7 @@ export default class AddCall extends Component {
 
     saveAndContinue = (e) => {
         e.preventDefault();
-        this.fetchInput();
+        // this.fetchInput();
         this.props.nextStep();
     }
 
