@@ -90,7 +90,6 @@ export default class ChartForm extends Component {
             this.setState({ birth: newDate })
             alert(this.state.birth);
         } else {*/
-            console.log(event.toISOString());
             this.setState({ [input]: event.target.value })
         //}
     }

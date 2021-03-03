@@ -50,5 +50,6 @@
     "error": "Error",
     "success": "éxito",
     "delete-account": "Borrar Cuenta",
-    "delete-self": "¿Está seguro de que desea eliminar su cuenta?"
+    "delete-self": "¿Está seguro de que desea eliminar su cuenta?",
+    "select": "-Seleccione-"
 }

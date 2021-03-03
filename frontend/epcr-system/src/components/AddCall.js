@@ -1,10 +1,12 @@
-import React, { Component } from 'react'
-import Button from 'react-bootstrap/Button'
-import '../App.css'
+import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button';
+import '../App.css';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { MainContext } from '../Auth';
 
 export default class AddCall extends Component {
+    static contextType = MainContext;
     constructor(props) {
         super(props);
         this.state = {
@@ -71,6 +73,7 @@ export default class AddCall extends Component {
                             <th width="20%">Unit number</th>
                             <td width="30%">
                                 <select name="unit" value={values.unit} onChange={this.props.handleChange('unit')}>
+                                    <option disabled selected value="">{this.context.translate('select')}</option>
                                     <option value="M-01">M-01</option>
                                     <option value="M-02">M-02</option>
                                     <option value="M-03">M-03</option>
@@ -91,6 +94,7 @@ export default class AddCall extends Component {
                             <th width="20%">Call type</th>
                             <td width="30%">
                                 <select name="ctype" value={values.ctype} onChange={this.props.handleChange('ctype')}>
+                                    <option disabled selected value="">{this.context.translate('select')}</option>
                                     <option value="Clinic">Clinic</option>
                                     <option value="Scene">Scene</option>
                                     <option value="Transfer">Transfer</option>
@@ -101,6 +105,7 @@ export default class AddCall extends Component {
                             <th>Incident location</th>
                             <td>
                                 <select name="loctype" value={values.loctype} onChange={this.props.handleChange('loctype')}>
+                                    <option disabled selected value="">{this.context.translate('select')}</option>
                                     <option value="Rescate clinic">Rescate clinic</option>
                                     <option value="Home">Home</option>
                                     <option value="Business">Business</option>
@@ -119,6 +124,7 @@ export default class AddCall extends Component {
                             <th>Nature of call</th>
                             <td>
                                 <select name="nature" value={values.nature} onChange={this.props.handleChange('nature')}>
+                                    <option disabled selected value="">{this.context.translate('select')}</option>
                                     <option value="B/P check">B/P check</option>
                                     <option value="Cardiac">Cardiac</option>
                                     <option value="Injection">Injection</option>
@@ -135,6 +141,7 @@ export default class AddCall extends Component {
                             <th>Care level</th>
                             <td>
                                 <select name="care" value={values.care} onChange={this.props.handleChange('care')}>
+                                    <option disabled selected value="">{this.context.translate('select')}</option>
                                     <option value="BLS">BLS</option>
                                     <option value="ALS">ALS</option>
                                     <option value="Nursing">Nursing</option>
@@ -145,6 +152,7 @@ export default class AddCall extends Component {
                             <th>Disposition</th>
                             <td>
                                 <select name="disp" value={values.disp} onChange={this.props.handleChange('disp')}>
+                                    <option disabled selected value="">{this.context.translate('select')}</option>
                                     <option value="Treat and release">Treat and release</option>
                                     <option value="Transport">Transport</option>
                                     <option value="DOA">DOA</option>
@@ -155,6 +163,7 @@ export default class AddCall extends Component {
                             <th>Destination</th>
                             <td>
                                 <select name="dest" value={values.dest} onChange={this.props.handleChange('dest')}>
+                                    <option disabled selected value="">{this.context.translate('select')}</option>
                                     <option value="Rescate clinic">Rescate clinic</option>
                                     <option value="IMSS">IMSS</option>
                                     <option value="ISTESON">ISTESON</option>
@@ -182,6 +191,7 @@ export default class AddCall extends Component {
                             <th>Trauma cause</th>
                             <td>
                                 <select name="trauma" value={values.trauma} onChange={this.props.handleChange('trauma')}>
+                                    <option disabled selected value="">{this.context.translate('select')}</option>
                                     <option value="Animal">Animal</option>
                                     <option value="Assault">Assault</option>
                                     <option value="Motor vehicle">Motor vehicle</option>
@@ -221,6 +231,7 @@ export default class AddCall extends Component {
                             <th>Triage Color</th>
                             <td>
                                 <select name="triage" value={values.triage} onChange={this.props.handleChange('triage')}>
+                                    <option disabled selected value="">{this.context.translate('select')}</option>
                                     <option value="Green">Green</option>
                                     <option value="Yellow">Yellow</option>
                                     <option value="Red">Red</option>
@@ -240,6 +251,7 @@ export default class AddCall extends Component {
                             <th>Type</th>
                             <td>
                                 <select name="vatype" value={values.vatype} onChange={this.props.handleChange('vatype')}>
+                                    <option disabled selected value="">{this.context.translate('select')}</option>
                                     <option value="Auto into object">Auto into object</option>
                                     <option value="Auto into another auto">Auto into another auto</option>
                                     <option value="Motorcycle">Motorcycle</option>
@@ -251,6 +263,7 @@ export default class AddCall extends Component {
                             <th>Safety equipment</th>
                             <td>
                                 <select name="vasafe" value={values.vasafe} onChange={this.props.handleChange('vasafe')}>
+                                    <option disabled selected value="">{this.context.translate('select')}</option>
                                     <option value="None">None</option>
                                     <option value="Seatbelt">Seatbelt</option>
                                     <option value="Helmet">Helmet</option>
