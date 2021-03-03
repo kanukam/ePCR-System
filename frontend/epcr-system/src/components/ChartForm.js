@@ -64,6 +64,7 @@ export default class ChartForm extends Component {
             fname: "",
             lname: "",
             birth: "",
+            birthDisplay: "",
             classify: "",
             gender: "",
             weight: "",
@@ -196,7 +197,7 @@ export default class ChartForm extends Component {
         const { step } = this.state;
         const { ino, idate, unit, ctype, nature, care, loctype, loc,
             disp, dest, agency, trauma, fallht, enrouteDisplay, arcscnDisplay, contactDisplay,
-            dptscnDisplay, arrdesDisplay, trcareDisplay, dispatchDisplay, idateDisplay,
+            dptscnDisplay, arrdesDisplay, trcareDisplay, dispatchDisplay, idateDisplay, birthDisplay,
             mci, ptct, triage, va, vatype, vasafe, vaimpact, vaspd, vaeject,
             dispatch, enroute, arrscn, contact, dptscn, arrdes, trcare,
             fname, lname, birth, classify, gender, weight, address, city, country, zip,
@@ -207,7 +208,7 @@ export default class ChartForm extends Component {
             ino, idate, idateDisplay, unit, ctype, nature, care, loctype, loc,
             disp, dest, agency, trauma, fallht,
             mci, ptct, triage, va, vatype, vasafe, vaimpact, vaspd, vaeject,
-            dispatch, enrouteDisplay, arcscnDisplay, contactDisplay,
+            dispatch, enrouteDisplay, arcscnDisplay, contactDisplay, birthDisplay,
             dptscnDisplay, arrdesDisplay, trcareDisplay, dispatchDisplay,
             fname, lname, birth, classify, gender, weight, address, city, country, zip,
             procedure
@@ -229,6 +230,7 @@ export default class ChartForm extends Component {
                     prevStep={this.prevStep}
                     navigate={this.navigate}
                     handleChange={this.handleChange}
+                    handleDate={this.handleDate}
                     values={values}
                 />
             case 3:

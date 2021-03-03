@@ -4,8 +4,11 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Popup from './Popup'
 import '../App.css'
+import { MainContext } from '../Auth';
+import DatePicker from "react-datepicker";
 
 export default class AddPatient extends Component {
+    static contextType = MainContext;
     constructor(props) {
         super(props);
         this.state = {
@@ -14,7 +17,7 @@ export default class AddPatient extends Component {
             fname: "",
             lname: "",
             birth: "", // datetime, age is calculated based on this
-            classify: "Adult",
+            classify: "",
             gender: "Male",
             weight: "", // in kg
             address: "",
@@ -79,12 +82,19 @@ export default class AddPatient extends Component {
                             </div>
                             <div className="group">
                                 <span>Date of Birth</span>
-                                <input type="date" name="birth" placeholder="DD/MM/YYYY" value={values.birth} onChange={this.props.handleChange('birth')} />
+                                <DatePicker
+                                    selected={values.birthDisplay ? values.birthDisplay : false}
+                                    placeholderText="dd/mm/yyyy"
+                                    onChange={this.props.handleDate('birth')}
+                                    timeInputLabel="Time:"
+                                    dateFormat="dd/MM/yyyy"
+                                />
                             </div>
                             <div className="group">
                                 <span>Classification</span>
                                 <div>
                                     <select name="classify" value={values.class} onChange={this.props.handleChange('classify')}>
+                                        <option disabled selected value="">{this.context.translate('select')}</option>
                                         <option value="Adult">Adult</option>
                                         <option value="Senior Adult">Senior Adult</option>
                                         <option value="Pediatric">Pediatric</option>
