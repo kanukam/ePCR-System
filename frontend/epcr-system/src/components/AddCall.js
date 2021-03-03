@@ -29,6 +29,7 @@ export default class AddCall extends Component {
         this.props.nextStep();
     }
 
+    /*
     fetchInput = (e) => {
         //e.preventDefault();
         var form = document.getElementById("call");
@@ -41,6 +42,7 @@ export default class AddCall extends Component {
         alert(this.state.jsonData);
         this.props.fetchNewInput(this.state.jsonData, 1);
     }
+    */
 
     showMCI = (e) => {
         var checkbox = document.getElementById("mci");
