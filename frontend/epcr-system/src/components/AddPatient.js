@@ -3,9 +3,9 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Popup from './Popup'
-import '../App.css'
-import { MainContext } from '../Auth';
 import DatePicker from "react-datepicker";
+import '../App.css';
+import { MainContext } from '../Auth';
 
 export default class AddPatient extends Component {
     static contextType = MainContext;
@@ -13,19 +13,6 @@ export default class AddPatient extends Component {
         super(props);
         this.state = {
             message: "",
-            // only variables for current section of form!
-            fname: "",
-            lname: "",
-            birth: "", // datetime, age is calculated based on this
-            classify: "",
-            gender: "Male",
-            weight: "", // in kg
-            address: "",
-            city: "",
-            country: "",
-            zip: "",
-            phone: "",
-            history: "", // subject to change
             showPop: false
         };
     }
@@ -51,17 +38,10 @@ export default class AddPatient extends Component {
         });
     }
 
-    testing = (e) => {
-        e.preventDefault();
-        var text = document.getElementById("inputt").value;
-        text = text + '5';
-        document.getElementById("inputt").value = text;
-    }
-
     render() {
         const { values } = this.props;
         return (
-            <div className="chartp">
+            <div className="chart">
                 <form>
                     <h2>Patient Information</h2>
                     <Button onClick={this.toggleAdd}>Previous Patient Search</Button>
@@ -80,13 +60,12 @@ export default class AddPatient extends Component {
                                     <strong>Last</strong>
                                 </div>
                             </div>
-                            <div className="group">
+                            <div>
                                 <span>Date of Birth</span>
                                 <DatePicker
-                                    selected={values.birthDisplay ? values.birthDisplay : false}
+                                    selected={values.birth ? values.birthDisplay : false}
                                     placeholderText="dd/mm/yyyy"
                                     onChange={this.props.handleDate('birth')}
-                                    timeInputLabel="Time:"
                                     dateFormat="dd/MM/yyyy"
                                 />
                             </div>

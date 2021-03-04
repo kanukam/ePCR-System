@@ -66,7 +66,6 @@ export default class AddCall extends Component {
                 <form id="call">
                     <h2>Call Information</h2>
                     <h3>Details</h3>
-                    {callinfo.no}
                     <table className="cform">
                         <tr>
                             <th width="20%">Incident number</th>
@@ -88,7 +87,6 @@ export default class AddCall extends Component {
                                     selected={values.idateDisplay ? values.idateDisplay : false}
                                     placeholderText="dd/mm/yyyy"
                                     onChange={this.props.handleDate('idate')}
-                                    timeInputLabel="Time:"
                                     dateFormat="dd/MM/yyyy"
                                 />
                             </td>

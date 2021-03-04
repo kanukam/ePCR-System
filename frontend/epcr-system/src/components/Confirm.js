@@ -27,14 +27,9 @@ export default class Confirm extends Component {
         this.props.prevStep();
     }
 
-    render() {        
-        const { callinfo: { ino, idate, ctype, nature, care, loctype, loc,
-            disp, dest, agency, trauma,
-            mci, ptct, triage, va, vatype, vasafe, vaimpact, vaspd, vaeject,
-            dispatch, enroute, arrscn, contact, dptscn, arrdes, trcare,
-            procedure
-        } } = this.props;
-        const { values: { fname, lname, birth, classify, gender, weight, address, city, country, zip } } = this.props;
+    render() {
+        
+        const { fname, lname, birth, classify, gender, weight, address, city, country, zip, idate, ptct, ino, mci, care, triage, ctype, disp, loctype, dest, loc, dispatch, contact, enroute, arrdes, arrscn  } = this.props.values;
         return (
             <div>
                 <form>
