@@ -57,4 +57,22 @@ function updateChart(userID, chartID, patientID, body, callback){
     WHERE (userID=${userID} AND id=${chartID} AND patientID=${patientID})`, body, callback);
 }
 
-module.exports = { viewChart, viewAllCharts, viewAllChartsFromPatientID, addChart, updateChart };
+function viewPatientChart(id, callback){
+    db.query(`SELECT * FROM charts INNER JOIN patients ON charts.patientID = patients.id WHERE charts.id=${id}`, (err, results) => {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, results);
+    });
+}
+
+function viewAllPatientCharts(callback){
+    db.query(`SELECT * FROM patients INNER JOIN charts ON charts.patientID = patients.id`, (err, results) => {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, results);
+    });
+}
+
+module.exports = { viewChart, viewAllCharts, viewAllChartsFromPatientID, addChart, updateChart, viewPatientChart, viewAllPatientCharts };

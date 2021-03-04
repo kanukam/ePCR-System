@@ -51,5 +51,6 @@
     "success": "éxito",
     "delete-account": "Borrar Cuenta",
     "delete-self": "¿Está seguro de que desea eliminar su cuenta?",
-    "select": "-Seleccione-"
+    "select": "-Seleccione-",
+    "view-charts": "?View Charts?"
 }

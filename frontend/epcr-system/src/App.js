@@ -6,8 +6,8 @@ import Chart from './components/Chart'
 import Login from "./views/Login";
 import Register from './components/Register'
 import Dashboard from "./views/Dashboard";
-import Patient from "./components/Patient";
-import Patients from './components/Patients';
+import ViewChart from "./components/ViewChart";
+import ViewCharts from './components/ViewCharts';
 import Settings from './views/Settings';
 import {ProtectedRoute, ProtectedLogin} from "./Routes";
 import i18next from 'i18next';
@@ -112,8 +112,8 @@ class App extends React.Component {
             <ProtectedLogin exact path="/" auth={this.state.auth} component={Login}/>
             <ProtectedRoute exact path="/Dashboard" auth={this.state.auth} component={Dashboard} />
             <ProtectedRoute exact path="/Chart" auth={this.state.auth} component={Chart} />
-            <ProtectedRoute exact path="/Patients" auth={this.state.auth} component={Patients} />
-            <ProtectedRoute exact path="/Patient/:id" auth={this.state.auth} component={Patient} />
+            <ProtectedRoute exact path="/ViewCharts" auth={this.state.auth} component={ViewCharts} />
+            <ProtectedRoute exact path="/ViewChart/:id" auth={this.state.auth} component={ViewChart} />
             <ProtectedRoute exact path="/Settings" auth={this.state.auth} component={Settings} />
             <Route exact path="/Register" component={Register} />
           </Switch>

@@ -13,17 +13,16 @@ import {
 } from '@material-ui/pickers';
 import '../App.css';
 
-export default class Patients extends Component {
+export default class ViewCharts extends Component {
     static contextType = MainContext;
     constructor(props) {
         super(props);
         this.state = {
-            patients: [],
+            charts: [],
             filtered: [],
             filter: false,
             contentSpacing: '0 0 0 150px',
             sidebarHide: true,
-            language: "",
             dob: null,
             startdate: null,
             enddate: null,
@@ -35,12 +34,10 @@ export default class Patients extends Component {
         this.search = this.search.bind(this);
         this.searchChange = this.searchChange.bind(this);
         this.dateChange = this.dateChange.bind(this);
-        this.languageChange = this.languageChange.bind(this);
     }
 
     componentDidMount() {
-        this.setState({language: this.context.language});
-        const url = 'http://localhost:3000/patients/';
+        const url = 'http://localhost:3000/charts/patients';
         const options = {
             method: 'GET',
             headers: {
@@ -56,7 +53,7 @@ export default class Patients extends Component {
                     throw Error("Failed");
             })
             .then((data) => {
-                this.setState({patients: data['patients'].reverse()});
+                this.setState({charts: data["charts"].reverse()});
             })
             .catch((error) => {
                 console.log(error);
@@ -113,19 +110,13 @@ export default class Patients extends Component {
         // filter end date
     }
 
-    languageChange(event) {
-        console.log(event.target.value);
-        this.setState({language: event.target.value});
-        this.context.setLanguage(event.target.value);
-    }
-
     render() {
         let searchPadding = '5px 0 5px ' + this.state.contentSpacing.slice(6);
         return (
             <React.Fragment>
                 <MainNav 
                     username={this.context.username} 
-                    patient={true} 
+                    viewcharts={true} 
                     sidebarHide={this.state.sidebarHide} 
                     contentSpacing={this.state.contentSpacing}
                     toggleCollapse={this.toggleCollapse}

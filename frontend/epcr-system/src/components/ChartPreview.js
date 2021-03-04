@@ -38,7 +38,7 @@ export class ChartPreview extends Component {
                     </Col>
                     <div >
                         <br /><br /><br />
-                        <Button variant="primary" as={Link} to={`/Patient/${this.props.id}`}>View</Button>
+                        <Button variant="primary" as={Link} to={`/ViewChart/${this.props.id}`}>View</Button>
                     </div>
                 </Row>
             </Container>

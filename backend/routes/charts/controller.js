@@ -53,4 +53,21 @@ function updateChart(req, res) {
   })
 }
 
-module.exports = { viewChart, viewAllCharts, addChart, updateChart };
+function viewPatientChart(req, res){
+  const id = req.params.chartId;
+  repo.viewPatientChart(id, (err, data) => {
+    err 
+      ? res.status(500).json({error: err})
+      : res.status(200).send(data)
+  })
+}
+
+function viewAllPatientCharts(req, res){
+  repo.viewAllPatientCharts((err, charts) => {
+    err 
+      ? res.status(500).json({error: err})
+      : res.status(200).send({ charts })
+  })
+}
+
+module.exports = { viewChart, viewAllCharts, addChart, updateChart, viewPatientChart, viewAllPatientCharts };

@@ -103,16 +103,16 @@ export default class MainNav extends Component {
 				                </Nav.Link>
 				            </Nav.Item>
 				        }
-			            {this.props.patient ?
+			            {this.props.viewcharts ?
 				            <Nav.Item className="sidebar-section active">
-				                <Nav.Link style={{color:'white'}} as={Link} to="/Patients">
-									{this.context.translate('patients')}
+				                <Nav.Link style={{color:'white'}} as={Link} to="/ViewCharts">
+									{this.context.translate('view-charts')}
 				                </Nav.Link>
 				            </Nav.Item>
 			            	:
 			            	<Nav.Item>
-				                <Nav.Link as={Link} to="/Patients">
-									{this.context.translate('patients')}
+				                <Nav.Link as={Link} to="/ViewCharts">
+									{this.context.translate('view-charts')}
 				                </Nav.Link>
 				            </Nav.Item>
 				        }
