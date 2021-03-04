@@ -28,32 +28,6 @@ export default class Login extends Component {
         this.context.setLanguage(language);
     }
 
-    setId() {
-        const url = 'http://localhost:3000/getUsername';
-        const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-        }
-        fetch(url, options)
-            .then((response) => {
-                if (response.ok)
-                    return response.json();
-                else
-                    throw Error("Failed");
-            })
-            .then((data) => {
-                const { id } = data
-                this.context.setId(id);
-                console.log(this.context);
-            })
-            .catch((error) => {
-
-            });
-    }
-
     handleSubmit = (event => {
         event.preventDefault();
         const username = this.state.username;
@@ -79,7 +53,6 @@ export default class Login extends Component {
                 this.setState({ authorized: true })
                 this.context.setAuth(true);
                 this.context.setUsername(this.state.username);
-                this.setId();
             }).catch((error) => {
                 this.setState({ errorMessage: this.context.translate('invalid-user') });
             })
