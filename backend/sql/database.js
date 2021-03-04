@@ -60,7 +60,7 @@ con.connect(err => {
         procedures VARCHAR(45) NULL,
         patientID VARCHAR(45) NULL,
         p_weight VARCHAR(10) NULL, 
-        p_classify VARCHAR(45) NULL DEFAULT 'Adult', 
+        p_classify VARCHAR(45) NULL, 
         p_bcolor VARCHAR(45) NULL, 
         p_address VARCHAR(255) NULL, 
         p_phone VARCHAR(12) NULL, 
