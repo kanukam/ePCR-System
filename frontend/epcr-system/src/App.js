@@ -19,9 +19,7 @@ class App extends React.Component {
     this.state = {
       auth: false,
       username: "",
-      id: "",
       setAuth: this.setAuth,
-      setId: this.setId,
       setUsername: this.setUsername,
       setLanguage: this.setLanguage,
       language: "",
@@ -43,10 +41,6 @@ class App extends React.Component {
   setLanguage = value => {
     this.setState({language: value});
     i18next.changeLanguage(value);
-  }
-
-  setId = id => {
-    this.setState({ id: id });
   }
 
   getLanguage(username){
@@ -94,9 +88,8 @@ class App extends React.Component {
           throw Error("Failed");
       })
       .then((data) => {
-        const {username, id} = data
+        const {username} = data
         this.setUsername(username);
-        this.setId(id);
       })
       .catch((error) => {
         
