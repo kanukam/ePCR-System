@@ -65,7 +65,6 @@ con.connect(err => {
         p_address VARCHAR(255) NULL, 
         p_phone VARCHAR(12) NULL, 
         p_history MEDIUMTEXT NULL, 
-        userID INT(11) UNSIGNED NULL,
         PRIMARY KEY (id)
         )`, (err, res) => {
         if(err) return console.log(err);
