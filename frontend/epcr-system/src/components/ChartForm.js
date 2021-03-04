@@ -18,7 +18,6 @@ export default class ChartForm extends Component {
             success: false,
             step: 1,
             redirect: "/Patients",
-            callinfo: [],
             // all default variables across section forms!
             /* call */
             ino: "",
@@ -70,10 +69,12 @@ export default class ChartForm extends Component {
             weight: "",
             address: "",
             city: "",
+            state: "",
             country: "",
             zip: "",
             phone: "",
             history: "", // subject to change
+            braslow: "",
             /* interventions */
             procedure: ""
         };
@@ -85,48 +86,78 @@ export default class ChartForm extends Component {
 
     handleDate = input => date => {
         var displayedDate = input + "Display";
-        console.log(date);
         this.setState({ [displayedDate]: date });
-        date = date.toISOString();
+        date = date.toISOString().slice(0, 19).replace('T', " ");
+        this.setState({ [input]: date });
+    }
+
+    handleDateNoTime = input => date => {
+        var displayedDate = input + "Display";
+        this.setState({ [displayedDate]: date });
+        date = (date.toISOString()).split("T", 1)[0]
         this.setState({ [input]: date });
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        /* variables used for monthly/yearly reporting */
-        // call variables
-        // patient variables
+        // Chart Table
+        const incident_number = this.state.ino;
+        const incident_date = this.state.idate || null;
+        const location = this.state.dest;
+        const incident_address = this.state.loc;
+        const disposition = this.state.disp;
+        const agencies = this.state.agency;
+        const patient_count = this.state.ptct;
+        const triage_color = this.state.triage;
+        const dispatch_date_time = this.state.dispatch || null;
+        const enroute_date_time = this.state.enroute || null;
+        const arrive_date_time = this.state.arrscn || null;
+        const patient_contact_date_time = this.state.contact || null;
+        const transfer_date_time = this.state.trcare || null;
+        const depart_date_time = this.state.dptscn || null;
+        const unit_number = this.state.unit;
+        const call_type = this.state.ctype;
+        const call_nature = this.state.nature;
+        const care_level = this.state.care;
+        const destination = this.state.dest;
+        const trauma_cause = this.state.trauma; 
+        const vehicle_accident_type = this.state.vatype;
+        const vehicle_accident_impact = this.state.vaimpact;
+        const vehicle_accident_safety_equipment = this.state.vasafe;
+        const vehicle_accident_mph = this.state.vaspd;
+        const vehicle_accident_ejected = this.state.eject;
+        const medications = this.state.medications;
+        const procedures = this.state.procedure;
+        const p_weight = this.state.weight;
+        const p_classify = this.state.classify;
+        const p_bcolor = this.state.braslow;
+        let p_address = "";
+        if(this.state.address || this.state.city || this.state.st || this.state.country || this.state.zip){
+            p_address = this.state.address + " " + this.state.city + ", " + this.state.state + " " + this.state.zip +  " " + this.state.country;
+        }
+        const p_phone = this.state.address;
+        const p_history = this.state.history;
+        // Patient Table
         const fname = this.state.fname;
         const lname = this.state.lname;
-        const classify = this.state.classify;
+        const birth = this.state.birth || null;
         const gender = this.state.gender;
-
-        /* variables used to reduce fields */
-        // call variables
-        let agency = this.state.agency;
-        let mci = "";
-        let va = "";
-        // patient variables
-        const dob = this.state.birth;
-        // Testing date, empty string dates will trigger an error on backend without this
-        const birth = dob || null;
-        const weight = this.state.weight;
-        const address = this.state.address + ", " + this.state.city + ", " + this.state.country + " " + this.state.zip;
-        const phone = this.state.phone;
-        // interventions variables
-        const procedure = this.state.procedure;
         /* send to backend */
-        /*
         const url = 'http://localhost:3000/charts/add';
         const options = {
             method: 'POST',
-            body: JSON.stringify({ date, incident, loctype, nature, disp, dest, agency, trauma, mci, va, times, fname, lname, birth, classify, gender, weight, address, phone, procedure }),
+            body: JSON.stringify({
+                body: { incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, medications, procedures, p_weight, p_classify, p_bcolor, p_address, p_phone, p_history},
+                    pbody: {fname, lname, birth, gender}
+            }),
             headers: {
                 'Content-Type': 'application/json'
             },
             credentials: 'include'
         }
+        console.log(options);
         fetch(url, options).then((response) => {
+            
             if (!response.ok) {
                 throw Error;
             }
@@ -137,7 +168,6 @@ export default class ChartForm extends Component {
         this.setState({
             success: true
         })
-        */
         this.nextStep();
     }
 
@@ -161,14 +191,8 @@ export default class ChartForm extends Component {
         })
     }
 
-    fetchNewInput = (input, num) => {
-        var obj = JSON.parse(input);
-        if(num === 1) { this.setState({callinfo: obj}); }
-    }
-
     render() {
         const { step } = this.state;
-        const {callinfo} = this.state;
         const values = this.state;
         switch (step) {
             case 1:
@@ -177,6 +201,7 @@ export default class ChartForm extends Component {
                     navigate={this.navigate}
                     handleChange={this.handleChange}
                     handleDate={this.handleDate}
+                    handleDateNoTime={this.handleDateNoTime}
                     values={values}
                 />
             case 2:
@@ -186,6 +211,7 @@ export default class ChartForm extends Component {
                     navigate={this.navigate}
                     handleChange={this.handleChange}
                     handleDate={this.handleDate}
+                    handleDateNoTime={this.handleDateNoTime}
                     values={values}
                 />
             case 3:

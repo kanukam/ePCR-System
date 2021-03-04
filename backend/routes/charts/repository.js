@@ -6,6 +6,7 @@ function addChart(body, pbody, callback) {
     const sql = 'INSERT INTO patients SET ?';
     db.query(sql, pbody, (err, res) => {
         if (err) {
+            console.log(err);
             return callback(err);
         }
         else {
@@ -15,6 +16,7 @@ function addChart(body, pbody, callback) {
             var sql = 'INSERT INTO charts SET ?';
             db.query(sql, body, (err, res) => {
                 if (err) {
+                    console.log(err);
                     callback(err);
                 }
                 else {

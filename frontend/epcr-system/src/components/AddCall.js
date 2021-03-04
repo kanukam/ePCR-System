@@ -60,7 +60,6 @@ export default class AddCall extends Component {
 
     render() {
         const { values } = this.props;
-        const { callinfo } = this.props;
         return (
             <div>
                 <form id="call">
@@ -86,7 +85,7 @@ export default class AddCall extends Component {
                                 <DatePicker
                                     selected={values.idateDisplay ? values.idateDisplay : false}
                                     placeholderText="dd/mm/yyyy"
-                                    onChange={this.props.handleDate('idate')}
+                                    onChange={this.props.handleDateNoTime('idate')}
                                     dateFormat="dd/MM/yyyy"
                                 />
                             </td>
@@ -293,7 +292,7 @@ export default class AddCall extends Component {
                             <th>Ejection from vehicle</th>
                             <td>
                                 <div>
-                                    <label><input type="radio" name="vaeject" value="Yes" defaultChecked /> Yes</label>
+                                    <label><input type="radio" name="vaeject" value="Yes"/> Yes</label>
                                     <label><input type="radio" name="vaeject" value="No" /> No</label>
                                 </div>
                             </td>
@@ -330,9 +329,9 @@ export default class AddCall extends Component {
                             <th>Arrive scene</th>
                             <td>
                                 <DatePicker
-                                    selected={values.arcscnDisplay ? values.arcscnDisplay : false}
+                                    selected={values.arrscnDisplay ? values.arrscnDisplay : false}
                                     placeholderText="dd/mm/yyyy --:-- --"
-                                    onChange={this.props.handleDate('arcscn')}
+                                    onChange={this.props.handleDate('arrscn')}
                                     timeInputLabel="Time:"
                                     dateFormat="dd/MM/yyyy h:mm aa"
                                     showTimeInput />

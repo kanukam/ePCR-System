@@ -65,7 +65,7 @@ export default class AddPatient extends Component {
                                 <DatePicker
                                     selected={values.birth ? values.birthDisplay : false}
                                     placeholderText="dd/mm/yyyy"
-                                    onChange={this.props.handleDate('birth')}
+                                    onChange={this.props.handleDateNoTime('birth')}
                                     dateFormat="dd/MM/yyyy"
                                 />
                             </div>
@@ -94,20 +94,22 @@ export default class AddPatient extends Component {
                                 <input style={{width:'80px', marginRight:'0px'}} type="number" name="weight" value={values.weight} min="0" onChange={this.props.handleChange('weight')} /> kg
                             </div>
                             <div className="group">
-                                <span style={{width:'15%'}}>Braslow Color</span>
+                                <span>Braslow Color</span>
                                 <div>
-                                    <label><input type="checkbox" name="bcolor" /> Gray</label>
-                                    <label><input type="checkbox" name="bcolor" /> Pink</label>
-                                    <label><input type="checkbox" name="bcolor" /> Red</label>
-                                    <label><input type="checkbox" name="bcolor" /> Purple</label>
-                                    <label><input type="checkbox" name="bcolor" /> Yellow</label>
-                                    <label><input type="checkbox" name="bcolor" /> White</label>
-                                    <label><input type="checkbox" name="bcolor" /> Blue</label>
-                                    <label><input type="checkbox" name="bcolor" /> Orange</label>
-                                    <label><input type="checkbox" name="bcolor" /> Green</label>
+                                    <select name="classify" value={values.class} onChange={this.props.handleChange('braslow')}>
+                                        <option disabled selected value="">{this.context.translate('select')}</option>
+                                        <option value="Gray">Gray</option>
+                                        <option value="Pink">Pink</option>
+                                        <option value="Red">Red</option>
+                                        <option value="Purple">Purple</option>
+                                        <option value="Yellow">Yellow</option>
+                                        <option value="White">White</option>
+                                        <option value="Blue">Blue</option>
+                                        <option value="Orange">Orange</option>
+                                        <option value="Green">Green</option>
+                                    </select>
                                 </div>
                             </div>
-                            <small>Note: Name split into first and last for easy search results sorted either by first or last name &amp;&amp; Braslow color not yet handled.</small> 
                         </Col>
                     </Row>
                     <h3>Address &amp; Contact</h3>
@@ -138,12 +140,12 @@ export default class AddPatient extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="group">
-                                <span>Phone</span>
-                                <input type="number" name="phone" value={values.phone} onChange={this.props.handleChange('phone')} />
-                            </div>
                         </Col>
                     </Row>
+                    <div>
+                        <span>Phone</span>
+                        <input type="number" name="phone" value={values.phone} onChange={this.props.handleChange('phone')} />
+                    </div>
                     <Button className="left" onClick={this.back}>Previous</Button>
                     <Button className="right" onClick={this.saveAndContinue}>Next</Button>
                 </form>
