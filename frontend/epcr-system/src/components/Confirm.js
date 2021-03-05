@@ -31,7 +31,7 @@ export default class Confirm extends Component {
         
         const { fname, lname, birth, classify, gender, weight, address, city, country, zip, idate, ptct, ino, mci, care, triage, ctype, disp, loctype, dest, loc, dispatch, contact, enroute, arrdes, arrscn  } = this.props.values;
         return (
-            <div>
+            <div className="chart">
                 <form>
                     <h2>Confirm Chart Report</h2>
                     <b>Date:</b> {idate}

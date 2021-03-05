@@ -35,7 +35,7 @@ export default class Chart extends Component {
 
                 {/* Form */}
                 <Container  className="main-content" style={{padding:this.state.contentSpacing}}>              
-                    <Container className="chart">
+                    <Container>
                         <ChartForm />
                     </Container>
                 </Container>

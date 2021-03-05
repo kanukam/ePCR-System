@@ -61,7 +61,7 @@ export default class AddCall extends Component {
     render() {
         const { values } = this.props;
         return (
-            <div>
+            <div className="chart">
                 <form id="call">
                     <h2>Call Information</h2>
                     <h3>Details</h3>

@@ -45,7 +45,7 @@ export default class AddInterventions extends Component {
     render() {
         const { values } = this.props;
         return (
-            <div>
+            <div className="chart">
                 <form>
                     <h2>Interventions / Treatment</h2>
                     <h3>Procedures</h3>
