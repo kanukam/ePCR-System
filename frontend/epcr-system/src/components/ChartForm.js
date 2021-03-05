@@ -102,11 +102,11 @@ export default class ChartForm extends Component {
             right_upper_leg: [],
             right_lower_leg: [],
             right_ankle_foot: [],
-            extra_findings: [],
-            stroke_time: [],
-            stroke_facial_droop: [],
-            stroke_arm_drift: [],
-            stroke_abnormal_speech: [],
+            extra_findings: "",
+            stroke_time: "",
+            stroke_facial_droop: "",
+            stroke_arm_drift: "",
+            stroke_abnormal_speech: "",
             /* interventions */
             procedure: ""
         };
@@ -200,29 +200,29 @@ export default class ChartForm extends Component {
         const p_phone = this.state.address;
         const p_history = this.state.history;
         // Physical Assessment
-        const skin = this.state.skin.toString();
-        const mental = this.state.mental.toString();
-        const neurological = this.state.neurological.toString();
-        const head = this.state.head.toString();
-        const neck = this.state.neck.toString();
-        const chest = this.state.chest.toString();
-        const pulse_strength = this.state.pulse_strength.toString();
-        const pulse_rate = this.state.pulse_rate.toString();
-        const abdomen = this.state.abdomen.toString();
-        const pelvis = this.state.pelvis.toString();
-        const back = this.state.back.toString();
-        const left_upper_arm = this.state.left_upper_arm.toString();
-        const left_lower_arm = this.state.left_lower_arm.toString();
-        const left_hand_wrist = this.state.left_hand_wrist.toString();
-        const left_upper_leg = this.state.left_upper_leg.toString();
-        const left_lower_leg = this.state.left_lower_leg.toString();
-        const left_ankle_foot = this.state.left_ankle_foot.toString();
-        const right_upper_arm = this.state.right_upper_arm.toString();
-        const right_lower_arm = this.state.right_lower_arm.toString();
-        const right_hand_wrist = this.state.right_hand_wrist.toString();
-        const right_upper_leg = this.state.right_upper_leg.toString();
-        const right_lower_leg = this.state.right_lower_leg.toString();
-        const right_ankle_foot = this.state.right_ankle_foot.toString();
+        const skin = this.state.skin.join();
+        const mental = this.state.mental.join();
+        const neurological = this.state.neurological.join();
+        const head = this.state.head.join();
+        const neck = this.state.neck.join();
+        const chest = this.state.chest.join();
+        const pulse_strength = this.state.pulse_strength.join();
+        const pulse_rate = this.state.pulse_rate.join();
+        const abdomen = this.state.abdomen.join();
+        const pelvis = this.state.pelvis.join();
+        const back = this.state.back.join();
+        const left_upper_arm = this.state.left_upper_arm.join();
+        const left_lower_arm = this.state.left_lower_arm.join();
+        const left_hand_wrist = this.state.left_hand_wrist.join();
+        const left_upper_leg = this.state.left_upper_leg.join();
+        const left_lower_leg = this.state.left_lower_leg.join();
+        const left_ankle_foot = this.state.left_ankle_foot.join();
+        const right_upper_arm = this.state.right_upper_arm.join();
+        const right_lower_arm = this.state.right_lower_arm.join();
+        const right_hand_wrist = this.state.right_hand_wrist.join();
+        const right_upper_leg = this.state.right_upper_leg.join();
+        const right_lower_leg = this.state.right_lower_leg.join();
+        const right_ankle_foot = this.state.right_ankle_foot.join();
         const extra_findings = this.state.extra_findings;
         const stroke_time = this.state.stroke_time;
         const stroke_facial_droop = this.state.stroke_facial_droop;
@@ -239,7 +239,7 @@ export default class ChartForm extends Component {
             method: 'POST',
             body: JSON.stringify({
                 body: {
-                    incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, medications, procedures, p_weight, p_classify, p_bcolor, p_address, p_phone, p_history, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot, extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech, skin, mental, neurological, head, neck, chest, pulse_strength, 
+                    incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, medications, procedures, p_weight, p_classify, p_bcolor, p_address, p_phone, p_history, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot, extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech, skin, mental, neurological, head, neck, chest, pulse_strength, pulse_rate
                 },
                     pbody: {fname, lname, birth, gender}
             }),
