@@ -390,7 +390,7 @@ export default class AddCall extends Component {
                 </form>
                 {/* Bottom chart navigation */}
                 <div className="chartnav">
-                    <div className="tab" onClick={this.navigate(1)}>
+                    <div className="tab active" onClick={this.navigate(1)}>
                         <img src="/profile.png" />
                         <b>Call</b>
                     </div>
@@ -398,7 +398,7 @@ export default class AddCall extends Component {
                         <img src="/profile.png" />
                         <b>Patient</b>
                     </div>
-                    <div className="tab active" onClick={this.navigate(3)}>
+                    <div className="tab" onClick={this.navigate(3)}>
                         <img src="/profile.png" />
                         <b>Interventions</b>
                     </div>

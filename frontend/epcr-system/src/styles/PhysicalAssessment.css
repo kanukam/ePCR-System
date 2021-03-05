@@ -1,3 +1,14 @@
-.assessment { position:relative; padding:25px; width:900px; min-height:200px; margin:30px auto 100px; padding:25px; background:#fff; font-size:14px; }
+.assessment { position:relative; padding:25px; }
+.content { width:900px; min-height:200px; margin:30px auto 100px; padding:25px; background:#fff; font-size:14px; }
 .assessment h2, .assessment h3 { margin-bottom:10px; font-size:25px; display:flex; text-transform:uppercase; text-align:center; }
 .assessment h3 { margin:10px 0; padding:0 10px; font-size:16px; line-height:40px; background:#E5E5E5; }
+.left { float:left; }
+.right { float:right; }
+
+.chartnav { position:fixed; bottom:0; display:flex; clear:both; margin-top:50px; padding:0 50px; width:960px; background:#fff; border-top:1px solid #ddd; font-size:12px; }
+.chartnav .tab { padding:5px; width:100px; height:80px; text-align:center; cursor:pointer; }
+.chartnav .tab.active { background:#eee; }
+.chartnav .tab img { width:50px; height:50px; background:#007bff; border:2px solid #80bdff; border-radius:50%; }
+.chartnav .tab b { display:block; font-weight:normal; color:#117a8b; }
+.chartnav .tab.active b { font-weight:bold; }
+

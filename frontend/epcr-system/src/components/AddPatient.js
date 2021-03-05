@@ -155,11 +155,11 @@ export default class AddPatient extends Component {
                         <img src="/profile.png" />
                         <b>Call</b>
                     </div>
-                    <div className="tab" onClick={this.navigate(2)}>
+                    <div className="tab active" onClick={this.navigate(2)}>
                         <img src="/profile.png" />
                         <b>Patient</b>
                     </div>
-                    <div className="tab active" onClick={this.navigate(3)}>
+                    <div className="tab" onClick={this.navigate(3)}>
                         <img src="/profile.png" />
                         <b>Interventions</b>
                     </div>
