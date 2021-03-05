@@ -15,6 +15,9 @@ export default class ChartForm extends Component {
         super(props);
         this.state = {
             message: "",
+            assessmentCheckBoxes: {
+                1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false, 11: false, 12: false, 13: false, 14: false, 15: false, 16: false, 17: false, 18: false, 19: false, 20: false, 21: false, 22: false, 23: false, 24: false, 25: false, 26: false, 27: false, 28: false, 29: false, 30: false, 31: false, 32: false, 33: false, 34: false, 35: false, 36: false, 37: false, 38: false, 39: false, 40: false, 41: false, 42: false, 43: false, 44: false, 45: false, 46: false, 47: false, 48: false, 49: false, 50: false, 51: false, 52: false, 53: false, 54: false, 55: false, 56: false, 57: false, 58: false, 59: false, 60: false, 61: false, 62: false, 63: false, 64: false, 65: false, 66: false, 67: false, 68: false, 69: false, 70: false, 71: false, 72: false, 73: false, 74: false, 75: false, 76: false, 77: false, 78: false, 79: false, 80: false, 81: false, 82: false, 83: false, 84: false, 85: false, 86: false, 87: false, 88: false, 89: false, 90: false, 91: false, 92: false, 93: false, 94: false, 95: false, 96: false, 97: false, 98: false, 99: false, 100: false, 101: false, 102: false, 103: false, 104: false, 105: false, 106: false, 107: false, 108: false, 109: false, 110: false, 111: false, 112: false, 113: false, 114: false, 115: false, 116: false, 117: false, 118: false, 119: false, 120: false, 121: false, 122: false, 123: false, 124: false, 125: false, 126: false, 127: false, 128: false, 129: false, 130: false, 131: false, 132: false, 133: false, 134: false, 135: false, 136: false, 137: false, 138: false, 139: false, 140: false, 141: false, 142: false, 143: false, 144: false, 145: false, 146: false, 147: false, 148: false, 149: false, 150: false, 151: false, 152: false, 153: false, 154: false, 155: false, 156: false, 157: false, 158: false, 159: false, 160: false, 161: false, 162: false, 163: false 
+            },
             success: false,
             step: 1,
             redirect: "/Patients",
@@ -76,6 +79,14 @@ export default class ChartForm extends Component {
             history: "", // subject to change
             braslow: "",
             // Physical Assessment
+            skin: [],
+            mental: [],
+            neurological: [],
+            head: [],
+            neck: [],
+            chest: [],
+            pulse_strength: [],
+            pulse_rate: [],
             abdomen: [],
             pelvis: [],
             back: [],
@@ -104,6 +115,36 @@ export default class ChartForm extends Component {
     handleChange = input => event => {
         this.setState({ [input]: event.target.value });
     }
+
+    handleAssessmentCheckboxes = boxNumber => event => {
+        var bodyPart = event.target.name;
+        var vals = this.state[bodyPart];
+        var checkBoxValue = event.target.value;
+        var assessmentCheckBoxes = this.state.assessmentCheckBoxes;
+        var checkbox = assessmentCheckBoxes[boxNumber];
+        // Remove word from array
+        if(checkbox){
+            vals = vals.filter(word => word !== checkBoxValue);
+            // Convert to array if integer
+            if(vals === parseInt(vals, 10)){
+                vals = [vals];
+            }
+            // set state to False
+            assessmentCheckBoxes[boxNumber] = false;
+            this.setState({ assessmentCheckBoxes });
+            // Set to filtered array
+            this.setState({ [bodyPart]: [...vals] });
+        }
+        else{
+            // Add value and marked checked as true
+            vals.push(checkBoxValue);
+            assessmentCheckBoxes[boxNumber] = true;
+            this.setState({ assessmentCheckBoxes });
+            this.setState({ [bodyPart]: [...vals] });
+        }
+    }
+
+
 
     handleDate = input => date => {
         var displayedDate = input + "Display";
@@ -159,21 +200,29 @@ export default class ChartForm extends Component {
         const p_phone = this.state.address;
         const p_history = this.state.history;
         // Physical Assessment
-        const abdomen = this.state.abdomen;
-        const pelvis = this.state.pelvis;
-        const back = this.state.back;
-        const left_upper_arm = this.state.left_upper_arm;
-        const left_lower_arm = this.state.left_lower_arm;
-        const left_hand_wrist = this.state.left_hand_wrist;
-        const left_upper_leg = this.state.left_upper_leg;
-        const left_lower_leg = this.state.left_lower_leg;
-        const left_ankle_foot = this.state.left_ankle_foot;
-        const right_upper_arm = this.state.right_upper_arm;
-        const right_lower_arm = this.state.right_lower_arm;
-        const right_hand_wrist = this.state.right_hand_wrist;
-        const right_upper_leg = this.state.right_upper_leg;
-        const right_lower_leg = this.state.right_lower_leg;
-        const right_ankle_foot = this.state.right_ankle_foot;
+        const skin = this.state.skin.toString();
+        const mental = this.state.mental.toString();
+        const neurological = this.state.neurological.toString();
+        const head = this.state.head.toString();
+        const neck = this.state.neck.toString();
+        const chest = this.state.chest.toString();
+        const pulse_strength = this.state.pulse_strength.toString();
+        const pulse_rate = this.state.pulse_rate.toString();
+        const abdomen = this.state.abdomen.toString();
+        const pelvis = this.state.pelvis.toString();
+        const back = this.state.back.toString();
+        const left_upper_arm = this.state.left_upper_arm.toString();
+        const left_lower_arm = this.state.left_lower_arm.toString();
+        const left_hand_wrist = this.state.left_hand_wrist.toString();
+        const left_upper_leg = this.state.left_upper_leg.toString();
+        const left_lower_leg = this.state.left_lower_leg.toString();
+        const left_ankle_foot = this.state.left_ankle_foot.toString();
+        const right_upper_arm = this.state.right_upper_arm.toString();
+        const right_lower_arm = this.state.right_lower_arm.toString();
+        const right_hand_wrist = this.state.right_hand_wrist.toString();
+        const right_upper_leg = this.state.right_upper_leg.toString();
+        const right_lower_leg = this.state.right_lower_leg.toString();
+        const right_ankle_foot = this.state.right_ankle_foot.toString();
         const extra_findings = this.state.extra_findings;
         const stroke_time = this.state.stroke_time;
         const stroke_facial_droop = this.state.stroke_facial_droop;
@@ -189,7 +238,9 @@ export default class ChartForm extends Component {
         const options = {
             method: 'POST',
             body: JSON.stringify({
-                body: { incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, medications, procedures, p_weight, p_classify, p_bcolor, p_address, p_phone, p_history, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot, extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech},
+                body: {
+                    incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, medications, procedures, p_weight, p_classify, p_bcolor, p_address, p_phone, p_history, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot, extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech, skin, mental, neurological, head, neck, chest, pulse_strength, 
+                },
                     pbody: {fname, lname, birth, gender}
             }),
             headers: {
@@ -270,6 +321,7 @@ export default class ChartForm extends Component {
                     prevStep={this.prevStep}
                     navigate={this.navigate}
                     handleChange={this.handleChange}
+                    handleAssessmentCheckboxes={this.handleAssessmentCheckboxes}
                     values={values}
                 />
             case 5:
