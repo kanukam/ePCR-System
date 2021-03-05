@@ -64,6 +64,7 @@ export default class ViewChart extends Component {
                         <h2>Patient Name Here</h2>
                         <b>Date:</b> {idate}
                         <table className="info" border="1">
+                            <tbody>
                             <tr><th colSpan="8">Patient Information</th></tr>
                             <tr>
                                 <td width="10%">Name</td>
@@ -85,8 +86,10 @@ export default class ViewChart extends Component {
                                 <td>Number of Patients at Scene</td>
                                 <td colSpan="7">{ptct}</td>
                             </tr>
+                            </tbody>
                         </table>
                         <table className="info" border="1">
+                            <tbody>
                             <tr><th colSpan="4">Call Information</th></tr>
                             <tr>
                                 <td width="15%">Incident #</td>
@@ -143,8 +146,10 @@ export default class ViewChart extends Component {
                                 <td>Arrive</td>
                                 <td>{arrscn}</td>
                             </tr>
+                            </tbody>
                         </table>
                         <table className="crew" order="1">
+                            <tbody>
                             <tr><th colSpan="4">Unit Personnel</th></tr>
                             <tr>
                                 <td><b>Crew Member</b></td>
@@ -156,6 +161,7 @@ export default class ViewChart extends Component {
                                 <td>Registered Nurse</td>
                                 <td></td>
                             </tr>
+                            </tbody>
                         </table>
                     
                     <Notes />
