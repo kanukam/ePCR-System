@@ -140,11 +140,15 @@ export default class Confirm extends Component {
                         <img src="/profile.png" />
                         <b>Patient</b>
                     </div>
-                    <div className="tab" onClick={this.navigate(3)}>
+                    <div className="tab active" onClick={this.navigate(3)}>
                         <img src="/profile.png" />
                         <b>Interventions</b>
                     </div>
-                    <div className="tab active" onClick={this.navigate(4)}>
+                    <div className="tab" onClick={this.navigate(4)}>
+                        <img src="/profile.png" />
+                        <b>Physical Assessment</b>
+                    </div>
+                    <div className="tab" onClick={this.navigate(5)}>
                         <img src="/profile.png" />
                         <b>Confirm</b>
                     </div>

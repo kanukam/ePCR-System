@@ -3,10 +3,10 @@ import { Redirect } from 'react-router-dom'
 import { MainContext } from '../Auth'
 import '../App.css'
 import '../Sidebar.css'
-
 import AddCall from './AddCall'
 import AddPatient from './AddPatient'
 import AddInterventions from './AddInterventions'
+import PhysicalAssessment from './PhysicalAssessment'
 import Confirm from './Confirm'
 
 export default class ChartForm extends Component {
@@ -189,7 +189,7 @@ export default class ChartForm extends Component {
         const options = {
             method: 'POST',
             body: JSON.stringify({
-                body: { incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, medications, procedures, p_weight, p_classify, p_bcolor, p_address, p_phone, p_history},
+                body: { incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, medications, procedures, p_weight, p_classify, p_bcolor, p_address, p_phone, p_history, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot, extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech},
                     pbody: {fname, lname, birth, gender}
             }),
             headers: {
@@ -265,6 +265,14 @@ export default class ChartForm extends Component {
                     values={values}
                 />
             case 4:
+                return <PhysicalAssessment
+                    nextStep={this.nextStep}
+                    prevStep={this.prevStep}
+                    navigate={this.navigate}
+                    handleChange={this.handleChange}
+                    values={values}
+                />
+            case 5:
                 return <Confirm
                     nextStep={this.nextStep}
                     prevStep={this.prevStep}
@@ -272,7 +280,7 @@ export default class ChartForm extends Component {
                     handleSubmit={this.handleSubmit}
                     values={values}
                 />
-            case 5:
+            case 6:
                 return <Redirect to={this.state.redirect}/>
         }
     }
