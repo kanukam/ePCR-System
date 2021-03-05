@@ -20,7 +20,7 @@ export default class ChartForm extends Component {
             },
             success: false,
             step: 1,
-            redirect: "/Patients",
+            redirect: "/ViewCharts",
             // all default variables across section forms!
             /* call */
             ino: "",

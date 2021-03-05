@@ -55,10 +55,10 @@ function updateChart(req, res) {
 
 function viewPatientChart(req, res){
   const id = req.params.chartId;
-  repo.viewPatientChart(id, (err, data) => {
+  repo.viewPatientChart(id, (err, chart) => {
     err 
       ? res.status(500).json({error: err})
-      : res.status(200).send(data)
+      : res.status(200).send({chart})
   })
 }
 

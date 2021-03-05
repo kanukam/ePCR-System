@@ -58,7 +58,7 @@ function updateChart(userID, chartID, patientID, body, callback){
 }
 
 function viewPatientChart(id, callback){
-    db.query(`SELECT * FROM charts INNER JOIN patients ON charts.patientID = patients.id WHERE charts.id=${id}`, (err, results) => {
+    db.query(`SELECT * FROM patients LEFT JOIN charts ON charts.patientID = patients.id WHERE charts.id=${id}`, (err, results) => {
         if (err) {
             return callback(err);
         }
@@ -67,7 +67,7 @@ function viewPatientChart(id, callback){
 }
 
 function viewAllPatientCharts(callback){
-    db.query(`SELECT * FROM patients INNER JOIN charts ON charts.patientID = patients.id`, (err, results) => {
+    db.query(`SELECT * FROM patients LEFT JOIN charts ON charts.patientID = patients.id`, (err, results) => {
         if (err) {
             return callback(err);
         }

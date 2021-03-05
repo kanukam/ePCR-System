@@ -12,12 +12,13 @@ export default class ViewChart extends Component {
         this.state = {
             sidebarHide: true,
             contentSpacing: '0 0 0 150px',
+            chart: []
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
     }
 
     componentDidMount() {
-        const url = 'http://localhost:3000/patients/' + this.props.match.params.id;
+        const url = 'http://localhost:3000/charts/patient/' + this.props.match.params.id;
         const options = {
             method: 'GET',
             headers: {
@@ -33,7 +34,7 @@ export default class ViewChart extends Component {
                     throw Error("Failed");
             })
             .then((data) => {
-                this.setState({patient: data['patient']});
+                this.setState({chart: data['chart'][0]});
             })
             .catch((error) => {
                 console.log(error);
@@ -46,14 +47,14 @@ export default class ViewChart extends Component {
     }
 
     render() {
-        console.log(this.state.patient);
+        console.log(this.state.chart);
         const { fname, lname, birth, classify, gender, weight, address, city, country, zip, idate, ptct, ino, mci, care, triage, ctype, disp, loctype, dest, loc, dispatch, contact, enroute, arrdes, arrscn  } = "";
 
         return (
             <React.Fragment>
                 <MainNav 
                     username={this.context.username} 
-                    patient={true} 
+                    viewcharts={true} 
                     sidebarHide={this.state.sidebarHide} 
                     contentSpacing={this.state.contentSpacing}
                     toggleCollapse={this.toggleCollapse}

@@ -112,6 +112,19 @@ export default class ViewCharts extends Component {
 
     render() {
         let searchPadding = '5px 0 5px ' + this.state.contentSpacing.slice(6);
+        console.log(this.state.charts);
+        let chartComponents = [];
+        this.state.charts.forEach(function(chart){
+            chartComponents.push(<ChartPreview 
+                fname={chart['fname']} 
+                lname={chart['lname']} 
+                birth={chart['birth']} 
+                address={chart['address']} 
+                phone={chart['phone']} 
+                id={chart['id']} 
+                key={chart['id']} />);
+        });
+
         return (
             <React.Fragment>
                 <MainNav 
@@ -201,17 +214,9 @@ export default class ViewCharts extends Component {
                     </form>
                 </div>
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
-                    {this.state.patients && !this.state.filter && this.state.patients.map(({ fname, lname, dob, birth, address, phone, history, id }, idx) => {
-                        return (
-                            <ChartPreview fname={fname} lname={lname} birth={birth} address={address} phone={phone} history={history} id={id} key={idx}/>
-                        )
-                    })}
-
-                    {this.state.filtered && this.state.filter && this.state.filtered.map(({ fname, lname, dob, birth, address, phone, history, id }, idx) => {
-                        return (
-                            <ChartPreview fname={fname} lname={lname} dob={dob} birth={birth} address={address} phone={phone} history={history} id={id} key={idx} />
-                        )
-                    })}
+                    {this.state.charts.length === 0 ? (<div><br /><h2 style={{textAlign:"center"}}>There are currently no patient charts in the system</h2></div>) : (
+                        chartComponents
+                    )}
                 </Container>
             </React.Fragment>
         )
