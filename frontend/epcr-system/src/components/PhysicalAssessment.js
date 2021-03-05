@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button'
 import '../App.css'
+import '../styles/PhysicalAssessment.css'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -50,9 +51,31 @@ export default class PhysicalAssessment extends Component {
             const stroke_abnormal_speech = this.state.stroke_abnormal_speech;
         */
         return (
-            <div>
-                <h2>Physical Assessment</h2>
-                
+            <div className="assessment mt-5">
+                <h2 className="mb-4">Physical Exam</h2>
+
+                <Form.Group as={Row} controlId="formHorizontalEmail">
+                    <Form.Label column sm={2}>Left Arm</Form.Label>
+                    <Col sm={4}>
+                        <Form.Control as="select" multiple>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </Form.Control>
+                    </Col>
+                    <Form.Label column sm={2}>Left Arm</Form.Label>
+                    <Col sm={4}>
+                        <Form.Control as="select" multiple>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </Form.Control>
+                    </Col>
+                </Form.Group>
 
 
 
