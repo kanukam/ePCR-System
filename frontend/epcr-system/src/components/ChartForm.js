@@ -17,7 +17,7 @@ export default class ChartForm extends Component {
             message: "",
             success: false,
             step: 1,
-            redirect: "/ViewCharts",
+            redirect: "/Patients",
             // all default variables across section forms!
             /* call */
             ino: "",
@@ -75,6 +75,27 @@ export default class ChartForm extends Component {
             phone: "",
             history: "", // subject to change
             braslow: "",
+            // Physical Assessment
+            abdomen: "",
+            pelvis: "",
+            back: "",
+            left_upper_arm: "",
+            left_lower_arm: "",
+            left_hand_wrist: "",
+            left_upper_leg: "",
+            left_lower_leg: "",
+            left_ankle_foot: "",
+            right_upper_arm: "",
+            right_lower_arm: "",
+            right_hand_wrist: "",
+            right_upper_leg: "",
+            right_lower_leg: "",
+            right_ankle_foot: "",
+            extra_findings: "",
+            stroke_time: "",
+            stroke_facial_droop: "",
+            stroke_arm_drift: "",
+            stroke_abnormal_speech: "",
             /* interventions */
             procedure: ""
         };
@@ -125,7 +146,7 @@ export default class ChartForm extends Component {
         const vehicle_accident_impact = this.state.vaimpact;
         const vehicle_accident_safety_equipment = this.state.vasafe;
         const vehicle_accident_mph = this.state.vaspd;
-        const vehicle_accident_ejected = this.state.eject;
+        const vehicle_accident_ejected = this.state.vaeject;
         const medications = this.state.medications;
         const procedures = this.state.procedure;
         const p_weight = this.state.weight;
@@ -137,6 +158,27 @@ export default class ChartForm extends Component {
         }
         const p_phone = this.state.address;
         const p_history = this.state.history;
+        // Physical Assessment
+        const abdomen = this.state.abdomen;
+        const pelvis = this.state.pelvis;
+        const back = this.state.back;
+        const left_upper_arm = this.state.left_upper_arm;
+        const left_lower_arm = this.state.left_lower_arm;
+        const left_hand_wrist = this.state.left_hand_wrist;
+        const left_upper_leg = this.state.left_upper_leg;
+        const left_lower_leg = this.state.left_lower_leg;
+        const left_ankle_foot = this.state.left_ankle_foot;
+        const right_upper_arm = this.state.right_upper_arm;
+        const right_lower_arm = this.state.right_lower_arm;
+        const right_hand_wrist = this.state.right_hand_wrist;
+        const right_upper_leg = this.state.right_upper_leg;
+        const right_lower_leg = this.state.right_lower_leg;
+        const right_ankle_foot = this.state.right_ankle_foot;
+        const extra_findings = this.state.extra_findings;
+        const stroke_time = this.state.stroke_time;
+        const stroke_facial_droop = this.state.stroke_facial_droop;
+        const stroke_arm_drift = this.state.stroke_arm_drift;
+        const stroke_abnormal_speech = this.state.stroke_abnormal_speech;
         // Patient Table
         const fname = this.state.fname;
         const lname = this.state.lname;
