@@ -27,6 +27,32 @@ function addChart(body, pbody, callback) {
     })
 }
 
+function addProcedure(body, callback) {
+    var sql = 'INSERT INTO procedures SET ?';
+    db.query(sql, body, (err, res) => {
+        if (err) {
+            console.log(err);
+            callback(err);
+        }
+        else {
+            callback(null);
+        }
+    });
+}
+
+function addMedication(body, callback) {
+    var sql = 'INSERT INTO medications SET ?';
+    db.query(sql, body, (err, res) => {
+        if (err) {
+            console.log(err);
+            callback(err);
+        }
+        else {
+            callback(null);
+        }
+    });
+}
+
 function viewAllCharts(callback) {
     db.query('SELECT * FROM charts', (err, results) => {
         if (err) {
@@ -75,4 +101,4 @@ function viewAllPatientCharts(callback){
     });
 }
 
-module.exports = { viewChart, viewAllCharts, viewAllChartsFromPatientID, addChart, updateChart, viewPatientChart, viewAllPatientCharts };
+module.exports = { viewChart, viewAllCharts, viewAllChartsFromPatientID, addChart, updateChart, addProcedure, addMedication, viewPatientChart, viewAllPatientCharts };

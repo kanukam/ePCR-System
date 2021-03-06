@@ -13,6 +13,9 @@ router.get("/patients", auth, controller.viewAllPatientCharts);
 
 router.post("/add", auth, controller.addChart);
 
+router.post("/addProc", auth, controller.addProcedure);
+router.post("/addMed", auth, controller.addMedication);
+
 router.get("/:chartId", auth, controller.viewChart);
 
 router.post("/:chartId/update", auth, controller.updateChart);
