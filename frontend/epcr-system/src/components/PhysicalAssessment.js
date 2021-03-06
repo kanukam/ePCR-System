@@ -9,13 +9,6 @@ import Col from 'react-bootstrap/Col';
 
 export default class PhysicalAssessment extends Component {
     static contextType = MainContext;
-    constructor(props) {
-        super(props);
-        // Creating Assessment checkboxes object
-        this.state = {
-            showStr: false
-        }
-    }
     navigate = step => (e) => {
         e.preventDefault();
         this.props.navigate(step);
