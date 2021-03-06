@@ -152,29 +152,6 @@ export default class PhysicalAssessment extends Component {
                         </Col>
                     </Form.Group>
 
-                    <Form.Group as={Row} controlId="formHorizontalEmail">
-                        <Form.Label column sm={2}>Pulse - Strength</Form.Label>
-                        <Col sm={3} className="mt-2">
-                            <Form.Control as="select" size="sm" onChange={this.props.handleChange('pulse_strength')} value={values.pulse_strength}>
-                                <option disabled selected value="">{this.context.translate('select')}</option>
-                                <option value="Normal">Normal</option>
-                                <option value="Weak">Weak</option>
-                                <option value="Absent">Absent</option>
-                                <option value="Bounding">Bounding</option>
-                            </Form.Control>
-                        </Col>
-                        <Col sm={1}></Col>
-
-                        <Form.Label column sm={2}>Pulse - Rate</Form.Label>
-                        <Col sm={3} className="mt-2">
-                            <Form.Control as="select" size="sm" onChange={this.props.handleChange('pulse_rate')} value={values.pulse_rate}>
-                                <option disabled selected value="">{this.context.translate('select')}</option>
-                                <option value="Regular">Regular</option>
-                                <option value="Irregular">Irregular</option>
-                            </Form.Control>
-                        </Col>
-                    </Form.Group>
-
                     <Form.Group as={Row}>
                         <Form.Label column sm={2}>Abdomen</Form.Label>
                         <Col sm={4} className="mt-2">
@@ -430,6 +407,29 @@ export default class PhysicalAssessment extends Component {
                             <Form.Check type="checkbox" label={`Open Fracture`} name="right_ankle_foot" value="Open Fracture" checked={values.assessmentCheckBoxes[257]} onChange={this.props.handleAssessmentCheckboxes(257)} />
                             <Form.Check type="checkbox" label={`Numbness`} name="right_ankle_foot" value="Numbness" checked={values.assessmentCheckBoxes[258]} onChange={this.props.handleAssessmentCheckboxes(258)} />
                             <Form.Check type="checkbox" label={`Burn`} name="right_ankle_foot" value="Burn" checked={values.assessmentCheckBoxes[259]} onChange={this.props.handleAssessmentCheckboxes(259)} />
+                        </Col>
+                    </Form.Group>
+
+                    <Form.Group as={Row} controlId="formHorizontalEmail">
+                        <Form.Label column sm={2}>Pulse - Strength</Form.Label>
+                        <Col sm={3} className="mt-2">
+                            <Form.Control as="select" size="sm" onChange={this.props.handleChange('pulse_strength')} value={values.pulse_strength}>
+                                <option disabled selected value="">{this.context.translate('select')}</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Weak">Weak</option>
+                                <option value="Absent">Absent</option>
+                                <option value="Bounding">Bounding</option>
+                            </Form.Control>
+                        </Col>
+                        <Col sm={1}></Col>
+
+                        <Form.Label column sm={2}>Pulse - Rate</Form.Label>
+                        <Col sm={3} className="mt-2">
+                            <Form.Control as="select" size="sm" onChange={this.props.handleChange('pulse_rate')} value={values.pulse_rate}>
+                                <option disabled selected value="">{this.context.translate('select')}</option>
+                                <option value="Regular">Regular</option>
+                                <option value="Irregular">Irregular</option>
+                            </Form.Control>
                         </Col>
                     </Form.Group>
 
