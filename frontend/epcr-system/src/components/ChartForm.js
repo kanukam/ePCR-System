@@ -35,7 +35,7 @@ export default class ChartForm extends Component {
             loctype: "",
             disp: "",
             dest: "",
-            agency: "",
+            agency: [],
             trauma: "",
             fallht: "",
             // this section must be blank by default
@@ -45,7 +45,7 @@ export default class ChartForm extends Component {
             va: "",
             vatype: "",
             vasafe: "",
-            vaimpact: "",
+            vaimpact: [],
             vaspd: "",
             vaeject: "",
             //
@@ -77,8 +77,13 @@ export default class ChartForm extends Component {
             country: "",
             zip: "",
             phone: "",
-            history: "", // subject to change
             braslow: "",
+            hpi: "",
+            historyGiven: [],
+            medAllergy: "",
+            envAllergy: "",
+            pastHistory: "",
+            pastHistoryOther: "",
             // Physical Assessment
             skin: [],
             mental: [],
@@ -119,13 +124,27 @@ export default class ChartForm extends Component {
             stroke_arm_drift: "",
             stroke_abnormal_speech: "",
             /* interventions */
-            procedure: "",
+            proc: "",
             none: [],
         };
     }
 
     handleChange = input => event => {
         this.setState({ [input]: event.target.value });
+    }
+
+    handleCheckbox = input => event => {
+        const target = event.target;
+        var value = target.value;
+        if(target.checked) {
+            if(input === "agency") { this.state.agency.push(value); }
+            else if(input === "vaimpact") { this.state.vaimpact.push(value); }
+            else if(input == "historyGiven") { this.state.historyGiven.push(value); }
+        } else {
+            if(input === "agency") { this.state.agency.splice(value, 1); }
+            else if(input === "vaimpact") { this.state.vaimpact.splice(value, 1); }
+            else if(input === "historyGiven") { this.state.historyGiven.splice(value, 1); }
+        }
     }
 
     handleAssessmentCheckboxes = boxNumber => event => {
@@ -196,9 +215,9 @@ export default class ChartForm extends Component {
         const location = this.state.dest;
         const incident_address = this.state.loc;
         const disposition = this.state.disp;
-        const agencies = this.state.agency;
-        const patient_count = this.state.ptct;
-        const triage_color = this.state.triage;
+        const agencies = this.state.agency.join();
+        const patient_count = this.state.ptct || null;
+        const triage_color = this.state.triage || null;
         const dispatch_date_time = this.state.dispatch || null;
         const enroute_date_time = this.state.enroute || null;
         const arrive_date_time = this.state.arrscn || null;
@@ -210,12 +229,13 @@ export default class ChartForm extends Component {
         const call_nature = this.state.nature;
         const care_level = this.state.care;
         const destination = this.state.dest;
-        const trauma_cause = this.state.trauma; 
-        const vehicle_accident_type = this.state.vatype;
-        const vehicle_accident_impact = this.state.vaimpact;
-        const vehicle_accident_safety_equipment = this.state.vasafe;
-        const vehicle_accident_mph = this.state.vaspd;
-        const vehicle_accident_ejected = this.state.vaeject;
+        let trauma_cause = this.state.trauma;
+        if(this.state.fallht) { trauma_cause += ", " + this.state.fallht; }
+        const vehicle_accident_type = this.state.vatype || null;
+        const vehicle_accident_impact = this.state.vaimpact.join();
+        const vehicle_accident_safety_equipment = this.state.vasafe || null;
+        const vehicle_accident_mph = this.state.vaspd || null;
+        const vehicle_accident_ejected = this.state.vaeject || null;
         const medications = this.state.medications;
         const procedures = this.state.procedure;
         const p_weight = this.state.weight;
@@ -225,8 +245,13 @@ export default class ChartForm extends Component {
         if(this.state.address || this.state.city || this.state.st || this.state.country || this.state.zip){
             p_address = this.state.address + " " + this.state.city + ", " + this.state.state + " " + this.state.zip +  " " + this.state.country;
         }
-        const p_phone = this.state.address;
-        const p_history = this.state.history;
+        const p_phone = this.state.phone;
+        const p_hpi = this.state.hpi;
+        const p_history_given = this.state.historyGiven.join();
+        const p_medical_allergies = this.state.medAllergy;
+        const p_environmental_allergies = this.state.envAllergy;
+        let p_past_medical_history = this.state.pastHistory;
+        if(this.state.pastHistoryOther) { p_past_medical_history += "," + this.state.pastHistoryOther; }
         // Physical Assessment
         const skin = this.state.skin.join();
         const mental = this.state.mental.join();
@@ -268,7 +293,7 @@ export default class ChartForm extends Component {
             method: 'POST',
             body: JSON.stringify({
                 body: {
-                    incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, medications, procedures, p_weight, p_classify, p_bcolor, p_address, p_phone, p_history, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot, extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech, skin, mental, neurological, head, neck, chest, pulse_strength, pulse_rate, vital_signs
+                    incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, medications, procedures, skin, mental, neurological, head, neck, chest, pulse_strength, pulse_rate, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot, extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech, vital_signs, p_weight, p_classify, p_bcolor, p_address, p_phone, p_hpi, p_history_given, p_medical_allergies, p_environmental_allergies, p_past_medical_history
                 },
                     pbody: {fname, lname, birth, gender}
             }),
@@ -322,6 +347,8 @@ export default class ChartForm extends Component {
                     nextStep={this.nextStep}
                     navigate={this.navigate}
                     handleChange={this.handleChange}
+                    handleCheckbox={this.handleCheckbox}
+                    handleAssessmentCheckboxes={this.handleAssessmentCheckboxes}
                     handleDate={this.handleDate}
                     handleDateNoTime={this.handleDateNoTime}
                     values={values}
@@ -332,19 +359,13 @@ export default class ChartForm extends Component {
                     prevStep={this.prevStep}
                     navigate={this.navigate}
                     handleChange={this.handleChange}
+                    handleCheckbox={this.handleCheckbox}
+                    handleAssessmentCheckboxes={this.handleAssessmentCheckboxes}
                     handleDate={this.handleDate}
                     handleDateNoTime={this.handleDateNoTime}
                     values={values}
                 />
             case 3:
-                return <AddInterventions
-                    nextStep={this.nextStep}
-                    prevStep={this.prevStep}
-                    navigate={this.navigate}
-                    handleChange={this.handleChange}
-                    values={values}
-                />
-            case 4:
                 return <PhysicalAssessment
                     nextStep={this.nextStep}
                     prevStep={this.prevStep}
@@ -352,6 +373,14 @@ export default class ChartForm extends Component {
                     handleChange={this.handleChange}
                     handleAssessmentCheckboxes={this.handleAssessmentCheckboxes}
                     appendVitals={this.appendVitals}
+                    values={values}
+                />
+            case 4:
+                return <AddInterventions
+                    nextStep={this.nextStep}
+                    prevStep={this.prevStep}
+                    navigate={this.navigate}
+                    handleChange={this.handleChange}
                     values={values}
                 />
             case 5:

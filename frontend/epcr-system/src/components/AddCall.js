@@ -58,12 +58,33 @@ export default class AddCall extends Component {
         });
     }
 
+    
+
+    //handleCheckbox = (e) => {
+        /*const target = e.target;
+        var value = target.value;
+        if(target.checked) {
+            this.props.agency.push(value);
+        } else {
+            this.props.agency.splice(value, 1);
+        }
+        alert(this.props.agency);
+        /*let object = [];
+        let container = document.querySelector("#agency");
+        let match = container.querySelectorAll("input[type=checkbox]:checked");
+        match.forEach(function(item) {
+            alert(item);
+            object.push(item);
+        });*/
+        //alert(object);
+    //}
+
     render() {
         const { values } = this.props;
         return (
             <div className="chart">
                 <form id="call">
-                    <h2>Call Information</h2>
+                    <h2>{this.context.translate('call-info')}</h2>
                     <h3>Details</h3>
                     <table className="cform">
                         <tr>
@@ -177,13 +198,13 @@ export default class AddCall extends Component {
                         <tr>
                             <th className="top" rowSpan="2">Other agencies on scene</th>
                             <td rowSpan="2">
-                                <div>
-                                    <label><input type="checkbox" name="agency" /> Local Police</label>
-                                    <label><input type="checkbox" name="agency" /> State Police</label><br/>
-                                    <label><input type="checkbox" name="agency" /> Federal Police</label>
-                                    <label><input type="checkbox" name="agency" /> Cruz Rojas</label><br/>
-                                    <label><input type="checkbox" name="agency" /> Bomberos</label>
-                                    <label><input type="checkbox" name="agency" /> Other</label>
+                                <div id="agency">
+                                    <label><input type="checkbox" name="agency" value="Local Police" checked={values.assessmentCheckBoxes[261]} onChange={this.props.handleAssessmentCheckboxes(261)} /> Local Police</label>
+                                    <label><input type="checkbox" name="agency" value="State Police" checked={values.assessmentCheckBoxes[262]} onChange={this.props.handleAssessmentCheckboxes(262)} /> State Police</label>
+                                    <label><input type="checkbox" name="agency" value="Federal Police" checked={values.assessmentCheckBoxes[263]} onChange={this.props.handleAssessmentCheckboxes(263)} /> Federal Police</label>
+                                    <label><input type="checkbox" name="agency" value="Cruz Rojas" checked={values.assessmentCheckBoxes[264]} onChange={this.props.handleAssessmentCheckboxes(264)} /> Cruz Rojas</label>
+                                    <label><input type="checkbox" name="agency" value="Bomberos" checked={values.assessmentCheckBoxes[265]} onChange={this.props.handleAssessmentCheckboxes(265)} /> Bomberos</label>
+                                    <label><input type="checkbox" name="agency" value="Other" checked={values.assessmentCheckBoxes[266]} onChange={this.props.handleAssessmentCheckboxes(266)} /> Other</label>
                                 </div>
                             </td>
                             <th>Trauma cause</th>
@@ -277,10 +298,10 @@ export default class AddCall extends Component {
                             <th rowSpan="2" valign="top">Impact</th>
                             <td rowSpan="2">
                                 <div>
-                                    <label><input type="checkbox" name="vaimpact" /> Head on</label>
-                                    <label><input type="checkbox" name="vaimpact" /> Side</label><br/>
-                                    <label><input type="checkbox" name="vaimpact" /> Rear</label>
-                                    <label><input type="checkbox" name="vaimpact" /> Roll over</label>
+                                    <label><input type="checkbox" name="vaimpact" value="Head on" checked={values.assessmentCheckBoxes[267]} onChange={this.props.handleAssessmentCheckboxes(267)} /> Head on</label>
+                                    <label><input type="checkbox" name="vaimpact" value="Side" checked={values.assessmentCheckBoxes[268]} onChange={this.props.handleAssessmentCheckboxes(268)} /> Side</label>
+                                    <label><input type="checkbox" name="vaimpact" value="Rear" checked={values.assessmentCheckBoxes[269]} onChange={this.props.handleAssessmentCheckboxes(269)} /> Rear</label>
+                                    <label><input type="checkbox" name="vaimpact" value="Roll over" checked={values.assessmentCheckBoxes[270]} onChange={this.props.handleAssessmentCheckboxes(270)} /> Roll over</label>
                                 </div>
                             </td>
                             <th>Estimated speed</th>
@@ -291,9 +312,9 @@ export default class AddCall extends Component {
                         <tr>
                             <th>Ejection from vehicle</th>
                             <td>
-                                <div>
-                                    <label><input type="radio" name="vaeject" value="Yes"/> Yes</label>
-                                    <label><input type="radio" name="vaeject" value="No" /> No</label>
+                                <div onChange={this.props.handleChange('vaeject')}>
+                                    <label><input type="radio" name="vaeject" value="Yes" defaultChecked checked={values.vaeject.includes("Yes")} /> Yes</label>
+                                    <label><input type="radio" name="vaeject" value="No" checked={values.vaeject.includes("No")} /> No</label>
                                 </div>
                             </td>
                         </tr>
@@ -400,11 +421,11 @@ export default class AddCall extends Component {
                     </div>
                     <div className="tab" onClick={this.navigate(3)}>
                         <img src="/profile.png" />
-                        <b>Interventions</b>
+                        <b>Physical Assessment</b>
                     </div>
                     <div className="tab" onClick={this.navigate(4)}>
                         <img src="/profile.png" />
-                        <b>Physical Assessment</b>
+                        <b>Interventions</b>
                     </div>
                     <div className="tab" onClick={this.navigate(5)}>
                         <img src="/profile.png" />
