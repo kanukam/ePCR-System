@@ -37,7 +37,7 @@ export default class PhysicalAssessment extends Component {
             <div className="assessment">
                 <div className="content">
                     <h2 className="mb-2">Physical Exam</h2>
-                    <Form.Group as={Row} controlId="formHorizontalEmail">
+                    <Form.Group as={Row}>
                         <Form.Label column sm={2}>Skin</Form.Label>
                         <Col sm={4} className="mt-2">
                             <Form.Check type="checkbox" label={`Normal`} name="skin" value="Normal" checked={values.assessmentCheckBoxes[1]} onChange={this.props.handleAssessmentCheckboxes(1)} />
@@ -70,7 +70,7 @@ export default class PhysicalAssessment extends Component {
                         </Col>
                     </Form.Group>
 
-                    <Form.Group as={Row} controlId="formHorizontalEmail">
+                    <Form.Group as={Row}>
                         <Form.Label column sm={2}>Neurological</Form.Label>
                         <Col sm={4} className="mt-2">
                             <Form.Check type="checkbox" label={`Normal`} name="neurological" value="Normal" checked={values.assessmentCheckBoxes[24]} onChange={this.props.handleAssessmentCheckboxes(24)} />
@@ -107,7 +107,7 @@ export default class PhysicalAssessment extends Component {
                         </Col>
                     </Form.Group>
 
-                    <Form.Group as={Row} controlId="formHorizontalEmail">
+                    <Form.Group as={Row}>
                         <Form.Label column sm={2}>Neck</Form.Label>
                         <Col sm={4} className="mt-2">
                             <Form.Check type="checkbox" label={`Normal`} name="neck" value="Normal" checked={values.assessmentCheckBoxes[52]} onChange={this.props.handleAssessmentCheckboxes(52)} />
