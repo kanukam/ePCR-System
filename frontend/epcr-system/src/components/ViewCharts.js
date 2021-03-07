@@ -204,13 +204,13 @@ export default class ViewCharts extends Component {
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
                     {this.state.charts.length === 0 && <div><br /><h2 style={{textAlign:"center"}}>There are currently no patient charts in the system</h2></div>}
 
-                    {this.state.charts && this.state.charts.length !== 0  && !this.state.filter && this.state.charts.map(({ fname, lname, birth, p_address, p_phone, id}, idx) => {
+                    {this.state.charts && !this.state.filter && this.state.charts.map(({ fname, lname, birth, p_address, p_phone, id}, idx) => {
                         return (
                             <ChartPreview fname={fname} lname={lname} birth={birth} address={p_address} phone={p_phone} id={id} key={idx} />
                         )
                     })}
 
-                    {this.state.charts && this.state.charts.length !== 0 && this.state.filter && this.state.filtered.map(({ fname, lname, birth, p_address, p_phone, id }, idx) => {
+                    {this.state.charts && this.state.filter && this.state.filtered.map(({ fname, lname, birth, p_address, p_phone, id }, idx) => {
                         return (
                             <ChartPreview fname={fname} lname={lname} birth={birth} address={p_address} phone={p_phone} id={id} key={idx} />
                         )
