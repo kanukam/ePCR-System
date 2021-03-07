@@ -119,8 +119,8 @@ export default class ViewCharts extends Component {
                 fname={chart['fname']} 
                 lname={chart['lname']} 
                 birth={chart['birth']} 
-                address={chart['address']} 
-                phone={chart['phone']} 
+                address={chart['p_address']} 
+                phone={chart['p_phone']} 
                 id={chart['id']} 
                 key={chart['id']} />);
         });
