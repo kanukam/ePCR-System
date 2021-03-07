@@ -37,27 +37,30 @@ export default class ViewCharts extends Component {
     }
 
     componentDidMount() {
-        const url = 'http://localhost:3000/charts/patients';
-        const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-        }
-        fetch(url, options)
-            .then((response) => {
-                if(response.ok)
-                    return response.json();
-                else
-                    throw Error("Failed");
-            })
-            .then((data) => {
-                this.setState({charts: data["charts"].reverse()});
-            })
-            .catch((error) => {
-                console.log(error);
-            }); 
+        // Delay slightly to allow server to insert into table
+        setTimeout(() => {
+            const url = 'http://localhost:3000/charts/patients';
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include'
+            }
+            fetch(url, options)
+                .then((response) => {
+                    if (response.ok)
+                        return response.json();
+                    else
+                        throw Error("Failed");
+                })
+                .then((data) => {
+                    this.setState({ charts: data["charts"].reverse() });
+                })
+                .catch((error) => {
+                    console.log(error);
+                }); 
+        }, 500)
     }
 
     toggleCollapse (){
