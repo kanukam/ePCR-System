@@ -96,7 +96,7 @@ export default class ViewCharts extends Component {
             filtered = filtered.filter(chart => chart.fname === this.state.firstname);
         }
         // filter last name
-        if (this.state.lname) {
+        if (this.state.lastname) {
             filtered = filtered.filter(chart => chart.lname === this.state.lastname);
         }
         // filter birth
