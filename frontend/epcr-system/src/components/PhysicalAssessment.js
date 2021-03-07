@@ -32,7 +32,6 @@ export default class PhysicalAssessment extends Component {
 
     render() {
         const{values} = this.props;
-        console.log(values);
         return (
             <div className="assessment">
                 <div className="content">
