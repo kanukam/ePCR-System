@@ -88,19 +88,19 @@ export default class ViewCharts extends Component {
     search(event){
         event.preventDefault();
         // filter first name
-        let filtered = this.state.patients;
+        let filtered = this.state.charts;
         if(this.state.firstname){
-            filtered = filtered.filter(patient => patient.fname === this.state.firstname);
+            filtered = filtered.filter(chart => chart.fname === this.state.firstname);
         }
         // filter last name
         if (this.state.lname) {
-            filtered = filtered.filter(patient => patient.lname === this.state.lastname);
+            filtered = filtered.filter(chart => chart.lname === this.state.lastname);
         }
         // filter birth
         if (this.state.dob) {
             var a = new Date(this.state.dob);
-            filtered = filtered.filter(patient => {
-                var b = new Date(patient.birth);
+            filtered = filtered.filter(chart => {
+                var b = new Date(chart.birth);
                 return (a.getDate() === b.getDate()) && (a.getDay() === b.getDay()) && ((a.getFullYear() === b.getFullYear()));
             })
         }
@@ -112,18 +112,6 @@ export default class ViewCharts extends Component {
 
     render() {
         let searchPadding = '5px 0 5px ' + this.state.contentSpacing.slice(6);
-        console.log(this.state.charts);
-        let chartComponents = [];
-        this.state.charts.forEach(function(chart){
-            chartComponents.push(<ChartPreview 
-                fname={chart['fname']} 
-                lname={chart['lname']} 
-                birth={chart['birth']} 
-                address={chart['p_address']} 
-                phone={chart['p_phone']} 
-                id={chart['id']} 
-                key={chart['id']} />);
-        });
 
         return (
             <React.Fragment>
@@ -214,9 +202,20 @@ export default class ViewCharts extends Component {
                     </form>
                 </div>
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
-                    {this.state.charts.length === 0 ? (<div><br /><h2 style={{textAlign:"center"}}>There are currently no patient charts in the system</h2></div>) : (
-                        chartComponents
-                    )}
+                    {this.state.charts.length === 0 && <div><br /><h2 style={{textAlign:"center"}}>There are currently no patient charts in the system</h2></div>}
+
+                    {this.state.charts && this.state.charts.length !== 0  && !this.state.filter && this.state.charts.map(({ fname, lname, birth, p_address, p_phone, id}, idx) => {
+                        return (
+                            <ChartPreview fname={fname} lname={lname} birth={birth} address={p_address} phone={p_phone} id={id} key={idx} />
+                        )
+                    })}
+
+                    {this.state.charts && this.state.charts.length !== 0 && this.state.filter && this.state.filtered.map(({ fname, lname, birth, p_address, p_phone, id }, idx) => {
+                        return (
+                            <ChartPreview fname={fname} lname={lname} birth={birth} address={p_address} phone={p_phone} id={id} key={idx} />
+                        )
+                    })}
+
                 </Container>
             </React.Fragment>
         )
