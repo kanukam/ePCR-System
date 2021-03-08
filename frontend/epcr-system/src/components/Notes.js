@@ -12,14 +12,18 @@ export default class Notes extends Component {
             sidebarHide: true,
             contentSpacing: '0 0 0 150px',
             message: '',
-            success: null,
+            notes: [],
+            noteBox: '',
+            emptyMessage: null,
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
         this.addNote = this.addNote.bind(this);
+        this.textInput = this.textInput.bind(this);
+        this.getNotes = this.getNotes.bind(this);
     }
 
     componentDidMount() {
-
+        this.getNotes();
     }
 
     toggleCollapse (){
@@ -27,45 +31,86 @@ export default class Notes extends Component {
         this.setState({sidebarHide : !this.state.sidebarHide});
     }
 
-    addNote(){
-        const note = "TESTING";
+    textInput(event){
+        this.setState({noteBox: event.target.value});
+    }
+
+    getNotes(){
         /* send to backend */
-        const url = 'http://localhost:3000/notes/0/chart/1/add';
+        const url = 'http://localhost:3000/notes/chart/' + this.props.chartId;
         const options = {
-            method: 'POST',
-            body: JSON.stringify({ note }),
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
             credentials: 'include'
         }
-        fetch(url, options).then((response) => {
-            if (!response.ok) {
-                throw Error;
+        fetch(url, options)
+            .then((response) => {
+                if(response.ok)
+                    return response.json();
+                else
+                    throw Error("Failed");
+            })
+            .then((data) => {
+                this.setState({notes: data});
+            })
+            .catch((error) => {
+                console.log(error);
+            }); 
+    }
+
+    addNote(){
+        const note = this.state.noteBox;
+        if(note !== ''){
+            this.setState({emptyMessage: null});
+            /* send to backend */
+            const url = 'http://localhost:3000/notes/chart/' + this.props.chartId + '/add';
+            const options = {
+                method: 'POST',
+                body: JSON.stringify({ note }),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include'
             }
-            this.setState({ message: "Add Successful" });
-        }).catch((error) => {
-            console.log(error);
-        })
-        this.setState({
-            success: true
-        })
-        console.log(this.state.message);
+            fetch(url, options).then((response) => {
+                if (!response.ok) {
+                    throw Error;
+                }
+                this.setState({ message: "Add Successful" });
+                this.setState({noteBox: ''});
+                this.getNotes();
+            }).catch((error) => {
+                console.log(error);
+            })
+        }
+        else{
+            this.setState({emptyMessage: 'Note is empty!'});
+        }
     }
 
     render() {
+        let notesComps = [];
+        this.state.notes.forEach(note => {
+            let date = new Date(note['dateAdded']);
+            notesComps.push(
+                <Container className="chart shadow" key={note['noteID']}>
+                    <p>{note['note']}</p>
+                    <b>{note['name']}</b>
+                    <br />
+                    <i>{date.toLocaleDateString()}</i>
+                </Container>
+            );
+        });
         return (
             <React.Fragment>
                 <Container className="chart shadow">
                     <h2>Notes:</h2>
+                    {notesComps}
                     <Container className="chart shadow">
-                        <h4>Note</h4>
-                    </Container>
-                    <Container className="chart shadow">
-                        <h4>Note</h4>
-                    </Container>
-                    <Container className="chart shadow">
-                        <h4>Note</h4>
+                        <textarea style={{resize:'none', width:'100%', height:'100px'}} value={this.state.noteBox} onChange={this.textInput}></textarea>
+                        {this.state.emptyMessage && <b>{this.state.emptyMessage}</b>}
                     </Container>
                     <Button onClick={this.addNote}>Add Note</Button>
                 </Container>

@@ -48,7 +48,7 @@ export default class ViewChart extends Component {
 
     render() {
         console.log(this.state.chart);
-        const { fname, lname, birth, classify, gender, weight, address, city, country, zip, idate, ptct, ino, mci, care, triage, ctype, disp, loctype, dest, loc, dispatch, contact, enroute, arrdes, arrscn  } = "";
+        const {fname, lname, birth, classify, gender, weight, address, city, country, zip, idate, ptct, ino, mci, care, triage, ctype, disp, loctype, dest, loc, dispatch, contact, enroute, arrdes, arrscn  } = this.state.chart;
 
         return (
             <React.Fragment>
@@ -164,7 +164,7 @@ export default class ViewChart extends Component {
                             </tbody>
                         </table>
                     
-                    <Notes />
+                    {this.state.chart['id'] && <Notes chartId={this.state.chart['id']}/>}
                 </Container>
             </React.Fragment>
         )
