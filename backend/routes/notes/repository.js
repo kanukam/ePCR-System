@@ -2,7 +2,7 @@
 const db = require('../../sql/database');
 
 function viewAllNotes(chartID, callback){
-    db.query(`SELECT notes.id AS noteID, note, dateAdded, name, chartID FROM notes LEFT JOIN users ON notes.userID = users.id where chartID=${chartID};`, (err, res) => {
+    db.query(`SELECT notes.id AS noteID, note, dateAdded, name, chartID FROM notes LEFT JOIN users ON notes.userID = users.id where chartID=${chartID}`, (err, res) => {
         return err
             ? callback(err)
             : callback(false, res);
@@ -10,7 +10,7 @@ function viewAllNotes(chartID, callback){
 }
 
 function addNote(userID, chartID, note, callback){
-    db.query(`INSERT INTO notes (userID, chartID, dateAdded, note) values (${userID}, ${chartID}, CURDATE(), '${note}');`, (err, res) => {
+    db.query(`INSERT INTO notes (userID, chartID, dateAdded, note) values (${userID}, ${chartID}, CURDATE(), '${note}')`, (err, res) => {
         return err
             ? callback(err)
             : callback(false, res);

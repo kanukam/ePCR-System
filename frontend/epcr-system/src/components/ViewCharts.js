@@ -28,6 +28,7 @@ export default class ViewCharts extends Component {
             enddate: null,
             firstname: "",
             lastname: "",
+            isData: null,
 
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
@@ -56,6 +57,7 @@ export default class ViewCharts extends Component {
                 })
                 .then((data) => {
                     this.setState({ charts: data["charts"].reverse() });
+                    (this.state.charts.length === 0) ? this.setState({isData: false}) : this.setState({isData: true});
                 })
                 .catch((error) => {
                     console.log(error);
@@ -205,7 +207,7 @@ export default class ViewCharts extends Component {
                     </form>
                 </div>
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
-                    {this.state.charts.length === 0 && <div><br /><h2 style={{textAlign:"center"}}>There are currently no patient charts in the system</h2></div>}
+                    {this.state.isData === false && <div><br /><h2 style={{textAlign:"center"}}>There are currently no patient charts in the system</h2></div>}
 
                     {this.state.charts && !this.state.filter && this.state.charts.map(({ fname, lname, birth, p_address, p_phone, id}, idx) => {
                         return (
