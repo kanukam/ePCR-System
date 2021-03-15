@@ -4,10 +4,12 @@ import React from 'react';
 import {MainContext} from './Auth';
 import Chart from './components/Chart'
 import Login from "./views/Login";
+import Reset from "./views/Reset";
 import Register from './components/Register'
 import Dashboard from "./views/Dashboard";
 import ViewChart from "./components/ViewChart";
 import ViewCharts from './components/ViewCharts';
+import ChangePassword from './components/ChangePassword';
 import Settings from './views/Settings';
 import {ProtectedRoute, ProtectedLogin} from "./Routes";
 import i18next from 'i18next';
@@ -116,6 +118,8 @@ class App extends React.Component {
             <ProtectedRoute exact path="/ViewChart/:id" auth={this.state.auth} component={ViewChart} />
             <ProtectedRoute exact path="/Settings" auth={this.state.auth} component={Settings} />
             <Route exact path="/Register" component={Register} />
+            <Route exact path="/Reset" component={Reset} />
+            <Route exact path="/Reset/:token" component={ChangePassword} />
           </Switch>
         </BrowserRouter>
       </MainContext.Provider>

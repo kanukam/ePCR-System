@@ -53,7 +53,10 @@
     "delete-self": "¿Está seguro de que desea eliminar su cuenta?",
     "select": "-Seleccione-",
     "view-charts": "Ver Gráficos",
-
+    "forgot-password": "¿Has olvidado tu contraseña?",
+    "reset-password": "Restablecer la contraseña",
+    "reset": "Reiniciar",
+    "email-sent": "Email enviado",
     "call-info": "Información de llamadas",
     "ino": "Incidente # / Ejecutar #",
     "unit": "Número de unidad",

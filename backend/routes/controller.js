@@ -22,6 +22,30 @@ function logout(req, res){
   res.cookie("token", "", { httpOnly: true }).clearCookie("token").sendStatus(200);
 }
 
+function forgot(req, res){
+  const {email} = req.body;
+  if(!email){
+    return res.status(401).json({ error: 'Email is blank' });
+  }
+  repo.forgot(email, (err) => {
+    err
+      ? res.status(500).json({ error: "Internal Server Error, try again" })
+      : res.status(200).json({status: "Success"});
+  })
+}
+
+function changePassword(req, res) {
+  const { password, token } = req.body;
+  if (!password || !token) {
+    return res.status(401).json({ error: 'Invalid' });
+  }
+  repo.changePassword(password, token, (err) => {
+    err
+      ? res.status(500).json({ error: "Internal Server Error, try again" })
+      : res.status(200).json({ status: "Success" });
+  })
+}
+
 function register(req, res) {
   const { username, password, email, phone, name } = req.body;
   // Mandatory Fields
@@ -55,5 +79,7 @@ module.exports = {
   logout,
   register,
   testAuth,
-  getUsername
+  getUsername,
+  forgot,
+  changePassword
 }

@@ -53,7 +53,10 @@
     "delete-self": "Are you sure you would like to delete your account?",
     "select": "-Select-",
     "view-charts": "View Charts",
-
+    "forgot-password": "Forgot Password?",
+    "reset-password": "Reset Password",
+    "reset": "Reset",
+    "email-sent": "Email Sent",
     "call-info": "Call Information",
     "ino": "Incident number",
     "unit": "Unit number",

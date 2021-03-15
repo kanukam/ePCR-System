@@ -21,4 +21,8 @@ app.use(cors({
 app.use(router); // Use /routes/router.js
 const server = http.createServer(app);
 
-server.listen(port, () => console.log(`ePCR backend listening on port ${port}`));
+server.listen(port, (err) => {
+  err?
+    console.log("ERROR") :
+    console.log(`ePCR backend listening on port ${port}`);
+});

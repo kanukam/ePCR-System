@@ -27,6 +27,12 @@ router.post("/register", controller.register); // Register user
 
 router.get("/test-auth", auth, controller.testAuth);
 
+// Forgot password Reset Email
+router.post("/forgot", controller.forgot);
+
+// Change password from reset link
+router.post("/change-password", controller.changePassword);
+
 router.get("/getUsername", auth, controller.getUsername);
 
 router.get("/", (req, res) => {

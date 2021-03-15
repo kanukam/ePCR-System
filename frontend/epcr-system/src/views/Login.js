@@ -48,7 +48,6 @@ export default class Login extends Component {
                 if (!response.ok) {
                     throw Error("Failed");
                 }
-                console.log(response);
                 this.setState({ errorMessage: "" });
                 this.setState({ authorized: true })
                 this.context.setAuth(true);
@@ -109,9 +108,15 @@ export default class Login extends Component {
                                         {this.context.translate('sign-in')}
                                     </Button>
                                 </Form>
-                                {/* Register */}
-                                <div className='mt-1'>
-                                    <Link to="/Register">{this.context.translate('register')}</Link>
+                                <div className="mt-3">
+                                    {/* Register */}
+                                    <div className='mt-1 float-left'>
+                                        <Link to="/Register">{this.context.translate('register')}</Link>
+                                    </div>
+                                    {/* Forgot Password */}
+                                    <div className='mt-1 float-right'>
+                                        <Link to="/Reset">{this.context.translate('forgot-password')}</Link>
+                                    </div>
                                 </div>
                                 {/* Error Message displayed if invalid login attempt */}
                                 {this.state.errorMessage && <p className="text-danger"> { this.state.errorMessage } </p>}

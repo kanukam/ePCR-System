@@ -1,8 +1,17 @@
 const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.JWT_SECRET;
+const siteEmail = process.env.EMAIL;
+const emailPassword = process.env.EMAIL_PASSWORD;
 const bcrypt = require('bcrypt');
-
 const db = require('../sql/database');
+const nodemailer = require('nodemailer');
+const mailConnection = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: siteEmail,
+        pass: emailPassword
+    }
+})
 
 // Can change this later, but will for now work with a login form:
 function login(username, typedPassword, callback){
@@ -82,7 +91,65 @@ function createAccount(username, hash, email, phone, name, callback){
     })
 }
 
+function forgot(email, callback) {
+    db.query(`SELECT * from users WHERE email='${email}'`,
+        (err, res) => {
+            if (err) {
+                return callback(err)
+            }
+            // email exists in database, send email with link
+            if (res.length != 0) {
+                // Link will work for an hour
+                const token = jwt.sign({ email }, jwtSecret, { expiresIn: 3600 });
+                // Change later when domain established
+                const link = `http://localhost:3001/Reset/${token}`
+                const mailOptions = {
+                    from: siteEmail,
+                    to: email,
+                    subject: "ePCR System - Reset Password",
+                    html: `<a href=${link}> Reset Password </a>`
+                }
+                mailConnection.sendMail(mailOptions, (err) => {
+                    err
+                        ? callback("Error")
+                        : callback(null);;
+                })
+            }
+            else{
+                return callback(true);
+            }
+        });
+}
+
+function changePassword(password, token, callback) {
+    jwt.verify(token, jwtSecret, (err, decoded) => {
+        if (err)
+            callback('401: Unauthorized. Invalid token');
+        else {
+            const {email} = decoded;
+            // Hash and set new password
+            bcrypt.hash(password, 10, (err, hash) => {
+                if (err) {
+                    return callback(err);
+                }
+                let sql = 'UPDATE users SET password = ? WHERE email = ?';
+                // Update password
+                db.query(sql, [hash, email], err => {
+                    if (err) {
+                        return callback(err);
+                    }
+                    else {
+                        return callback(null);
+                    }
+                })
+            })
+        }
+    });
+}
+
 module.exports = {
     register,
-    login
+    login,
+    changePassword,
+    forgot,
 }
