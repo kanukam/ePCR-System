@@ -18,6 +18,7 @@ function createChartPDF(info, locale, cb){
         arrive_date_time,
         patient_contact_date_time,
         depart_date_time,
+        arrive_destination_date_time, //!!
         transfer_date_time,
         unit_number,
         call_type,
@@ -117,26 +118,28 @@ function createChartPDF(info, locale, cb){
                      align: 'left'
                 })
                 .moveDown()
+
                 .text(tags.callInformation, {align: 'center', width: 410})
                 .text(`
                     ${tags.incidentNumber}: ${incident_number}
                     ${tags.unitNumber}: ${unit_number}
-                    ${tags.callType}: ${tags.callTypes[call_type]}
-                    ${tags.callNature}: ${tags.callNatures[call_nature]}
+                    ${tags.callType}: ${tags.callTypes[call_type] || call_type}
+                    ${tags.callNature}: ${tags.callNatures[call_nature] || call_nature}
                     ${tags.incidentDate}: ${incident_date}
-                    ${tags.location}: ${tags.locations[location]}
+                    ${tags.location}: ${tags.locations[location] || location}
                     ${tags.incidentAddress}: ${incident_address}
-                    ${tags.disposition}: ${tags.dispositions[disposition]}
-                    ${tags.destination}: ${tags.destinations[destination]}
+                    ${tags.disposition}: ${tags.dispositions[disposition] || disposition}
+                    ${tags.destination}: ${tags.destinations[destination] || destination}
                     ${tags.agency}: ${tags.agencies[agencies] || agencies}
                     ${trags.trauma}: ${tags.traumas[trauma_cause] || trauma_cause}
                 `, { align: 'left' })
                 .moveDown()
+
                 .text(`MCI`, {align: 'center', width: 410})
                 .moveDown()
                 .text(`
                     ${tags.numberOfPatients}: ${patient_count}
-                    ${tags.triageColor}: ${tags.colors[triage_color]}
+                    ${tags.triageColor}: ${tags.colors[triage_color] || triage_color}
                 `, { align: 'left' })
             if(vehicle_accident_type){
                 doc
@@ -144,7 +147,7 @@ function createChartPDF(info, locale, cb){
                     .text(`
                         ${tags.vehicleAccidentType}: ${tags.vehicleAccidenTypes[vehicle_accident_type]}
                         ${tags.vehicleAccidentImpact}: ${tags.vehicleAccidentImpacts[vehicle_accident_impact]}
-                        ${tags.vehicleAccidentSafetyEquipment}: ${tags.vehicleAccidentSafetyEquipment[vehicle_accident_safety_equipment]}
+                        ${tags.vehicleAccidentSafetyEquipment}: ${tags.vehicleAccidentSafetyEquipments[vehicle_accident_safety_equipment]}
                         ${tags.vehicleAccidentSpeed}: ${vehicle_accident_mph}mph / ${(vehicle_accident_mph*1.61).toFixed(2)}kmph
                         ${tags.vehicleAccidentEjection}: ${tags.yesNo[vehicle_accident_ejected]}
                         `, { align: 'left'})
@@ -157,10 +160,69 @@ function createChartPDF(info, locale, cb){
                     ${tags.arriveScene}: ${arrive_date_time}
                     ${tags.patientContact}: ${patient_contact_date_time}
                     ${tags.departScene}: ${depart_date_time}
-                    ${tags.arriveDestination}: ${arive_destination_date_time}
+                    ${tags.arriveDestination}: ${arrive_destination_date_time}
                     ${tags.transferCare}: ${transfer_date_time}
                 `, { align: 'left'})
+                .moveDown()
+
                 .text("HPI", {align: 'center', width: 410})
+                .text(p_hpi, {align: "left"})
+                .moveDown()
+
+                .text(tags.medicalHistory, {align: 'center', width: 410})
+                .text(`
+                    ${tags.medicationAllergies}: ${p_medical_allergies}
+                    ${tags.environmentalAllergies}: ${p_environmental_allergies}
+                    ${tags.pastMedicalHistory}: ${p_past_medical_historyL}
+                    ${tags.medications}: ${medications}
+                    `, { align: 'left'})
+                .moveDown()
+
+                .text(tags.physicalExam, {align: 'center', width: 410})
+                .text(`
+                    ${tags.skin}: ${skin}
+                    ${tags.mental}: ${mental}
+                    ${tags.neurological}: ${neurological}
+                    ${tags.head}: ${head}
+                    ${tags.neck}: ${neck}
+                    ${tags.chest}: ${chest}
+
+                    ${tags.pulse}
+                        ${tags.strength}: ${pulse_strength}
+                        ${tags.rate}: ${pulse_rate}
+                    
+                    ${tags.abdomen}: ${abdomen}
+                    ${tags.pelvis}: ${pelvis}
+                    ${tags.back}: ${back}
+                    ${tags.leftUpperArm}: ${left_upper_arm}
+                    ${tags.leftLowerArm}: ${left_lower_arm}
+                    ${tags.leftHandWrist}: ${left_hand_wrist}
+                    ${tags.rightUpperArm}: ${right_upper_arm}
+                    ${tags.rightLowerArm}: ${right_lower_arm}
+                    ${tags.rightHandWrist}: ${right_hand_wrist}
+                    ${tags.leftUpperLeg}: ${left_upper_leg}
+                    ${tags.leftLowerLeg}: ${left_lower_leg}
+                    ${tags.leftAnkleFoot}: ${left_ankle_foot}
+                    ${tags.rightUpperLeg}: ${right_upper_leg}
+                    ${tags.rightLowerLeg}: ${right_lower_leg}
+                    ${tags.rightAnkleFoot}: ${right_ankle_foot}
+                    ${tags.additionalFindings}: ${extra_findings}
+                `, { align: left })
+                .moveDown()
+
+                .text(tags.stroke, {align: 'center', width: 410})
+                .text(`
+                    ${tags.strokeTime}: ${stroke_time}
+                        ${tags.strokeFacialDroop}: ${tags.yesNo[stroke_facial_droop]}
+                        ${tags.strokeArmDrift}: ${tags.yesNo[stroke_arm_drift]}
+                        ${tags.strokeAbnormalSpeech}: ${tags.yesNo[stroke_abnormal_speech]}
+                `, {align: "left"})
+                .moveDown()
+
+                .text(tags.vitalSigns, {align: 'center', width: 410})
+                .text(`
+                    ${vital_signs}
+                `, {align: "left"})
                 // get a blob when you're done
             doc.end();
             stream.on('finish', function() {
