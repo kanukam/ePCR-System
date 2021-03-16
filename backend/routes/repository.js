@@ -108,7 +108,7 @@ function forgot(email, callback) {
                     from: siteEmail,
                     to: email,
                     subject: "ePCR System - Reset Password",
-                    html: `<a href=${link}> Reset Password </a>`
+                    html: `<a href=${link}> Reset Password </a><br><p>Expires in 1 hour</p>`
                 }
                 mailConnection.sendMail(mailOptions, (err) => {
                     err
