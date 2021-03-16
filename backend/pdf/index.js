@@ -1,8 +1,7 @@
 const PDFDocument = require('pdfkit');
-const blobStream  = require('blob-stream');
 const fs = require('fs');
 
-function createChartPDF(info, locale, cb){
+function createChartPDF(info, locale, pipeTo, cb){
     // create a document the same way as above
     let {
         incident_number,
@@ -84,13 +83,14 @@ function createChartPDF(info, locale, cb){
     fs.readFile(`./locales/${locale}.json`, 'utf8', (err, data) => {
         let tags;
         if (err)
-            return console.log(`Error reading file from disk: ${err}`);
+            return callback(err)
         else
             tags = JSON.parse(data);
             const doc = new PDFDocument;
+            doc.pipe(pipeTo);
 
             // pipe the document to a blob
-            const stream = doc.pipe(blobStream());
+            //const stream = doc.pipe(blobStream());
         
             // add your content to the document here, as usual
             doc.addPage()
@@ -106,10 +106,10 @@ function createChartPDF(info, locale, cb){
                     ${tags.demographics}
                     ${tags.fName}: ${fname}
                     ${tags.lName}: ${lname}
-                    ${tags.classificationText}: ${tags.classifications[p_classify]}
+                    ${tags.classificationText}: ${p_classify}
                     ${tags.DOB}: ${birth}
                     ${tags.weight}: ${p_weight} kg
-                    ${tags.braslow}: ${tags.colors[p_bcolor]}
+                    ${tags.braslow}: ${p_bcolor}
                     ${tags.sex}: ${gender}
                     ${tags.address}: ${p_address}
                     ${tags.phone}: ${p_phone}
@@ -123,15 +123,15 @@ function createChartPDF(info, locale, cb){
                 .text(`
                     ${tags.incidentNumber}: ${incident_number}
                     ${tags.unitNumber}: ${unit_number}
-                    ${tags.callType}: ${tags.callTypes[call_type] || call_type}
-                    ${tags.callNature}: ${tags.callNatures[call_nature] || call_nature}
+                    ${tags.callType}: ${call_type}
+                    ${tags.callNature}: ${call_nature}
                     ${tags.incidentDate}: ${incident_date}
-                    ${tags.location}: ${tags.locations[location] || location}
+                    ${tags.location}: ${location}
                     ${tags.incidentAddress}: ${incident_address}
-                    ${tags.disposition}: ${tags.dispositions[disposition] || disposition}
-                    ${tags.destination}: ${tags.destinations[destination] || destination}
-                    ${tags.agency}: ${tags.agencies[agencies] || agencies}
-                    ${trags.trauma}: ${tags.traumas[trauma_cause] || trauma_cause}
+                    ${tags.disposition}: ${disposition}
+                    ${tags.destination}: ${destination}
+                    ${tags.agency}: ${agencies}
+                    ${trags.trauma}: ${trauma_cause}
                 `, { align: 'left' })
                 .moveDown()
 
@@ -139,15 +139,15 @@ function createChartPDF(info, locale, cb){
                 .moveDown()
                 .text(`
                     ${tags.numberOfPatients}: ${patient_count}
-                    ${tags.triageColor}: ${tags.colors[triage_color] || triage_color}
+                    ${tags.triageColor}: ${triage_color}
                 `, { align: 'left' })
             if(vehicle_accident_type){
                 doc
                     .text(tags.vehicleAccident, {align: 'center', width: 410})
                     .text(`
-                        ${tags.vehicleAccidentType}: ${tags.vehicleAccidenTypes[vehicle_accident_type]}
-                        ${tags.vehicleAccidentImpact}: ${tags.vehicleAccidentImpacts[vehicle_accident_impact]}
-                        ${tags.vehicleAccidentSafetyEquipment}: ${tags.vehicleAccidentSafetyEquipments[vehicle_accident_safety_equipment]}
+                        ${tags.vehicleAccidentType}: ${vehicle_accident_type}
+                        ${tags.vehicleAccidentImpact}: ${vehicle_accident_impact}
+                        ${tags.vehicleAccidentSafetyEquipment}: ${vehicle_accident_safety_equipment}
                         ${tags.vehicleAccidentSpeed}: ${vehicle_accident_mph}mph / ${(vehicle_accident_mph*1.61).toFixed(2)}kmph
                         ${tags.vehicleAccidentEjection}: ${tags.yesNo[vehicle_accident_ejected]}
                         `, { align: 'left'})
@@ -213,9 +213,9 @@ function createChartPDF(info, locale, cb){
                 .text(tags.stroke, {align: 'center', width: 410})
                 .text(`
                     ${tags.strokeTime}: ${stroke_time}
-                        ${tags.strokeFacialDroop}: ${tags.yesNo[stroke_facial_droop]}
-                        ${tags.strokeArmDrift}: ${tags.yesNo[stroke_arm_drift]}
-                        ${tags.strokeAbnormalSpeech}: ${tags.yesNo[stroke_abnormal_speech]}
+                        ${tags.strokeFacialDroop}: ${stroke_facial_droop}
+                        ${tags.strokeArmDrift}: ${stroke_arm_drift}
+                        ${tags.strokeAbnormalSpeech}: ${stroke_abnormal_speech}
                 `, {align: "left"})
                 .moveDown()
 
@@ -224,16 +224,13 @@ function createChartPDF(info, locale, cb){
                     ${vital_signs}
                 `, {align: "left"})
                 // get a blob when you're done
-            doc.end();
-            stream.on('finish', function() {
-                // get a blob you can do whatever you like with
-                const blob = stream.toBlob('application/pdf');
-        
-                // or get a blob URL for display in the browser
-                const url = stream.toBlobURL('application/pdf');
             
-                cb(blob);
-            });
+            doc.end();
+            cb();
     });
 
+}
+
+module.exports = {
+    createChartPDF
 }
