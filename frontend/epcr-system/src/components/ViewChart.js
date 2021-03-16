@@ -46,6 +46,16 @@ export default class ViewChart extends Component {
         this.setState({sidebarHide : !this.state.sidebarHide});
     }
 
+    year(date) {
+        let temp = date.split('T')[0]
+        temp = temp.split('-');
+        let year = temp[0];
+        let month = temp[1];
+        let day = temp[2];
+        return day + '/' + month + '/' + year;
+
+    }
+
     render() {
         console.log(this.state.chart);
         const {fname, lname, birth, classify, gender, weight, address, city, country, zip, idate, ptct, ino, mci, care, triage, ctype, disp, loctype, dest, loc, dispatch, contact, enroute, arrdes, arrscn  } = this.state.chart;
@@ -72,7 +82,7 @@ export default class ViewChart extends Component {
                                 <td width="10%">Classification</td>
                                 <td width="20%">{classify}</td>
                                 <td width="10%">D.O.B.</td>
-                                <td width="20%">{birth}</td>
+                                <td width="20%">{birth? this.year(birth): null}</td>
                             </tr>
                             <tr>
                                 <td>Address</td>
