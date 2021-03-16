@@ -98,6 +98,11 @@ con.connect(err => {
         p_medical_allergies TINYTEXT NULL,
         p_environmental_allergies TINYTEXT NULL,
         p_past_medical_history MEDIUMTEXT NULL,
+        intake_bleeding VARCHAR(500) NULL,
+        intake_iv_fluids VARCHAR(500) NULL,
+        intake_oral_fluids VARCHAR(500) NULL,
+        intake_vomit VARCHAR(500) NULL,
+        obstetrics MEDIUMTEXT NULL,
         PRIMARY KEY (id)
         )`, (err, res) => {
         if (err) return console.log(err);
@@ -123,69 +128,12 @@ con.connect(err => {
         patientID INT(11) UNSIGNED, 
         chartID INT(11) UNSIGNED, 
         userID INT(11) UNSIGNED, 
-        dateAdded DATE,
-        note MEDIUMTEXT, 
+        body MEDIUMTEXT, 
         PRIMARY KEY (id)
         )`, (err, res) => {
         if (err) return console.log(err);
         if (res.changedRows > 0) console.log("\t...'notes' table created/updated");
         else console.log("\t'notes' table up to date.");
-    });
-
-    con.query(`CREATE TABLE IF NOT EXISTS procedures (
-        id INT NOT NULL AUTO_INCREMENT,
-        name VARCHAR(255) NULL,
-        time DATE NULL,
-        location VARCHAR(255) NULL,
-        type VARCHAR(255) NULL,
-        size VARCHAR(255) NULL,
-        tube VARCHAR(225) NULL,
-        needle VARCHAR(225) NULL,
-        fluid VARCHAR(225) NULL,
-        result VARCHAR(255) NULL,
-        delivery VARCHAR(255) NULL,
-        amount VARCHAR(255) NULL,
-        adjuncts VARCHAR(255) NULL,
-        physician VARCHAR(255) NULL,
-        orders VARCHAR(255) NULL,
-        teeth VARCHAR(255) NULL,
-        confirm VARCHAR(255) NULL,
-        findings VARCHAR(255) NULL,
-        rhythm VARCHAR(255) NULL,
-        mode VARCHAR(255) NULL,
-        rate VARCHAR(255) NULL,
-        output VARCHAR(255) NULL,
-        capture VARCHAR(255) NULL,
-        cprStart DATETIME NULL,
-        cprStop DATETIME NULL,
-        outcome VARCHAR(255) NULL,
-        effective VARCHAR(45) NULL,
-        energy VARCHAR(45) NULL,
-        converted VARCHAR(255) NULL,
-        pulseCapture VARCHAR(255) NULL,
-        patientID VARCHAR(45) NULL,
-        userID VARCHAR(45) NULL,
-        PRIMARY KEY (id)
-    )`, (err, res) => {
-        if (err) return console.log(err);
-        if (res.changedRows > 0) console.log("\t...'procedures' table created/updated");
-        else console.log("\t'procedures' table up to date.");
-    });
-
-    con.query(`CREATE TABLE IF NOT EXISTS medications (
-        id INT NOT NULL AUTO_INCREMENT,
-        name VARCHAR(255) NULL,
-        time DATETIME NULL,
-        dosage VARCHAR(45) NULL,
-        unit VARCHAR(255) NULL,
-        route VARCHAR(255) NULL,
-        patientID VARCHAR(45) NULL,
-        userID VARCHAR(45) NULL,
-        PRIMARY KEY (id)
-    )`, (err, res) => {
-        if (err) return console.log(err);
-        if (res.changedRows > 0) console.log("\t...'medications' table created/updated");
-        else console.log("\t'medications' table up to date.");
     });
 });
 
