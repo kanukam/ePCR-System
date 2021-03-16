@@ -278,12 +278,15 @@ export default class ChartForm extends Component {
 
     setPatient = string => {
         var patient = string.split(",");
+        var birthDisplay = null;
+        if(patient[3]) { birthDisplay = new Date(patient[3]); }
         this.setState({
             pid: patient[0],
             fname: patient[1],
             lname: patient[2],
             birth: patient[3],
-            gender: patient[4]
+            gender: patient[4],
+            birthDisplay
         });
     }
 
@@ -396,7 +399,8 @@ export default class ChartForm extends Component {
                 obstetrics += " | Feel baby moving: " + this.state.oBabyMoving + " | Delivery time: " + this.state.oDelivery + " | Placenta delivered: " + this.state.oPlacenta + " | Baby sex: " + this.state.oBabySex + " | Born: " + this.state.oBorn + " | APGAR score: " + this.state.oAPGAR;
             }
             /* patient table */
-            const id = this.state.pid;
+            const patientID = this.state.pid || null;
+            //alert(patientID);
             const fname = this.state.fname;
             const lname = this.state.lname;
             const birth = this.state.birth || null;
@@ -409,7 +413,8 @@ export default class ChartForm extends Component {
                     body: {
                         incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, medications, procedures, skin, mental, neurological, head, neck, chest, pulse_strength, pulse_rate, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot, extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech, vital_signs, p_weight, p_classify, p_bcolor, p_address, p_phone, p_hpi, p_history_given, p_medical_allergies, p_environmental_allergies, p_past_medical_history, intake_bleeding, intake_iv_fluids, intake_oral_fluids, intake_vomit, obstetrics
                     },
-                    pbody: { fname, lname, birth, gender }
+                    pbody: { fname, lname, birth, gender },
+                    patientID: patientID
                 }),
                 headers: {
                     'Content-Type': 'application/json'
