@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.JWT_SECRET;
 const siteEmail = process.env.EMAIL;
 const emailPassword = process.env.EMAIL_PASSWORD;
+const frontendUrl = process.env.FRONTEND_HOST_URL;
 const bcrypt = require('bcrypt');
 const db = require('../sql/database');
 const nodemailer = require('nodemailer');
@@ -102,7 +103,7 @@ function forgot(email, callback) {
                 // Link will work for an hour
                 const token = jwt.sign({ email }, jwtSecret, { expiresIn: 3600 });
                 // Change later when domain established
-                const link = `http://localhost:3001/Reset/${token}`
+                const link = `${frontendUrl}Reset/${token}`
                 const mailOptions = {
                     from: siteEmail,
                     to: email,
