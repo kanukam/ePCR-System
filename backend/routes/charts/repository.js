@@ -28,6 +28,20 @@ function addChart(body, pbody, callback) {
     })
 }
 
+function addChartFromPatientID(body, patientId, callback){
+    body["patientID"] = patientId;
+    var sql = 'INSERT INTO charts SET ?';
+    db.query(sql, body, (err, res) => {
+        if (err) {
+            console.log(err);
+            callback(err);
+        }
+        else {
+            callback(null);
+        }
+    })
+}
+
 function viewAllCharts(callback) {
     db.query('SELECT * FROM charts', (err, results) => {
         if (err) {
@@ -193,7 +207,8 @@ module.exports = {
     viewChart, 
     viewAllCharts, 
     viewAllChartsFromPatientID, 
-    addChart, 
+    addChart,
+    addChartFromPatientID,
     addProcedure,
     addMedication,
     updateChart, 
