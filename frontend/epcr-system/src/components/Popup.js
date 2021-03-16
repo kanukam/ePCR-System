@@ -403,41 +403,6 @@ export default class Popup extends Component {
                         </div>
                     </div>
                 );
-            case "Cardiac Arrest":
-                return (
-                    <div>
-                        <div>
-                            <span>Start time CPR</span>
-                            <DatePicker
-                                selected={this.props.pCPRstartDisplay ? this.props.pCPRstartDisplay : false}
-                                placeholderText="dd/mm/yyyy --:-- --"
-                                onChange={this.props.handleDate('pCPRstart')}
-                                timeInputLabel="Time:"
-                                dateFormat="dd/MM/yyyy h:mm aa"
-                                showTimeInput
-                            />
-                        </div>
-                        <div>
-                            <span>Stop time CPR</span>
-                            <DatePicker
-                                selected={this.props.pCPRstopDisplay ? this.props.pCPRstopDisplay : false}
-                                placeholderText="dd/mm/yyyy --:-- --"
-                                onChange={this.props.handleDate('pCPRstop')}
-                                timeInputLabel="Time:"
-                                dateFormat="dd/MM/yyyy h:mm aa"
-                                showTimeInput
-                            />
-                        </div>
-                        <div className="group">
-                            <span>Outcome</span>
-                            <select name="pOutcome" value={this.props.pOutcome} onChange={this.props.changeInter('pOutcome')}>
-                                <option disabled selected value="">-Select-</option>
-                                <option value="Pulse return">Pulse return</option>
-                                <option value="Expired">Expired</option>
-                            </select>
-                        </div>
-                    </div>
-                );
             case "Cardiac Defib - AED":
                 return (
                     <div className="group" onChange={this.props.changeInter('pEffective')}>
@@ -544,7 +509,7 @@ export default class Popup extends Component {
             patientComponents.push(<PatientRow
                 fname={this.state.patients[i]["fname"]}
                 lname={this.state.patients[i]["lname"]}
-                dob={this.displayTime(this.state.patients[i]["birth"])}
+                dob={this.state.patients[i]["birth"] ? this.displayTime(this.state.patients[i]["birth"]) : null}
                 id={this.state.patients[i].id}
                 index={i}
                 select={this.selectPatient}
@@ -569,133 +534,183 @@ export default class Popup extends Component {
                             </table>
                         </div>
                     </div>
-                : <div className="popup shadow">
-                    <h2>{this.props.text}</h2>
-                    {this.props.text.includes("Procedure") ?
-                        <form>
-                            <Row>
-                                <Col>
-                                    <div className="group">
-                                        <span>Procedure</span>
-                                        <select className="multiple" name="pName" style={{ height: '150px' }} onChange={this.props.changeInter('pName')} multiple>
-                                            <option value="Blood Glucose">Blood Glucose</option>
-                                            <option value="Hemorrhage Control">Hemorrhage Control</option>
-                                            <option value="Splinting">Splinting</option>
-                                            <option value="Oxygen">Oxygen</option>
-                                            <option value="Spinal Precautions">Spinal Precautions</option>
-                                            <option value="Pelvic Binder">Pelvic Binder</option>
-                                            <option value="Suction">Suction</option>
-                                            <option value="Basic Airway - BVM">Basic Airway - BVM</option>
-                                            <option value="MD Consult">MD Consult</option>
-                                            <option value="IV">IV</option>
-                                            <option value="IO IV">IO IV</option>
-                                            <option value="Pleural Decompression">Pleural Decompression</option>
-                                            <option value="Advanced Airway - LMA">Advanced Airway - LMA</option>
-                                            <option value="Advanced Airway - Intubation">Advanced Airway - Intubation</option>
-                                            <option value="Cricothyrotomy">Cricothyrotomy</option>
-                                            <option value="12 Lead EKG">12 Lead EKG</option>
-                                            <option value="Cardiac Arrest">Cardiac Arrest</option>
-                                            <option value="Cardiac Defib - AED">Cardiac Defib - AED</option>
-                                            <option value="Cardiac Defib - Manual">Cardiac Defib - Manual</option>
-                                            <option value="Cardiac Pacing">Cardiac Pacing</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <span>{inter.pName === "Cardiac Arrest" ? "Time of arrest" : "Time"}</span>
-                                        <DatePicker
-                                            selected={inter.pTimeDisplay ? inter.pTimeDisplay : false}
-                                            placeholderText="dd/mm/yyyy --:-- --"
-                                            onChange={this.props.handleDate('pTime')}
-                                            timeInputLabel="Time:"
-                                            dateFormat="dd/MM/yyyy h:mm aa"
-                                            showTimeInput
-                                        />
-                                    </div>
-                                    {this.renderProc(inter.pName)}
-                                    <div className="group">
-                                        <span>{inter.pName === "Cardiac Arrest" ? "CPR done by" : "Crew"}</span>
-                                        <input type="text" value="John Doe" disabled />
-                                    </div>
-                                    <small>Note: Crew member name should be selected from current user's information.</small><br/>
-                                    <small style={{color:'red'}}>{inter.message}</small>
-                                    <div className="bottom">
-                                        <input type="button" className="left" value="Add" onClick={this.props.submitProcedure} />
-                                        <input type="button" className="right" value="Cancel" onClick={this.props.closePopup} />
-                                    </div>
-                                </Col>
-                            </Row>
-                        </form>
-                        : null}
-                    {this.props.text.includes("Medication") ?
-                        <form>
-                            <Row>
-                                <Col>
-                                    <div className="group">
-                                        <span>Medication</span>
-                                        <select className="multiple" name="mName" style={{ height: '150px' }} onChange={this.props.changeInter('mName')} multiple>
-                                            <option value="Nitroglycerine">Nitroglycerine</option>
-                                            <option value="Ondansetron">Ondansetron</option>
-                                            <option value="Oxygen">Oxygen</option>
-                                            <option value="Phenylephrine">Phenylephrine</option>
-                                            <option value="Procardia">Procardia</option>
-                                            <option value="Propanalol">Propanalol</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <span>Time</span>
-                                        {/*<input type="datetime-local" name="mTime" value={inter.mTime} onChange={this.props.changeInter('mTime')} />*/}
-                                        <DatePicker
-                                            selected={inter.mTimeDisplay ? inter.mTimeDisplay : false}
-                                            placeholderText="dd/mm/yyyy --:-- --"
-                                            onChange={this.props.handleDate('mTime')}
-                                            timeInputLabel="Time:"
-                                            dateFormat="dd/MM/yyyy h:mm aa"
-                                            showTimeInput
-                                        />
-                                    </div>
-                                    <div className="group">
-                                        <span>Dosage</span>
-                                        <input type="number" style={{ width: '27%', marginRight: '10px' }} min="0" name="mDosage" value={inter.mDosage} onChange={this.props.changeInter('mDosage')} />
-                                        <select name="mUnit" style={{ width: '32%' }} onChange={this.props.changeInter('mUnit')}>
-                                            <option disabled selected value="">-Select-</option>
-                                            <option value="GMS">GMS</option>
-                                            <option value="in.">Inches (in.)</option>
-                                            <option value="L">Liters (L)</option>
-                                            <option value="kg">Kilograms (kg)</option>
-                                            <option value="tablet">Tablets</option>
-                                        </select>
-                                    </div>
-                                    <div className="group">
-                                        <span>Route</span>
-                                        <select name="mRoute" onChange={this.props.changeInter('mRoute')}>
-                                            <option disabled selected value="">-Select-</option>
-                                            <option value="Oral">Oral</option>
-                                            <option value="IM">IM</option>
-                                            <option value="IV">IV</option>
-                                            <option value="Nasal">Nasal</option>
-                                            <option value="Inhaled">Inhaled</option>
-                                            <option value="Topical">Topical</option>
-                                            <option value="Sublingual">Sublingual</option>
-                                            <option value="Ophthalmic">Ophthalmic</option>
-                                            <option value="Otic">Otic</option>
-                                            <option value="Rectal">Rectal</option>
-                                        </select>
-                                    </div>
-                                    <div className="group">
-                                        <span>Crew</span>
-                                        <input type="text" value="John Doe" disabled />
-                                    </div>
-                                    <small>Note: Crew member name should be selected from current user's information.</small><br/>
-                                    <small style={{color:'red'}}>{inter.message}</small>
-                                    <div className="bottom">
-                                    <input type="button" className="left" value="Add" onClick={this.props.submitMedication} />
-                                        <input type="button" className="right" value="Cancel" onClick={this.props.closePopup} />
-                                    </div>
-                                </Col>
-                            </Row>
-                        </form>
-                        : null}
-                </div>}
+                    : <div className="popup shadow">
+                        <h2>{this.props.text}</h2>
+                        {this.props.text.includes("Procedure") ?
+                            <form>
+                                <Row>
+                                    <Col>
+                                        <div className="group">
+                                            <span>Procedure</span>
+                                            <select className="multiple" name="pName" style={{ height: '150px' }} onChange={this.props.changeInter('pName')} multiple>
+                                                <option value="Blood Glucose">Blood Glucose</option>
+                                                <option value="Hemorrhage Control">Hemorrhage Control</option>
+                                                <option value="Splinting">Splinting</option>
+                                                <option value="Oxygen">Oxygen</option>
+                                                <option value="Spinal Precautions">Spinal Precautions</option>
+                                                <option value="Pelvic Binder">Pelvic Binder</option>
+                                                <option value="Suction">Suction</option>
+                                                <option value="Basic Airway - BVM">Basic Airway - BVM</option>
+                                                <option value="MD Consult">MD Consult</option>
+                                                <option value="IV">IV</option>
+                                                <option value="IO IV">IO IV</option>
+                                                <option value="Pleural Decompression">Pleural Decompression</option>
+                                                <option value="Advanced Airway - LMA">Advanced Airway - LMA</option>
+                                                <option value="Advanced Airway - Intubation">Advanced Airway - Intubation</option>
+                                                <option value="Cricothyrotomy">Cricothyrotomy</option>
+                                                <option value="12 Lead EKG">12 Lead EKG</option>
+                                                <option value="Cardiac Arrest">Cardiac Arrest</option>
+                                                <option value="Cardiac Defib - AED">Cardiac Defib - AED</option>
+                                                <option value="Cardiac Defib - Manual">Cardiac Defib - Manual</option>
+                                                <option value="Cardiac Pacing">Cardiac Pacing</option>
+                                            </select>
+                                        </div>
+                                        {inter.pName === "Cardiac Arrest" ?
+                                            <div>
+                                                <div>
+                                                    <span>Time of arrest</span>
+                                                    <DatePicker
+                                                        selected={inter.pTimeDisplay ? inter.pTimeDisplay : false}
+                                                        placeholderText="dd/mm/yyyy --:-- --"
+                                                        onChange={this.props.handleDate('pTime')}
+                                                        timeInputLabel="Time:"
+                                                        dateFormat="dd/MM/yyyy h:mm aa"
+                                                        showTimeInput
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <span>Start time CPR</span>
+                                                    <DatePicker
+                                                        selected={inter.pCPRstartDisplay ? inter.pCPRstartDisplay : false}
+                                                        placeholderText="dd/mm/yyyy --:-- --"
+                                                        onChange={this.props.handleDate('pCPRstart')}
+                                                        timeInputLabel="Time:"
+                                                        dateFormat="dd/MM/yyyy h:mm aa"
+                                                        showTimeInput
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <span>Stop time CPR</span>
+                                                    <DatePicker
+                                                        selected={inter.pCPRstopDisplay ? inter.pCPRstopDisplay : false}
+                                                        placeholderText="dd/mm/yyyy --:-- --"
+                                                        onChange={this.props.handleDate('pCPRstop')}
+                                                        timeInputLabel="Time:"
+                                                        dateFormat="dd/MM/yyyy h:mm aa"
+                                                        showTimeInput
+                                                    />
+                                                </div>
+                                                <div className="group">
+                                                    <span>Outcome</span>
+                                                    <select name="pOutcome" value={inter.pOutcome} onChange={this.props.changeInter('pOutcome')}>
+                                                        <option disabled selected value="">-Select-</option>
+                                                        <option value="Pulse return">Pulse return</option>
+                                                        <option value="Expired">Expired</option>
+                                                    </select>
+                                                </div>
+                                                <div className="group">
+                                                    <span>CPR done by</span>
+                                                    <input type="text" value="John Doe" disabled />
+                                                </div>
+                                            </div>
+                                            : <div>
+                                                <div>
+                                                    <span>Time</span>
+                                                    <DatePicker
+                                                        selected={inter.pTimeDisplay ? inter.pTimeDisplay : false}
+                                                        placeholderText="dd/mm/yyyy --:-- --"
+                                                        onChange={this.props.handleDate('pTime')}
+                                                        timeInputLabel="Time:"
+                                                        dateFormat="dd/MM/yyyy h:mm aa"
+                                                        showTimeInput
+                                                    />
+                                                </div>
+                                                {this.renderProc(inter.pName)}
+                                                <div className="group">
+                                                    <span>Crew</span>
+                                                    <input type="text" value="John Doe" disabled />
+                                                </div>
+                                            </div>}
+                                        <small>Note: Crew member name should be selected from current user's information.</small><br />
+                                        <small style={{ color: 'red' }}>{inter.message}</small>
+                                        <div className="bottom">
+                                            <input type="button" className="left" value="Add" onClick={this.props.submitProcedure} />
+                                            <input type="button" className="right" value="Cancel" onClick={this.props.closePopup} />
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </form>
+                            : null}
+                        {this.props.text.includes("Medication") ?
+                            <form>
+                                <Row>
+                                    <Col>
+                                        <div className="group">
+                                            <span>Medication</span>
+                                            <select className="multiple" name="mName" style={{ height: '150px' }} onChange={this.props.changeInter('mName')} multiple>
+                                                <option value="Nitroglycerine">Nitroglycerine</option>
+                                                <option value="Ondansetron">Ondansetron</option>
+                                                <option value="Oxygen">Oxygen</option>
+                                                <option value="Phenylephrine">Phenylephrine</option>
+                                                <option value="Procardia">Procardia</option>
+                                                <option value="Propanalol">Propanalol</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <span>Time</span>
+                                            {/*<input type="datetime-local" name="mTime" value={inter.mTime} onChange={this.props.changeInter('mTime')} />*/}
+                                            <DatePicker
+                                                selected={inter.mTimeDisplay ? inter.mTimeDisplay : false}
+                                                placeholderText="dd/mm/yyyy --:-- --"
+                                                onChange={this.props.handleDate('mTime')}
+                                                timeInputLabel="Time:"
+                                                dateFormat="dd/MM/yyyy h:mm aa"
+                                                showTimeInput
+                                            />
+                                        </div>
+                                        <div className="group">
+                                            <span>Dosage</span>
+                                            <input type="number" style={{ width: '27%', marginRight: '10px' }} min="0" name="mDosage" value={inter.mDosage} onChange={this.props.changeInter('mDosage')} />
+                                            <select name="mUnit" style={{ width: '32%' }} onChange={this.props.changeInter('mUnit')}>
+                                                <option disabled selected value="">-Select-</option>
+                                                <option value="GMS">GMS</option>
+                                                <option value="in.">Inches (in.)</option>
+                                                <option value="L">Liters (L)</option>
+                                                <option value="kg">Kilograms (kg)</option>
+                                                <option value="tablet">Tablets</option>
+                                            </select>
+                                        </div>
+                                        <div className="group">
+                                            <span>Route</span>
+                                            <select name="mRoute" onChange={this.props.changeInter('mRoute')}>
+                                                <option disabled selected value="">-Select-</option>
+                                                <option value="Oral">Oral</option>
+                                                <option value="IM">IM</option>
+                                                <option value="IV">IV</option>
+                                                <option value="Nasal">Nasal</option>
+                                                <option value="Inhaled">Inhaled</option>
+                                                <option value="Topical">Topical</option>
+                                                <option value="Sublingual">Sublingual</option>
+                                                <option value="Ophthalmic">Ophthalmic</option>
+                                                <option value="Otic">Otic</option>
+                                                <option value="Rectal">Rectal</option>
+                                            </select>
+                                        </div>
+                                        <div className="group">
+                                            <span>Crew</span>
+                                            <input type="text" value="John Doe" disabled />
+                                        </div>
+                                        <small>Note: Crew member name should be selected from current user's information.</small><br />
+                                        <small style={{ color: 'red' }}>{inter.message}</small>
+                                        <div className="bottom">
+                                            <input type="button" className="left" value="Add" onClick={this.props.submitMedication} />
+                                            <input type="button" className="right" value="Cancel" onClick={this.props.closePopup} />
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </form>
+                            : null}
+                    </div>}
             </div>
         )
     }
