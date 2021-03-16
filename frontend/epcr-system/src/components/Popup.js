@@ -557,7 +557,7 @@ export default class Popup extends Component {
                 {this.props.text.includes("Patient") ?
                     <div className="popup shadow psearch">
                         <h2>{this.props.text}</h2>
-                        <div style={{ height: '285px', overflow: 'auto' }}>
+                        <div style={{ height: '282px', overflow: 'auto' }}>
                             <table className="treatment" style={{ marginBottom: '0' }}>
                                 <tr>
                                     <th>Last name</th>

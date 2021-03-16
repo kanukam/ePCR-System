@@ -62,7 +62,7 @@ export default class ChartForm extends Component {
             arrdes: "",
             arrdesDisplay: "",
             trcare: "",
-            trcareDisplay:"",
+            trcareDisplay: "",
             /* patient */
             pid: "",
             fname: "",
@@ -164,14 +164,14 @@ export default class ChartForm extends Component {
     handleCheckbox = input => event => {
         const target = event.target;
         var value = target.value;
-        if(target.checked) {
-            if(input === "agency") { this.state.agency.push(value); }
-            else if(input === "vaimpact") { this.state.vaimpact.push(value); }
-            else if(input === "historyGiven") { this.state.historyGiven.push(value); }
+        if (target.checked) {
+            if (input === "agency") { this.state.agency.push(value); }
+            else if (input === "vaimpact") { this.state.vaimpact.push(value); }
+            else if (input === "historyGiven") { this.state.historyGiven.push(value); }
         } else {
-            if(input === "agency") { this.state.agency.splice(value, 1); }
-            else if(input === "vaimpact") { this.state.vaimpact.splice(value, 1); }
-            else if(input === "historyGiven") { this.state.historyGiven.splice(value, 1); }
+            if (input === "agency") { this.state.agency.splice(value, 1); }
+            else if (input === "vaimpact") { this.state.vaimpact.splice(value, 1); }
+            else if (input === "historyGiven") { this.state.historyGiven.splice(value, 1); }
         }
     }
 
@@ -182,10 +182,10 @@ export default class ChartForm extends Component {
         var assessmentCheckBoxes = this.state.assessmentCheckBoxes;
         var checkbox = assessmentCheckBoxes[boxNumber];
         // Remove word from array
-        if(checkbox){
+        if (checkbox) {
             vals = vals.filter(word => word !== checkBoxValue);
             // Convert to array if integer
-            if(vals === parseInt(vals, 10)){
+            if (vals === parseInt(vals, 10)) {
                 vals = [vals];
             }
             // set state to False
@@ -194,7 +194,7 @@ export default class ChartForm extends Component {
             // Set to filtered array
             this.setState({ [bodyPart]: [...vals] });
         }
-        else{
+        else {
             // Add value and marked checked as true
             vals.push(checkBoxValue);
             assessmentCheckBoxes[boxNumber] = true;
@@ -248,7 +248,8 @@ export default class ChartForm extends Component {
             vital_signs_gcs: "",
             vital_signs_pain: "",
             vital_signs_temp: "",
-            vital_signs_etco2: ""});
+            vital_signs_etco2: ""
+        });
     }
 
     appendProcedures = procedure => {
@@ -282,137 +283,154 @@ export default class ChartForm extends Component {
             fname: patient[1],
             lname: patient[2],
             birth: patient[3],
-            gender: patient[4]});
+            gender: patient[4]
+        });
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        /* chart table */
-        // chart call
-        const incident_number = this.state.ino;
-        const incident_date = this.state.idate || null;
-        const location = this.state.dest;
-        const incident_address = this.state.loc;
-        const disposition = this.state.disp;
-        const agencies = this.state.agency.join();
-        const patient_count = this.state.ptct || null;
-        const triage_color = this.state.triage || null;
-        const dispatch_date_time = this.state.dispatch || null;
-        const enroute_date_time = this.state.enroute || null;
-        const arrive_date_time = this.state.arrscn || null;
-        const patient_contact_date_time = this.state.contact || null;
-        const transfer_date_time = this.state.trcare || null;
-        const depart_date_time = this.state.dptscn || null;
-        const unit_number = this.state.unit;
-        const call_type = this.state.ctype;
-        const call_nature = this.state.nature;
-        const care_level = this.state.care;
-        const destination = this.state.dest;
-        let trauma_cause = this.state.trauma;
-        if(this.state.fallht) { trauma_cause += ", " + this.state.fallht; }
-        const vehicle_accident_type = this.state.vatype || null;
-        const vehicle_accident_impact = this.state.vaimpact.join();
-        const vehicle_accident_safety_equipment = this.state.vasafe || null;
-        const vehicle_accident_mph = this.state.vaspd || null;
-        const vehicle_accident_ejected = this.state.vaeject || null;
-        // chart patient
-        const p_weight = this.state.weight;
-        const p_classify = this.state.classify;
-        const p_bcolor = this.state.braslow;
-        let p_address = "";
-        if(this.state.address || this.state.city || this.state.st || this.state.country || this.state.zip){
-            p_address = this.state.address + " " + this.state.city + ", " + this.state.state + " " + this.state.zip +  " " + this.state.country;
-        }
-        const p_phone = this.state.phone;
-        const p_hpi = this.state.hpi;
-        const p_history_given = this.state.historyGiven.join();
-        const p_medical_allergies = this.state.medAllergy;
-        const p_environmental_allergies = this.state.envAllergy;
-        let p_past_medical_history = this.state.pastHistory.join();
-        if(this.state.pastHistoryOther) { p_past_medical_history += ", [O - Other:" + this.state.pastHistoryOther + "]"; }
-        // chart assessment
-        const skin = this.state.skin.join();
-        const mental = this.state.mental.join();
-        const neurological = this.state.neurological.join();
-        const head = this.state.head.join();
-        const neck = this.state.neck.join();
-        const chest = this.state.chest.join();
-        const pulse_strength = this.state.pulse_strength;
-        const pulse_rate = this.state.pulse_rate;
-        const abdomen = this.state.abdomen.join();
-        const pelvis = this.state.pelvis.join();
-        const back = this.state.back.join();
-        const left_upper_arm = this.state.left_upper_arm.join();
-        const left_lower_arm = this.state.left_lower_arm.join();
-        const left_hand_wrist = this.state.left_hand_wrist.join();
-        const left_upper_leg = this.state.left_upper_leg.join();
-        const left_lower_leg = this.state.left_lower_leg.join();
-        const left_ankle_foot = this.state.left_ankle_foot.join();
-        const right_upper_arm = this.state.right_upper_arm.join();
-        const right_lower_arm = this.state.right_lower_arm.join();
-        const right_hand_wrist = this.state.right_hand_wrist.join();
-        const right_upper_leg = this.state.right_upper_leg.join();
-        const right_lower_leg = this.state.right_lower_leg.join();
-        const right_ankle_foot = this.state.right_ankle_foot.join();
-        const vital_signs = this.state.vital_signs.join();
-        const extra_findings = this.state.extra_findings;
-        const stroke_time = this.state.stroke_time;
-        const stroke_facial_droop = this.state.stroke_facial_droop;
-        const stroke_arm_drift = this.state.stroke_arm_drift;
-        const stroke_abnormal_speech = this.state.stroke_abnormal_speech;
-        // chart interventions        
-        const medications = this.state.medications.join();
-        const procedures = this.state.procedures.join();
-        let intake_bleeding = "";
-        let intake_iv_fluids = "";
-        let intake_oral_fluids = "";
-        let intake_vomit = "";
-        if(this.state.ioBleedPT !== "") {
-            intake_bleeding = "Pre transport: " + this.state.ioBleedPT + " | Transport: " + this.state.ioBleedT + " | Total: " + (parseInt(this.state.ioBleedPT) + parseInt(this.state.ioBleedT));
-            intake_iv_fluids = "Pre transport: " + this.state.ioIVPT + " | Transport: " + this.state.ioIVT + " | Total: " + (parseInt(this.state.ioIVPT) + parseInt(this.state.ioIVT));
-            intake_oral_fluids = "Pre transport: " + this.state.ioOralPT + " | Transport: " + this.state.ioOralT + " | Total: " + (parseInt(this.state.ioOralPT) + parseInt(this.state.ioOralT));
-            intake_vomit = "Pre transport: " + this.state.ioVomitPT + " | Transport: " + this.state.ioVomitT + " | Total: " + (parseInt(this.state.ioVomitPT) + parseInt(this.state.ioVomitT));
-        }
-        let obstetrics = "";
-        if(this.state.oGravid !== "") {
-            obstetrics = "Gravid: " + this.state.oGravid + " | Para: " + this.state.oPara + " | Abortion: " + this.state.oAbortion + " | Due date: " + this.state.oDuedate + " | Gestation: " + this.state.oGestation + " | Vaginal bleeding: " + this.state.oVaginalBleed + " | Contraction onset: " + this.state.oContraction + " | Frequency: " + this.state.oFrequency + " | Duration: " + this.state.oDuration + " | Bag of water ruptured: " + this.state.oWaterRupture;
-            if(this.state.oWaterRupture === "Yes") { obstetrics += " | Color of fluid: " + this.state.oWaterColor; }
-            obstetrics += " | Feel baby moving: " + this.state.oBabyMoving + " | Delivery time: " + this.state.oDelivery + " | Placenta delivered: " + this.state.oPlacenta + " | Baby sex: " + this.state.oBabySex + " | Born: " + this.state.oBorn + " | APGAR score: " + this.state.oAPGAR;
-        }
-        /* patient table */
-        const fname = this.state.fname;
-        const lname = this.state.lname;
-        const birth = this.state.birth || null;
-        const gender = this.state.gender;
-        /* send to backend */
-        const url = 'http://localhost:3000/charts/add';
-        const options = {
-            method: 'POST',
-            body: JSON.stringify({
-                body: {
-                    incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, medications, procedures, skin, mental, neurological, head, neck, chest, pulse_strength, pulse_rate, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot, extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech, vital_signs, p_weight, p_classify, p_bcolor, p_address, p_phone, p_hpi, p_history_given, p_medical_allergies, p_environmental_allergies, p_past_medical_history, intake_bleeding, intake_iv_fluids, intake_oral_fluids, intake_vomit, obstetrics
-                },
-                    pbody: {fname, lname, birth, gender}
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-        }
-        console.log(options);
-        fetch(url, options).then((response) => {
-            
-            if (!response.ok) {
-                throw Error;
+        if (this.state.ino === "" || this.state.idate === "") {
+            this.setState({ message: "One or more required fields have been left blank. Please fill them out." });
+        } else {
+            /* chart table */
+            // chart call
+            const incident_number = this.state.ino;
+            const incident_date = this.state.idate || null;
+            const location = this.state.dest;
+            const incident_address = this.state.loc;
+            const disposition = this.state.disp;
+            const agencies = this.state.agency.join();
+            const dispatch_date_time = this.state.dispatch || null;
+            const enroute_date_time = this.state.enroute || null;
+            const arrive_date_time = this.state.arrscn || null;
+            const patient_contact_date_time = this.state.contact || null;
+            const transfer_date_time = this.state.trcare || null;
+            const depart_date_time = this.state.dptscn || null;
+            const unit_number = this.state.unit;
+            const call_type = this.state.ctype;
+            const call_nature = this.state.nature;
+            const care_level = this.state.care;
+            const destination = this.state.dest;
+            let trauma_cause = this.state.trauma;
+            if (this.state.trauma === "Fall") { trauma_cause += ", " + this.state.fallht + " m"; }
+            let patient_count = null;
+            let triage_color = null;
+            if (this.state.assessmentCheckBoxes[268]) {
+                patient_count = this.state.ptct;
+                triage_color = this.state.triage;
             }
-            this.setState({ message: "Add Successful" });
-        }).catch((error) => {
-            this.setState({ message: "Add Failed" });
-        })
-        this.setState({
-            success: true
-        })
-        this.nextStep();
+            let vehicle_accident_type = null;
+            let vehicle_accident_impact = null;
+            let vehicle_accident_safety_equipment = null;
+            let vehicle_accident_mph = null;
+            let vehicle_accident_ejected = null;
+            if (this.state.assessmentCheckBoxes[269]) {
+                vehicle_accident_type = this.state.vatype;
+                vehicle_accident_impact = this.state.vaimpact.join();
+                vehicle_accident_safety_equipment = this.state.vasafe;
+                vehicle_accident_mph = this.state.vaspd;
+                vehicle_accident_ejected = this.state.vaeject;
+            }
+            // chart patient
+            const p_weight = this.state.weight;
+            const p_classify = this.state.classify;
+            const p_bcolor = this.state.braslow;
+            let p_address = "";
+            if (this.state.address || this.state.city || this.state.st || this.state.country || this.state.zip) {
+                p_address = this.state.address + " " + this.state.city + ", " + this.state.state + " " + this.state.zip + " " + this.state.country;
+            }
+            const p_phone = this.state.phone;
+            const p_hpi = this.state.hpi;
+            const p_history_given = this.state.historyGiven.join();
+            const p_medical_allergies = this.state.medAllergy;
+            const p_environmental_allergies = this.state.envAllergy;
+            let p_past_medical_history = this.state.pastHistory.join();
+            if (this.state.assessmentCheckBoxes[315]) { p_past_medical_history += ", [O - Other:" + this.state.pastHistoryOther + "]"; }
+            // chart assessment
+            const skin = this.state.skin.join();
+            const mental = this.state.mental.join();
+            const neurological = this.state.neurological.join();
+            const head = this.state.head.join();
+            const neck = this.state.neck.join();
+            const chest = this.state.chest.join();
+            const pulse_strength = this.state.pulse_strength;
+            const pulse_rate = this.state.pulse_rate;
+            const abdomen = this.state.abdomen.join();
+            const pelvis = this.state.pelvis.join();
+            const back = this.state.back.join();
+            const left_upper_arm = this.state.left_upper_arm.join();
+            const left_lower_arm = this.state.left_lower_arm.join();
+            const left_hand_wrist = this.state.left_hand_wrist.join();
+            const left_upper_leg = this.state.left_upper_leg.join();
+            const left_lower_leg = this.state.left_lower_leg.join();
+            const left_ankle_foot = this.state.left_ankle_foot.join();
+            const right_upper_arm = this.state.right_upper_arm.join();
+            const right_lower_arm = this.state.right_lower_arm.join();
+            const right_hand_wrist = this.state.right_hand_wrist.join();
+            const right_upper_leg = this.state.right_upper_leg.join();
+            const right_lower_leg = this.state.right_lower_leg.join();
+            const right_ankle_foot = this.state.right_ankle_foot.join();
+            const vital_signs = this.state.vital_signs.join();
+            const extra_findings = this.state.extra_findings;
+            const stroke_time = this.state.stroke_time;
+            const stroke_facial_droop = this.state.stroke_facial_droop;
+            const stroke_arm_drift = this.state.stroke_arm_drift;
+            const stroke_abnormal_speech = this.state.stroke_abnormal_speech;
+            // chart interventions        
+            const medications = this.state.medications.join();
+            const procedures = this.state.procedures.join();
+            let intake_bleeding = "";
+            let intake_iv_fluids = "";
+            let intake_oral_fluids = "";
+            let intake_vomit = "";
+            if (this.state.assessmentCheckBoxes[316]) {
+                intake_bleeding = "Pre transport: " + this.state.ioBleedPT + " | Transport: " + this.state.ioBleedT + " | Total: " + (parseInt(this.state.ioBleedPT) + parseInt(this.state.ioBleedT));
+                intake_iv_fluids = "Pre transport: " + this.state.ioIVPT + " | Transport: " + this.state.ioIVT + " | Total: " + (parseInt(this.state.ioIVPT) + parseInt(this.state.ioIVT));
+                intake_oral_fluids = "Pre transport: " + this.state.ioOralPT + " | Transport: " + this.state.ioOralT + " | Total: " + (parseInt(this.state.ioOralPT) + parseInt(this.state.ioOralT));
+                intake_vomit = "Pre transport: " + this.state.ioVomitPT + " | Transport: " + this.state.ioVomitT + " | Total: " + (parseInt(this.state.ioVomitPT) + parseInt(this.state.ioVomitT));
+            }
+            let obstetrics = "";
+            if (this.state.assessmentCheckBoxes[317]) {
+                obstetrics = "Gravid: " + this.state.oGravid + " | Para: " + this.state.oPara + " | Abortion: " + this.state.oAbortion + " | Due date: " + this.state.oDuedate + " | Gestation: " + this.state.oGestation + " | Vaginal bleeding: " + this.state.oVaginalBleed + " | Contraction onset: " + this.state.oContraction + " | Frequency: " + this.state.oFrequency + " | Duration: " + this.state.oDuration + " | Bag of water ruptured: " + this.state.oWaterRupture;
+                if (this.state.oWaterRupture === "Yes") { obstetrics += " | Color of fluid: " + this.state.oWaterColor; }
+                obstetrics += " | Feel baby moving: " + this.state.oBabyMoving + " | Delivery time: " + this.state.oDelivery + " | Placenta delivered: " + this.state.oPlacenta + " | Baby sex: " + this.state.oBabySex + " | Born: " + this.state.oBorn + " | APGAR score: " + this.state.oAPGAR;
+            }
+            /* patient table */
+            const id = this.state.pid;
+            const fname = this.state.fname;
+            const lname = this.state.lname;
+            const birth = this.state.birth || null;
+            const gender = this.state.gender;
+            /* send to backend */
+            const url = 'http://localhost:3000/charts/add';
+            const options = {
+                method: 'POST',
+                body: JSON.stringify({
+                    body: {
+                        incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, medications, procedures, skin, mental, neurological, head, neck, chest, pulse_strength, pulse_rate, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot, extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech, vital_signs, p_weight, p_classify, p_bcolor, p_address, p_phone, p_hpi, p_history_given, p_medical_allergies, p_environmental_allergies, p_past_medical_history, intake_bleeding, intake_iv_fluids, intake_oral_fluids, intake_vomit, obstetrics
+                    },
+                    pbody: { fname, lname, birth, gender }
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include'
+            }
+            console.log(options);
+            fetch(url, options).then((response) => {
+
+                if (!response.ok) {
+                    throw Error;
+                }
+                this.setState({ message: "Add Successful" });
+            }).catch((error) => {
+                this.setState({ message: "Add Failed" });
+            })
+            this.setState({
+                success: true
+            })
+            this.nextStep();
+        }
     }
 
     nextStep = () => {
@@ -498,7 +516,7 @@ export default class ChartForm extends Component {
                     values={values}
                 />
             case 6:
-                return <Redirect to={this.state.redirect}/>
+                return <Redirect to={this.state.redirect} />
         }
     }
 }

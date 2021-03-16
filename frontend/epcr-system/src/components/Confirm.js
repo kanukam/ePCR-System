@@ -62,7 +62,7 @@ export default class Confirm extends Component {
                             <td>
                                 <b>Vehicle accident</b> {values.assessmentCheckBoxes[269] ? <text>Yes<br/>
                                     <b>Type</b> {values.vatype}<br/>
-                                    <b>Impact</b> {values.impact.join()}<br/>
+                                    <b>Impact</b> {values.impact}<br/>
                                     <b>Safety equipment</b> {values.vasafe}<br/>
                                     <b>Estimated speed</b> {values.vaspd}<br/>
                                     <b>Ejection from vehicle</b> {values.vaeject}
@@ -88,7 +88,7 @@ export default class Confirm extends Component {
                                 <b>Gender</b> {values.gender}<br/>
                                 <b>Weight</b> {values.weight} kg<br/>
                                 <b>Braslow color</b> {values.bcolor}<br/>
-                                <b>Address</b> {values.street}, {values.city}, {values.state}, {values.country} {values.zip}
+                                <b>Address</b> {values.street}, {values.city}, {values.state}, {values.country} {values.zip}<br/>
                                 <b>Phone</b> {values.phone}
                             </td>
                         </tr>
@@ -102,6 +102,7 @@ export default class Confirm extends Component {
                             </td>
                         </tr>
                     </table>
+                    <small style={{color:'red'}}>{values.message}</small>
                     <Button className="left" onClick={this.back}>Previous</Button>
                     <Button className="right" onClick={this.props.handleSubmit}>Submit</Button>
                 </form>
