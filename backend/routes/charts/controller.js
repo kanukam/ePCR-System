@@ -27,24 +27,6 @@ function addChart(req, res) {
   })
 }
 
-function addProcedure(req, res) {
-  const { body } = req.body;
-  repo.addProcedure(body, (err) => {
-    err
-      ? res.status(500).json({ error: err })
-      : res.status(200).json({ status: 'Successfully added' });
-  })
-}
-
-function addMedication(req, res) {
-  const { body } = req.body;
-  repo.addMedication(body, (err) => {
-    err
-      ? res.status(500).json({ error: err })
-      : res.status(200).json({ status: 'Successfully added' });
-  })
-}
-
 function updateChart(req, res) {
   const chartID = req.params;
   const userID = req.user.id;
@@ -88,4 +70,4 @@ function viewAllPatientCharts(req, res){
   })
 }
 
-module.exports = { viewChart, viewAllCharts, addChart, updateChart, addProcedure, addMedication, viewPatientChart, viewAllPatientCharts };
+module.exports = { viewChart, viewAllCharts, addChart, updateChart, viewPatientChart, viewAllPatientCharts };

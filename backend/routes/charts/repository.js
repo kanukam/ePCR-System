@@ -93,8 +93,7 @@ function viewPatientChart(id, callback){
 }
 
 function viewAllPatientCharts(callback){
-    db.query(`select patients.fname, patients.lname, patients.birth, charts.p_address, charts.p_phone, charts.id
-                FROM charts INNER JOIN patients ON patients.id = charts.patientID;`, (err, results) => {
+    db.query(`SELECT * FROM patients LEFT JOIN charts ON charts.patientID = patients.id`, (err, results) => {
         if (err) {
             return callback(err);
         }
