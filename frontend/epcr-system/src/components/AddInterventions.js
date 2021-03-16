@@ -416,7 +416,7 @@ export default class AddInterventions extends Component {
                             <tr>
                                 <th>Vaginal bleeding</th>
                                 <td>
-                                    <div onChange={this.props.handleChange('oVaginalBleed')}>
+                                    <div style={{margin:'7.5px'}} onChange={this.props.handleChange('oVaginalBleed')}>
                                         <label className="v2"><input type="radio" name="oVaginalBleed" value="Yes" checked={values.oVaginalBleed.includes("Yes")} /> Yes</label>
                                         <label className="v2"><input type="radio" name="oVaginalBleed" value="No" checked={values.oVaginalBleed.includes("No")} /> No</label>
                                     </div>
@@ -437,7 +437,7 @@ export default class AddInterventions extends Component {
                             <tr>
                                 <th>Bag of water ruptured</th>
                                 <td>
-                                    <div onChange={this.props.handleChange('oWaterRupture')}>
+                                    <div style={{margin:'7.5px'}} onChange={this.props.handleChange('oWaterRupture')}>
                                         <label className="v2"><input type="radio" name="oWaterRupture" value="Yes" checked={values.oWaterRupture.includes("Yes")} /> Yes</label>
                                         <label className="v2"><input type="radio" name="oWaterRupture" value="No" checked={values.oWaterRupture.includes("No")} /> No</label>
                                     </div>                                    
@@ -447,7 +447,7 @@ export default class AddInterventions extends Component {
                             <tr>
                                 <th>Color of fluid</th>
                                 <td>
-                                    <div onChange={this.props.handleChange('oWaterColor')}>
+                                    <div style={{margin:'7.5px'}} onChange={this.props.handleChange('oWaterColor')}>
                                         <label className="v2"><input type="radio" name="oWaterColor" value="Clear" checked={values.oWaterColor.includes("Clear")} /> Clear</label>
                                         <label className="v2"><input type="radio" name="oWaterColor" value="Bloody" checked={values.oWaterColor.includes("Bloody")} /> Bloody</label>
                                         <label className="v2"><input type="radio" name="oWaterColor" value="Meconium" checked={values.oWaterColor.includes("Meconium")} /> Meconium</label>
@@ -458,7 +458,7 @@ export default class AddInterventions extends Component {
                             <tr>
                                 <th>Feel baby moving</th>
                                 <td>
-                                    <div onChange={this.props.handleChange('oBabyMoving')}>
+                                    <div style={{margin:'7.5px'}} onChange={this.props.handleChange('oBabyMoving')}>
                                         <label className="v2"><input type="radio" name="oBabyMoving" value="Yes" checked={values.oBabyMoving.includes("Yes")} /> Yes</label>
                                         <label className="v2"><input type="radio" name="oBabyMoving" value="No" checked={values.oBabyMoving.includes("No")} /> No</label>
                                     </div>                                    
@@ -471,7 +471,7 @@ export default class AddInterventions extends Component {
                             <tr>
                                 <th>Placenta delivered</th>
                                 <td>
-                                    <div onChange={this.props.handleChange('oPlacenta')}>
+                                    <div style={{margin:'7.5px'}} onChange={this.props.handleChange('oPlacenta')}>
                                         <label className="v2"><input type="radio" name="oPlacenta" value="Yes" checked={values.oPlacenta.includes("Yes")} /> Yes</label>
                                         <label className="v2"><input type="radio" name="oPlacenta" value="No" checked={values.oPlacenta.includes("No")} /> No</label>
                                     </div>
@@ -480,7 +480,7 @@ export default class AddInterventions extends Component {
                             <tr>
                                 <th>Baby sex</th>
                                 <td>
-                                    <div onChange={this.props.handleChange('oBabySex')}>
+                                    <div style={{margin:'7.5px'}} onChange={this.props.handleChange('oBabySex')}>
                                         <label className="v2"><input type="radio" name="oBabySex" value="Male" checked={values.oBabySex.includes("Male")} /> Male</label>
                                         <label className="v2"><input type="radio" name="oBabySex" value="Female" checked={values.oBabySex.includes("Female")} /> Female</label>
                                     </div>
@@ -489,7 +489,7 @@ export default class AddInterventions extends Component {
                             <tr>
                                 <th>Born</th>
                                 <td>
-                                    <div onChange={this.props.handleChange('oBorn')}>
+                                    <div style={{margin:'7.5px'}} onChange={this.props.handleChange('oBorn')}>
                                         <label className="v2"><input type="radio" name="oBorn" value="Alive" checked={values.oBorn.includes("Alive")} /> Alive</label>
                                         <label className="v2"><input type="radio" name="oBorn" value="Dead" checked={values.oBorn.includes("Dead")} /> Dead</label>
                                     </div>
@@ -498,7 +498,7 @@ export default class AddInterventions extends Component {
                             <tr>
                                 <th className="top">APGAR score</th>
                                 <td>
-                                    <div onChange={this.props.handleChange('oAPGAR')}>
+                                    <div style={{margin:'7.5px'}} onChange={this.props.handleChange('oAPGAR')}>
                                         <img width="600px" src="https://1q3nfm4evj5z1sgm624e93ka-wpengine.netdna-ssl.com/wp-content/uploads/2016/06/Apgar-Scoring-System-Diagnosing-Birth-Injuries.jpg"/><br/>
                                         <label className="v2"><input type="radio" name="oAPGAR" value="0" checked={values.oAPGAR.includes("0")} /> 0 points</label>
                                         <label className="v2"><input type="radio" name="oAPGAR" value="1" checked={values.oAPGAR.includes("1")} /> 1 point</label>

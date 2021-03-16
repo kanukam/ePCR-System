@@ -278,12 +278,15 @@ export default class ChartForm extends Component {
 
     setPatient = string => {
         var patient = string.split(",");
+        var birthDisplay = null;
+        if(patient[3]) { birthDisplay = new Date(patient[3]); }
         this.setState({
             pid: patient[0],
             fname: patient[1],
             lname: patient[2],
             birth: patient[3],
-            gender: patient[4]
+            gender: patient[4],
+            birthDisplay
         });
     }
 
