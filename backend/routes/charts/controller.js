@@ -79,6 +79,14 @@ function downloadPdf(req, res){
   })
 }
 
+function downloadPdfTest(req, res){
+  res.header('Content-disposition', 'inline; filename=' + `test_chart`);
+  res.header('Content-type', 'application/pdf');
+  repo.downloadPdfTest(res, (err) => {
+    console.log(err);
+  })
+}
+
 module.exports = { 
   viewChart, 
   viewAllCharts, 
@@ -86,5 +94,6 @@ module.exports = {
   updateChart, 
   viewPatientChart, 
   viewAllPatientCharts,
-  downloadPdf
+  downloadPdf,
+  downloadPdfTest
 };
