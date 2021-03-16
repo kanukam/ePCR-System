@@ -64,6 +64,7 @@ export default class ChartForm extends Component {
             trcare: "",
             trcareDisplay:"",
             /* patient */
+            pid: "",
             fname: "",
             lname: "",
             birth: "",
@@ -82,9 +83,9 @@ export default class ChartForm extends Component {
             historyGiven: [],
             medAllergy: "",
             envAllergy: "",
-            pastHistory: "",
+            pastHistory: [],
             pastHistoryOther: "",
-            // Physical Assessment
+            // physical exam
             skin: [],
             mental: [],
             neurological: [],
@@ -124,7 +125,34 @@ export default class ChartForm extends Component {
             stroke_arm_drift: "",
             stroke_abnormal_speech: "",
             /* interventions */
-            proc: "",
+            procedures: [],
+            medications: [],
+            ioBleedPT: "",
+            ioBleedT: "",
+            ioIVPT: "",
+            ioIVT: "",
+            ioOralPT: "",
+            ioOralT: "",
+            ioVomitPT: "",
+            ioVomitT: "",
+            oGravid: "",
+            oPara: "",
+            oAbortion: "",
+            oDuedate: "",
+            oDuedateDisplay: "",
+            oGestation: "",
+            oVaginalBleed: "",
+            oContraction: "",
+            oFrequency: "",
+            oDuration: "",
+            oWaterRupture: "",
+            oWaterColor: "",
+            oBabyMoving: "",
+            oDelivery: "",
+            oPlacenta: "",
+            oBabySex: "",
+            oBorn: "",
+            oAPGAR: "",
             none: [],
         };
     }
@@ -139,7 +167,7 @@ export default class ChartForm extends Component {
         if(target.checked) {
             if(input === "agency") { this.state.agency.push(value); }
             else if(input === "vaimpact") { this.state.vaimpact.push(value); }
-            else if(input == "historyGiven") { this.state.historyGiven.push(value); }
+            else if(input === "historyGiven") { this.state.historyGiven.push(value); }
         } else {
             if(input === "agency") { this.state.agency.splice(value, 1); }
             else if(input === "vaimpact") { this.state.vaimpact.splice(value, 1); }
@@ -190,6 +218,22 @@ export default class ChartForm extends Component {
         this.setState({ [input]: date });
     }
 
+    displayTime(time) {
+        var index = time.indexOf("-");
+        var lastIndex = time.lastIndexOf("-");
+        var year = time.substring(0, index);
+        var month = time.substring(index + 1, index + 3);
+        var day = time.substring(lastIndex + 1);
+        return day + "/" + month + "/" + year;
+    }
+
+    testingDate = input => event => {
+        var displayedDate = input + "Display";
+        var date = this.displayTime(event.target.value);
+        alert(date);
+        this.setState({ [displayedDate]: date })
+    }
+
     appendVitals = vitals => {
         var vital_signs = this.state.vital_signs;
         vital_signs.push(vitals);
@@ -207,9 +251,44 @@ export default class ChartForm extends Component {
             vital_signs_etco2: ""});
     }
 
+    appendProcedures = procedure => {
+        var procedures = this.state.procedures;
+        procedures.push(procedure);
+        this.setState({ procedures });
+    }
+
+    deleteProcedures = index => {
+        var procedures = this.state.procedures;
+        procedures.splice(index, 1);
+        this.setState({ procedures });
+    }
+
+    appendMedications = medication => {
+        var medications = this.state.medications;
+        medications.push(medication);
+        this.setState({ medications });
+    }
+
+    deleteMedications = index => {
+        var medications = this.state.medications;
+        medications.splice(index, 1);
+        this.setState({ medications });
+    }
+
+    setPatient = string => {
+        var patient = string.split(",");
+        this.setState({
+            pid: patient[0],
+            fname: patient[1],
+            lname: patient[2],
+            birth: patient[3],
+            gender: patient[4]});
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
-        // Chart Table
+        /* chart table */
+        // chart call
         const incident_number = this.state.ino;
         const incident_date = this.state.idate || null;
         const location = this.state.dest;
@@ -236,8 +315,7 @@ export default class ChartForm extends Component {
         const vehicle_accident_safety_equipment = this.state.vasafe || null;
         const vehicle_accident_mph = this.state.vaspd || null;
         const vehicle_accident_ejected = this.state.vaeject || null;
-        const medications = this.state.medications;
-        const procedures = this.state.procedure;
+        // chart patient
         const p_weight = this.state.weight;
         const p_classify = this.state.classify;
         const p_bcolor = this.state.braslow;
@@ -250,9 +328,9 @@ export default class ChartForm extends Component {
         const p_history_given = this.state.historyGiven.join();
         const p_medical_allergies = this.state.medAllergy;
         const p_environmental_allergies = this.state.envAllergy;
-        let p_past_medical_history = this.state.pastHistory;
-        if(this.state.pastHistoryOther) { p_past_medical_history += "," + this.state.pastHistoryOther; }
-        // Physical Assessment
+        let p_past_medical_history = this.state.pastHistory.join();
+        if(this.state.pastHistoryOther) { p_past_medical_history += ", [O - Other:" + this.state.pastHistoryOther + "]"; }
+        // chart assessment
         const skin = this.state.skin.join();
         const mental = this.state.mental.join();
         const neurological = this.state.neurological.join();
@@ -282,7 +360,26 @@ export default class ChartForm extends Component {
         const stroke_facial_droop = this.state.stroke_facial_droop;
         const stroke_arm_drift = this.state.stroke_arm_drift;
         const stroke_abnormal_speech = this.state.stroke_abnormal_speech;
-        // Patient Table
+        // chart interventions        
+        const medications = this.state.medications.join();
+        const procedures = this.state.procedures.join();
+        let intake_bleeding = "";
+        let intake_iv_fluids = "";
+        let intake_oral_fluids = "";
+        let intake_vomit = "";
+        if(this.state.ioBleedPT !== "") {
+            intake_bleeding = "Pre transport: " + this.state.ioBleedPT + " | Transport: " + this.state.ioBleedT + " | Total: " + (parseInt(this.state.ioBleedPT) + parseInt(this.state.ioBleedT));
+            intake_iv_fluids = "Pre transport: " + this.state.ioIVPT + " | Transport: " + this.state.ioIVT + " | Total: " + (parseInt(this.state.ioIVPT) + parseInt(this.state.ioIVT));
+            intake_oral_fluids = "Pre transport: " + this.state.ioOralPT + " | Transport: " + this.state.ioOralT + " | Total: " + (parseInt(this.state.ioOralPT) + parseInt(this.state.ioOralT));
+            intake_vomit = "Pre transport: " + this.state.ioVomitPT + " | Transport: " + this.state.ioVomitT + " | Total: " + (parseInt(this.state.ioVomitPT) + parseInt(this.state.ioVomitT));
+        }
+        let obstetrics = "";
+        if(this.state.oGravid !== "") {
+            obstetrics = "Gravid: " + this.state.oGravid + " | Para: " + this.state.oPara + " | Abortion: " + this.state.oAbortion + " | Due date: " + this.state.oDuedate + " | Gestation: " + this.state.oGestation + " | Vaginal bleeding: " + this.state.oVaginalBleed + " | Contraction onset: " + this.state.oContraction + " | Frequency: " + this.state.oFrequency + " | Duration: " + this.state.oDuration + " | Bag of water ruptured: " + this.state.oWaterRupture;
+            if(this.state.oWaterRupture === "Yes") { obstetrics += " | Color of fluid: " + this.state.oWaterColor; }
+            obstetrics += " | Feel baby moving: " + this.state.oBabyMoving + " | Delivery time: " + this.state.oDelivery + " | Placenta delivered: " + this.state.oPlacenta + " | Baby sex: " + this.state.oBabySex + " | Born: " + this.state.oBorn + " | APGAR score: " + this.state.oAPGAR;
+        }
+        /* patient table */
         const fname = this.state.fname;
         const lname = this.state.lname;
         const birth = this.state.birth || null;
@@ -293,7 +390,7 @@ export default class ChartForm extends Component {
             method: 'POST',
             body: JSON.stringify({
                 body: {
-                    incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, medications, procedures, skin, mental, neurological, head, neck, chest, pulse_strength, pulse_rate, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot, extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech, vital_signs, p_weight, p_classify, p_bcolor, p_address, p_phone, p_hpi, p_history_given, p_medical_allergies, p_environmental_allergies, p_past_medical_history
+                    incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, medications, procedures, skin, mental, neurological, head, neck, chest, pulse_strength, pulse_rate, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot, extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech, vital_signs, p_weight, p_classify, p_bcolor, p_address, p_phone, p_hpi, p_history_given, p_medical_allergies, p_environmental_allergies, p_past_medical_history, intake_bleeding, intake_iv_fluids, intake_oral_fluids, intake_vomit, obstetrics
                 },
                     pbody: {fname, lname, birth, gender}
             }),
@@ -363,6 +460,8 @@ export default class ChartForm extends Component {
                     handleAssessmentCheckboxes={this.handleAssessmentCheckboxes}
                     handleDate={this.handleDate}
                     handleDateNoTime={this.handleDateNoTime}
+                    testingDate={this.testingDate}
+                    setPatient={this.setPatient}
                     values={values}
                 />
             case 3:
@@ -381,6 +480,12 @@ export default class ChartForm extends Component {
                     prevStep={this.prevStep}
                     navigate={this.navigate}
                     handleChange={this.handleChange}
+                    handleAssessmentCheckboxes={this.handleAssessmentCheckboxes}
+                    handleDate={this.handleDate}
+                    appendProcedures={this.appendProcedures}
+                    deleteProcedures={this.deleteProcedures}
+                    appendMedications={this.appendMedications}
+                    deleteMedications={this.deleteMedications}
                     values={values}
                 />
             case 5:
@@ -389,6 +494,7 @@ export default class ChartForm extends Component {
                     prevStep={this.prevStep}
                     navigate={this.navigate}
                     handleSubmit={this.handleSubmit}
+                    handleAssessmentCheckboxes={this.handleAssessmentCheckboxes}
                     values={values}
                 />
             case 6:

@@ -41,24 +41,7 @@ export default class AddCall extends Component {
         alert(this.state.jsonData);
         this.props.fetchNewInput(this.state.jsonData, 1);
     }
-    */
-
-    showMCI = (e) => {
-        var checkbox = document.getElementById("mci");
-        //if(checkbox.checked) {
-            this.setState({
-                mci: !this.state.mci
-            });
-        //}
-    }
-
-    showVA = (e) => {
-        this.setState({
-            va: !this.state.va
-        });
-    }
-
-    
+    */    
 
     //handleCheckbox = (e) => {
         /*const target = e.target;
@@ -199,12 +182,12 @@ export default class AddCall extends Component {
                             <th className="top" rowSpan="2">Other agencies on scene</th>
                             <td rowSpan="2">
                                 <div id="agency">
-                                    <label><input type="checkbox" name="agency" value="Local Police" checked={values.assessmentCheckBoxes[261]} onChange={this.props.handleAssessmentCheckboxes(261)} /> Local Police</label>
-                                    <label><input type="checkbox" name="agency" value="State Police" checked={values.assessmentCheckBoxes[262]} onChange={this.props.handleAssessmentCheckboxes(262)} /> State Police</label>
-                                    <label><input type="checkbox" name="agency" value="Federal Police" checked={values.assessmentCheckBoxes[263]} onChange={this.props.handleAssessmentCheckboxes(263)} /> Federal Police</label>
-                                    <label><input type="checkbox" name="agency" value="Cruz Rojas" checked={values.assessmentCheckBoxes[264]} onChange={this.props.handleAssessmentCheckboxes(264)} /> Cruz Rojas</label>
-                                    <label><input type="checkbox" name="agency" value="Bomberos" checked={values.assessmentCheckBoxes[265]} onChange={this.props.handleAssessmentCheckboxes(265)} /> Bomberos</label>
-                                    <label><input type="checkbox" name="agency" value="Other" checked={values.assessmentCheckBoxes[266]} onChange={this.props.handleAssessmentCheckboxes(266)} /> Other</label>
+                                    <label><input type="checkbox" name="agency" value="Local Police" checked={values.assessmentCheckBoxes[262]} onChange={this.props.handleAssessmentCheckboxes(262)} /> Local Police</label>
+                                    <label><input type="checkbox" name="agency" value="State Police" checked={values.assessmentCheckBoxes[263]} onChange={this.props.handleAssessmentCheckboxes(263)} /> State Police</label>
+                                    <label><input type="checkbox" name="agency" value="Federal Police" checked={values.assessmentCheckBoxes[264]} onChange={this.props.handleAssessmentCheckboxes(264)} /> Federal Police</label>
+                                    <label><input type="checkbox" name="agency" value="Cruz Rojas" checked={values.assessmentCheckBoxes[265]} onChange={this.props.handleAssessmentCheckboxes(265)} /> Cruz Rojas</label>
+                                    <label><input type="checkbox" name="agency" value="Bomberos" checked={values.assessmentCheckBoxes[266]} onChange={this.props.handleAssessmentCheckboxes(266)} /> Bomberos</label>
+                                    <label><input type="checkbox" name="agency" value="Other" checked={values.assessmentCheckBoxes[267]} onChange={this.props.handleAssessmentCheckboxes(267)} /> Other</label>
                                 </div>
                             </td>
                             <th>Trauma cause</th>
@@ -239,11 +222,13 @@ export default class AddCall extends Component {
                         : <tr><td className="top" colSpan="2" height="28%"></td></tr>}
                         <tr style={{borderTop:'1px solid #ddd'}}>
                             <th colSpan="4">
-                                <b style={{display:'inline-block', paddingRight:'10px'}}>MCI</b>
-                                <input type="checkbox" name="mci" id="mci" onClick={this.showMCI} />
+                                <label className="v2">
+                                    <b style={{display:'inline-block', paddingRight:'10px'}}>MCI</b>
+                                    <input type="checkbox" name="none" value="mci" checked={values.assessmentCheckBoxes[268]} onChange={this.props.handleAssessmentCheckboxes(268)} />
+                                </label>
                             </th>
                         </tr>
-                        {this.state.mci ?
+                        {values.assessmentCheckBoxes[268] ?
                         <tr>
                             <th>Patient Count</th>
                             <td><input type="number" name="ptct" min="1" value={values.ptct} onChange={this.props.handleChange('ptct')} /></td>
@@ -258,14 +243,16 @@ export default class AddCall extends Component {
                                 </select>
                             </td>
                         </tr>
-                        : null}
+                        : null }
                         <tr>
                             <th colSpan="4">
-                                <b style={{display:'inline-block', paddingRight:'10px'}}>Vehicle Accident</b>
-                                <input type="checkbox" name="va" id="va" value={values.va} onClick={this.showVA} />
+                                <label className="v2">
+                                    <b style={{display:'inline-block', paddingRight:'10px'}}>Vehicle Accident</b>
+                                    <input type="checkbox" name="none" value="va" checked={values.assessmentCheckBoxes[269]} onChange={this.props.handleAssessmentCheckboxes(269)} />
+                                </label>
                             </th>
                         </tr>
-                        {this.state.va ?
+                        {values.assessmentCheckBoxes[269] ?
                         <tr>
                             <th>Type</th>
                             <td>
@@ -293,22 +280,22 @@ export default class AddCall extends Component {
                             </td>
                         </tr>
                         : null}
-                        {this.state.va ?
+                        {values.assessmentCheckBoxes[269] ?
                         <tr>
                             <th rowSpan="2" valign="top">Impact</th>
                             <td rowSpan="2">
                                 <div>
-                                    <label><input type="checkbox" name="vaimpact" value="Head on" checked={values.assessmentCheckBoxes[267]} onChange={this.props.handleAssessmentCheckboxes(267)} /> Head on</label>
-                                    <label><input type="checkbox" name="vaimpact" value="Side" checked={values.assessmentCheckBoxes[268]} onChange={this.props.handleAssessmentCheckboxes(268)} /> Side</label>
-                                    <label><input type="checkbox" name="vaimpact" value="Rear" checked={values.assessmentCheckBoxes[269]} onChange={this.props.handleAssessmentCheckboxes(269)} /> Rear</label>
-                                    <label><input type="checkbox" name="vaimpact" value="Roll over" checked={values.assessmentCheckBoxes[270]} onChange={this.props.handleAssessmentCheckboxes(270)} /> Roll over</label>
+                                    <label><input type="checkbox" name="vaimpact" value="Head on" checked={values.assessmentCheckBoxes[270]} onChange={this.props.handleAssessmentCheckboxes(270)} /> Head on</label>
+                                    <label><input type="checkbox" name="vaimpact" value="Side" checked={values.assessmentCheckBoxes[271]} onChange={this.props.handleAssessmentCheckboxes(271)} /> Side</label>
+                                    <label><input type="checkbox" name="vaimpact" value="Rear" checked={values.assessmentCheckBoxes[272]} onChange={this.props.handleAssessmentCheckboxes(272)} /> Rear</label>
+                                    <label><input type="checkbox" name="vaimpact" value="Roll over" checked={values.assessmentCheckBoxes[273]} onChange={this.props.handleAssessmentCheckboxes(273)} /> Roll over</label>
                                 </div>
                             </td>
                             <th>Estimated speed</th>
                             <td><input style={{width:'80px', marginRight:'0px'}} type="number" name="vaspd" value={values.vaspd} min="0" onChange={this.props.handleChange('vaspd')} /> mph</td>
                         </tr>
                         : null}
-                        {this.state.va ?
+                        {values.assessmentCheckBoxes[269] ?
                         <tr>
                             <th>Ejection from vehicle</th>
                             <td>
@@ -421,7 +408,7 @@ export default class AddCall extends Component {
                     </div>
                     <div className="tab" onClick={this.navigate(3)}>
                         <img src="/profile.png" />
-                        <b>Physical Assessment</b>
+                        <b>Physical Exam</b>
                     </div>
                     <div className="tab" onClick={this.navigate(4)}>
                         <img src="/profile.png" />

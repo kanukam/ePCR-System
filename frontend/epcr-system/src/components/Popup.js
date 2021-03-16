@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
+import PatientRow from './PatientRow'
 import '../App.css'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -12,16 +13,34 @@ export default class Popup extends Component {
         this.state = {
             type: "",
             surgicalcheck: "",
-            needlecheck: ""
-            // procedures
+            needlecheck: "",
+            patients: [],
+            patientList: []
         };
     }
 
-    handleType = input => event => {
-        if (input.includes("Procedure")) {
-            this.setState({ type: "procedure" });
+    componentDidMount() {
+        const url = 'http://localhost:3000/patients/';
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
         }
-        else { alert(false); }
+        fetch(url, options)
+            .then((response) => {
+                if (response.ok)
+                    return response.json();
+                else
+                    throw Error("Failed");
+            })
+            .then((data) => {
+                this.setState({ patients: data['patients'] });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     showSomething = input => (e) => {
@@ -159,8 +178,8 @@ export default class Popup extends Component {
                         <span>Adjuncts</span>
                         <div style={{ width: '245px' }}>
                             <label><input type="checkbox" name="pAdjuncts" value="None" onChange={this.props.handleCheck("pAdjuncts")} /> None</label>
-                            <label><input type="checkbox" name="pAdjuncts" value="OPA" onChange={this.props.handleCheck("pAdjuncts")}/> OPA</label>
-                            <label><input type="checkbox" name="pAdjuncts" value="NPA" onChange={this.props.handleCheck("pAdjuncts")}/> NPA</label>
+                            <label><input type="checkbox" name="pAdjuncts" value="OPA" onChange={this.props.handleCheck("pAdjuncts")} /> OPA</label>
+                            <label><input type="checkbox" name="pAdjuncts" value="NPA" onChange={this.props.handleCheck("pAdjuncts")} /> NPA</label>
                         </div>
                     </div>
                 );
@@ -308,11 +327,11 @@ export default class Popup extends Component {
                             <span>Confirmation</span>
                             <div style={{ width: '245px' }}>
                                 <label><input type="checkbox" name="pConfirm" value="Chest rise" onChange={this.props.handleCheck("pConfirm")} /> Chest rise</label>
-                                <label><input type="checkbox" name="pConfirm" value="Even breath sounds" onChange={this.props.handleCheck("pConfirm")}/> Equal breath sounds</label>
-                                <label><input type="checkbox" name="pConfirm" value="Vapor in tube" onChange={this.props.handleCheck("pConfirm")}/> Vapor in tube</label>
-                                <label><input type="checkbox" name="pConfirm" value="Bulb Suction" onChange={this.props.handleCheck("pConfirm")}/> Bulb Suction</label>
-                                <label><input type="checkbox" name="pConfirm" value="EasyCap" onChange={this.props.handleCheck("pConfirm")}/> EasyCap</label>
-                                <label><input type="checkbox" name="pConfirm" value="ETCO2" onChange={this.props.handleCheck("pConfirm")}/> ETCO2</label>
+                                <label><input type="checkbox" name="pConfirm" value="Even breath sounds" onChange={this.props.handleCheck("pConfirm")} /> Equal breath sounds</label>
+                                <label><input type="checkbox" name="pConfirm" value="Vapor in tube" onChange={this.props.handleCheck("pConfirm")} /> Vapor in tube</label>
+                                <label><input type="checkbox" name="pConfirm" value="Bulb Suction" onChange={this.props.handleCheck("pConfirm")} /> Bulb Suction</label>
+                                <label><input type="checkbox" name="pConfirm" value="EasyCap" onChange={this.props.handleCheck("pConfirm")} /> EasyCap</label>
+                                <label><input type="checkbox" name="pConfirm" value="ETCO2" onChange={this.props.handleCheck("pConfirm")} /> ETCO2</label>
                             </div>
                         </div>
                     </div>
@@ -374,12 +393,12 @@ export default class Popup extends Component {
                             <span>Findings</span>
                             <div style={{ width: '245px' }}>
                                 <label><input type="checkbox" name="pFindings" value="Normal" onChange={this.props.handleCheck("pFindings")} /> Normal</label>
-                                <label><input type="checkbox" name="pFindings" value="Inferior MI" onChange={this.props.handleCheck("pFindings")}/> Inferior MI</label>
-                                <label><input type="checkbox" name="pFindings" value="Anterior MI" onChange={this.props.handleCheck("pFindings")}/> Anterior MI</label>
-                                <label><input type="checkbox" name="pFindings" value="Lateral MI" onChange={this.props.handleCheck("pFindings")}/> Lateral MI</label>
-                                <label><input type="checkbox" name="pFindings" value="Septal MI" onChange={this.props.handleCheck("pFindings")}/> Septal MI</label>
-                                <label><input type="checkbox" name="pFindings" value="RBBB" onChange={this.props.handleCheck("pFindings")}/> RBBB</label>
-                                <label><input type="checkbox" name="pFindings" value="LBBB" onChange={this.props.handleCheck("pFindings")}/> LBBB</label>
+                                <label><input type="checkbox" name="pFindings" value="Inferior MI" onChange={this.props.handleCheck("pFindings")} /> Inferior MI</label>
+                                <label><input type="checkbox" name="pFindings" value="Anterior MI" onChange={this.props.handleCheck("pFindings")} /> Anterior MI</label>
+                                <label><input type="checkbox" name="pFindings" value="Lateral MI" onChange={this.props.handleCheck("pFindings")} /> Lateral MI</label>
+                                <label><input type="checkbox" name="pFindings" value="Septal MI" onChange={this.props.handleCheck("pFindings")} /> Septal MI</label>
+                                <label><input type="checkbox" name="pFindings" value="RBBB" onChange={this.props.handleCheck("pFindings")} /> RBBB</label>
+                                <label><input type="checkbox" name="pFindings" value="LBBB" onChange={this.props.handleCheck("pFindings")} /> LBBB</label>
                             </div>
                         </div>
                     </div>
@@ -504,127 +523,179 @@ export default class Popup extends Component {
         }
     }
 
+    selectPatient = index => (event) => {
+        var patient = this.state.patientList[index];
+        this.props.selectPatient(patient);
+    }
+
+    displayTime(time) {
+        var index = time.indexOf("-");
+        var lastIndex = time.lastIndexOf("-");
+        var year = time.substring(0, index);
+        var month = time.substring(index + 1, index + 3);
+        var day = time.substring(lastIndex + 1);
+        return day + "/" + month + "/" + year;
+    }
+
     render() {
         const { inter } = this.props;
+        var patientComponents = [];
+        for (var i = 0; i < this.state.patients.length; i++) {
+            patientComponents.push(<PatientRow
+                fname={this.state.patients[i]["fname"]}
+                lname={this.state.patients[i]["lname"]}
+                dob={this.displayTime(this.state.patients[i]["birth"])}
+                id={this.state.patients[i].id}
+                index={i}
+                select={this.selectPatient}
+            />)
+            var pat = this.state.patients[i].id + "," + this.state.patients[i]["fname"] + "," + this.state.patients[i]["lname"] + "," + this.state.patients[i]["birth"] + "," + this.state.patients[i]["gender"] + ",;";
+            this.state.patientList.push(pat);
+        }
         return (
-            <div className="popup shadow">
-                <h2>{this.props.text}</h2>
+            <div>
                 {this.props.text.includes("Patient") ?
-                    <div>Search for patient and then use those values to populate to form fields.</div>
-                    : null}
-                {this.props.text.includes("Procedure") ?
-                    <form>
-                        <Row>
-                            <Col>
-                                <div className="group">
-                                    <span>Procedure</span>
-                                    <select name="pName" value={inter.pName} onChange={this.props.changeInter('pName')}>
-                                        <option disabled selected value="">-Select-</option>
-                                        <option value="Blood Glucose">Blood Glucose</option>
-                                        <option value="Hemorrhage Control">Hemorrhage Control</option>
-                                        <option value="Splinting">Splinting</option>
-                                        <option value="Oxygen">Oxygen</option>
-                                        <option value="Spinal Precautions">Spinal Precautions</option>
-                                        <option value="Pelvic Binder">Pelvic Binder</option>
-                                        <option value="Suction">Suction</option>
-                                        <option value="Basic Airway - BVM">Basic Airway - BVM</option>
-                                        <option value="MD Consult">MD Consult</option>
-                                        <option value="IV">IV</option>
-                                        <option value="IO IV">IO IV</option>
-                                        <option value="Pleural Decompression">Pleural Decompression</option>
-                                        <option value="Advanced Airway - LMA">Advanced Airway - LMA</option>
-                                        <option value="Advanced Airway - Intubation">Advanced Airway - Intubation</option>
-                                        <option value="Cricothyrotomy">Cricothyrotomy</option>
-                                        <option value="12 Lead EKG">12 Lead EKG</option>
-                                        <option value="Cardiac Arrest">Cardiac Arrest</option>
-                                        <option value="Cardiac Defib - AED">Cardiac Defib - AED</option>
-                                        <option value="Cardiac Defib - Manual">Cardiac Defib - Manual</option>
-                                        <option value="Cardiac Pacing">Cardiac Pacing</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <span>{inter.pName === "Cardiac Arrest" ? "Time of arrest" : "Time"}</span>
-                                    <DatePicker
-                                        selected={inter.pTimeDisplay ? inter.pTimeDisplay : false}
-                                        placeholderText="dd/mm/yyyy --:-- --"
-                                        onChange={this.props.handleDate('pTime')}
-                                        timeInputLabel="Time:"
-                                        dateFormat="dd/MM/yyyy h:mm aa"
-                                        showTimeInput
-                                    />
-                                </div>
-                                {this.renderProc(inter.pName)}
-                                <div className="group">
-                                    <span>{inter.pName === "Cardiac Arrest" ? "CPR done by" : "Crew"}</span>
-                                    <input type="text" value="John Doe" disabled />
-                                </div>
-                                <small>Note: Crew member name should be selected from current user's information. Currently, the below buttons do nothing yet.</small>
-                                <div className="bottom">
-                                    <Button className="left" onClick={this.props.submitProcedure}>Add</Button>
-                                    <Button className="right" onClick={this.props.closePopup}>Cancel</Button>
-                                </div>
-                            </Col>
-                        </Row>
-                    </form>
-                    : null}
-                {this.props.text.includes("Medication") ?
-                    <form>
-                        <Row>
-                            <Col>
-                                <div className="group">
-                                    <span>Medication</span>
-                                    <select className="multiple" name="mName" style={{ height: '150px' }} onChange={this.props.changeInter('mName')} multiple>
-                                        <option value="Nitroglycerine">Nitroglycerine</option>
-                                        <option value="Ondansetron">Ondansetron</option>
-                                        <option value="Oxygen">Oxygen</option>
-                                        <option value="Phenylephrine">Phenylephrine</option>
-                                        <option value="Procardia">Procardia</option>
-                                        <option value="Propanalol">Propanalol</option>
-                                    </select>
-                                </div>
-                                <div className="group">
-                                    <span>Time</span>
-                                    <input type="datetime-local" name="mTime" value={inter.mTime} onChange={this.props.changeInter('mTime')} />
-                                </div>
-                                <div className="group">
-                                    <span>Dosage</span>
-                                    <input type="number" style={{ width: '27%', marginRight: '10px' }} min="0" name="mDosage" value={inter.mDosage} onChange={this.props.changeInter('mDosage')}/>
-                                    <select name="mUnit" style={{ width: '32%' }} onChange={this.props.changeInter('mUnit')}>
-                                        <option value="GMS">GMS</option>
-                                        <option value="in.">Inches (in.)</option>
-                                        <option value="L">Liters (L)</option>
-                                        <option value="kg">Kilograms (kg)</option>
-                                        <option value="tablet">Tablets</option>
-                                    </select>
-                                </div>
-                                <div className="group">
-                                    <span>Route</span>
-                                    <select name="mRoute" onChange={this.props.changeInter('mRoute')}>
-                                        <option value="Oral">Oral</option>
-                                        <option value="IM">IM</option>
-                                        <option value="IV">IV</option>
-                                        <option value="Nasal">Nasal</option>
-                                        <option value="Inhaled">Inhaled</option>
-                                        <option value="Topical">Topical</option>
-                                        <option value="Sublingual">Sublingual</option>
-                                        <option value="Ophthalmic">Ophthalmic</option>
-                                        <option value="Otic">Otic</option>
-                                        <option value="Rectal">Rectal</option>
-                                    </select>
-                                </div>
-                                <div className="group">
-                                    <span>Crew</span>
-                                    <input type="text" value="John Doe" disabled />
-                                </div>
-                                <small>Note: Crew member name should be selected from current user's information. Currently, the below buttons do nothing yet.</small>
-                                <div className="bottom">
-                                    <Button className="left" onClick={this.props.submitMedication}>Add</Button>
-                                    <Button className="right" onClick={this.props.closePopup}>Cancel</Button>
-                                </div>
-                            </Col>
-                        </Row>
-                    </form>
-                    : null}
+                    <div className="popup shadow psearch">
+                        <h2>{this.props.text}</h2>
+                        <div style={{ height: '285px', overflow: 'auto' }}>
+                            <table className="treatment" style={{ marginBottom: '0' }}>
+                                <tr>
+                                    <th>Last name</th>
+                                    <th>First name</th>
+                                    <th>Date of birth</th>
+                                    <th width="100px">Action</th>
+                                </tr>
+                                {patientComponents}
+                            </table>
+                        </div>
+                    </div>
+                : <div className="popup shadow">
+                    <h2>{this.props.text}</h2>
+                    {this.props.text.includes("Procedure") ?
+                        <form>
+                            <Row>
+                                <Col>
+                                    <div className="group">
+                                        <span>Procedure</span>
+                                        <select className="multiple" name="pName" style={{ height: '150px' }} onChange={this.props.changeInter('pName')} multiple>
+                                            <option value="Blood Glucose">Blood Glucose</option>
+                                            <option value="Hemorrhage Control">Hemorrhage Control</option>
+                                            <option value="Splinting">Splinting</option>
+                                            <option value="Oxygen">Oxygen</option>
+                                            <option value="Spinal Precautions">Spinal Precautions</option>
+                                            <option value="Pelvic Binder">Pelvic Binder</option>
+                                            <option value="Suction">Suction</option>
+                                            <option value="Basic Airway - BVM">Basic Airway - BVM</option>
+                                            <option value="MD Consult">MD Consult</option>
+                                            <option value="IV">IV</option>
+                                            <option value="IO IV">IO IV</option>
+                                            <option value="Pleural Decompression">Pleural Decompression</option>
+                                            <option value="Advanced Airway - LMA">Advanced Airway - LMA</option>
+                                            <option value="Advanced Airway - Intubation">Advanced Airway - Intubation</option>
+                                            <option value="Cricothyrotomy">Cricothyrotomy</option>
+                                            <option value="12 Lead EKG">12 Lead EKG</option>
+                                            <option value="Cardiac Arrest">Cardiac Arrest</option>
+                                            <option value="Cardiac Defib - AED">Cardiac Defib - AED</option>
+                                            <option value="Cardiac Defib - Manual">Cardiac Defib - Manual</option>
+                                            <option value="Cardiac Pacing">Cardiac Pacing</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <span>{inter.pName === "Cardiac Arrest" ? "Time of arrest" : "Time"}</span>
+                                        <DatePicker
+                                            selected={inter.pTimeDisplay ? inter.pTimeDisplay : false}
+                                            placeholderText="dd/mm/yyyy --:-- --"
+                                            onChange={this.props.handleDate('pTime')}
+                                            timeInputLabel="Time:"
+                                            dateFormat="dd/MM/yyyy h:mm aa"
+                                            showTimeInput
+                                        />
+                                    </div>
+                                    {this.renderProc(inter.pName)}
+                                    <div className="group">
+                                        <span>{inter.pName === "Cardiac Arrest" ? "CPR done by" : "Crew"}</span>
+                                        <input type="text" value="John Doe" disabled />
+                                    </div>
+                                    <small>Note: Crew member name should be selected from current user's information.</small><br/>
+                                    <small style={{color:'red'}}>{inter.message}</small>
+                                    <div className="bottom">
+                                        <input type="button" className="left" value="Add" onClick={this.props.submitProcedure} />
+                                        <input type="button" className="right" value="Cancel" onClick={this.props.closePopup} />
+                                    </div>
+                                </Col>
+                            </Row>
+                        </form>
+                        : null}
+                    {this.props.text.includes("Medication") ?
+                        <form>
+                            <Row>
+                                <Col>
+                                    <div className="group">
+                                        <span>Medication</span>
+                                        <select className="multiple" name="mName" style={{ height: '150px' }} onChange={this.props.changeInter('mName')} multiple>
+                                            <option value="Nitroglycerine">Nitroglycerine</option>
+                                            <option value="Ondansetron">Ondansetron</option>
+                                            <option value="Oxygen">Oxygen</option>
+                                            <option value="Phenylephrine">Phenylephrine</option>
+                                            <option value="Procardia">Procardia</option>
+                                            <option value="Propanalol">Propanalol</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <span>Time</span>
+                                        {/*<input type="datetime-local" name="mTime" value={inter.mTime} onChange={this.props.changeInter('mTime')} />*/}
+                                        <DatePicker
+                                            selected={inter.mTimeDisplay ? inter.mTimeDisplay : false}
+                                            placeholderText="dd/mm/yyyy --:-- --"
+                                            onChange={this.props.handleDate('mTime')}
+                                            timeInputLabel="Time:"
+                                            dateFormat="dd/MM/yyyy h:mm aa"
+                                            showTimeInput
+                                        />
+                                    </div>
+                                    <div className="group">
+                                        <span>Dosage</span>
+                                        <input type="number" style={{ width: '27%', marginRight: '10px' }} min="0" name="mDosage" value={inter.mDosage} onChange={this.props.changeInter('mDosage')} />
+                                        <select name="mUnit" style={{ width: '32%' }} onChange={this.props.changeInter('mUnit')}>
+                                            <option disabled selected value="">-Select-</option>
+                                            <option value="GMS">GMS</option>
+                                            <option value="in.">Inches (in.)</option>
+                                            <option value="L">Liters (L)</option>
+                                            <option value="kg">Kilograms (kg)</option>
+                                            <option value="tablet">Tablets</option>
+                                        </select>
+                                    </div>
+                                    <div className="group">
+                                        <span>Route</span>
+                                        <select name="mRoute" onChange={this.props.changeInter('mRoute')}>
+                                            <option disabled selected value="">-Select-</option>
+                                            <option value="Oral">Oral</option>
+                                            <option value="IM">IM</option>
+                                            <option value="IV">IV</option>
+                                            <option value="Nasal">Nasal</option>
+                                            <option value="Inhaled">Inhaled</option>
+                                            <option value="Topical">Topical</option>
+                                            <option value="Sublingual">Sublingual</option>
+                                            <option value="Ophthalmic">Ophthalmic</option>
+                                            <option value="Otic">Otic</option>
+                                            <option value="Rectal">Rectal</option>
+                                        </select>
+                                    </div>
+                                    <div className="group">
+                                        <span>Crew</span>
+                                        <input type="text" value="John Doe" disabled />
+                                    </div>
+                                    <small>Note: Crew member name should be selected from current user's information.</small><br/>
+                                    <small style={{color:'red'}}>{inter.message}</small>
+                                    <div className="bottom">
+                                    <input type="button" className="left" value="Add" onClick={this.props.submitMedication} />
+                                        <input type="button" className="right" value="Cancel" onClick={this.props.closePopup} />
+                                    </div>
+                                </Col>
+                            </Row>
+                        </form>
+                        : null}
+                </div>}
             </div>
         )
     }

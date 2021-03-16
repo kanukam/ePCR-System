@@ -32,6 +32,7 @@ export default class PhysicalAssessment extends Component {
 
     render() {
         const{values} = this.props;
+        console.log(values);
         return (
             <div className="assessment">
                 <div className="content">
@@ -608,7 +609,7 @@ export default class PhysicalAssessment extends Component {
                     </div>
                     <div className="tab active" onClick={this.navigate(3)}>
                         <img src="/profile.png" />
-                        <b>Physical Assessment</b>
+                        <b>Physical Exam</b>
                     </div>
                     <div className="tab" onClick={this.navigate(4)}>
                         <img src="/profile.png" />

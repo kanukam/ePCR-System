@@ -26,104 +26,80 @@ export default class Confirm extends Component {
     }
 
     render() {
-        const { fname, lname, birth, classify, gender, weight, address, city, country, zip, idate, ptct, ino, mci, care, triage, ctype, disp, loctype, dest, loc, dispatch, contact, enroute, arrdes, arrscn  } = this.props.values;
+        const { values } = this.props;
         return (
             <div>
                 <form>
                     <h2>Confirm Chart Report</h2>
-                    <b>Date:</b> {idate}
-                    <table className="info" border="1">
-                        <tr><th colSpan="8">Patient Information</th></tr>
+                    <b>Date:</b> {values.idate}
+                    <table className="crew" border="1">
                         <tr>
-                            <td width="10%">Name</td>
-                            <td width="30%">{lname}, {fname}</td>
-                            <td width="10%">Classification</td>
-                            <td width="20%">{classify}</td>
-                            <td width="10%">D.O.B.</td>
-                            <td width="20%">{birth}</td>
+                            <td>
+                                <b>Incident #</b> {values.ino}<br/>
+                                <b>Incident #</b> {values.ino}<br/>
+                                <b>Unit #</b> {values.unit}<br/>
+                                <b>Call type</b> {values.ctype}<br/>
+                                <b>Call nature</b> {values.nature}<br/>
+                                <b>Care level</b> {values.care}
+                            </td>
                         </tr>
                         <tr>
-                            <td>Address</td>
-                            <td>{address}, {city}, {country} {zip}</td>
-                            <td>Gender</td>
-                            <td>{gender}</td>
-                            <td>Weight</td>
-                            <td>{weight} kg</td>
+                            <td>
+                                <b>Incident address</b> {values.loc}<br/>
+                                <b>Incident location</b> {values.loctype}<br/>
+                                <b>Disposition</b> {values.disp}<br/>
+                                <b>Destination</b> {values.dest}<br/>
+                                <b>Other agencies on scene</b> {values.agency.join()}<br/>
+                                <b>Trauma cause</b> {values.trauma}{values.fallht !== "" ? ", height: " + values.fallht + " m" : null}
+                            </td>
                         </tr>
                         <tr>
-                            <td>Number of Patients at Scene</td>
-                            <td colSpan="7">{ptct}</td>
-                        </tr>
-                    </table>
-                    <table className="info" border="1">
-                        <tr><th colSpan="4">Call Information</th></tr>
-                        <tr>
-                            <td width="15%">Incident #</td>
-                            <td width="35%">{ino}</td>
-                            <td width="15%">MCI</td>
-                            <td width="35%">{mci}</td>
+                            <td>
+                                <b>MCI</b> {values.assessmentCheckBoxes[268] ? <text>Yes<br/><b>Patient count</b> {values.ptct}<br/><b>Triage color</b> {values.triage}</text> : "No"}
+                            </td>
                         </tr>
                         <tr>
-                            <td>Care Level</td>
-                            <td>{care}</td>
-                            <td>Triage Color</td>
-                            <td>{triage}</td>
+                            <td>
+                                <b>Vehicle accident</b> {values.assessmentCheckBoxes[269] ? <text>Yes<br/>
+                                    <b>Type</b> {values.vatype}<br/>
+                                    <b>Impact</b> {values.impact.join()}<br/>
+                                    <b>Safety equipment</b> {values.vasafe}<br/>
+                                    <b>Estimated speed</b> {values.vaspd}<br/>
+                                    <b>Ejection from vehicle</b> {values.vaeject}
+                                </text> : "No"}
+                            </td>
                         </tr>
                         <tr>
-                            <td>Call Type</td>
-                            <td>{ctype}</td>
-                            <td>Disposition</td>
-                            <td>{disp}</td>
+                            <td>
+                                <b>Dispatch</b> {values.dispatch}<br/>
+                                <b>Enroute</b> {values.enroute}<br/>
+                                <b>Arrive scene</b> {values.arrscn}<br/>
+                                <b>Patient contact</b> {values.contact}<br/>
+                                <b>Depart scene</b> {values.dptscn}<br/>
+                                <b>Arrive destination</b> {values.arrdes}<br/>
+                                <b>Transfer of care</b> {values.trcare}
+                            </td>
                         </tr>
                         <tr>
-                            <td>Location Type</td>
-                            <td>{loctype}</td>
-                            <td>Destination Type</td>
-                            <td>{dest}</td>
+                            <td>
+                                <b>Patient name</b> {values.lname}, {values.fname}<br/>
+                                <b>Date of birth</b> {values.birth}<br/>
+                                <b>Classification</b> {values.classify}<br/>
+                                <b>Gender</b> {values.gender}<br/>
+                                <b>Weight</b> {values.weight} kg<br/>
+                                <b>Braslow color</b> {values.bcolor}<br/>
+                                <b>Address</b> {values.street}, {values.city}, {values.state}, {values.country} {values.zip}
+                                <b>Phone</b> {values.phone}
+                            </td>
                         </tr>
                         <tr>
-                            <td>Location</td>
-                            <td>{loc}</td>
-                            <td>Destination</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Response Mode</td>
-                            <td></td>
-                            <td>Transport Mode</td>
-                            <td></td>
-                        </tr>
-                        <tr><th colSpan="4">Response Times</th></tr>
-                        <tr>
-                            <td>Dispatch</td>
-                            <td>{dispatch}</td>
-                            <td>Contact</td>
-                            <td>{contact}</td>
-                        </tr>
-                        <tr>
-                            <td>Enroute</td>
-                            <td>{enroute}</td>
-                            <td>Enroute</td>
-                            <td>{arrdes}</td>
-                        </tr>
-                        <tr>
-                            <td>Scene</td>
-                            <td>{arrscn}</td>
-                            <td>Arrive</td>
-                            <td>{arrscn}</td>
-                        </tr>
-                    </table>
-                    <table className="crew" order="1">
-                        <tr><th colSpan="4">Unit Personnel</th></tr>
-                        <tr>
-                            <td><b>Crew Member</b></td>
-                            <td><b>Certification</b></td>
-                            <td><b>Role</b></td>
-                        </tr>
-                        <tr>
-                            <td>CREW NAME</td>
-                            <td>Registered Nurse</td>
-                            <td></td>
+                            <td>
+                                <b>History of present illness</b> {values.hpi}<br/>
+                                <b>Given by</b> {values.historyGiven.join()}<br/>
+                                <b>Medical allergies</b> {values.medAllergy}<br/>
+                                <b>Environmental allergies</b> {values.envAllergy}<br/>
+                                <b>Past medical history</b> {values.pastHistory}{values.assessmentCheckBoxes[315] ? ",O - Other" + values.pastHistoryOther : null}
+                            </td>
                         </tr>
                     </table>
                     <Button className="left" onClick={this.back}>Previous</Button>
@@ -141,11 +117,11 @@ export default class Confirm extends Component {
                     </div>
                     <div className="tab" onClick={this.navigate(3)}>
                         <img src="/profile.png" />
-                        <b>Interventions</b>
+                        <b>Physical Exam</b>
                     </div>
                     <div className="tab" onClick={this.navigate(4)}>
                         <img src="/profile.png" />
-                        <b>Physical Assessment</b>
+                        <b>Interventions</b>
                     </div>
                     <div className="tab active" onClick={this.navigate(5)}>
                         <img src="/profile.png" />
