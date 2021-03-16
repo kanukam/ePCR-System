@@ -1,5 +1,6 @@
 // @ts-check
 const db = require('../../sql/database');
+const pdf = require('../../pdf');
 
 function addChart(body, pbody, callback) {
     // insert into patient table first
@@ -25,32 +26,6 @@ function addChart(body, pbody, callback) {
             })
         }
     })
-}
-
-function addProcedure(body, callback) {
-    var sql = 'INSERT INTO procedures SET ?';
-    db.query(sql, body, (err, res) => {
-        if (err) {
-            console.log(err);
-            callback(err);
-        }
-        else {
-            callback(null);
-        }
-    });
-}
-
-function addMedication(body, callback) {
-    var sql = 'INSERT INTO medications SET ?';
-    db.query(sql, body, (err, res) => {
-        if (err) {
-            console.log(err);
-            callback(err);
-        }
-        else {
-            callback(null);
-        }
-    });
 }
 
 function viewAllCharts(callback) {
@@ -101,4 +76,51 @@ function viewAllPatientCharts(callback){
     });
 }
 
-module.exports = { viewChart, viewAllCharts, viewAllChartsFromPatientID, addChart, updateChart, addProcedure, addMedication, viewPatientChart, viewAllPatientCharts };
+function addProcedure(body, callback) {
+    var sql = 'INSERT INTO procedures SET ?';
+    db.query(sql, body, (err, res) => {
+        if (err) {
+            console.log(err);
+            callback(err);
+        }
+        else {
+            callback(null);
+        }
+    });
+}
+
+function addMedication(body, callback) {
+    var sql = 'INSERT INTO medications SET ?';
+    db.query(sql, body, (err, res) => {
+        if (err) {
+            console.log(err);
+            callback(err);
+        }
+        else {
+            callback(null);
+        }
+    });
+}
+
+function downloadPdf(id, locale, pipeTo, callback){
+    viewChart(id, (err, res)=>{
+        err
+        ? callback(err)
+        : pdf.createChartPDF(res, locale, pipeTo, (err) => {
+            callback(err);
+        } )
+    })
+}
+
+module.exports = { 
+    viewChart, 
+    viewAllCharts, 
+    viewAllChartsFromPatientID, 
+    addChart, 
+    addProcedure,
+    addMedication,
+    updateChart, 
+    viewPatientChart, 
+    viewAllPatientCharts,
+    downloadPdf
+};

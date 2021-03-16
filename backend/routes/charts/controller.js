@@ -70,4 +70,21 @@ function viewAllPatientCharts(req, res){
   })
 }
 
-module.exports = { viewChart, viewAllCharts, addChart, updateChart, viewPatientChart, viewAllPatientCharts };
+function downloadPdf(req, res){
+  const id = req.params.chartId;
+  let locale = req.query.locale ? req.query.locale : 'EN';
+  res.header('Content-disposition', 'inline; filename=' + `${id}_chart`);
+  res.header('Content-type', 'application/pdf');
+  repo.downloadPdf(id, locale, res, (err) => {
+  })
+}
+
+module.exports = { 
+  viewChart, 
+  viewAllCharts, 
+  addChart, 
+  updateChart, 
+  viewPatientChart, 
+  viewAllPatientCharts,
+  downloadPdf
+};
