@@ -20,18 +20,20 @@ function viewAllCharts(req, res) {
 
 function addChart(req, res) {
   const { body, pbody, patientID } = req.body;
-  if(patientID !== undefined)
+  if(patientID !== null) {
     repo.addChartFromPatientID(body, patientID, (err) => {
       err
         ? res.status(500).json({ error: err })
         : res.status(200).json({ status: 'Successfully added' });
     })
-  else
+  }
+  else {
     repo.addChart(body, pbody, (err) => {
       err
         ? res.status(500).json({ error: err })
         : res.status(200).json({ status: 'Successfully added' });
     })
+  }
 }
 
 function updateChart(req, res) {
