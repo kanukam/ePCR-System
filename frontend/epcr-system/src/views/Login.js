@@ -108,23 +108,22 @@ export default class Login extends Component {
                                         {this.context.translate('sign-in')}
                                     </Button>
                                 </Form>
-                                <div className="mt-3">
-                                    {/* Register */}
-                                    <div className='mt-1 float-left'>
-                                        <Link to="/Register">{this.context.translate('register')}</Link>
-                                    </div>
-                                    {/* Forgot Password */}
-                                    <div className='mt-1 float-right'>
-                                        <Link to="/Reset">{this.context.translate('forgot-password')}</Link>
-                                    </div>
-                                </div>
                                 {/* Error Message displayed if invalid login attempt */}
-                                {this.state.errorMessage && <p className="text-danger"> { this.state.errorMessage } </p>}
+                                {this.state.errorMessage && <p className="text-danger"> {this.state.errorMessage} </p>}
                                 <Jumbotron className='mt-3' fluid>
                                     <Container>
+                                        <div>
+                                            {/* Register */}
+                                            <div className='float-left'>
+                                                <Link to="/Register">{this.context.translate('register')}</Link>
+                                            </div>
+                                            {/* Forgot Password */}
+                                            <div className='float-right'>
+                                                <Link to="/Reset">{this.context.translate('forgot-password')}</Link>
+                                            </div>
+                                        </div>
                                     </Container>
                                 </Jumbotron>
-                                
                             </Col>
                         </Row>
                     </Container>
