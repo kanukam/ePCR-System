@@ -19,6 +19,8 @@ router.post("/:chartId/update", auth, controller.updateChart);
 
 router.get("/:chartId/pdf", auth, controller.downloadPdf);
 
+router.get("/:chartId/pdfTest", controller.downloadPdfTest);
+
 router.get("/patient/:chartId", auth, controller.viewPatientChart);
 
 module.exports = router;

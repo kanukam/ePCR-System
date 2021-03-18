@@ -19,12 +19,21 @@ function viewAllCharts(req, res) {
 }
 
 function addChart(req, res) {
-  const { body, pbody } = req.body;
-  repo.addChart(body, pbody, (err) => {
-    err
-      ? res.status(500).json({ error: err })
-      : res.status(200).json({ status: 'Successfully added' });
-  })
+  const { body, pbody, patientID } = req.body;
+  if(patientID !== null) {
+    repo.addChartFromPatientID(body, patientID, (err) => {
+      err
+        ? res.status(500).json({ error: err })
+        : res.status(200).json({ status: 'Successfully added' });
+    })
+  }
+  else {
+    repo.addChart(body, pbody, (err) => {
+      err
+        ? res.status(500).json({ error: err })
+        : res.status(200).json({ status: 'Successfully added' });
+    })
+  }
 }
 
 function updateChart(req, res) {
@@ -79,6 +88,14 @@ function downloadPdf(req, res){
   })
 }
 
+function downloadPdfTest(req, res){
+  res.header('Content-disposition', 'inline; filename=' + `test_chart`);
+  res.header('Content-type', 'application/pdf');
+  repo.downloadPdfTest(res, (err) => {
+    console.log(err);
+  })
+}
+
 module.exports = { 
   viewChart, 
   viewAllCharts, 
@@ -86,5 +103,6 @@ module.exports = {
   updateChart, 
   viewPatientChart, 
   viewAllPatientCharts,
-  downloadPdf
+  downloadPdf,
+  downloadPdfTest
 };
