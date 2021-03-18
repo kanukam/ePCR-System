@@ -28,7 +28,7 @@ export default class Confirm extends Component {
     render() {
         const { values } = this.props;
         return (
-            <div>
+            <div className="form-confirm">
                 <form>
                     <h2>Confirm Chart Report</h2>
                     <b>Date:</b> {values.idate}
