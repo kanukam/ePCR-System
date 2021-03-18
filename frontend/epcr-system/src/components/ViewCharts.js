@@ -95,11 +95,11 @@ export default class ViewCharts extends Component {
         // filter first name
         let filtered = this.state.charts;
         if(this.state.firstname){
-            filtered = filtered.filter(chart => chart.fname === this.state.firstname);
+            filtered = filtered.filter(chart => chart.fname.toLowerCase() === this.state.firstname.toLowerCase());
         }
         // filter last name
         if (this.state.lastname) {
-            filtered = filtered.filter(chart => chart.lname === this.state.lastname);
+            filtered = filtered.filter(chart => chart.lname.toLowerCase() === this.state.lastname.toLowerCase());
         }
         // filter birth
         if (this.state.dob) {
