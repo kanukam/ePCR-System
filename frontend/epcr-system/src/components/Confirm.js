@@ -102,7 +102,7 @@ export default class Confirm extends Component {
                             </td>
                         </tr>
                     </table>
-                    <small style={{color:'red'}}>{values.message}</small>
+                    <small style={{color:'red'}} className="ml-2">{values.message}</small>
                     <Button className="left" onClick={this.back}>Previous</Button>
                     <Button className="right" onClick={this.props.handleSubmit}>Submit</Button>
                 </form>
