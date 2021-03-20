@@ -74,12 +74,12 @@ export default class Confirm extends Component {
                         <tr>
                             <td>
                                 <b>Dispatch</b> {values.dispatch ? <Moment date={values.dispatch} format="DD-MM-YY hh:mm:ss A" /> : null}<br/>
-                                <b>Enroute</b> {values.enroute ? <Moment date={values.enroute} format="DD-MM-YY hh:mm:ss" /> : null}<br/>
-                                <b>Arrive scene</b> {values.arrscn ? <Moment date={values.arrscn} format="DD-MM-YY hh:mm:ss" /> : null}<br/>
-                                <b>Patient contact</b> {values.contact ? <Moment date={values.contact} format="DD-MM-YY hh:mm:ss" /> : null}<br/>
-                                <b>Depart scene</b> {values.dptscn ? <Moment date={values.dptscn} format="DD-MM-YY hh:mm:ss" /> : null}<br/>
-                                <b>Arrive destination</b> {values.arrdes ? <Moment date={values.arrdes} format="DD-MM-YY hh:mm:ss" /> : null}<br/>
-                                <b>Transfer of care</b> {values.trcare ? <Moment date={values.trcare} format="DD-MM-YY hh:mm:ss" /> : null}
+                                <b>Enroute</b> {values.enroute ? <Moment date={values.enroute} format="DD-MM-YY hh:mm:ss A" /> : null}<br/>
+                                <b>Arrive scene</b> {values.arrscn ? <Moment date={values.arrscn} format="DD-MM-YY hh:mm:ss A" /> : null}<br/>
+                                <b>Patient contact</b> {values.contact ? <Moment date={values.contact} format="DD-MM-YY hh:mm:ss A" /> : null}<br/>
+                                <b>Depart scene</b> {values.dptscn ? <Moment date={values.dptscn} format="DD-MM-YY hh:mm:ss A" /> : null}<br/>
+                                <b>Arrive destination</b> {values.arrdes ? <Moment date={values.arrdes} format="DD-MM-YY hh:mm:ss A" /> : null}<br/>
+                                <b>Transfer of care</b> {values.trcare ? <Moment date={values.trcare} format="DD-MM-YY hh:mm:ss A" /> : null}
                             </td>
                         </tr>
                         <tr>
