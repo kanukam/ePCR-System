@@ -72,10 +72,12 @@ export default class ChartForm extends Component {
             classify: "",
             gender: "",
             weight: "",
-            address: "",
+            subdivision: "",
+            street: "",
+            blvd: "",
+            km:"",
             city: "",
             state: "",
-            country: "",
             zip: "",
             phone: "",
             braslow: "",
@@ -339,8 +341,8 @@ export default class ChartForm extends Component {
             const p_classify = this.state.classify;
             const p_bcolor = this.state.braslow;
             let p_address = "";
-            if (this.state.address || this.state.city || this.state.st || this.state.country || this.state.zip) {
-                p_address = this.state.address + " " + this.state.city + ", " + this.state.state + " " + this.state.zip + " " + this.state.country;
+            if (this.state.subdivision || this.state.street || this.state.blvd || this.state.km || this.state.city || this.state.state) {
+                p_address = this.state.subdivision + ", " + this.state.street + ", " + this.state.blvd + ", " + this.state.km + ", " + this.state.city + ", " + this.state.state;
             }
             const p_phone = this.state.phone;
             const p_hpi = this.state.hpi;
