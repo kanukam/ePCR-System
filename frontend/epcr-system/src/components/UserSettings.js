@@ -74,30 +74,58 @@ export default class Settings extends Component {
             this.setState({ message: this.context.translate('all-fields') });
         }
     })
+    passwordWordCheck = (password) => {
+        let regularExp = /[a-zA-Z]/g;
+        let capital = new RegExp("[A-Z]");
+        let number = /\d/g;
+        // Check at least 8 chars
+        if (password.length < 8) {
+            this.setState({ message: this.context.translate('password-length') });
+            return false;
+        }
+        else if (!regularExp.test(password)) {
+            this.setState({ message: this.context.translate('password-letter') });
+            return false;
+        }
+        else if (!capital.test(password)) {
+            this.setState({ message: this.context.translate('password-capital') });
+            return false;
+        }
+        else if (!number.test(password)) {
+            this.setState({ message: this.context.translate('password-number') });
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
     // Function to change Password
-    handlePassword = () => {
+    handlePassword = (event) => {
+        event.preventDefault();
         const { oldPassword, newPassword, confirmedPassword } = this.state
         if (oldPassword && newPassword && confirmedPassword) {
             // Send Request if passwords match
             if (newPassword === confirmedPassword) {
-                const url = `http://localhost:3000/users/${this.context.username}/password`;
-                const options = {
-                    method: 'POST',
-                    body: JSON.stringify({ oldPassword, newPassword }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    credentials: 'include'
-                }
-                // Check if update is successful
-                fetch(url, options).then((response) => {
-                    if (!response.ok) {
-                        throw Error("Failed");
+                if (this.passwordWordCheck(newPassword)) {
+                    const url = `http://localhost:3000/users/${this.context.username}/password`;
+                    const options = {
+                        method: 'POST',
+                        body: JSON.stringify({ oldPassword, newPassword }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include'
                     }
-                    this.setState({ message: this.context.translate('passwordChange') });
-                }).catch((error) => {
-                    this.setState({ message: this.context.translate('failed') });
-                })
+                    // Check if update is successful
+                    fetch(url, options).then((response) => {
+                        if (!response.ok) {
+                            throw Error("Failed");
+                        }
+                        this.setState({ message: this.context.translate('passwordChange') });
+                    }).catch((error) => {
+                        this.setState({ message: this.context.translate('failed') });
+                    })
+                }
             }
             else {
                 this.setState({ message: this.context.translate('passwordMismatch') })
@@ -144,25 +172,25 @@ export default class Settings extends Component {
 
                                 <Card.Title className='mt-4'>{this.context.translate('change-pw')}</Card.Title>
                                 <hr></hr>
-                                <Form>
+                                <Form onSubmit={this.handlePassword}>
                                     <Form.Row>
                                         <Form.Group as={Col}>
                                             <Form.Label>{this.context.translate('old-pw')}</Form.Label>
                                             <Form.Control type="password" value={this.state.oldPassword} onChange={e => this.setState({ oldPassword: e.target.value })} />
                                         </Form.Group>
 
-                                        <Form.Group as={Col}>
+                                        <Form.Group as={Col} sm="12">
                                             <Form.Label>{this.context.translate('new-pw')}</Form.Label>
-                                            <Form.Control type="password" value={this.state.newPassword} onChange={e => this.setState({ newPassword: e.target.value })} />
+                                            <Form.Control type="password" pattern="[a-zA-Z0-9]{0,100}" placeholder={this.context.translate('password-requirements')} value={this.state.newPassword} onChange={e => this.setState({ newPassword: e.target.value })} />
                                         </Form.Group>
 
                                         <Form.Group as={Col}>
                                             <Form.Label>{this.context.translate('confirm')}</Form.Label>
-                                            <Form.Control type="password" value={this.state.confirmedPassword} onChange={e => this.setState({ confirmedPassword: e.target.value })} />
+                                            <Form.Control type="password" pattern="[a-zA-Z0-9]{0,100}" placeholder={this.context.translate('password-requirements')} value={this.state.confirmedPassword} onChange={e => this.setState({ confirmedPassword: e.target.value })} />
                                         </Form.Group>
                                     </Form.Row>
 
-                                    <Button variant="primary" onClick={this.handlePassword}>
+                                    <Button variant="primary" type="submit">
                                         {this.context.translate('change')}
                                     </Button>
                                 </Form>

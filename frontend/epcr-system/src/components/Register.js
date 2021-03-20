@@ -30,6 +30,32 @@ export default class Register extends Component {
         console.log(this.context);
     }
 
+    passwordWordCheck = (password) => {
+        let regularExp = /[a-zA-Z]/g;
+        let capital = new RegExp("[A-Z]");
+        let number = /\d/g;
+        // Check at least 8 chars
+        if(password.length < 8){
+            this.setState({ message: this.context.translate('password-length') });
+            return false;
+        }
+        else if (!regularExp.test(password)) {
+            this.setState({ message: this.context.translate('password-letter') });
+            return false;
+        }
+        else if (!capital.test(password)) {
+            this.setState({ message: this.context.translate('password-capital') });
+            return false;
+        }
+        else if (!number.test(password)) {
+            this.setState({ message: this.context.translate('password-number') });
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
     handleSubmit = (event => {
         event.preventDefault();
         const username = this.state.username;
@@ -39,24 +65,26 @@ export default class Register extends Component {
         const name = this.state.name;
         if(username && password && email)
         {
-            const url = 'http://localhost:3000/register';
-            const options = {
-                method: 'POST',
-                body: JSON.stringify({ username, password, email, phone, name }),
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include'
-            }
-            // Check if registration is successful, redirect to login on success
-            fetch(url, options).then((response) => {
-                if (!response.ok) {
-                    throw Error;
+            if(this.passwordWordCheck(password)){
+                const url = 'http://localhost:3000/register';
+                const options = {
+                    method: 'POST',
+                    body: JSON.stringify({ username, password, email, phone, name }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include'
                 }
-                this.setState({ message: this.context.translate('reg-succ') });
-            }).catch((error) => {
-                this.setState({ message: this.context.translate('reg-failed') });
-            })
+                // Check if registration is successful, redirect to login on success
+                fetch(url, options).then((response) => {
+                    if (!response.ok) {
+                        throw Error;
+                    }
+                    this.setState({ message: this.context.translate('reg-succ') });
+                }).catch((error) => {
+                    this.setState({ message: this.context.translate('reg-failed') });
+                })
+            }
         }
         else{
             this.setState({ message: this.context.translate('reg-fields') });
@@ -109,7 +137,7 @@ export default class Register extends Component {
                                     {/* Password Field */}
                                     <Form.Group>
                                         <Form.Label>{this.context.translate('enter-password')}</Form.Label>
-                                        <Form.Control type="password" placeholder={this.context.translate('password')} value={this.state.password} onChange={e => this.setState({ password: e.target.value })}/>
+                                        <Form.Control type="password" pattern="[a-zA-Z0-9]{0,100}" placeholder={this.context.translate('password-requirements')} value={this.state.password} onChange={e => this.setState({ password: e.target.value })}/>
                                     </Form.Group>
                                     {/* Phone Field */}
                                     <Form.Group>
