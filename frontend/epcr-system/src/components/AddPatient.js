@@ -95,11 +95,12 @@ export default class AddPatient extends Component {
                         <tr>
                             <th>{this.context.translate('psex')}</th>
                             <td>
-                                <div style={{ margin: '5px' }} onChange={this.props.handleChange('gender')}>
-                                    <label className="v2"><input type="radio" name="gender" value="Hombre" defaultChecked checked={values.gender.includes("Male")} />{this.context.translate('male')}</label>
-                                    <label className="v2"><input type="radio" name="gender" value="Mujer" checked={values.gender.includes("Female")} /> {this.context.translate('female')}</label>
-                                    <label className="v2"><input type="radio" name="gender" value="Otro" checked={values.gender.includes("Other")} />{this.context.translate('other')}</label>
-                                </div>
+                                <select name="gender" value={values.gender} onChange={this.props.handleChange('gender')}>
+                                    <option disabled selected value="">{this.context.translate('select')}</option>
+                                    <option value="Hombre">{this.context.translate('male')}</option>
+                                    <option value="Mujer">{this.context.translate('female')}</option>
+                                    <option value="Otro">{this.context.translate('other')}</option>
+                                </select>
                             </td>
                         </tr>
                         <tr>

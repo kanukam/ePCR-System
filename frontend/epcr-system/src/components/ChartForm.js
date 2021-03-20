@@ -208,7 +208,6 @@ export default class ChartForm extends Component {
 
 
     handleDate = input => date => {
-        console.log(date);
         var displayedDate = input + "Display";
         this.setState({ [displayedDate]: date });
         date = moment(date).format("YYYY-MM-DD HH:mm:ss");
