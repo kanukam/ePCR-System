@@ -114,7 +114,7 @@ con.connect(err => {
         id INT(11) UNSIGNED AUTO_INCREMENT, 
         fname VARCHAR(255) NULL, 
         lname VARCHAR(255) NULL, 
-        birth DATE NULL, 
+        birth VARCHAR(30) NULL,
         gender VARCHAR(10), 
         PRIMARY KEY (id)
         )`, (err, res) => {
