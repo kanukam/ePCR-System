@@ -22,7 +22,7 @@
     "password-length": "Password must be of at least length 8",
     "password-letter": "Password must contain at least one letter",
     "password-capital": "Password must contain at least one capital letter",
-    "password-requirements": "Password must have at least 8 characters, one letter, and one capital letter",
+    "password-requirements": "Password must have at least 7 characters, > 0 letters, > 0 capital letters",
     "password-number": "Password must have a number",
     "save": "Save",
     "change-pw": "Change Password",

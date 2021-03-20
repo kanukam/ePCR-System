@@ -22,7 +22,7 @@
     "password-length": "La contraseña debe tener al menos 8 letras",
     "password-letter": "La contraseña debe tener al menos 1 letra",
     "password-capital": "La contraseña debe tener al menos 1 letra mayúscula",
-    "password-requirements": "> 8 caracteres, al menos una letra, al menos una letra mayúscula",
+    "password-requirements": "> 7 caracteres, > 0 letra, > 0 letra mayúscula",
     "password-number": "la contraseña debe tener un número",
     "save": "Salvar",
     "change-pw": "Cambiar la contraseña",
