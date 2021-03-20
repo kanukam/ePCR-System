@@ -294,7 +294,7 @@ export default class ChartForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        if (this.state.ino === "" || this.state.idate === "") {
+        if (this.state.idate === "") {
             this.setState({ message: "One or more required fields have been left blank. Please fill them out." });
         } else {
             /* chart table */
