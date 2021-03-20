@@ -8,6 +8,7 @@ import AddPatient from './AddPatient'
 import AddInterventions from './AddInterventions'
 import PhysicalAssessment from './PhysicalAssessment'
 import Confirm from './Confirm'
+import moment from 'moment'
 
 export default class ChartForm extends Component {
     static contextType = MainContext;
@@ -207,16 +208,17 @@ export default class ChartForm extends Component {
 
 
     handleDate = input => date => {
+        console.log(date);
         var displayedDate = input + "Display";
         this.setState({ [displayedDate]: date });
-        date = date.toISOString().slice(0, 19).replace('T', " ");
+        date = moment(date).format("YYYY-MM-DD HH:mm:ss");
         this.setState({ [input]: date });
     }
 
     handleDateNoTime = input => date => {
         var displayedDate = input + "Display";
         this.setState({ [displayedDate]: date });
-        date = (date.toISOString()).split("T", 1)[0]
+        date = moment(date).format("YYYY-MM-DD");
         this.setState({ [input]: date });
     }
 

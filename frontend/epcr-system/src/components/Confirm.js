@@ -28,6 +28,7 @@ export default class Confirm extends Component {
 
     render() {
         const { values } = this.props;
+        console.log(values.dispatch);
         return (
             <div className="form-confirm">
                 <form>
@@ -72,7 +73,7 @@ export default class Confirm extends Component {
                         </tr>
                         <tr>
                             <td>
-                                <b>Dispatch</b> {values.dispatch ? <Moment date={values.dispatch} format="DD-MM-YY hh:mm:ss" /> : null}<br/>
+                                <b>Dispatch</b> {values.dispatch ? <Moment date={values.dispatch} format="DD-MM-YY hh:mm:ss A" /> : null}<br/>
                                 <b>Enroute</b> {values.enroute ? <Moment date={values.enroute} format="DD-MM-YY hh:mm:ss" /> : null}<br/>
                                 <b>Arrive scene</b> {values.arrscn ? <Moment date={values.arrscn} format="DD-MM-YY hh:mm:ss" /> : null}<br/>
                                 <b>Patient contact</b> {values.contact ? <Moment date={values.contact} format="DD-MM-YY hh:mm:ss" /> : null}<br/>
