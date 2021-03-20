@@ -144,7 +144,7 @@ export default class PhysicalAssessment extends Component {
                     </Form.Group>
 
                     <Form.Group as={Row}>
-                        <Form.Label column sm={2}>label={this.context.translate('Abdomen')}</Form.Label>
+                        <Form.Label column sm={2}>{this.context.translate('Abdomen')}</Form.Label>
                         <Col sm={4} className="mt-2">
                             <Form.Check type="checkbox" label={this.context.translate('Normal')} name="abdomen" value="Normal" checked={values.assessmentCheckBoxes[80]} onChange={this.props.handleAssessmentCheckboxes(80)} />
                             <Form.Check type="checkbox" label={this.context.translate('Rigid')} name="abdomen" value="Rígido" checked={values.assessmentCheckBoxes[81]} onChange={this.props.handleAssessmentCheckboxes(81)} />
