@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button'
+import Moment from 'react-moment';
 import '../App.css'
 
 export default class Confirm extends Component {
@@ -71,13 +72,13 @@ export default class Confirm extends Component {
                         </tr>
                         <tr>
                             <td>
-                                <b>Dispatch</b> {values.dispatch}<br/>
-                                <b>Enroute</b> {values.enroute}<br/>
-                                <b>Arrive scene</b> {values.arrscn}<br/>
-                                <b>Patient contact</b> {values.contact}<br/>
-                                <b>Depart scene</b> {values.dptscn}<br/>
-                                <b>Arrive destination</b> {values.arrdes}<br/>
-                                <b>Transfer of care</b> {values.trcare}
+                                <b>Dispatch</b> {values.dispatch ? <Moment date={values.dispatch} format="DD-MM-YY hh:mm:ss" /> : null}<br/>
+                                <b>Enroute</b> {values.enroute ? <Moment date={values.enroute} format="DD-MM-YY hh:mm:ss" /> : null}<br/>
+                                <b>Arrive scene</b> {values.arrscn ? <Moment date={values.arrscn} format="DD-MM-YY hh:mm:ss" /> : null}<br/>
+                                <b>Patient contact</b> {values.contact ? <Moment date={values.contact} format="DD-MM-YY hh:mm:ss" /> : null}<br/>
+                                <b>Depart scene</b> {values.dptscn ? <Moment date={values.dptscn} format="DD-MM-YY hh:mm:ss" /> : null}<br/>
+                                <b>Arrive destination</b> {values.arrdes ? <Moment date={values.arrdes} format="DD-MM-YY hh:mm:ss" /> : null}<br/>
+                                <b>Transfer of care</b> {values.trcare ? <Moment date={values.trcare} format="DD-MM-YY hh:mm:ss" /> : null}
                             </td>
                         </tr>
                         <tr>
