@@ -85,7 +85,7 @@ export default class Confirm extends Component {
                         <tr>
                             <td>
                                 <b>Patient name</b> {values.lname}, {values.fname}<br/>
-                                <b>Date of birth</b> {values.birth}<br/>
+                                <b>Date of birth</b> {values.birth ? <Moment date={values.birth} format="DD-MM-YY" /> : null}<br/>
                                 <b>Classification</b> {values.classify}<br/>
                                 <b>Gender</b> {values.gender}<br/>
                                 <b>Weight</b> {values.weight} kg<br/>
