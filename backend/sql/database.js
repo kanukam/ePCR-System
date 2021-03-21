@@ -128,7 +128,8 @@ con.connect(err => {
         patientID INT(11) UNSIGNED, 
         chartID INT(11) UNSIGNED, 
         userID INT(11) UNSIGNED, 
-        body MEDIUMTEXT, 
+        note MEDIUMTEXT, 
+        dateAdded DATE,
         PRIMARY KEY (id)
         )`, (err, res) => {
         if (err) return console.log(err);
