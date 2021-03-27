@@ -83,7 +83,6 @@ export default class TrendCall extends Component {
         }
         else if(this.state.calls){
             const { from, to } = this.props.history.location.state;
-            const {day} = this.state;
                 return (
                     <React.Fragment>
                         <MainNav
@@ -111,7 +110,7 @@ export default class TrendCall extends Component {
                                     </Col>
                                 </Row>
                             </Form>
-                            {day && <CallChart day={day} dates={this.state.calls}/>}
+                            {this.state.day && <CallChart day={this.state.day} dates={this.state.calls}/>}
                         </Container>
                     </React.Fragment>
                 )

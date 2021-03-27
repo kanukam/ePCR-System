@@ -23,21 +23,23 @@ export default class CallChart extends Component {
         if (this.props.dates) {
             this.props.dates.forEach(element => {
                 const { dispatch_date_time } = element;
-                const day = new Date(dispatch_date_time);
+                var day = new Date(dispatch_date_time);
+                day.setDate(day.getDate() + 1);
+                
                 if (day.getDay() == parseInt(this.props.day)) {
-                    if (day.getUTCHours >= 0 && day.getUTCHours <= 4) {
+                    if (day.getUTCHours() >= 0 && day.getUTCHours() <= 4) {
                         zeroToFour += 1;
                     }
-                    else if (day.getUTCHours >= 5 && day.getUTCHours <= 8) {
+                    else if (day.getUTCHours() >= 5 && day.getUTCHours() <= 8) {
                         fiveToEight += 1;
                     }
-                    else if (day.getUTCHours >= 9 && day.getUTCHours <= 12) {
+                    else if (day.getUTCHours() >= 9 && day.getUTCHours() <= 12) {
                         nineToTwelve += 1;
                     }
-                    else if (day.getUTCHours >= 13 && day.getUTCHours <= 16) {
+                    else if (day.getUTCHours() >= 13 && day.getUTCHours() <= 16) {
                         thirteenToSixteen += 1;
                     }
-                    else if (day.getUTCHours >= 17 && day.getUTCHours <= 20) {
+                    else if (day.getUTCHours() >= 17 && day.getUTCHours() <= 20) {
                         seventeenToTwenty += 1;
                     }
                     else {
