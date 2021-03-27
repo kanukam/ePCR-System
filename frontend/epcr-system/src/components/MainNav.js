@@ -26,6 +26,7 @@ export default class MainNav extends Component {
 				throw Error("Failed");
 			}
 			this.context.setAuth(false);
+			this.context.setPrivilege("");
 		}).catch((error) => {
 			console.log("Logout Failed");
 		})
