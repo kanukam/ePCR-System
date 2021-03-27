@@ -116,6 +116,8 @@ export default class ChartForm extends Component {
             vital_signs_time: "",
             vital_signs_pulse: "",
             vital_signs_b_p: "",
+            vital_signs_b_p_d: "",
+            vital_signs_b_p_s: "",
             vital_signs_resp: "",
             vital_signs_spo2: "",
             vital_signs_gcs: "",
@@ -245,7 +247,6 @@ export default class ChartForm extends Component {
         this.setState({
             vital_signs_time: "",
             vital_signs_pulse: "",
-            vital_signs_b_p: "",
             vital_signs_resp: "",
             vital_signs_spo2: "",
             vital_signs_gcs: "",

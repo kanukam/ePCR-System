@@ -26,7 +26,7 @@ export default class PhysicalAssessment extends Component {
 
     addVitals = (e) => {
         e.preventDefault();
-        const vitals = "[Hora: " + this.props.values.vital_signs_time + " Pulso: " + this.props.values.vital_signs_pulse + " B/P: " + this.props.values.vital_signs_b_p + " Resp: " + this.props.values.vital_signs_resp + " Sp02: " + this.props.values.vital_signs_spo2 + " GCS: " + this.props.values.vital_signs_gcs + " Dolor: " + this.props.values.vital_signs_pain + " Temp: " + this.props.values.vital_signs_temp + " ETCO2: " + this.props.values.vital_signs_temp + "]";
+        const vitals = "[Hora: " + this.props.values.vital_signs_time + " Pulso: " + this.props.values.vital_signs_pulse + " B/P: " + this.props.values.vital_signs_b_p_s + "/" + this.props.values.vital_signs_b_p_d + " Resp: " + this.props.values.vital_signs_resp + " Sp02: " + this.props.values.vital_signs_spo2 + " GCS: " + this.props.values.vital_signs_gcs + " Dolor: " + this.props.values.vital_signs_pain + " Temp: " + this.props.values.vital_signs_temp + " ETCO2: " + this.props.values.vital_signs_temp + "]";
         this.props.appendVitals(vitals);
     }
 
@@ -508,13 +508,26 @@ export default class PhysicalAssessment extends Component {
                             </Col>
 
                             <Form.Label column sm={2}>B/P</Form.Label>
-                            <Col sm={4} className="mt-2">
+                            <Col sm={2} className="mt-2">
                                 <Form.Control
                                     required
                                     type="text"
+                                    pattern="\d*"
+                                    maxlength="3"
                                     placeholder=""
-                                    onChange={this.props.handleChange('vital_signs_b_p')}
-                                    value={values.vital_signs_b_p}
+                                    onChange={this.props.handleChange('vital_signs_b_p_s')}
+                                    value={values.vital_signs_b_p_s}
+                                />
+                            </Col>
+                            <Col sm={2} className="mt-2">
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    pattern="\d*"
+                                    maxlength="3"
+                                    placeholder=""
+                                    onChange={this.props.handleChange('vital_signs_b_p_d')}
+                                    value={values.vital_signs_b_p_d}
                                 />
                             </Col>
 
