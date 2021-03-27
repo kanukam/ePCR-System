@@ -70,7 +70,7 @@
     "add-vitals": "Add Vitals",
     "create": "Create",
     "trend-call": "Trend Call Analysis",
-
+    "date-error": "The from date must be before",
 
     "ino": "Incident number",
     "unit": "Unit number",

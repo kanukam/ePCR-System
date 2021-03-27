@@ -70,7 +70,7 @@
     "add-vitals": "Agregar Signos Vitales",
     "create": "Crear",
     "trend-call": "Análisis de llamadas",
-
+    "date-error": "La fecha de inicio debe ser anterior",
 
     "ino": "Incidente # / Ejecutar #",
     "unit": "Número de unidad",

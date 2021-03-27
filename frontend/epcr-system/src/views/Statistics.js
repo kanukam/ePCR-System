@@ -49,11 +49,18 @@ class Statistics extends Component {
         const { fromSummaryDate, toSummaryDate} = this.state;
         if (fromSummaryDate && toSummaryDate){
             this.setState({ message: "" });
-            // Redirect to page with summary
-            this.props.history.push({
-                pathname: '/SummaryReport',
-                state: {from: this.state.fromSummaryDate, to: this.state.toSummaryDate}
-            })
+            const fromDate = new Date(fromSummaryDate);
+            const toDate = new Date(toSummaryDate);
+            if(fromDate < toDate){
+                // Redirect to page with summary
+                this.props.history.push({
+                    pathname: '/SummaryReport',
+                    state: { from: this.state.fromSummaryDate, to: this.state.toSummaryDate }
+                })
+            }
+            else{
+                this.setState({ message: this.context.translate('date-error') });
+            }
         }
         else{
             this.setState({ message: this.context.translate('all-fields') });
