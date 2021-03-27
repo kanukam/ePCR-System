@@ -137,7 +137,7 @@ export default class Register extends Component {
                                     {/* Password Field */}
                                     <Form.Group>
                                         <Form.Label>{this.context.translate('enter-password')}</Form.Label>
-                                        <Form.Control type="password" pattern="[a-zA-Z0-9]{0,100}" placeholder={this.context.translate('password-requirements')} value={this.state.password} onChange={e => this.setState({ password: e.target.value })}/>
+                                        <Form.Control type="password" pattern="[a-zA-Z0-9!@?]{0,100}" placeholder={this.context.translate('password-requirements')} value={this.state.password} onChange={e => this.setState({ password: e.target.value })}/>
                                     </Form.Group>
                                     {/* Phone Field */}
                                     <Form.Group>

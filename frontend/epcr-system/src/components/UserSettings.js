@@ -181,12 +181,12 @@ export default class Settings extends Component {
 
                                         <Form.Group as={Col} sm="12">
                                             <Form.Label>{this.context.translate('new-pw')}</Form.Label>
-                                            <Form.Control type="password" pattern="[a-zA-Z0-9]{0,100}" placeholder={this.context.translate('password-requirements')} value={this.state.newPassword} onChange={e => this.setState({ newPassword: e.target.value })} />
+                                            <Form.Control type="password" pattern="[a-zA-Z0-9!@?]{0,100}" placeholder={this.context.translate('password-requirements')} value={this.state.newPassword} onChange={e => this.setState({ newPassword: e.target.value })} />
                                         </Form.Group>
 
                                         <Form.Group as={Col}>
                                             <Form.Label>{this.context.translate('confirm')}</Form.Label>
-                                            <Form.Control type="password" pattern="[a-zA-Z0-9]{0,100}" placeholder={this.context.translate('password-requirements')} value={this.state.confirmedPassword} onChange={e => this.setState({ confirmedPassword: e.target.value })} />
+                                            <Form.Control type="password" pattern="[a-zA-Z0-9!@?]{0,100}" placeholder={this.context.translate('password-requirements')} value={this.state.confirmedPassword} onChange={e => this.setState({ confirmedPassword: e.target.value })} />
                                         </Form.Group>
                                     </Form.Row>
 
