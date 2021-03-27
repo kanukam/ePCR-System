@@ -13,7 +13,7 @@ router.get("/patients", auth, controller.viewAllPatientCharts);
 
 router.post("/add", auth, controller.addChart);
 
-router.post("/summary", controller.summary);
+router.post("/summary", auth, controller.summary);
 
 router.get("/:chartId", auth, controller.viewChart);
 

@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
 import MainNav from '../components/MainNav';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
-import Form from 'react-bootstrap/Form';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { MainContext } from '../Auth';
-import moment from 'moment';
 
 export default class SummaryReport extends Component {
     static contextType = MainContext;
@@ -27,6 +19,32 @@ export default class SummaryReport extends Component {
         const{from, to} = this.props.history.location.state;
         if(from && to){
             // Get summary report data back from server
+            const url = `http://localhost:3000/charts/summary`;
+            const options = {
+                method: 'POST',
+                body: JSON.stringify({ from, to }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include'
+            }
+            // Post request to get summary data
+            fetch(url, options).then(response => {
+                if (!response.ok) {
+                    throw Error("Failed");
+                }
+                return response.json()
+                })
+                .then(data => {
+                    this.setState({ summary: data["data"], });
+                    console.log(this.state.summary);
+                })
+                .catch((error) => {
+                    this.setState({ message: this.context.translate('error') });
+                })
+        }
+        else {
+            this.setState({ message: this.context.translate('error') });
         }
     }
 
@@ -46,7 +64,7 @@ export default class SummaryReport extends Component {
                     toggleCollapse={this.toggleCollapse}
                 />
                 <Container className="mt-5 main-content" style={{ padding: this.state.contentSpacing }}>
-                    
+                    Hi
                 </Container>
             </React.Fragment>
         )
