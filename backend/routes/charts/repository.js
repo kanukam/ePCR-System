@@ -119,7 +119,6 @@ function summary(from, to, callback) {
             var animal, assault, motor, bike, boat, drown, electrical, explosion, fall, fire, gun, tools, stabbing, struck, toxic, vehicle, trauma_other;
             animal = assault = motor = bike = boat = drown = electrical = explosion = fall = fire = gun = tools = stabbing = struck = toxic = vehicle = trauma_other = 0;
             // Procedures
-            var io, pleural, airway_lma, airway_intub, crico, cardiac_arrest, cardiac_aed, cardiac_defib, cardiac_pacing, procedure_ob;
             io = pleural = airway_lma = airway_intub = crico = cardiac_arrest = cardiac_aed = cardiac_defib = cardiac_pacing = procedure_ob = 0;
             results.forEach(element => {
                 const { p_classify, gender, call_nature, location, disposition, destination, trauma_cause, procedures, obstetrics} = element;
