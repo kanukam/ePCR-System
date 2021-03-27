@@ -129,6 +129,22 @@ export default class MainNav extends Component {
 				                </Nav.Link>
 							</Nav.Item>
 						}
+						{this.context.privilege === 'admin' && this.props.statistics ?
+							<Nav.Item className="sidebar-section active">
+								<Nav.Link as={Link} to="/Statistics" style={{ color: 'white' }}>
+									{this.context.translate('statistics')}
+								</Nav.Link>
+							</Nav.Item>
+							:
+							null
+						}
+						{this.context.privilege === 'admin' &&
+							<Nav.Item>
+								<Nav.Link as={Link} to="/Statistics">
+									{this.context.translate('statistics')}
+								</Nav.Link>
+							</Nav.Item>
+						}
 			        </Navbar>
 		        : null}
 	        </div>

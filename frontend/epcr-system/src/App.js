@@ -21,6 +21,8 @@ class App extends React.Component {
     this.state = {
       auth: false,
       username: "",
+      privilege: "",
+      setPrivilege: this.setPrivilege,
       setAuth: this.setAuth,
       setUsername: this.setUsername,
       setLanguage: this.setLanguage,
@@ -35,6 +37,10 @@ class App extends React.Component {
   setAuth = value => {
     this.setState({ auth: value });
   };
+
+  setPrivilege = value => {
+    this.setState({ privilege: value });
+  }
 
   setUsername = value => {
     this.setState({ username: value });
@@ -65,7 +71,6 @@ class App extends React.Component {
         throw Error("Failed");
       }
       if (response.ok) {
-        console.log("Success");
         this.setAuth(true);
       }
     }).catch((error) => {
@@ -90,8 +95,9 @@ class App extends React.Component {
           throw Error("Failed");
       })
       .then((data) => {
-        const {username} = data
+        const { username, privilege} = data
         this.setUsername(username);
+        this.setPrivilege(privilege);
       })
       .catch((error) => {
         
@@ -111,7 +117,7 @@ class App extends React.Component {
       <MainContext.Provider value={this.state}>
         <BrowserRouter>
           <Switch>
-            <ProtectedLogin exact path="/" auth={this.state.auth} component={Login}/>
+            <ProtectedLogin exact path="/" auth={this.state.auth} getUsername={this.getUsername} component={Login}/>
             <ProtectedRoute exact path="/Dashboard" auth={this.state.auth} component={Dashboard} />
             <ProtectedRoute exact path="/Chart" auth={this.state.auth} component={Chart} />
             <ProtectedRoute exact path="/ViewCharts" auth={this.state.auth} component={ViewCharts} />

@@ -52,6 +52,7 @@ export default class Login extends Component {
                 this.setState({ authorized: true })
                 this.context.setAuth(true);
                 this.context.setUsername(this.state.username);
+                this.props.getUsername();
             }).catch((error) => {
                 this.setState({ errorMessage: this.context.translate('invalid-user') });
             })

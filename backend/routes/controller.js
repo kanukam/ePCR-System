@@ -70,9 +70,11 @@ function testAuth(req, res){
 }
 
 function getUsername(req, res){
-  const {username} = req.user;
-  res.status(200).json({ "username": username});
+  const { username, privilege} = req.user;
+  res.status(200).json({ username, privilege});
 }
+
+
 
 module.exports = {
   login,
