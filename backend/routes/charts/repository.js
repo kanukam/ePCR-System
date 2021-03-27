@@ -119,6 +119,7 @@ function summary(from, to, callback) {
             var animal, assault, motor, bike, boat, drown, electrical, explosion, fall, fire, gun, tools, stabbing, struck, toxic, vehicle, trauma_other;
             animal = assault = motor = bike = boat = drown = electrical = explosion = fall = fire = gun = tools = stabbing = struck = toxic = vehicle = trauma_other = 0;
             // Procedures
+            var io, pleural, airway_lma, airway_intub, crico, cardiac_arrest, cardiac_aed, cardiac_defib, cardiac_pacing, procedure_ob;
             io = pleural = airway_lma = airway_intub = crico = cardiac_arrest = cardiac_aed = cardiac_defib = cardiac_pacing = procedure_ob = 0;
             results.forEach(element => {
                 const { p_classify, gender, call_nature, location, disposition, destination, trauma_cause, procedures, obstetrics} = element;
@@ -152,7 +153,6 @@ function summary(from, to, callback) {
                 school += checkData("Escuela", location);
                 other += checkData("Otro", location);
                 // Disposition
-                treat_release = transport, unable, doa, ama = 0;
                 treat_release += checkData("Tratar", disposition);
                 transport += checkData("Tranportacion", disposition);
                 unable += checkData("localizar", disposition);
@@ -187,7 +187,6 @@ function summary(from, to, callback) {
                 vehicle += checkData("vehículo", trauma_cause);
                 trauma_other += checkData("Otro", trauma_cause);
                 // Procedures
-                io = pleural = airway_intub = airway_intub = crico = cardiac_arrest = cardiac_aed = cardiac_defib = cardiac_pacing = procedure_ob = 0;
                 io += checkData("Intravenosa", procedures);
                 pleural += checkData("Descompresión", procedures);
                 airway_lma += checkData("LMA", procedures);
