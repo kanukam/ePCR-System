@@ -12,6 +12,8 @@
     "@testing-library/user-event": "^12.2.2",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
+    "canvasjs": "^1.8.3",
+    "canvasjs-react-charts": "^1.0.5",
     "date-fns": "^2.17.0",
     "i18next": "^19.8.9",
     "moment": "^2.29.1",

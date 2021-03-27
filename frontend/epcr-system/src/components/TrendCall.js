@@ -76,13 +76,14 @@ export default class TrendCall extends Component {
                         toggleCollapse={this.toggleCollapse}
                     />
                     <Container className="mt-5 main-content" style={{ padding: this.state.contentSpacing }}>
-                        <h1></h1>
+                        <h1>{this.state.message}</h1>
                     </Container>
                 </React.Fragment>
             )
         }
         else if(this.state.calls){
             const { from, to } = this.props.history.location.state;
+            const {day} = this.state;
                 return (
                     <React.Fragment>
                         <MainNav
@@ -94,7 +95,7 @@ export default class TrendCall extends Component {
                         />
                         <Container className="mt-5 main-content" style={{ padding: this.state.contentSpacing }}>
                             <h3 className="text-center">{moment(from).format("DD/MM/YYYY")} - {moment(to).format("DD/MM/YYYY") }</h3>
-                            <Form>
+                            <Form className="mb-5">
                                 <Row>
                                     <Col xs={6} className="offset-3">
                                         <Form.Control as="select" onChange={e => this.setState({ day: e.target.value })} value={this.state.day}>
@@ -110,7 +111,7 @@ export default class TrendCall extends Component {
                                     </Col>
                                 </Row>
                             </Form>
-                            {this.state.day && <CallChart day={this.state.day} dates={this.state.calls}/>}
+                            {day && <CallChart day={day} dates={this.state.calls}/>}
                         </Container>
                     </React.Fragment>
                 )
