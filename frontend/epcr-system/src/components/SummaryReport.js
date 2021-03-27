@@ -457,7 +457,7 @@ export default class SummaryReport extends Component {
                                             {summary.cardiac_aed}
                                         </Col>
 
-                                        <Form.Label column xs={4}>{this.context.translate('cardiac_defib')}:</Form.Label>
+                                        <Form.Label column xs={4}>{this.context.translate('cardiac_manual')}:</Form.Label>
                                         <Col xs={2} className="mt-2">
                                             {summary.cardiac_manual}
                                         </Col>
