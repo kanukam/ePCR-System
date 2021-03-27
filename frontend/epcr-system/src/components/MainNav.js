@@ -116,19 +116,6 @@ export default class MainNav extends Component {
 				                </Nav.Link>
 				            </Nav.Item>
 				        }
-						{this.props.settings ?
-							<Nav.Item className="sidebar-section active">
-								<Nav.Link style={{ color: 'white' }} as={Link} to="/Settings">
-									{this.context.translate('settings')}
-				                </Nav.Link>
-							</Nav.Item>
-							:
-							<Nav.Item>
-								<Nav.Link as={Link} to="/Settings">
-									{this.context.translate('settings')}
-				                </Nav.Link>
-							</Nav.Item>
-						}
 						{this.context.privilege === 'admin' && this.props.statistics ?
 							<Nav.Item className="sidebar-section active">
 								<Nav.Link as={Link} to="/Statistics" style={{ color: 'white' }}>
@@ -143,6 +130,19 @@ export default class MainNav extends Component {
 								<Nav.Link as={Link} to="/Statistics">
 									{this.context.translate('statistics')}
 								</Nav.Link>
+							</Nav.Item>
+						}
+						{this.props.settings ?
+							<Nav.Item className="sidebar-section active">
+								<Nav.Link style={{ color: 'white' }} as={Link} to="/Settings">
+									{this.context.translate('settings')}
+				                </Nav.Link>
+							</Nav.Item>
+							:
+							<Nav.Item>
+								<Nav.Link as={Link} to="/Settings">
+									{this.context.translate('settings')}
+				                </Nav.Link>
 							</Nav.Item>
 						}
 			        </Navbar>

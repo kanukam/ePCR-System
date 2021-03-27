@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
 import MainNav from '../components/MainNav';
 import { MainContext } from '../Auth';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 export default class SummaryReport extends Component {
     static contextType = MainContext;
@@ -64,7 +65,13 @@ export default class SummaryReport extends Component {
                     toggleCollapse={this.toggleCollapse}
                 />
                 <Container className="mt-5 main-content" style={{ padding: this.state.contentSpacing }}>
-                    Hi
+                    <ListGroup>
+                        <ListGroup.Item>Cras justo odio</ListGroup.Item>
+                        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+                        <ListGroup.Item>Morbi leo risus</ListGroup.Item>
+                        <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+                        <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                    </ListGroup>
                 </Container>
             </React.Fragment>
         )
