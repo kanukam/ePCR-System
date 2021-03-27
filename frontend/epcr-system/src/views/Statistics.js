@@ -1,24 +1,24 @@
-import React, { Component } from 'react'
-import Container from 'react-bootstrap/Container'
-import Button from 'react-bootstrap/Button'
-import MainNav from '../components/MainNav'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
-import Form from 'react-bootstrap/Form'
+import React, { Component } from 'react';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import MainNav from '../components/MainNav';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { MainContext } from '../Auth'
-import moment from 'moment'
+import { MainContext } from '../Auth';
+import moment from 'moment';
+import {withRouter} from 'react-router-dom';
 
-export default class Statistics extends Component {
+class Statistics extends Component {
     static contextType = MainContext;
     constructor(props) {
         super(props);
         this.state = {
             contentSpacing: '0 0 0 150px',
             sidebarHide: true,
-            message: "",
             fromSummaryDate: null,
             fromSummaryDateDisplay: null,
             toSummaryDate: null,
@@ -27,6 +27,7 @@ export default class Statistics extends Component {
             fromCallDateDisplay: null,
             toCallDate: null,
             toCallDateDisplay: null,
+            message: "",
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
     }
@@ -41,6 +42,22 @@ export default class Statistics extends Component {
         this.setState({ [displayedDate]: date });
         date = moment(date).format("YYYY-MM-DD");
         this.setState({ [input]: date });
+    }
+
+    createSummary = event => {
+        event.preventDefault();
+        const { fromSummaryDate, toSummaryDate} = this.state;
+        if (fromSummaryDate && toSummaryDate){
+            this.setState({ message: "" });
+            // Redirect to page with summary
+            this.props.history.push({
+                pathname: '/SummaryReport',
+                state: {from: this.state.fromSummaryDate, to: this.state.toSummaryDate}
+            })
+        }
+        else{
+            this.setState({ message: this.context.translate('all-fields') });
+        }
     }
 
     render() {
@@ -78,12 +95,14 @@ export default class Statistics extends Component {
                                             />
                                         </Col>
                                         <Col xs={6} className="offset-3">
-                                            <Button className="" onClick={this.addVitals}>{this.context.translate('create')}</Button>
+                                            <Button className="" onClick={this.createSummary}>{this.context.translate('create')}</Button>
                                         </Col>
                                     </Form.Group>
                             </Form>
                         </Card.Body>
                     </Card>
+
+                    {this.state.message && <p> {this.state.message} </p>}
 
                     <Card className="text-center mt-5">
                         <Card.Header>{this.context.translate('trend-call')}</Card.Header>
@@ -120,3 +139,4 @@ export default class Statistics extends Component {
         )
     }
 }
+export default withRouter(Statistics);

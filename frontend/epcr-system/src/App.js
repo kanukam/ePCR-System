@@ -9,6 +9,7 @@ import Register from './components/Register'
 import Dashboard from "./views/Dashboard";
 import ViewChart from "./components/ViewChart";
 import ViewCharts from './components/ViewCharts';
+import SummaryReport from "./components/SummaryReport";
 import ChangePassword from './components/ChangePassword';
 import Settings from './views/Settings';
 import Statistics from './views/Statistics';
@@ -123,6 +124,7 @@ class App extends React.Component {
             <ProtectedRoute exact path="/Chart" auth={this.state.auth} component={Chart} />
             <ProtectedRoute exact path="/ViewCharts" auth={this.state.auth} component={ViewCharts} />
             <ProtectedRoute exact path="/ViewChart/:id" auth={this.state.auth} component={ViewChart} />
+            <ProtectedRoute exact path="/SummaryReport" auth={this.state.auth} component={SummaryReport} />
             <ProtectedRoute exact path="/Settings" auth={this.state.auth} component={Settings} />
             <ProtectedRoute exact path="/Statistics" auth={this.state.auth} component={Statistics} />
             <Route exact path="/Register" component={Register} />
