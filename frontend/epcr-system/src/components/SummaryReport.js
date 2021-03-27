@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
 import MainNav from '../components/MainNav';
 import { MainContext } from '../Auth';
+import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -59,12 +60,17 @@ export default class SummaryReport extends Component {
         this.setState({ sidebarHide: !this.state.sidebarHide });
     }
 
+    saveAsPdf = (event) => {
+        event.preventDefault();
+        window.print();
+    }
+
     render() {
         const {summary} = this.state;
         const { from, to } = this.props.history.location.state;
         if(this.state.message){
             return(
-                <React.Fragment>
+                <React.Fragment id="summary">
                     <MainNav
                         username={this.context.username}
                         statistics={true}
@@ -413,93 +419,62 @@ export default class SummaryReport extends Component {
                             </Card>
 
                             <Card className="mt-5">
-                                <Card.Header as="h5">*************</Card.Header>
+                                <Card.Header as="h5">Procedures</Card.Header>
                                 <Card.Body>
                                     <Form.Group as={Row}>
-                                        <Form.Label column xs={4}>Animal:</Form.Label>
+                                        <Form.Label column xs={4}>{this.context.translate('io_iv')}:</Form.Label>
                                         <Col xs={2} className="mt-2">
+                                            {summary.io}
                                         </Col>
-                                        <Form.Label column xs={4}>{this.context.translate('assault')}:</Form.Label>
+                                        <Form.Label column xs={4}>{this.context.translate('pleural_decomp')}:</Form.Label>
                                         <Col xs={2} className="mt-2">
-                                        </Col>
-
-                                        <Form.Label column xs={4}>{this.context.translate('motor-vehicle')}:</Form.Label>
-                                        <Col xs={2} className="mt-2">
-
+                                            {summary.pleural}
                                         </Col>
 
-                                        <Form.Label column xs={4}>{this.context.translate('bicycle')}:</Form.Label>
+                                        <Form.Label column xs={4}>{this.context.translate('airway_lma')}:</Form.Label>
                                         <Col xs={2} className="mt-2">
+                                            {summary.airway_lma}
 
                                         </Col>
 
-                                        <Form.Label column xs={4}>{this.context.translate('boat')}:</Form.Label>
+                                        <Form.Label column xs={4}>{this.context.translate('airway_intub')}:</Form.Label>
                                         <Col xs={2} className="mt-2">
-
+                                            {summary.airway_intub}
                                         </Col>
 
-                                        <Form.Label column xs={4}>{this.context.translate('drown')}:</Form.Label>
+                                        <Form.Label column xs={4}>{this.context.translate('crico')}:</Form.Label>
                                         <Col xs={2} className="mt-2">
-
+                                            {summary.crico}
                                         </Col>
 
-                                        <Form.Label column xs={4}>{this.context.translate('electrical')}:</Form.Label>
+                                        <Form.Label column xs={4}>{this.context.translate('cardiac_arrest')}:</Form.Label>
                                         <Col xs={2} className="mt-2">
-
+                                            {summary.cardiac_arrest}
                                         </Col>
 
-                                        <Form.Label column xs={4}>{this.context.translate('explosion')}:</Form.Label>
+                                        <Form.Label column xs={4}>{this.context.translate('cardiac_aed')}:</Form.Label>
                                         <Col xs={2} className="mt-2">
-
+                                            {summary.cardiac_aed}
                                         </Col>
 
-                                        <Form.Label column xs={4}>{this.context.translate('fall')}:</Form.Label>
+                                        <Form.Label column xs={4}>{this.context.translate('cardiac_defib')}:</Form.Label>
                                         <Col xs={2} className="mt-2">
-
+                                            {summary.cardiac_manual}
                                         </Col>
 
-                                        <Form.Label column xs={4}>{this.context.translate('fire')}:</Form.Label>
+                                        <Form.Label column xs={4}>{this.context.translate('cardiac_pacing')}:</Form.Label>
                                         <Col xs={2} className="mt-2">
-
+                                            {summary.cardiac_pacing}
                                         </Col>
 
-                                        <Form.Label column xs={4}>{this.context.translate('gun')}:</Form.Label>
+                                        <Form.Label column xs={4}>{this.context.translate('obstetrics')}:</Form.Label>
                                         <Col xs={2} className="mt-2">
-
-                                        </Col>
-
-                                        <Form.Label column xs={4}>{this.context.translate('tools')}:</Form.Label>
-                                        <Col xs={2} className="mt-2">
-
-                                        </Col>
-
-                                        <Form.Label column xs={4}>{this.context.translate('stabbing')}:</Form.Label>
-                                        <Col xs={2} className="mt-2">
-
-                                        </Col>
-
-                                        <Form.Label column xs={4}>{this.context.translate('object-struck')}:</Form.Label>
-                                        <Col xs={2} className="mt-2">
-
-                                        </Col>
-
-                                        <Form.Label column xs={4}>{this.context.translate('toxic-subst')}:</Form.Label>
-                                        <Col xs={2} className="mt-2">
-
-                                        </Col>
-
-                                        <Form.Label column xs={4}>{this.context.translate('other-vehicle')}:</Form.Label>
-                                        <Col xs={2} className="mt-2">
-
-                                        </Col>
-
-                                        <Form.Label column xs={4}>{this.context.translate('other')}:</Form.Label>
-                                        <Col xs={2} className="mt-2">
-
+                                            {summary.ob}
                                         </Col>
                                     </Form.Group>
                                 </Card.Body>
                             </Card>
+                            <Button className="mt-3 mb-3" onClick={this.saveAsPdf}>{this.context.translate('save')}</Button>
                         </Container>
                     </React.Fragment>
                 )

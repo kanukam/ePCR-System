@@ -330,5 +330,18 @@
     "Vital-Signs": "Vital Signs",
     "Time": "Time",
     "Temp": "Temp",
-    "ETCO2": "ETCO2"
+    "ETCO2": "ETCO2",
+
+    "procedures": "Procedures",
+    "io_iv": "IO IV",
+    "pleural_decomp": "Pleural Decompression",
+    "airway_lma": "Advanced Airway - LMA",
+    "airway_intub": "Advanced Airway - Intubation",
+    "crico": "Cricothyrotomy",
+    "cardiac_arrest": "Cardiac Arrest",
+    "cardiac_aed": "Cardiac Defib -AED",
+    "cardiac_manual": "Cardiac Defib – Manual",
+    "cardiac_pacing": "Cardiac Pacing",
+    "obstetrics": "Obstetrics"
+
 }

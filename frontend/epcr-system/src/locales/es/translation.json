@@ -334,5 +334,16 @@
     "SpO2": "SpO2",
     "GCS": "GCS",
     "Temp": "Temp",
-    "ETCO2": "ETCO2"
+    "ETCO2": "ETCO2",
+
+    "io_iv": "IO Intravenosa",
+    "pleural_decomp": "Descompresión pleural",
+    "airway_lma": "Vía aérea avanzada - LMA",
+    "airway_intub": "Vía aérea avanzada - Intubación",
+    "crico": "Cricotirotomía",
+    "cardiac_arrest": "Paro cardíaco",
+    "cardiac_aed": "Defib cardíaco - AED",
+    "cardiac_manual": "Defib cardíaco - Manual",
+    "cardiac_pacing": "Ritmo cardíaco",
+    "obstetrics": "Obstetricia"
 }
