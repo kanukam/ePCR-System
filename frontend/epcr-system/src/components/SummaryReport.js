@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
 import MainNav from '../components/MainNav';
 import { MainContext } from '../Auth';
-import ListGroup from 'react-bootstrap/ListGroup';
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
 
 export default class SummaryReport extends Component {
     static contextType = MainContext;
@@ -12,6 +15,7 @@ export default class SummaryReport extends Component {
             contentSpacing: '0 0 0 150px',
             sidebarHide: true,
             message: "",
+            summary: "",
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
     }
@@ -55,6 +59,7 @@ export default class SummaryReport extends Component {
     }
 
     render() {
+        const {summary} = this.state;
         return (
             <React.Fragment>
                 <MainNav
@@ -65,13 +70,95 @@ export default class SummaryReport extends Component {
                     toggleCollapse={this.toggleCollapse}
                 />
                 <Container className="mt-5 main-content" style={{ padding: this.state.contentSpacing }}>
-                    <ListGroup>
-                        <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                        <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-                        <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-                        <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-                    </ListGroup>
+                    <Card>
+                        <Card.Header as="h5">{this.context.translate('patient')} {this.context.translate('classification')}</Card.Header>
+                        <Card.Body>
+                            <Form.Group as={Row}>
+                                <Form.Label column xs={4}>{this.context.translate('adult')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+                                    4
+                                </Col>
+                                <Form.Label column xs={4}>{this.context.translate('senior-adult')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('pediatric')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('neonatal')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+                                    
+                                </Col>
+                            </Form.Group>
+                        </Card.Body>
+                    </Card>
+
+                    <Card className="mt-5">
+                        <Card.Header as="h5">{this.context.translate('psex')}</Card.Header>
+                        <Card.Body>
+                            <Form.Group as={Row}>
+                                <Form.Label column xs={4}>{this.context.translate('male')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+                                    4
+                                </Col>
+                                <Form.Label column xs={4}>{this.context.translate('female')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('other')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+                            </Form.Group>
+                        </Card.Body>
+                    </Card>
+
+                    <Card className="mt-5">
+                        <Card.Header as="h5">{this.context.translate('call-nature')}</Card.Header>
+                        <Card.Body>
+                            <Form.Group as={Row}>
+                                <Form.Label column xs={4}>{this.context.translate('bp-check')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+                                    
+                                </Col>
+                                <Form.Label column xs={4}>{this.context.translate('injection')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('medical-other')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('cardiac')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('pulmonary')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>Trauma:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>OB:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+                            </Form.Group>
+                        </Card.Body>
+                    </Card>
+
+
                 </Container>
             </React.Fragment>
         )
