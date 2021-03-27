@@ -45,7 +45,7 @@ export default class TrendCall extends Component {
                 .then(data => {
                     this.setState({ calls: data["data"], });
                     console.log(this.state.calls);
-                    const {dispatch_date_time} = this.state.calls[0]
+                    const {dispatch_date_time} = this.state.calls[1]
                     console.log(dispatch_date_time);
                     let d = new Date(dispatch_date_time);
                     console.log(d.getUTCHours());

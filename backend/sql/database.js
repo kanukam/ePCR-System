@@ -5,7 +5,8 @@ const con = mysql.createConnection({
     user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
-    database: process.env.DB_NAME
+    database: process.env.DB_NAME,
+    timezone: 'utc'
 });
 
 con.connect(err => {
