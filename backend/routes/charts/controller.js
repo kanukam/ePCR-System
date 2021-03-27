@@ -5,7 +5,7 @@ function viewChart(req, res){
   const id = req.params.chartId;
   repo.viewChart(id, (err, data) => {
     err 
-      ? res.status(500).json({error: err})
+      ? res.status(500).json({error: "internal server error"})
       : res.status(200).send(data)
   })
 }
@@ -13,7 +13,7 @@ function viewChart(req, res){
 function viewAllCharts(req, res) {
   repo.viewAllCharts((err, data) => {
     err
-      ? res.status(500).json({ error: err })
+      ? res.status(500).json({ error: "internal server error" })
       : res.status(200).send(data);
   })
 }
@@ -23,14 +23,14 @@ function addChart(req, res) {
   if(patientID !== null) {
     repo.addChartFromPatientID(body, patientID, (err) => {
       err
-        ? res.status(500).json({ error: err })
+        ? res.status(500).json({ error: "internal server error" })
         : res.status(200).json({ status: 'Successfully added' });
     })
   }
   else {
     repo.addChart(body, pbody, (err) => {
       err
-        ? res.status(500).json({ error: err })
+        ? res.status(500).json({ error: "internal server error" })
         : res.status(200).json({ status: 'Successfully added' });
     })
   }
@@ -57,7 +57,7 @@ function updateChart(req, res) {
 
   repo.updateChart(userID, chartID, patientID, body, err => {
     err 
-      ? res.status(500).json({ error: err }) 
+      ? res.status(500).json({ error: "internal server error" }) 
       : res.status(200).json({ status: 'Successfully updated.' });
   })
 }
@@ -66,7 +66,7 @@ function viewPatientChart(req, res){
   const id = req.params.chartId;
   repo.viewPatientChart(id, (err, chart) => {
     err 
-      ? res.status(500).json({error: err})
+      ? res.status(500).json({error: "internal server error"})
       : res.status(200).send({chart})
   })
 }
@@ -74,9 +74,23 @@ function viewPatientChart(req, res){
 function viewAllPatientCharts(req, res){
   repo.viewAllPatientCharts((err, charts) => {
     err 
-      ? res.status(500).json({error: err})
+      ? res.status(500).json({error: "internal server error"})
       : res.status(200).send({ charts })
   })
+}
+
+function summary(req, res) {
+  const { from, to } = req.body;
+  if (from && to) {
+    repo.summary(from, to, (err, data) => {
+      err
+        ? res.status(500).json({ error: "Internal Server error" })
+        : res.status(200).json({ data })
+    })
+  }
+  else {
+    res.status(400).json({ status: "Bad Request" });
+  }
 }
 
 function downloadPdf(req, res){
@@ -103,6 +117,7 @@ module.exports = {
   updateChart, 
   viewPatientChart, 
   viewAllPatientCharts,
+  summary,
   downloadPdf,
   downloadPdfTest
 };
