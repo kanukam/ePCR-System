@@ -55,7 +55,7 @@ export default class CallChart extends Component {
                 text: this.context.translate('trend-call')
             },
             axisX: {
-                title: this.context.translate('time'),
+                title: this.context.translate('Time'),
             },
             axisY: {
                 title: this.context.translate('number'),
