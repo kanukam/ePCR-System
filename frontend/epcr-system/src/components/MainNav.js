@@ -138,7 +138,7 @@ export default class MainNav extends Component {
 							:
 							null
 						}
-						{this.context.privilege === 'admin' &&
+						{this.context.privilege === 'admin' && !this.props.statistics &&
 							<Nav.Item>
 								<Nav.Link as={Link} to="/Statistics">
 									{this.context.translate('statistics')}

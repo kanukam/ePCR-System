@@ -11,6 +11,7 @@ import ViewChart from "./components/ViewChart";
 import ViewCharts from './components/ViewCharts';
 import ChangePassword from './components/ChangePassword';
 import Settings from './views/Settings';
+import Statistics from './views/Statistics';
 import {ProtectedRoute, ProtectedLogin} from "./Routes";
 import i18next from 'i18next';
 import {withTranslation} from 'react-i18next'
@@ -123,6 +124,7 @@ class App extends React.Component {
             <ProtectedRoute exact path="/ViewCharts" auth={this.state.auth} component={ViewCharts} />
             <ProtectedRoute exact path="/ViewChart/:id" auth={this.state.auth} component={ViewChart} />
             <ProtectedRoute exact path="/Settings" auth={this.state.auth} component={Settings} />
+            <ProtectedRoute exact path="/Statistics" auth={this.state.auth} component={Statistics} />
             <Route exact path="/Register" component={Register} />
             <Route exact path="/Reset" component={Reset} />
             <Route exact path="/Reset/:token" component={ChangePassword} />
