@@ -63,6 +63,12 @@
     "reset": "Reset",
     "email-sent": "Email Sent",
     "call-info": "Call Information",
+    "statistics": "Statistics",
+    "summary-report": "Summary Report",
+    "from": "From",
+    "to": "To",
+    "add-vitals": "Add Vitals",
+
     "ino": "Incident number",
     "unit": "Unit number",
     "call-type": "Call type",

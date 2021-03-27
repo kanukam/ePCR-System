@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import UserSettings from '../components/UserSettings'
-import AdminSettings from '../components/AdminSettings'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import MainNav from '../components/MainNav'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
+import Form from 'react-bootstrap/Form'
 import { MainContext } from '../Auth'
 
 export default class Statistics extends Component {
@@ -55,14 +57,29 @@ export default class Statistics extends Component {
                     contentSpacing={this.state.contentSpacing}
                     toggleCollapse={this.toggleCollapse}
                 />
-                <Container className='main-content' style={{ padding: this.state.contentSpacing }}>
-                    <UserSettings />
-                    <AdminSettings />
-                    <div className="text-center">
-                        <Button variant="danger" type="submit" className="mb-5 mt-5" onClick={this.remove}>{this.context.translate('delete-account')}</Button>
-                    </div>
-                    {this.state.message && <p className="text-info"> {this.state.message} </p>}
-                </Container>  
+                <Container className="mt-5 main-content" style={{ padding: this.state.contentSpacing }}>
+                    <Card className="text-center">
+                        <Card.Header>{this.context.translate('summary-report')}</Card.Header>
+                        <Card.Body>
+                            <Form>
+                                <Form.Row>
+                                    <Form.Label column sm={2}>{this.context.translate('from')}</Form.Label>
+                                    <Form.Group as={Col}>
+                                        <Form.Control type="text" value={this.state.name} onChange={e => this.setState({ name: e.target.value })} />
+                                    </Form.Group>
+
+                                    <Form.Label column sm={2}>{this.context.translate('to')}</Form.Label>
+                                    <Form.Group as={Col}>
+                                        <Form.Control type="email" placeholder={this.context.translate('enter-email')} value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
+                                    </Form.Group>
+                                    <Form.Group as={Col}>
+                                        <Button className="" onClick={this.addVitals}>Add</Button>
+                                    </Form.Group>
+                                </Form.Row>
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                </Container>
             </React.Fragment>
         )
     }

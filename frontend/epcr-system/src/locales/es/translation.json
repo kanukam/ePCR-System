@@ -64,7 +64,9 @@
     "email-sent": "Email enviado",
     "call-info": "Información de llamadas",
     "statistics": "Estadísticas",
-
+    "summary-report": "Informe resumido",
+    "from": "A Partir De",
+    "to": "Hasta",
 
 
     "ino": "Incidente # / Ejecutar #",

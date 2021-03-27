@@ -580,7 +580,7 @@ export default class PhysicalAssessment extends Component {
                                     value={values.vital_signs_etco2}
                                 />
                             </Col>
-                            <Button className="left" onClick={this.addVitals}>Add Vitals</Button>
+                            <Button className="left" onClick={this.addVitals}>{this.context.translate('add-vitals')}</Button>
                         </Form.Group>
                         : null}
                             
