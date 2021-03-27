@@ -66,6 +66,7 @@ export default class TrendCall extends Component {
     }
 
     render() {
+        const { from, to } = this.props.history.location.state;
         if(this.state.message){
             return(
                 <React.Fragment id="summary">
@@ -93,7 +94,7 @@ export default class TrendCall extends Component {
                             toggleCollapse={this.toggleCollapse}
                         />
                         <Container className="mt-5 main-content" style={{ padding: this.state.contentSpacing }}>
-                            <h1 className="text-center">{moment(from).format("DD/MM/YYYY")} - {moment(to).format("DD/MM/YYYY") }</h1>
+                            <h3 className="text-center">{moment(from).format("DD/MM/YYYY")} - {moment(to).format("DD/MM/YYYY") }</h3>
                         </Container>
                     </React.Fragment>
                 )
