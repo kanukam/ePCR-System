@@ -149,7 +149,7 @@ function summary(from, to, callback) {
                 ocean += checkData("Océano", location);
                 beach += checkData("Playa", location);
                 marina += checkData("Marina", location);
-                medical_office += checkData("Marina", location);
+                medical_office += checkData("médica", location);
                 school += checkData("Escuela", location);
                 other += checkData("Otro", location);
                 // Disposition
