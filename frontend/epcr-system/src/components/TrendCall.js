@@ -26,7 +26,7 @@ export default class TrendCall extends Component {
         const{from, to} = this.props.history.location.state;
         if(from && to){
             // Get summary report data back from server
-            const url = `http://localhost:3000/charts/summary`;
+            const url = `http://localhost:3000/charts/calls`;
             const options = {
                 method: 'POST',
                 body: JSON.stringify({ from, to }),
@@ -43,8 +43,12 @@ export default class TrendCall extends Component {
                 return response.json()
                 })
                 .then(data => {
-                    this.setState({ summary: data["data"], });
-                    console.log(this.state.summary);
+                    this.setState({ calls: data["data"], });
+                    console.log(this.state.calls);
+                    const {dispatch_date_time} = this.state.calls[0]
+                    console.log(dispatch_date_time);
+                    let d = new Date(dispatch_date_time);
+                    console.log(d.getUTCHours());
                 })
                 .catch((error) => {
                     this.setState({ message: this.context.translate('error') });
@@ -69,7 +73,7 @@ export default class TrendCall extends Component {
         const { from, to } = this.props.history.location.state;
         if(this.state.message){
             return(
-                <React.Fragment id="summary">
+                <React.Fragment>
                     <MainNav
                         username={this.context.username}
                         statistics={true}
@@ -83,7 +87,7 @@ export default class TrendCall extends Component {
                 </React.Fragment>
             )
         }
-        else if(this.state.summary){
+        else if(this.state.calls){
                 return (
                     <React.Fragment>
                         <MainNav
@@ -100,7 +104,19 @@ export default class TrendCall extends Component {
                 )
         }
         else{
-            return null;
+            return (
+                <React.Fragment>
+                    <MainNav
+                        username={this.context.username}
+                        statistics={true}
+                        sidebarHide={this.state.sidebarHide}
+                        contentSpacing={this.state.contentSpacing}
+                        toggleCollapse={this.toggleCollapse}
+                    />
+                    <Container className="mt-5 main-content" style={{ padding: this.state.contentSpacing }}>
+                    </Container>
+                </React.Fragment>
+            )
         }
     }
 }

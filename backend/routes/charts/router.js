@@ -15,6 +15,8 @@ router.post("/add", auth, controller.addChart);
 
 router.post("/summary", auth, controller.summary);
 
+router.post("/calls", auth, controller.calls);
+
 router.get("/:chartId", auth, controller.viewChart);
 
 router.post("/:chartId/update", auth, controller.updateChart);

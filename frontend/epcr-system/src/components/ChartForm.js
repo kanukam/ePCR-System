@@ -210,14 +210,14 @@ export default class ChartForm extends Component {
     handleDate = input => date => {
         var displayedDate = input + "Display";
         this.setState({ [displayedDate]: date });
-        date = moment(date).format("YYYY-MM-DD HH:mm:ss");
+        date = moment(date).format("YYYY-MM-DDTHH:mm");
         this.setState({ [input]: date });
     }
 
     handleDateNoTime = input => date => {
         var displayedDate = input + "Display";
         this.setState({ [displayedDate]: date });
-        date = moment(date).format("YYYY-MM-DD");
+        date = moment(date).format("YYYY-MM-DDTHH:mm");
         this.setState({ [input]: date });
     }
 
@@ -324,7 +324,7 @@ export default class ChartForm extends Component {
             if (this.state.trauma === "Fall") { trauma_cause += ", " + this.state.fallht + " m"; }
             let patient_count = null;
             let triage_color = null;
-            if (this.state.assessmentCheckBoxes[268]) {
+            if (this.state.ptct || this.state.triage) {
                 patient_count = this.state.ptct;
                 triage_color = this.state.triage;
             }
@@ -333,7 +333,7 @@ export default class ChartForm extends Component {
             let vehicle_accident_safety_equipment = null;
             let vehicle_accident_mph = null;
             let vehicle_accident_ejected = null;
-            if (this.state.assessmentCheckBoxes[269]) {
+            if (this.state.vatype || this.state.vaimpact || this.state.vasafe || this.state.vaspd || this.state.vaeject) {
                 vehicle_accident_type = this.state.vatype;
                 vehicle_accident_impact = this.state.vaimpact.join();
                 vehicle_accident_safety_equipment = this.state.vasafe;
@@ -354,7 +354,7 @@ export default class ChartForm extends Component {
             const p_medical_allergies = this.state.medAllergy;
             const p_environmental_allergies = this.state.envAllergy;
             let p_past_medical_history = this.state.pastHistory.join();
-            if (this.state.assessmentCheckBoxes[315]) { p_past_medical_history += ", [O - Other:" + this.state.pastHistoryOther + "]"; }
+            if (p_past_medical_history || this.state.pastHistoryOther) { p_past_medical_history += ", [O - Other:" + this.state.pastHistoryOther + "]"; }
             // chart assessment
             const skin = this.state.skin.join();
             const mental = this.state.mental.join();
@@ -392,18 +392,14 @@ export default class ChartForm extends Component {
             let intake_iv_fluids = "";
             let intake_oral_fluids = "";
             let intake_vomit = "";
-            if (this.state.assessmentCheckBoxes[316]) {
-                intake_bleeding = "Pre transport: " + this.state.ioBleedPT + " | Transport: " + this.state.ioBleedT + " | Total: " + (parseInt(this.state.ioBleedPT) + parseInt(this.state.ioBleedT));
-                intake_iv_fluids = "Pre transport: " + this.state.ioIVPT + " | Transport: " + this.state.ioIVT + " | Total: " + (parseInt(this.state.ioIVPT) + parseInt(this.state.ioIVT));
-                intake_oral_fluids = "Pre transport: " + this.state.ioOralPT + " | Transport: " + this.state.ioOralT + " | Total: " + (parseInt(this.state.ioOralPT) + parseInt(this.state.ioOralT));
-                intake_vomit = "Pre transport: " + this.state.ioVomitPT + " | Transport: " + this.state.ioVomitT + " | Total: " + (parseInt(this.state.ioVomitPT) + parseInt(this.state.ioVomitT));
-            }
+            if (this.state.ioBleedPT || this.state.ioBleedPT || this.state.ioBleedT) { intake_bleeding = "Pre transport: " + this.state.ioBleedPT + " | Transport: " + this.state.ioBleedT + " | Total: " + (parseInt(this.state.ioBleedPT) + parseInt(this.state.ioBleedT));}
+            if (this.state.ioIVPT || this.state.ioIVT) { intake_iv_fluids = "Pre transport: " + this.state.ioIVPT + " | Transport: " + this.state.ioIVT + " | Total: " + (parseInt(this.state.ioIVPT) + parseInt(this.state.ioIVT));}
+            if (this.state.ioOralPT || this.state.ioOralT) { intake_oral_fluids = "Pre transport: " + this.state.ioOralPT + " | Transport: " + this.state.ioOralT + " | Total: " + (parseInt(this.state.ioOralPT) + parseInt(this.state.ioOralT));}
+            if (this.state.ioVomitPT || this.state.ioVomitT) { intake_vomit = "Pre transport: " + this.state.ioVomitPT + " | Transport: " + this.state.ioVomitT + " | Total: " + (parseInt(this.state.ioVomitPT) + parseInt(this.state.ioVomitT));}
             let obstetrics = "";
-            if (this.state.assessmentCheckBoxes[317]) {
-                obstetrics = "Gravid: " + this.state.oGravid + " | Para: " + this.state.oPara + " | Abortion: " + this.state.oAbortion + " | Due date: " + this.state.oDuedate + " | Gestation: " + this.state.oGestation + " | Vaginal bleeding: " + this.state.oVaginalBleed + " | Contraction onset: " + this.state.oContraction + " | Frequency: " + this.state.oFrequency + " | Duration: " + this.state.oDuration + " | Bag of water ruptured: " + this.state.oWaterRupture;
-                if (this.state.oWaterRupture === "Yes") { obstetrics += " | Color of fluid: " + this.state.oWaterColor; }
-                obstetrics += " | Feel baby moving: " + this.state.oBabyMoving + " | Delivery time: " + this.state.oDelivery + " | Placenta delivered: " + this.state.oPlacenta + " | Baby sex: " + this.state.oBabySex + " | Born: " + this.state.oBorn + " | APGAR score: " + this.state.oAPGAR;
-            }
+            if (this.state.oGravid || this.state.oPara || this.state.oAbortion || this.state.oDuedate || this.state.oGestation || this.state.oVaginalBleed || this.state.oContraction || this.state.oFrequency || this.state.oDuration || this.state.oWaterRupture) { obstetrics = "Gravid: " + this.state.oGravid + " | Para: " + this.state.oPara + " | Abortion: " + this.state.oAbortion + " | Due date: " + this.state.oDuedate + " | Gestation: " + this.state.oGestation + " | Vaginal bleeding: " + this.state.oVaginalBleed + " | Contraction onset: " + this.state.oContraction + " | Frequency: " + this.state.oFrequency + " | Duration: " + this.state.oDuration + " | Bag of water ruptured: " + this.state.oWaterRupture;}
+            if (this.state.oWaterRupture === "Yes") { obstetrics += " | Color of fluid: " + this.state.oWaterColor; }
+            if (this.state.oBabyMoving || this.state.oDelivery || this.state.oPlacenta || this.state.oBabySex || this.state.oBorn || this.state.oAPGAR){obstetrics += " | Feel baby moving: " + this.state.oBabyMoving + " | Delivery time: " + this.state.oDelivery + " | Placenta delivered: " + this.state.oPlacenta + " | Baby sex: " + this.state.oBabySex + " | Born: " + this.state.oBorn + " | APGAR score: " + this.state.oAPGAR;}
             /* patient table */
             const patientID = this.state.pid || null;
             //alert(patientID);

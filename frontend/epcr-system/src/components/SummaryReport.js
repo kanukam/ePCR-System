@@ -480,7 +480,19 @@ export default class SummaryReport extends Component {
                 )
         }
         else{
-            return null;
+            return (
+                <React.Fragment>
+                    <MainNav
+                        username={this.context.username}
+                        statistics={true}
+                        sidebarHide={this.state.sidebarHide}
+                        contentSpacing={this.state.contentSpacing}
+                        toggleCollapse={this.toggleCollapse}
+                    />
+                    <Container className="mt-5 main-content" style={{ padding: this.state.contentSpacing }}>
+                    </Container>
+                </React.Fragment>
+            )
         }
     }
 }

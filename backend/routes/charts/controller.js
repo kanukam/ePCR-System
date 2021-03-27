@@ -81,8 +81,22 @@ function viewAllPatientCharts(req, res){
 
 function summary(req, res) {
   const { from, to } = req.body;
-  if (from && to) {
+  if (from && to && req.user.privilege === "admin") {
     repo.summary(from, to, (err, data) => {
+      err
+        ? res.status(500).json({ error: "Internal Server error" })
+        : res.status(200).json({ data })
+    })
+  }
+  else {
+    res.status(400).json({ status: "Bad Request" });
+  }
+}
+
+function calls(req, res) {
+  const { from, to } = req.body;
+  if (from && to && req.user.privilege === "admin") {
+    repo.calls(from, to, (err, data) => {
       err
         ? res.status(500).json({ error: "Internal Server error" })
         : res.status(200).json({ data })
@@ -118,6 +132,7 @@ module.exports = {
   viewPatientChart, 
   viewAllPatientCharts,
   summary,
+  calls,
   downloadPdf,
   downloadPdfTest
 };

@@ -205,6 +205,18 @@ function summary(from, to, callback) {
     });
 }
 
+function calls(from, to, callback) {
+    const query = `SELECT dispatch_date_time FROM charts WHERE dispatch_date_time BETWEEN '${from}' AND '${to}'`;
+    db.query(query, (err, results) => {
+        if (err) {
+            return callback(err);
+        }
+        else {
+            callback(null, results);
+        }
+    });
+}
+
 function checkData(word, target){
     if (target.includes(word)){
         return 1;
@@ -337,6 +349,7 @@ module.exports = {
     viewPatientChart, 
     viewAllPatientCharts,
     summary,
+    calls,
     downloadPdf,
     downloadPdfTest
 };
