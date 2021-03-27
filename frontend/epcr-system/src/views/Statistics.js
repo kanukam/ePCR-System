@@ -28,6 +28,7 @@ class Statistics extends Component {
             toCallDate: null,
             toCallDateDisplay: null,
             message: "",
+            trendMessage: ""
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
     }
@@ -64,6 +65,29 @@ class Statistics extends Component {
         }
         else{
             this.setState({ message: this.context.translate('all-fields') });
+        }
+    }
+
+    trendAnalysis = event => {
+        event.preventDefault();
+        const { fromCallDate, toCallDate } = this.state;
+        if (fromCallDate && toCallDate) {
+            this.setState({ trendMessage: "" });
+            const fromDate = new Date(fromCallDate);
+            const toDate = new Date(toCallDate);
+            if (fromDate < toDate) {
+                // Redirect to page with trend calls
+                this.props.history.push({
+                    pathname: '/TrendCall',
+                    state: { from: this.state.fromCallDate, to: this.state.toCallDate }
+                })
+            }
+            else {
+                this.setState({ trendMessage: this.context.translate('date-error') });
+            }
+        }
+        else {
+            this.setState({ trendMessage: this.context.translate('all-fields') });
         }
     }
 
@@ -135,12 +159,13 @@ class Statistics extends Component {
                                         />
                                     </Col>
                                     <Col xs={6} className="offset-3">
-                                        <Button className="" onClick={this.addVitals}>{this.context.translate('create')}</Button>
+                                        <Button className="" onClick={this.trendAnalysis}>{this.context.translate('create')}</Button>
                                     </Col>
                                 </Form.Group>
                             </Form>
                         </Card.Body>
                     </Card>
+                    {this.state.trendMessage && <p> {this.state.trendMessage} </p>}
                 </Container>
             </React.Fragment>
         )
