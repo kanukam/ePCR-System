@@ -6,7 +6,10 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { MainContext } from '../Auth'
+import moment from 'moment'
 
 export default class Statistics extends Component {
     static contextType = MainContext;
@@ -15,7 +18,15 @@ export default class Statistics extends Component {
         this.state = {
             contentSpacing: '0 0 0 150px',
             sidebarHide: true,
-            message: ""
+            message: "",
+            fromSummaryDate: null,
+            fromSummaryDateDisplay: null,
+            toSummaryDate: null,
+            toSummaryDateDisplay: null,
+            fromCallDate: null,
+            fromCallDateDisplay: null,
+            toCallDate: null,
+            toCallDateDisplay: null,
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
     }
@@ -25,26 +36,11 @@ export default class Statistics extends Component {
         this.setState({ sidebarHide: !this.state.sidebarHide });
     }
 
-    remove = event => {
-        event.preventDefault();
-        if (window.confirm(this.context.translate('delete-self'))){
-            const url = 'http://localhost:3000/users/0/remove';
-            const options = {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include'
-            }
-            fetch(url, options).then((response) => {
-                if (!response.ok) {
-                    throw Error("Failed");
-                }
-                this.context.setAuth(false);
-            }).catch((error) => {
-                this.setState({ message: this.context.translate('failed') });
-            })
-        }
+    handleDateNoTime = input => date => {
+        var displayedDate = input + "Display";
+        this.setState({ [displayedDate]: date });
+        date = moment(date).format("YYYY-MM-DD");
+        this.setState({ [input]: date });
     }
 
     render() {
@@ -58,24 +54,64 @@ export default class Statistics extends Component {
                     toggleCollapse={this.toggleCollapse}
                 />
                 <Container className="mt-5 main-content" style={{ padding: this.state.contentSpacing }}>
-                    <Card className="text-center">
+                    <Card className="text-center mb-5">
                         <Card.Header>{this.context.translate('summary-report')}</Card.Header>
                         <Card.Body>
                             <Form>
-                                <Form.Row>
-                                    <Form.Label column sm={2}>{this.context.translate('from')}</Form.Label>
-                                    <Form.Group as={Col}>
-                                        <Form.Control type="text" value={this.state.name} onChange={e => this.setState({ name: e.target.value })} />
+                                    <Form.Group as={Row}>
+                                        <Form.Label column xs={6}>{this.context.translate('from')}</Form.Label>
+                                        <Col xs={6}>
+                                            <DatePicker
+                                                selected={this.state.fromSummaryDateDisplay ? this.state.fromSummaryDateDisplay : false}
+                                                placeholderText="dd/mm/yyyy"
+                                                onChange={this.handleDateNoTime('fromSummaryDate')}
+                                                dateFormat="dd/MM/yyyy"
+                                            />
+                                        </Col>
+                                        <Form.Label column xs={6}>{this.context.translate('to')}</Form.Label>
+                                        <Col xs={6}>
+                                            <DatePicker
+                                                selected={this.state.toSummaryDateDisplay ? this.state.toSummaryDateDisplay : false}
+                                                placeholderText="dd/mm/yyyy"
+                                                onChange={this.handleDateNoTime('toSummaryDate')}
+                                                dateFormat="dd/MM/yyyy"
+                                            />
+                                        </Col>
+                                        <Col xs={6} className="offset-3">
+                                            <Button className="" onClick={this.addVitals}>{this.context.translate('create')}</Button>
+                                        </Col>
                                     </Form.Group>
+                            </Form>
+                        </Card.Body>
+                    </Card>
 
-                                    <Form.Label column sm={2}>{this.context.translate('to')}</Form.Label>
-                                    <Form.Group as={Col}>
-                                        <Form.Control type="email" placeholder={this.context.translate('enter-email')} value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
-                                    </Form.Group>
-                                    <Form.Group as={Col}>
-                                        <Button className="" onClick={this.addVitals}>Add</Button>
-                                    </Form.Group>
-                                </Form.Row>
+                    <Card className="text-center mt-5">
+                        <Card.Header>{this.context.translate('trend-call')}</Card.Header>
+                        <Card.Body>
+                            <Form>
+                                <Form.Group as={Row}>
+                                    <Form.Label column xs={6}>{this.context.translate('from')}</Form.Label>
+                                    <Col xs={6}>
+                                        <DatePicker
+                                            selected={this.state.fromCallDateDisplay ? this.state.fromCallDateDisplay : false}
+                                            placeholderText="dd/mm/yyyy"
+                                            onChange={this.handleDateNoTime('fromCallDate')}
+                                            dateFormat="dd/MM/yyyy"
+                                        />
+                                    </Col>
+                                    <Form.Label column xs={6}>{this.context.translate('to')}</Form.Label>
+                                    <Col xs={6}>
+                                        <DatePicker
+                                            selected={this.state.toCallDateDisplay ? this.state.toCallDateDisplay : false}
+                                            placeholderText="dd/mm/yyyy"
+                                            onChange={this.handleDateNoTime('toCallDate')}
+                                            dateFormat="dd/MM/yyyy"
+                                        />
+                                    </Col>
+                                    <Col xs={6} className="offset-3">
+                                        <Button className="" onClick={this.addVitals}>{this.context.translate('create')}</Button>
+                                    </Col>
+                                </Form.Group>
                             </Form>
                         </Card.Body>
                     </Card>

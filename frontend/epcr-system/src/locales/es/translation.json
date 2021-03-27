@@ -67,6 +67,9 @@
     "summary-report": "Informe resumido",
     "from": "A Partir De",
     "to": "Hasta",
+    "add-vitals": "Agregar Signos Vitales",
+    "create": "Crear",
+    "trend-call": "Análisis de llamadas",
 
 
     "ino": "Incidente # / Ejecutar #",
