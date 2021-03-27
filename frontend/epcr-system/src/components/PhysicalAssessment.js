@@ -67,6 +67,9 @@ export default class PhysicalAssessment extends Component {
                             <Form.Check type="checkbox" label={this.context.translate('Combative')} name="mental" value="Combativo" checked={values.assessmentCheckBoxes[21]} onChange={this.props.handleAssessmentCheckboxes(21)} />
                             <Form.Check type="checkbox" label={this.context.translate('Suicidal-thinking/action')} name="mental" value="Pensamiento suicida / Acción" checked={values.assessmentCheckBoxes[22]} onChange={this.props.handleAssessmentCheckboxes(22)} />
                             <Form.Check type="checkbox" label={this.context.translate('Hallucinations')} name="mental" value="Alucinaciones" checked={values.assessmentCheckBoxes[23]} onChange={this.props.handleAssessmentCheckboxes(23)} />
+                            <Form.Check type="checkbox" label={this.context.translate('anxious')} name="mental" value="Ansioso" checked={values.assessmentCheckBoxes[2300]} onChange={this.props.handleAssessmentCheckboxes(2300)} />
+                            <Form.Check type="checkbox" label={this.context.translate('depressed')} name="mental" value="Deprimido" checked={values.assessmentCheckBoxes[2301]} onChange={this.props.handleAssessmentCheckboxes(2301)} />
+                            <Form.Check type="checkbox" label={this.context.translate('appears_impaired')} name="mental" value="Parece deteriorado" checked={values.assessmentCheckBoxes[2302]} onChange={this.props.handleAssessmentCheckboxes(2302)} />
                         </Col>
                     </Form.Group>
 
