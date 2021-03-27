@@ -158,7 +158,244 @@ export default class SummaryReport extends Component {
                         </Card.Body>
                     </Card>
 
+                    <Card className="mt-5">
+                        <Card.Header as="h5">{this.context.translate('ilocation')}</Card.Header>
+                        <Card.Body>
+                            <Form.Group as={Row}>
+                                <Form.Label column xs={4}>{this.context.translate('rescate-clinic')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
 
+                                </Col>
+                                <Form.Label column xs={4}>{this.context.translate('chome')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('business')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('road-hwy')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('construction-site')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('ocean-bay')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('beach')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>Marina:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('med-office')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('school')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('other')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+                            </Form.Group>
+                        </Card.Body>
+                    </Card>
+
+                    <Card className="mt-5">
+                        <Card.Header as="h5">{this.context.translate('disposition')}</Card.Header>
+                        <Card.Body>
+                            <Form.Group as={Row}>
+                                <Form.Label column xs={4}>{this.context.translate('treat-release')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+                                <Form.Label column xs={4}>{this.context.translate('transport')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('na-locate')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('doa')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('ama')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+                            </Form.Group>
+                        </Card.Body>
+                    </Card>
+
+                    <Card className="mt-5">
+                        <Card.Header as="h5">{this.context.translate('destination')}</Card.Header>
+                        <Card.Body>
+                            <Form.Group as={Row}>
+                                <Form.Label column xs={4}>{this.context.translate('rescate-clinic')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+                                <Form.Label column xs={4}>IMSS:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>ISTESON:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>SEMESON:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>ISSSTE:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>Pabellon Guadalupe:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>Hospital Cima:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>Hospital Clinica Del Noroeste:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>Hospital Clinica Del Noroeste:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>Hospital San Benito:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+                            </Form.Group>
+                        </Card.Body>
+                    </Card>
+
+                    <Card className="mt-5">
+                        <Card.Header as="h5">{this.context.translate('trauma-cause')}</Card.Header>
+                        <Card.Body>
+                            <Form.Group as={Row}>
+                                <Form.Label column xs={4}>Animal:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+                                <Form.Label column xs={4}>{this.context.translate('assault')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('motor-vehicle')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('bicycle')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('boat')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('drown')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('electrical')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('explosion')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('fall')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('fire')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('gun')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('tools')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('stabbing')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('object-struck')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('toxic-subst')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('other-vehicle')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+
+                                <Form.Label column xs={4}>{this.context.translate('other')}:</Form.Label>
+                                <Col xs={2} className="mt-2">
+
+                                </Col>
+                            </Form.Group>
+                        </Card.Body>
+                    </Card>
                 </Container>
             </React.Fragment>
         )
