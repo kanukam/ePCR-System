@@ -71,6 +71,13 @@
     "create": "Crear",
     "trend-call": "Análisis de llamadas",
     "date-error": "La fecha de inicio debe ser anterior",
+    "sunday": "Domingo",
+    "monday": "Lunes",
+    "tuesday": "Martes",
+    "wednesday": "Miércoles",
+    "thursday": "Jueves",
+    "friday": "Viernes",
+    "saturday": "Sábado",
 
     "ino": "Incidente # / Ejecutar #",
     "unit": "Número de unidad",

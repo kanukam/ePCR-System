@@ -71,6 +71,13 @@
     "create": "Create",
     "trend-call": "Trend Call Analysis",
     "date-error": "The from date must be before",
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
 
     "ino": "Incident number",
     "unit": "Unit number",

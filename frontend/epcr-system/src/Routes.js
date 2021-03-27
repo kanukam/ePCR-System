@@ -27,7 +27,7 @@ export const ProtectedLogin = ({auth, component: Component, ...rest }) => {
                 <Component />
             ):
                 (
-                    <Redirect to="/Dashboard" />
+                    <Redirect to="/Chart" />
                 )
             }
         />

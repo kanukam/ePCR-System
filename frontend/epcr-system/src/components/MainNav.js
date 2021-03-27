@@ -77,19 +77,6 @@ export default class MainNav extends Component {
 		        {/* Sidebar */}
 		        { this.props.sidebarHide ?
 			        <Navbar className="col-md-1 d-none d-md-block bg-light sidebar">
-			        	{this.props.dashboard ?
-				            <Nav.Item className="sidebar-section active">
-				                <Nav.Link style={{color:'white'}} as={Link} to="/Dashboard">
-									{this.context.translate('home')}
-				                </Nav.Link>
-				            </Nav.Item>
-				            :
-				            <Nav.Item>
-				                <Nav.Link as={Link} to="/Dashboard">
-									{this.context.translate('home')}
-				                </Nav.Link>
-				            </Nav.Item>
-				        }
 			            {this.props.chart ?
 				            <Nav.Item className="sidebar-section active">
 				                <Nav.Link style={{color:'white'}} as={Link} to="/Chart">

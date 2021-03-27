@@ -66,8 +66,6 @@ export default class SummaryReport extends Component {
     }
 
     render() {
-        const {summary} = this.state;
-        const { from, to } = this.props.history.location.state;
         if(this.state.message){
             return(
                 <React.Fragment id="summary">
@@ -85,6 +83,8 @@ export default class SummaryReport extends Component {
             )
         }
         else if(this.state.summary){
+            const { summary } = this.state;
+            const { from, to } = this.props.history.location.state;
                 return (
                     <React.Fragment>
                         <MainNav
@@ -459,7 +459,7 @@ export default class SummaryReport extends Component {
 
                                         <Form.Label column xs={4}>{this.context.translate('cardiac_manual')}:</Form.Label>
                                         <Col xs={2} className="mt-2">
-                                            {summary.cardiac_manual}
+                                            {summary.cardiac_defib}
                                         </Col>
 
                                         <Form.Label column xs={4}>{this.context.translate('cardiac_pacing')}:</Form.Label>

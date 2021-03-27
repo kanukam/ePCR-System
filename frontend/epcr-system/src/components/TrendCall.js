@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
 import MainNav from '../components/MainNav';
+import CallChart from '../components/CallChart';
 import { MainContext } from '../Auth';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -16,8 +15,9 @@ export default class TrendCall extends Component {
         this.state = {
             contentSpacing: '0 0 0 150px',
             sidebarHide: true,
-            message: "",
+            message: null,
             summary: "",
+            day: "",
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
     }
@@ -44,11 +44,6 @@ export default class TrendCall extends Component {
                 })
                 .then(data => {
                     this.setState({ calls: data["data"], });
-                    console.log(this.state.calls);
-                    const {dispatch_date_time} = this.state.calls[1]
-                    console.log(dispatch_date_time);
-                    let d = new Date(dispatch_date_time);
-                    console.log(d.getUTCHours());
                 })
                 .catch((error) => {
                     this.setState({ message: this.context.translate('error') });
@@ -70,7 +65,6 @@ export default class TrendCall extends Component {
     }
 
     render() {
-        const { from, to } = this.props.history.location.state;
         if(this.state.message){
             return(
                 <React.Fragment>
@@ -82,12 +76,13 @@ export default class TrendCall extends Component {
                         toggleCollapse={this.toggleCollapse}
                     />
                     <Container className="mt-5 main-content" style={{ padding: this.state.contentSpacing }}>
-                        <h1>{this.context.translate("error")}</h1>
+                        <h1></h1>
                     </Container>
                 </React.Fragment>
             )
         }
         else if(this.state.calls){
+            const { from, to } = this.props.history.location.state;
                 return (
                     <React.Fragment>
                         <MainNav
@@ -99,6 +94,23 @@ export default class TrendCall extends Component {
                         />
                         <Container className="mt-5 main-content" style={{ padding: this.state.contentSpacing }}>
                             <h3 className="text-center">{moment(from).format("DD/MM/YYYY")} - {moment(to).format("DD/MM/YYYY") }</h3>
+                            <Form>
+                                <Row>
+                                    <Col xs={6} className="offset-3">
+                                        <Form.Control as="select" onChange={e => this.setState({ day: e.target.value })} value={this.state.day}>
+                                            <option disabled selected value="">{this.context.translate('select')}</option>
+                                            <option value={0}>{this.context.translate('sunday')}</option>
+                                            <option value={1}>{this.context.translate('monday')}</option>
+                                            <option value={2}>{this.context.translate('tuesday')}</option>
+                                            <option value={3}>{this.context.translate('wednesday')}</option>
+                                            <option value={4}>{this.context.translate('thursday')}</option>
+                                            <option value={5}>{this.context.translate('friday')}</option>
+                                            <option value={6}>{this.context.translate('saturday')}</option>
+                                        </Form.Control>
+                                    </Col>
+                                </Row>
+                            </Form>
+                            {this.state.day && <CallChart day={this.state.day} dates={this.state.calls}/>}
                         </Container>
                     </React.Fragment>
                 )

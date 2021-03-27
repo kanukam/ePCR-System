@@ -65,7 +65,7 @@ export default class Login extends Component {
 
     render() {
         if(this.state.authorized) {
-            return <Redirect to="/Dashboard" />
+            return <Redirect to="/Chart" />
         }
 
         return (
