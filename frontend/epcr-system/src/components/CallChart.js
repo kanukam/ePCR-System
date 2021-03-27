@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { MainContext } from '../Auth';
 import { CanvasJSChart } from 'canvasjs-react-charts';
 import Button from 'react-bootstrap/Button';
+import moment from 'moment';
 
 export default class CallChart extends Component {
     static contextType = MainContext;
@@ -23,23 +24,21 @@ export default class CallChart extends Component {
         if (this.props.dates) {
             this.props.dates.forEach(element => {
                 const { dispatch_date_time } = element;
-                var day = new Date(dispatch_date_time);
-                day.setDate(day.getDate() + 1);
-                
-                if (day.getDay() == parseInt(this.props.day)) {
-                    if (day.getUTCHours() >= 0 && day.getUTCHours() <= 4) {
+                var day = moment(dispatch_date_time).utc();
+                if (day.day() === parseInt(this.props.day)) {
+                    if (day.hour() >= 0 && day.hour() <= 4) {
                         zeroToFour += 1;
                     }
-                    else if (day.getUTCHours() >= 5 && day.getUTCHours() <= 8) {
+                    else if (day.hour() >= 5 && day.hour() <= 8) {
                         fiveToEight += 1;
                     }
-                    else if (day.getUTCHours() >= 9 && day.getUTCHours() <= 12) {
+                    else if (day.hour() >= 9 && day.hour() <= 12) {
                         nineToTwelve += 1;
                     }
-                    else if (day.getUTCHours() >= 13 && day.getUTCHours() <= 16) {
+                    else if (day.hour() >= 13 && day.hour() <= 16) {
                         thirteenToSixteen += 1;
                     }
-                    else if (day.getUTCHours() >= 17 && day.getUTCHours() <= 20) {
+                    else if (day.hour() >= 17 && day.hour() <= 20) {
                         seventeenToTwenty += 1;
                     }
                     else {
