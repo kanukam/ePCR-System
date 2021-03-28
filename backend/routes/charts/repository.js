@@ -219,7 +219,7 @@ function calls(from, to, callback) {
 }
 
 function checkData(word, target){
-    if (target.includes(word)){
+    if (word && target && target.includes(word)){
         return 1;
     }
     return 0;
