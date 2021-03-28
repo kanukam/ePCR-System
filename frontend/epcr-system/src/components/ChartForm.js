@@ -306,7 +306,7 @@ export default class ChartForm extends Component {
             // chart call
             const incident_number = this.state.ino;
             const incident_date = this.state.idate || null;
-            const location = this.state.dest;
+            const location = this.state.loctype;
             const incident_address = this.state.loc;
             const disposition = this.state.disp;
             const agencies = this.state.agency.join();

@@ -81,6 +81,7 @@
     "number": "Número",
 
     "ino": "Incidente # / Ejecutar #",
+    "incedent-date": "Fecha del incidente",
     "unit": "Número de unidad",
     "call-type": "Tipo de llamada",
     "clinic": "Clínica",

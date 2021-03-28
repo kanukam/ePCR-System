@@ -82,7 +82,7 @@ function viewPatientChart(id, callback){
 }
 
 function viewAllPatientCharts(callback){
-    db.query(`select patients.fname, patients.lname, patients.birth, charts.p_address, charts.p_phone, charts.id
+    db.query(`select patients.fname, patients.lname, patients.birth, charts.p_address, charts.incident_date, charts.call_type, charts.location, charts.p_phone, charts.id
                  FROM charts INNER JOIN patients ON patients.id = charts.patientID;`, (err, results) => {
         if (err) {
             return callback(err);

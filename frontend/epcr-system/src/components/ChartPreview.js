@@ -27,7 +27,7 @@ export class ChartPreview extends Component {
                         <br />
                         <b>{this.context.translate('dob')}: </b>
                         {this.props.birth && this.year(this.props.birth)}
-                        <br /><br />
+                        <br />
                         <b>{this.context.translate('address')}: </b>
                         {this.props.address}
                         <br />
@@ -35,6 +35,16 @@ export class ChartPreview extends Component {
                         {this.props.phone}
                         <br />
                         {this.props.history}
+                    </Col>
+                    <Col>
+                        <b>{this.context.translate('ilocation')}: </b>
+                        {this.props.location}
+                        <br />
+                        <b>{this.context.translate('call-type')}: </b>
+                        {this.props.call_type}
+                        <br />
+                        <b>{this.context.translate('incedent-date')}: </b>
+                        {this.props.incident_date && this.year(this.props.incident_date)}
                     </Col>
                     <div >
                         <br /><br /><br />

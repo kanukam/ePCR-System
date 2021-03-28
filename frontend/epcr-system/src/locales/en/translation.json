@@ -81,6 +81,7 @@
     "number": "Number",
 
     "ino": "Incident number",
+    "incedent-date": "Incident Date",
     "unit": "Unit number",
     "call-type": "Call type",
     "clinic": "Clinic",
