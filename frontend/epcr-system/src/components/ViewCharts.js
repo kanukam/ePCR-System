@@ -109,10 +109,24 @@ export default class ViewCharts extends Component {
                 return (a.getDate() === b.getDate()) && (a.getDay() === b.getDay()) && ((a.getFullYear() === b.getFullYear()));
             })
         }
+        // filter start date
+        if (this.state.startdate) {
+            filtered = filtered.filter(chart => {
+                var a = new Date(this.state.startdate);
+                var b = new Date(chart.incident_date);
+                return b >= a;
+            })
+        }
+        // filter end date
+        if (this.state.enddate) {
+            filtered = filtered.filter(chart => {
+                var a = new Date(this.state.enddate);
+                var b = new Date(chart.incident_date);
+                return b <= a;
+            })
+        }
         // set filtered bool to true, assign filtered state array
         this.setState({filter: true, filtered: filtered});
-        // filter start date
-        // filter end date
     }
 
     render() {
