@@ -86,9 +86,11 @@
     "crew": "Crew",
     "previous": "Previous",
     "next": "Next",
+    "remove": "Remove",
     "confirm-chart": "Confirm Chart Report",
     "required-fields": "One or more required fields have been left blank. Please fill them out.",
 
+    "response-details": "Details",
     "ino": "Incident number",
     "idate": "Incident date",
     "unit": "Unit number",
@@ -143,7 +145,7 @@
     "object-struck": "Struck by object",
     "toxic-subst": "Toxic substance",
     "other-vehicle": "Other vehicle",
-    "mci": "Mild Cognitive Impairment",
+    "mci": "Mass Casualty Incident",
     "num-patients": "Patient count",
     "triage": "Triage color",
     "vehicle-accident": "Vehicle Accident",
@@ -178,6 +180,7 @@
     "trcare": "Transfer of care",
 
     "patient-info": "Patient Information",
+    "patient-search": "Patient Search",
     "prev-patient-search": "Previous Patient Search",
     "full-name": "Full name",
     "fname": "First",
