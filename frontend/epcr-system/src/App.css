@@ -1,6 +1,6 @@
 /* main styles */
 :focus { outline:none; }
-body { font-size:15px; }
+body { font-size:16px; }
 hr { margin:30px 0; height:1px; }
 input:disabled { background:#eee !important; }
 .form-confirm form { padding-bottom:150px; }
