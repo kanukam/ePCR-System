@@ -28,6 +28,31 @@ export default class Login extends Component {
         this.context.setLanguage(language);
     }
 
+    getRole() {
+        const url = 'http://localhost:3000/getUsername';
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        }
+        fetch(url, options)
+            .then((response) => {
+                if (response.ok)
+                    return response.json();
+                else
+                    throw Error("Failed");
+            })
+            .then((data) => {
+                const { privilege } = data;
+                this.context.setPrivilege(privilege);
+            })
+            .catch((error) => {
+
+            });
+    }
+
     handleSubmit = (event => {
         event.preventDefault();
         const username = this.state.username;
@@ -52,7 +77,7 @@ export default class Login extends Component {
                 this.setState({ authorized: true })
                 this.context.setAuth(true);
                 this.context.setUsername(this.state.username);
-                this.props.getUsername();
+                this.getRole();
             }).catch((error) => {
                 this.setState({ errorMessage: this.context.translate('invalid-user') });
             })

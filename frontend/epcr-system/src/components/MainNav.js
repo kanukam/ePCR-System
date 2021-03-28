@@ -37,6 +37,7 @@ export default class MainNav extends Component {
 	}
 
     render(){
+		const privilege = this.context.privilege;
     	return(
     		<div>
 		    	{/* Navigation Bar */}
@@ -104,7 +105,7 @@ export default class MainNav extends Component {
 				                </Nav.Link>
 				            </Nav.Item>
 				        }
-						{this.context.privilege === 'admin' && this.props.statistics ?
+						{privilege === 'admin' && this.props.statistics ?
 							<Nav.Item className="sidebar-section active">
 								<Nav.Link as={Link} to="/Statistics" style={{ color: 'white' }}>
 									{this.context.translate('statistics')}
