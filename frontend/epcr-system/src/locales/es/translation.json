@@ -86,9 +86,11 @@
     "crew": "Miembro",
     "previous": "Anterior",
     "next": "Siguiente",
+    "remove": "Eliminar",
     "confirm-chart": "Confirmar informe gráfico",
     "required-fields": "Se han dejado en blanco uno o más campos obligatorios. Por favor llénelos.",
 
+    "response-details": "Detalles de la respuesta",
     "ino": "Número de incidente",
     "idate": "Fecha del incidente",
     "unit": "Número de unidad",
@@ -144,7 +146,7 @@
     "object-struck": "Atascado por objeto",
     "toxic-subst": "Sustancia tóxica",
     "other-vehicle": "Otro vehículo",
-    "mci": "Defecto cognitivo leve",
+    "mci": "Incidente de víctimas masivas",
     "num-patients": "Número de pacientes",
     "triage": "Color de clasificación",
     "vehicle-accident": "Accidente vehiculoso",
@@ -179,6 +181,7 @@
     "trcare": "Transferencia del paciente",
 
     "patient-info": "información del paciente",
+    "patient-search": "Búsqueda de pacientes",
     "prev-patient-search": "Búsqueda de pacientes anteriores",
     "full-name": "Nombre completo",
     "fname": "Nombre de pila",
