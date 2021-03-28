@@ -254,7 +254,9 @@ export default class ChartForm extends Component {
             vital_signs_gcs: "",
             vital_signs_pain: "",
             vital_signs_temp: "",
-            vital_signs_etco2: ""
+            vital_signs_etco2: "",
+            vital_signs_b_p_d: "",
+            vital_signs_b_p_s: "",
         });
     }
 
