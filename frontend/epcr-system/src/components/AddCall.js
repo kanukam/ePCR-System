@@ -68,7 +68,7 @@ export default class AddCall extends Component {
             <div className="chart">
                 <form id="call">
                     <h2>{this.context.translate('call-info')}</h2>
-                    <h3>Details</h3>
+                    <h3>{this.context.translate('response-details')}</h3>
                     <table className="cform">
                         <tr>
                             <th width="20%">{this.context.translate('ino')}</th>

@@ -11,7 +11,7 @@ export default class ShowProc extends Component {
                 <td>{this.props.name}</td>
                 <td>{this.props.data}</td>
                 <td>{this.props.crew}</td>
-                <td><input type="button" value="Remove" onClick={this.props.deleteProc(this.props.index)} /></td>
+                <td><input type="button" value={this.props.removeText} onClick={this.props.deleteProc(this.props.index)} /></td>
             </tr>
         )
     }

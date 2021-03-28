@@ -245,6 +245,7 @@ export default class AddInterventions extends Component {
                 crew={crew}
                 index={i}
                 deleteProc={this.deleteProcedure}
+                removeText={this.context.translate('remove')}
             />)
         }
         var medicationList = [];
@@ -261,6 +262,7 @@ export default class AddInterventions extends Component {
                 crew={crew}
                 index={i}
                 deleteMed={this.deleteMedication}
+                removeText={this.context.translate('remove')}
             />)
         }
 

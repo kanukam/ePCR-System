@@ -250,7 +250,7 @@ export default class AddPatient extends Component {
                             </td>
                             <td colspan="2" valign="top">
                                 <label><input type="checkbox" name="none" value="O - Otro" checked={values.assessmentCheckBoxes[315]} onChange={this.props.handleAssessmentCheckboxes(315)} /> O - {this.context.translate('other')}</label>
-                                {values.assessmentCheckBoxes[315] ? <input type="text" className="block" name="pastHistoryOther" placeholder="Separate multiple items with a comma" value={values.pastHistoryOther} onChange={this.props.handleChange('pastHistoryOther')} /> : null}
+                                {values.assessmentCheckBoxes[315] ? <input type="text" className="block" name="pastHistoryOther" placeholder={this.context.translate('seperate-comma')} value={values.pastHistoryOther} onChange={this.props.handleChange('pastHistoryOther')} /> : null}
                             </td>
                         </tr>
                     </table>
