@@ -6,14 +6,16 @@ import PatientRow from './PatientRow'
 import '../App.css'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { MainContext } from '../Auth';
 
 export default class Popup extends Component {
+    static contextType = MainContext;
     constructor(props) {
         super(props);
         this.state = {
             type: "",
-            surgicalcheck: "",
-            needlecheck: "",
+            surgicalcheck: false,
+            needlecheck: false,
             patients: [],
             patientList: []
         };
@@ -45,12 +47,10 @@ export default class Popup extends Component {
 
     showSomething = input => (e) => {
         if (input === "surgical") {
-            //var checkbox = document.getElementById("surgical");
             this.setState({
                 surgicalcheck: !this.state.surgicalcheck
             });
         } else if (input === "needle") {
-            //var checkbox = document.getElementById("needle");
             this.setState({
                 needlecheck: !this.state.needlecheck
             });
@@ -59,150 +59,150 @@ export default class Popup extends Component {
 
     renderProc(proc) {
         switch (proc) {
-            case "Blood Glucose":
+            case "Glucosa en sangre":
                 return (
                     <div className="group">
-                        <span>Results</span>
+                        <span>{this.context.translate('results')}</span>
                         <input type="text" name="pResult" value={this.props.pResult} onChange={this.props.changeInter('pResult')} />
                     </div>
                 );
-            case "Hemorrhage Control":
+            case "Control de hemorragia":
                 return (
                     <div>
                         <div className="group">
-                            <span>Type</span>
+                            <span>{this.context.translate('type')}</span>
                             <select name="pType" value={this.props.pType} onChange={this.props.changeInter('pType')}>
-                                <option disabled selected value="">-Select-</option>
-                                <option value="Direct pressure">Direct pressure</option>
-                                <option value="Elevation">Elevation</option>
-                                <option value="Pressure dressing">Pressure dressing</option>
-                                <option value="Pressure point">Pressure point</option>
-                                <option value="Hemostatic dressing">Hemostatic dressing</option>
-                                <option value="Tourniquet">Tourniquet</option>
+                                <option disabled selected value="">{this.context.translate('select')}</option>
+                                <option value="Presión directa">{this.context.translate('direct-press')}</option>
+                                <option value="Elevación">{this.context.translate('elevation')}</option>
+                                <option value="Apósito a presión">{this.context.translate('press-dress')}</option>
+                                <option value="Punto de presión">{this.context.translate('press-point')}</option>
+                                <option value="Aderezo hemostático">{this.context.translate('hemo-dress')}</option>
+                                <option value="Torniquete">{this.context.translate('tourniquet')}</option>
                             </select>
                         </div>
                         <div className="group">
-                            <span>Location</span>
+                            <span>{this.context.translate('location')}</span>
                             <select name="pLocation" value={this.props.pLocation} onChange={this.props.changeInter('pLocation')}>
-                                <option disabled selected value="">-Select-</option>
-                                <option value="Hand Left">Hand Left</option>
-                                <option value="Hand Right">Hand Right</option>
-                                <option value="Arm Left">Arm Left</option>
-                                <option value="Arm Right">Arm Right</option>
-                                <option value="Foot Left">Foot Left</option>
-                                <option value="Foot Right">Foot Right</option>
-                                <option value="Leg Left">Leg Left</option>
-                                <option value="Leg Right">Leg Right</option>
-                                <option value="Head">Head</option>
-                                <option value="Neck">Neck</option>
-                                <option value="Chest">Chest</option>
-                                <option value="Abdomen">Abdomen</option>
-                                <option value="Back">Back</option>
+                                <option disabled selected value="">{this.context.translate('select')}</option>
+                                <option value="Mano izquierda">{this.context.translate('hand-left')}</option>
+                                <option value="Mano derecha">{this.context.translate('hand-right')}</option>
+                                <option value="Brazo a la izquierda">{this.context.translate('arm-left')}</option>
+                                <option value="Brazo a la derecha">{this.context.translate('arm-right')}</option>
+                                <option value="Pie izquierdo">{this.context.translate('foot-left')}</option>
+                                <option value="Pie derecho">{this.context.translate('foot-right')}</option>
+                                <option value="Pierna izquierda">{this.context.translate('leg-left')}</option>
+                                <option value="Pierna derecha">{this.context.translate('leg-right')}</option>
+                                <option value="Cabeza">{this.context.translate('Head')}</option>
+                                <option value="Cuello">{this.context.translate('Neck')}</option>
+                                <option value="Pecho">{this.context.translate('Chest')}</option>
+                                <option value="Abdomen">{this.context.translate('Abdomen')}</option>
+                                <option value="Espalda">{this.context.translate('back')}</option>
                             </select>
                         </div>
                     </div>
                 );
-            case "Splinting":
+            case "Entablillado":
                 return (
                     <div>
                         <div className="group">
-                            <span>Type</span>
+                            <span>{this.context.translate('type')}</span>
                             <select name="pType" value={this.props.pType} onChange={this.props.changeInter('pType')}>
-                                <option disabled selected value="">-Select-</option>
-                                <option value="Standard">Standard</option>
-                                <option value="Sling">Sling</option>
-                                <option value="Traction">Traction</option>
+                                <option disabled selected value="">{this.context.translate('select')}</option>
+                                <option value="Estándar">{this.context.translate('standard')}</option>
+                                <option value="Cabestrillo">{this.context.translate('sling')}</option>
+                                <option value="Tracción">{this.context.translate('traction')}</option>
                             </select>
                         </div>
                         <div className="group">
-                            <span>Location</span>
+                            <span>{this.context.translate('location')}</span>
                             <select name="pLocation" value={this.props.pLocation} onChange={this.props.changeInter('pLocation')}>
-                                <option disabled selected value="">-Select-</option>
-                                <option value="Hand/Wrist Left">Hand/Wrist Left</option>
-                                <option value="Hand/Wrist Right">Hand/Wrist Right</option>
-                                <option value="Arm Left">Arm Left</option>
-                                <option value="Arm Right">Arm Right</option>
-                                <option value="Foot/Ankle Left">Foot/Ankle Left</option>
-                                <option value="Foot/Ankle Right">Foot/Ankle Right</option>
-                                <option value="Leg Left">Leg Left</option>
-                                <option value="Leg Right">Leg Right</option>
+                                <option disabled selected value="">{this.context.translate('select')}</option>
+                                <option value="Mano/Muñeca izquierda">{this.context.translate('Left-hand-/-wrist')}</option>
+                                <option value="Mano/Muñeca derecha">{this.context.translate('Right-hand-/-wrist')}</option>
+                                <option value="Brazo a la izquierda">{this.context.translate('arm-left')}</option>
+                                <option value="Brazo a la derecha">{this.context.translate('arm-right')}</option>
+                                <option value="Pie/Tobillo izquierdo">{this.context.translate('Left-ankle-/-foot')}</option>
+                                <option value="Pie/Tobillo derecho">{this.context.translate('Right-ankle-/-foot')}</option>
+                                <option value="Pierna izquierda">{this.context.translate('leg-left')}</option>
+                                <option value="Pierna derecha">{this.context.translate('leg-right')}</option>
                             </select>
                         </div>
                     </div>
                 );
-            case "Oxygen":
+            case "Oxígeno":
                 return (
                     <div>
                         <div className="group">
-                            <span>Delivery</span>
+                            <span>{this.context.translate('delivery')}</span>
                             <select name="pDelivery" value={this.props.pDelivery} onChange={this.props.changeInter('pDelivery')}>
-                                <option disabled selected value="">-Select-</option>
-                                <option value="Nasal cannula">Nasal cannula</option>
-                                <option value="Face mask">Face mask</option>
-                                <option value="Non-rebreather mask">Non-rebreather mask</option>
+                                <option disabled selected value="">{this.context.translate('select')}</option>
+                                <option value="Mangera nasal">{this.context.translate('nasal-cannula')}</option>
+                                <option value="Mascarilla">{this.context.translate('face-mask')}</option>
+                                <option value="Máscara de no respirar">{this.context.translate('non-rebreather')}</option>
                                 <option value="BVM/LMA/ETT">BVM/LMA/ETT</option>
                             </select>
                         </div>
                         <div className="group">
-                            <span>Amount</span>
+                            <span>{this.context.translate('amount')}</span>
                             <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pAmount" value={this.props.pAmount} maxlength="2" min="1" max="15" onChange={this.props.changeInter('pAmount')} /> L/min
                         </div>
                     </div>
                 );
-            case "Spinal Precautions":
+            case "Precauciones de la columna vertebral":
                 return (
                     <div className="group">
-                        <span>Type</span>
+                        <span>{this.context.translate('type')}</span>
                         <select name="pType" value={this.props.pType} onChange={this.props.changeInter('pType')}>
-                            <option disabled selected value="">-Select-</option>
-                            <option value="C-Collar">C-Collar</option>
-                            <option value="Backboard">Backboard</option>
-                            <option value="Straps">Straps</option>
+                            <option disabled selected value="">{this.context.translate('select')}</option>
+                            <option value="C-Cuello">{this.context.translate('c-collar')}</option>
+                            <option value="Tablero">{this.context.translate('backboard')}</option>
+                            <option value="Correas">{this.context.translate('straps')}</option>
                         </select>
                     </div>
                 );
-            case "Suction":
+            case "Succión":
                 return (
                     <div className="group">
-                        <span>Location</span>
+                        <span>{this.context.translate('location')}</span>
                         <select name="pLocation" value={this.props.pLocation} onChange={this.props.changeInter('pLocation')}>
-                            <option disabled selected value="">-Select-</option>
-                            <option value="Mouth">Mouth</option>
+                            <option disabled selected value="">{this.context.translate('select')}</option>
+                            <option value="Boca">{this.context.translate('mouth')}</option>
                             <option value="Nasal">Nasal</option>
                         </select>
                     </div>
                 );
-            case "Basic Airway - BVM":
+            case "Vía aérea básica - BVM":
                 return (
                     <div className="group">
-                        <span>Adjuncts</span>
+                        <span>{this.context.translate('adjuncts')}</span>
                         <div style={{ width: '245px' }}>
-                            <label><input type="checkbox" name="pAdjuncts" value="None" onChange={this.props.handleCheck("pAdjuncts")} /> None</label>
+                            <label><input type="checkbox" name="pAdjuncts" value="Ninguno" onChange={this.props.handleCheck("pAdjuncts")} /> {this.context.translate('none')}</label>
                             <label><input type="checkbox" name="pAdjuncts" value="OPA" onChange={this.props.handleCheck("pAdjuncts")} /> OPA</label>
                             <label><input type="checkbox" name="pAdjuncts" value="NPA" onChange={this.props.handleCheck("pAdjuncts")} /> NPA</label>
                         </div>
                     </div>
                 );
-            case "MD Consult":
+            case "MD Consultar":
                 return (
                     <div>
                         <div className="group">
-                            <span>Physician</span>
+                            <span>{this.context.translate('physician')}</span>
                             <input type="text" name="pPhysician" value={this.props.pPhysician} onChange={this.props.changeInter('pPhysician')} />
                         </div>
                         <div className="group">
-                            <span>Orders</span>
+                            <span>{this.context.translate('orders')}</span>
                             <textarea name="pOrders" value={this.props.pOrders} onChange={this.props.changeInter('pOrders')} />
                         </div>
                     </div>
                 );
-            case "IV":
+            case "Intravenosa":
                 return (
                     <div>
                         <div className="group">
-                            <span>Size</span>
+                            <span>{this.context.translate('size')}</span>
                             <select name="pSize" value={this.props.pSize} onChange={this.props.changeInter('pSize')}>
-                                <option disabled selected value="">-Select-</option>
+                                <option disabled selected value="">{this.context.translate('select')}</option>
                                 <option value="14 ga">14 ga</option>
                                 <option value="16 ga">16 ga</option>
                                 <option value="18 ga">18 ga</option>
@@ -212,22 +212,22 @@ export default class Popup extends Component {
                             </select>
                         </div>
                         <div className="group">
-                            <span>Location</span>
+                            <span>{this.context.translate('location')}</span>
                             <select name="pLocation" value={this.props.pLocation} onChange={this.props.changeInter('pLocation')}>
-                                <option disabled selected value="">-Select-</option>
-                                <option value="Antecubital Left">Antecubital Left</option>
-                                <option value="Antecubital Right">Antecubital Right</option>
-                                <option value="Hand Left">Hand Left</option>
-                                <option value="Hand Right">Hand Right</option>
-                                <option value="Forearm Left">Forearm Left</option>
-                                <option value="Forearm Right">Forearm Right</option>
-                                <option value="Foot Left">Foot Left</option>
-                                <option value="Foot Right">Foot Right</option>
-                                <option value="Other">Other</option>
+                                <option disabled selected value="">{this.context.translate('select')}</option>
+                                <option value="Antecubital Left">{this.context.translate('antecubital-left')}</option>
+                                <option value="Antecubital Right">{this.context.translate('antecubital-right')}</option>
+                                <option value="Hand Left">{this.context.translate('hand-left')}</option>
+                                <option value="Hand Right">{this.context.translate('hand-right')}</option>
+                                <option value="Forearm Left">{this.context.translate('forearm-left')}</option>
+                                <option value="Forearm Right">{this.context.translate('forearm-right')}</option>
+                                <option value="Foot Left">{this.context.translate('foot-left')}</option>
+                                <option value="Foot Right">{this.context.translate('foot-right')}</option>
+                                <option value="Other">{this.context.translate('other')}</option>
                             </select>
                         </div>
                         <div className="group" onChange={this.props.changeInter('pFluid')}>
-                            <span>Fluid</span>
+                            <span>{this.context.translate('fluid')}</span>
                             <div style={{ margin: '7px' }}>
                                 <label className="v2"><input type="radio" name="pFluid" value="NS" defaultChecked /> NS</label>
                                 <label className="v2"><input type="radio" name="pFluid" value="LR" /> LR</label>
@@ -236,30 +236,30 @@ export default class Popup extends Component {
                         </div>
                     </div>
                 );
-            case "IO IV":
+            case "IO Intravenosa":
                 return (
                     <div>
                         <div className="group">
-                            <span>Size</span>
+                            <span>{this.context.translate('size')}</span>
                             <select name="pSize" value={this.props.pSize} onChange={this.props.changeInter('pSize')}>
-                                <option disabled selected value="">-Select-</option>
-                                <option value="Blue adult">Blue adult</option>
-                                <option value="Pink pediatric">Pink pediatric</option>
-                                <option value="Yellow large">Yellow large</option>
+                                <option disabled selected value="">{this.context.translate('select')}</option>
+                                <option value="Adulto azul">{this.context.translate('blue-adult')}</option>
+                                <option value="Rosa pediátrico">{this.context.translate('pink-pediatric')}</option>
+                                <option value="Amarillo grande">{this.context.translate('yellow-large')}</option>
                             </select>
                         </div>
                         <div className="group">
                             <span>Location</span>
                             <select name="pLocation" value={this.props.pLocation} onChange={this.props.changeInter('pLocation')}>
-                                <option disabled selected value="">-Select-</option>
-                                <option value="Tibia Left">Tibia Left</option>
-                                <option value="Tibia Right">Tibia Right</option>
-                                <option value="Humeral Head Left">Humeral Head Left</option>
-                                <option value="Humeral Head Right">Humeral Head Right</option>
+                                <option disabled selected value="">{this.context.translate('select')}</option>
+                                <option value="Tibia izquierda">{this.context.translate('tibia-left')}</option>
+                                <option value="Tibia derecha">{this.context.translate('tibia-right')}</option>
+                                <option value="Cabeza humeral izquierda">{this.context.translate('humeral-left')}</option>
+                                <option value="Cabeza humeral derecha">{this.context.translate('humeral-right')}</option>
                             </select>
                         </div>
                         <div className="group" onChange={this.props.changeInter('pFluid')}>
-                            <span>Fluid</span>
+                            <span>{this.context.translate('fluid')}</span>
                             <div style={{ margin: '7px' }}>
                                 <label className="v2"><input type="radio" name="pFluid" value="NS" defaultChecked /> NS</label>
                                 <label className="v2"><input type="radio" name="pFluid" value="LR" /> LR</label>
@@ -268,44 +268,44 @@ export default class Popup extends Component {
                         </div>
                     </div>
                 );
-            case "Pleural Decompression":
+            case "Descompresión pleural":
                 return (
                     <div>
                         <div className="group">
-                            <span>Needle size</span>
+                            <span>{this.context.translate('needle-size')}</span>
                             <select name="pNeedle" value={this.props.pNeedle} onChange={this.props.changeInter('pNeedle')}>
-                                <option disabled selected value="">-Select-</option>
+                                <option disabled selected value="">{this.context.translate('select')}</option>
                                 <option value="14 ga">14 ga</option>
                                 <option value="18 ga">18 ga</option>
                                 <option value="20 ga">20 ga</option>
                             </select>
                         </div>
                         <div className="group">
-                            <span>Location</span>
+                            <span>{this.context.translate('location')}</span>
                             <select name="pLocation" value={this.props.pLocation} onChange={this.props.changeInter('pLocation')}>
-                                <option disabled selected value="">-Select-</option>
-                                <option value="Left anterior chest">Left anterior chest</option>
-                                <option value="Right anterior chest">Right anterior chest</option>
-                                <option value="Left lateral chest">Left lateral chest</option>
-                                <option value="Right lateral chest">Right lateral chest</option>
+                                <option disabled selected value="">{this.context.translate('select')}</option>
+                                <option value="Pecho anterior izquierdo">{this.context.translate('ant-chest-left')}</option>
+                                <option value="Pecho anterior derecho">{this.context.translate('ant-chest-right')}</option>
+                                <option value="Pecho lateral izquierdo">{this.context.translate('lat-chest-left')}</option>
+                                <option value="Pecho lateral derecho">{this.context.translate('lat-chest-right')}</option>
                             </select>
                         </div>
                     </div>
                 );
-            case "Advanced Airway - LMA":
+            case "Vía aérea avanzada - LMA":
                 return (
                     <div className="group">
-                        <span>Size</span>
+                        <span>{this.context.translate('size')}</span>
                         <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pSize" value={this.props.pSize} maxlength="1" min="0" max="5" onChange={this.props.changeInter('pSize')} />
                     </div>
                 );
-            case "Advanced Airway - Intubation":
+            case "Vía aérea avanzada - Intubación":
                 return (
                     <div>
                         <div className="group">
-                            <span>Tube size</span>
+                            <span>{this.context.translate('tube-size')}</span>
                             <select name="pTube" value={this.props.pTube} onChange={this.props.changeInter('pTube')}>
-                                <option disabled selected value="">-Select-</option>
+                                <option disabled selected value="">{this.context.translate('select')}</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                                 <option value="4.5">4.5</option>
@@ -320,34 +320,34 @@ export default class Popup extends Component {
                             </select>
                         </div>
                         <div className="group">
-                            <span>Depth at Teeth</span>
+                            <span>{this.context.translate('depth-teeth')}</span>
                             <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pTeeth" value={this.props.pTeeth} maxlength="2" min="0" max="99" onChange={this.props.changeInter('pTeeth')} /> cm
                         </div>
                         <div className="group">
-                            <span>Confirmation</span>
+                            <span>{this.context.translate('confirmation')}</span>
                             <div style={{ width: '245px' }}>
-                                <label><input type="checkbox" name="pConfirm" value="Chest rise" onChange={this.props.handleCheck("pConfirm")} /> Chest rise</label>
-                                <label><input type="checkbox" name="pConfirm" value="Even breath sounds" onChange={this.props.handleCheck("pConfirm")} /> Equal breath sounds</label>
-                                <label><input type="checkbox" name="pConfirm" value="Vapor in tube" onChange={this.props.handleCheck("pConfirm")} /> Vapor in tube</label>
-                                <label><input type="checkbox" name="pConfirm" value="Bulb Suction" onChange={this.props.handleCheck("pConfirm")} /> Bulb Suction</label>
+                                <label><input type="checkbox" name="pConfirm" value="Aumento del pecho" onChange={this.props.handleCheck("pConfirm")} /> {this.context.translate('chest-rise')}</label>
+                                <label><input type="checkbox" name="pConfirm" value="Sonidos de respiración iguales" onChange={this.props.handleCheck("pConfirm")} /> {this.context.translate('equal-breath')}</label>
+                                <label><input type="checkbox" name="pConfirm" value="Vapor en tubo" onChange={this.props.handleCheck("pConfirm")} /> {this.context.translate('vapor-tube')}</label>
+                                <label><input type="checkbox" name="pConfirm" value="Succión de bombilla" onChange={this.props.handleCheck("pConfirm")} /> {this.context.translate('bulb-suction')}</label>
                                 <label><input type="checkbox" name="pConfirm" value="EasyCap" onChange={this.props.handleCheck("pConfirm")} /> EasyCap</label>
                                 <label><input type="checkbox" name="pConfirm" value="ETCO2" onChange={this.props.handleCheck("pConfirm")} /> ETCO2</label>
                             </div>
                         </div>
                     </div>
                 );
-            case "Cricothyrotomy":
+            case "Cricotirotomía":
                 return (
                     <div>
                         <div className="group">
-                            <span>Surgical</span>
-                            <input type="checkbox" style={{ margin: '13px 0' }} name="surgical" value={this.state.surgicalcheck} onClick={this.showSomething("surgical")} />
+                            <span>{this.context.translate('surgical')}</span>
+                            <input type="checkbox" style={{ margin: '13px 0' }} name="surgical" value={this.state.surgicalcheck} onChange={this.showSomething("surgical")} />
                         </div>
                         {this.state.surgicalcheck ?
                             <div className="group">
-                                <span>Tube size</span>
+                                <span>{this.context.translate('tube-size')}</span>
                                 <select name="pTube" value={this.props.pTube} onChange={this.props.changeInter('pTube')}>
-                                    <option disabled selected value="">-Select-</option>
+                                    <option disabled selected value="">{this.context.translate('select')}</option>
                                     <option value="4">4</option>
                                     <option value="4.5">4.5</option>
                                     <option value="5">5</option>
@@ -358,14 +358,14 @@ export default class Popup extends Component {
                             </div>
                             : null}
                         <div className="group">
-                            <span>Needle</span>
-                            <input type="checkbox" style={{ margin: '13px 0' }} name="needle" value={this.state.needlecheck} onClick={this.showSomething("needle")} />
+                            <span>{this.context.translate('needle')}</span>
+                            <input type="checkbox" style={{ margin: '13px 0' }} name="needle" value={this.state.needlecheck} onChange={this.showSomething("needle")} />
                         </div>
                         {this.state.needlecheck ?
                             <div className="group">
-                                <span>Needle size</span>
+                                <span>{this.context.translate('needle-size')}</span>
                                 <select name="pNeedle" value={this.props.pNeedle} onChange={this.props.changeInter('pNeedle')}>
-                                    <option disabled selected value="">-Select-</option>
+                                    <option disabled selected value="">{this.context.translate('select')}</option>
                                     <option value="14 ga">14 ga</option>
                                     <option value="18 ga">18 ga</option>
                                     <option value="20 ga">20 ga</option>
@@ -378,19 +378,19 @@ export default class Popup extends Component {
                 return (
                     <div>
                         <div className="group">
-                            <span>Rhythm</span>
+                            <span>{this.context.translate('rhythm')}</span>
                             <select name="pRhythm" value={this.props.pRhythm} onChange={this.props.changeInter('pRhythm')}>
-                                <option disabled selected value="">-Select-</option>
-                                <option value="Sinus rhythm">Sinus rhythm</option>
-                                <option value="A-Flutter">A-Flutter</option>
-                                <option value="A-Fibrillation">A-Fibrillation</option>
-                                <option value="1st degree block">1st degree block</option>
-                                <option value="2nd degree block">2nd degree block</option>
-                                <option value="3rd degree block">3rd degree block</option>
+                                <option disabled selected value="">{this.context.translate('select')}</option>
+                                <option value="Ritmo sinusal">{this.context.translate('sinus-rhythm')}</option>
+                                <option value="A-Aleteo">{this.context.translate('a-flutter')}</option>
+                                <option value="A-Fibrilación">{this.context.translate('a-fibrillation')}</option>
+                                <option value="1st bloque de grado">{this.context.translate('1-degree-block')}</option>
+                                <option value="2nd bloque de grado">{this.context.translate('2-degree-block')}</option>
+                                <option value="3rd bloque de grado">{this.context.translate('3-degree-block')}</option>
                             </select>
                         </div>
                         <div className="group">
-                            <span>Findings</span>
+                            <span>{this.context.translate('findings')}</span>
                             <div style={{ width: '245px' }}>
                                 <label><input type="checkbox" name="pFindings" value="Normal" onChange={this.props.handleCheck("pFindings")} /> Normal</label>
                                 <label><input type="checkbox" name="pFindings" value="Inferior MI" onChange={this.props.handleCheck("pFindings")} /> Inferior MI</label>
@@ -403,81 +403,81 @@ export default class Popup extends Component {
                         </div>
                     </div>
                 );
-            case "Cardiac Defib - AED":
+            case "Defib cardíaco - AED":
                 return (
                     <div className="group" onChange={this.props.changeInter('pEffective')}>
-                        <span>Effective</span>
+                        <span>{this.context.translate('effective')}</span>
                         <div style={{ margin: '7px' }}>
-                            <label className="v2"><input type="radio" name="pEffective" value="Yes" defaultChecked /> Yes</label>
+                            <label className="v2"><input type="radio" name="pEffective" value="Sí" defaultChecked /> {this.context.translate('yes')}</label>
                             <label className="v2"><input type="radio" name="pEffective" value="No" /> No</label>
                         </div>
                     </div>
                 );
-            case "Cardiac Defib - Manual":
+            case "Defib cardíaco - Manual":
                 return (
                     <div>
                         <div className="group">
-                            <span>Rhythm</span>
+                            <span>{this.context.translate('rhythm')}</span>
                             <select name="pRhythm" value={this.props.pRhythm} onChange={this.props.changeInter('pRhythm')}>
-                                <option disabled selected value="">-Select-</option>
+                                <option disabled selected value="">{this.context.translate('select')}</option>
                                 <option value="V-Tach">V-Tach</option>
                                 <option value="V-Fib">V-Fib</option>
                                 <option value="SVT">SVT</option>
                             </select>
                         </div>
                         <div className="group" onChange={this.props.changeInter('pMode')}>
-                            <span>Mode</span>
+                            <span>{this.context.translate('mode')}</span>
                             <div style={{ margin: '7px' }}>
-                                <label className="v2"><input type="radio" name="pMode" value="Synchronized" defaultChecked /> Synchronized</label>
-                                <label className="v2"><input type="radio" name="pMode" value="Unsynchronized" /> Unsynchronized</label>
+                                <label className="v2"><input type="radio" name="pMode" value="Sincronizado" defaultChecked /> {this.context.translate('synchronized')}</label>
+                                <label className="v2"><input type="radio" name="pMode" value="Sin sincronizar" /> {this.context.translate('unsynchronized')}</label>
                             </div>
                         </div>
                         <div className="group">
-                            <span>Energy</span>
+                            <span>{this.context.translate('energy')}</span>
                             <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pEnergy" value={this.props.pEnergy} maxlength="3" min="0" max="999" onChange={this.props.changeInter('pEnergy')} /> jules
                         </div>
                         <div className="group">
-                            <span>Converted to</span>
+                            <span>{this.context.translate('converted')}</span>
                             <select name="pConverted" value={this.props.pConverted} onChange={this.props.changeInter('pConverted')}>
-                                <option disabled selected value="">-Select-</option>
-                                <option value="Sinus rhythm">Sinus rhythm</option>
+                                <option disabled selected value="">{this.context.translate('select')}</option>
+                                <option value="Ritmo sinusal">{this.context.translate('sinus-rhythm')}</option>
                                 <option value="V-Tach">V-Tach</option>
                                 <option value="V-Fib">V-Fib</option>
-                                <option value="Asystole">Asystole</option>
-                                <option value="No conversion">No conversion</option>
+                                <option value="Asistolia">{this.context.translate('asystole')}</option>
+                                <option value="Sin conversión">{this.context.translate('no-convert')}</option>
                             </select>
                         </div>
                     </div>
                 );
-            case "Cardiac Pacing":
+            case "Ritmo cardíaco":
                 return (
                     <div>
                         <div className="group" onChange={this.props.changeInter('pMode')}>
-                            <span>Mode</span>
+                            <span>{this.context.translate('mode')}</span>
                             <div style={{ margin: '7px' }}>
-                                <label className="v2"><input type="radio" name="pMode" value="Fixed" defaultChecked /> Fixed</label>
-                                <label className="v2"><input type="radio" name="pMode" value="Demand" /> Demand</label>
+                                <label className="v2"><input type="radio" name="pMode" value="Fijo" defaultChecked /> {this.context.translate('fixed')}</label>
+                                <label className="v2"><input type="radio" name="pMode" value="Demanda" /> {this.context.translate('demanda')}</label>
                             </div>
                         </div>
                         <div className="group">
-                            <span>Rate</span>
+                            <span>{this.context.translate('rate')}</span>
                             <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pRate" value={this.props.pRate} maxlength="3" min="0" max="999" onChange={this.props.changeInter('pRate')} />
                         </div>
                         <div className="group">
-                            <span>mA Output</span>
+                            <span>{this.context.translate('ma-output')}</span>
                             <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pOutput" value={this.props.pOutput} maxlength="3" min="0" max="999" onChange={this.props.changeInter('pOutput')} />
                         </div>
                         <div className="group" onChange={this.props.changeInter('pCapture')}>
-                            <span>Capture</span>
+                            <span>{this.context.translate('capture')}</span>
                             <div style={{ margin: '7px' }}>
-                                <label className="v2"><input type="radio" name="pCapture" value="Yes" defaultChecked /> Yes</label>
+                                <label className="v2"><input type="radio" name="pCapture" value="Sí" defaultChecked /> {this.context.translate('yes')}</label>
                                 <label className="v2"><input type="radio" name="pCapture" value="No" /> No</label>
                             </div>
                         </div>
                         <div className="group" onChange={this.props.changeInter('pPulseCapture')}>
-                            <span>Pulse with capture</span>
+                            <span>{this.context.translate('pulse-capture')}</span>
                             <div style={{ margin: '7px' }}>
-                                <label className="v2"><input type="radio" name="pPulseCapture" value="Yes" defaultChecked /> Yes</label>
+                                <label className="v2"><input type="radio" name="pPulseCapture" value="Sí" defaultChecked /> {this.context.translate('yes')}</label>
                                 <label className="v2"><input type="radio" name="pPulseCapture" value="No" /> No</label>
                             </div>
                         </div>
@@ -513,62 +513,63 @@ export default class Popup extends Component {
                 id={this.state.patients[i].id}
                 index={i}
                 select={this.selectPatient}
+                selectText={this.context.translate('select1')}
             />)
             var pat = this.state.patients[i].id + "," + this.state.patients[i]["fname"] + "," + this.state.patients[i]["lname"] + "," + this.state.patients[i]["birth"] + "," + this.state.patients[i]["gender"] + ",;";
             this.state.patientList.push(pat);
         }
         return (
             <div>
-                {this.props.text.includes("Patient") ?
+                {this.props.text.includes("patient") ?
                     <div className="popup shadow psearch">
                         <h2>{this.props.text}</h2>
                         <div style={{ height: '282px', overflow: 'auto' }}>
                             <table className="treatment" style={{ marginBottom: '0' }}>
                                 <tr>
-                                    <th>Last name</th>
-                                    <th>First name</th>
-                                    <th>Date of birth</th>
-                                    <th width="100px">Action</th>
+                                    <th>{this.context.translate('fname')}</th>
+                                    <th>{this.context.translate('lname')}</th>
+                                    <th>{this.context.translate('pbirth')}</th>
+                                    <th width="100px">{this.context.translate('action')}</th>
                                 </tr>
                                 {patientComponents}
                             </table>
                         </div>
                     </div>
                     : <div className="popup shadow">
-                        <h2>{this.props.text}</h2>
-                        {this.props.text.includes("Procedure") ?
+                        <h2>{this.context.translate(this.props.text)}</h2>
+                        {this.props.text.includes("proc") ?
                             <form>
                                 <Row>
                                     <Col>
                                         <div className="group">
-                                            <span>Procedure</span>
+                                            <span>{this.context.translate('procedure')}</span>
                                             <select className="multiple" name="pName" style={{ height: '150px' }} onChange={this.props.changeInter('pName')} multiple>
-                                                <option value="Blood Glucose">Blood Glucose</option>
-                                                <option value="Hemorrhage Control">Hemorrhage Control</option>
-                                                <option value="Splinting">Splinting</option>
-                                                <option value="Oxygen">Oxygen</option>
-                                                <option value="Spinal Precautions">Spinal Precautions</option>
-                                                <option value="Pelvic Binder">Pelvic Binder</option>
-                                                <option value="Suction">Suction</option>
-                                                <option value="Basic Airway - BVM">Basic Airway - BVM</option>
-                                                <option value="MD Consult">MD Consult</option>
-                                                <option value="IV">IV</option>
-                                                <option value="IO IV">IO IV</option>
-                                                <option value="Pleural Decompression">Pleural Decompression</option>
-                                                <option value="Advanced Airway - LMA">Advanced Airway - LMA</option>
-                                                <option value="Advanced Airway - Intubation">Advanced Airway - Intubation</option>
-                                                <option value="Cricothyrotomy">Cricothyrotomy</option>
+                                                <option value="Glucosa en sangre">{this.context.translate('blood_glucose')}</option>
+                                                <option value="Control de hemorragia">{this.context.translate('hemo_control')}</option>
+                                                <option value="Entablillado">{this.context.translate('splinting')}</option>
+                                                <option value="Oxígeno">{this.context.translate('oxygen')}</option>
+                                                <option value="Precauciones de la columna vertebral">{this.context.translate('spinal_precaution')}</option>
+                                                <option value="Aglutinante pélvic">{this.context.translate('pelvic_binder')}</option>
+                                                <option value="Succión">{this.context.translate('suction')}</option>
+                                                <option value="Vía aérea básica - BVM">{this.context.translate('airway_bvm')}</option>
+                                                <option value="MD Consultar">{this.context.translate('md_consult')}</option>
+                                                <option value="Intravenosa">{this.context.translate('iv')}</option>
+                                                <option value="IO Intravenosa">{this.context.translate('io_iv')}</option>
+                                                <option value="Descompresión pleural">{this.context.translate('pleural_decomp')}</option>
+                                                <option value="Vía aérea avanzada - LMA">{this.context.translate('airway_lma')}</option>
+                                                <option value="Vía aérea avanzada - Intubación">{this.context.translate('airway_intub')}</option>
+                                                <option value="Cricotirotomía">{this.context.translate('crico')}</option>
                                                 <option value="12 Lead EKG">12 Lead EKG</option>
-                                                <option value="Cardiac Arrest">Cardiac Arrest</option>
-                                                <option value="Cardiac Defib - AED">Cardiac Defib - AED</option>
-                                                <option value="Cardiac Defib - Manual">Cardiac Defib - Manual</option>
-                                                <option value="Cardiac Pacing">Cardiac Pacing</option>
+                                                <option value="Paro cardíaco">{this.context.translate('cardiac_arrest')}</option>
+                                                <option value="Defib cardíaco - AED">{this.context.translate('cardiac_aed')}</option>
+                                                <option value="Defib cardíaco - Manual">{this.context.translate('cardiac_manual')}</option>
+                                                <option value="Ritmo cardíaco">{this.context.translate('cardiac_pacing')}</option>
                                             </select>
                                         </div>
-                                        {inter.pName === "Cardiac Arrest" ?
+                                        {inter.pName === "Paro cardíaco" ?
                                             <div>
                                                 <div>
-                                                    <span>Time of arrest</span>
+                                                    <span>{this.context.translate('time-arrest')}</span>
                                                     <DatePicker
                                                         selected={inter.pTimeDisplay ? inter.pTimeDisplay : false}
                                                         placeholderText="dd/mm/yyyy --:-- --"
@@ -579,7 +580,7 @@ export default class Popup extends Component {
                                                     />
                                                 </div>
                                                 <div>
-                                                    <span>Start time CPR</span>
+                                                    <span>{this.context.translate('cpr-start')}</span>
                                                     <DatePicker
                                                         selected={inter.pCPRstartDisplay ? inter.pCPRstartDisplay : false}
                                                         placeholderText="dd/mm/yyyy --:-- --"
@@ -590,7 +591,7 @@ export default class Popup extends Component {
                                                     />
                                                 </div>
                                                 <div>
-                                                    <span>Stop time CPR</span>
+                                                    <span>{this.context.translate('cpr-stop')}</span>
                                                     <DatePicker
                                                         selected={inter.pCPRstopDisplay ? inter.pCPRstopDisplay : false}
                                                         placeholderText="dd/mm/yyyy --:-- --"
@@ -601,21 +602,25 @@ export default class Popup extends Component {
                                                     />
                                                 </div>
                                                 <div className="group">
-                                                    <span>Outcome</span>
+                                                    <span>{this.context.translate('outcome')}</span>
                                                     <select name="pOutcome" value={inter.pOutcome} onChange={this.props.changeInter('pOutcome')}>
-                                                        <option disabled selected value="">-Select-</option>
-                                                        <option value="Pulse return">Pulse return</option>
-                                                        <option value="Expired">Expired</option>
+                                                        <option disabled selected value="">{this.context.translate('select')}</option>
+                                                        <option value="Retorno de pulso">{this.context.translate('pulse-return')}</option>
+                                                        <option value="Muerto">{this.context.translate('expired')}</option>
                                                     </select>
                                                 </div>
                                                 <div className="group">
-                                                    <span>CPR done by</span>
-                                                    <input type="text" value="John Doe" disabled />
+                                                    <span>{this.context.translate('cpr-by')}</span>
+                                                    <select name="pCPRby" value={this.props.pConverted} onChange={this.props.changeInter('pCPRby')}>
+                                                        <option disabled selected value="">{this.context.translate('select')}</option>
+                                                        <option value="Espectador">{this.context.translate('bystander')}</option>
+                                                        <option value="Personal médico">{this.context.translate('med-personnel')}</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             : <div>
                                                 <div>
-                                                    <span>Time</span>
+                                                    <span>{this.context.translate('Time')}</span>
                                                     <DatePicker
                                                         selected={inter.pTimeDisplay ? inter.pTimeDisplay : false}
                                                         placeholderText="dd/mm/yyyy --:-- --"
@@ -627,12 +632,11 @@ export default class Popup extends Component {
                                                 </div>
                                                 {this.renderProc(inter.pName)}
                                                 <div className="group">
-                                                    <span>Crew</span>
+                                                    <span>{this.context.translate('by')}</span>
                                                     <input type="text" value="John Doe" disabled />
                                                 </div>
                                             </div>}
-                                        <small>Note: Crew member name should be selected from current user's information.</small><br />
-                                        <small style={{ color: 'red' }}>{inter.message}</small>
+                                        <small style={{ color: 'red' }}>{this.context.translate(inter.message)}</small>
                                         <div className="bottom">
                                             <input type="button" className="left" value="Add" onClick={this.props.submitProcedure} />
                                             <input type="button" className="right" value="Cancel" onClick={this.props.closePopup} />
@@ -641,12 +645,12 @@ export default class Popup extends Component {
                                 </Row>
                             </form>
                             : null}
-                        {this.props.text.includes("Medication") ?
+                        {this.props.text.includes("med") ?
                             <form>
                                 <Row>
                                     <Col>
                                         <div className="group">
-                                            <span>Medication</span>
+                                            <span>{this.context.translate('medication')}</span>
                                             <select className="multiple" name="mName" style={{ height: '150px' }} onChange={this.props.changeInter('mName')} multiple>
                                                 <option value="Nitroglycerine">Nitroglycerine</option>
                                                 <option value="Ondansetron">Ondansetron</option>
@@ -657,7 +661,7 @@ export default class Popup extends Component {
                                             </select>
                                         </div>
                                         <div>
-                                            <span>Time</span>
+                                            <span>{this.context.translate('Time')}</span>
                                             {/*<input type="datetime-local" name="mTime" value={inter.mTime} onChange={this.props.changeInter('mTime')} />*/}
                                             <DatePicker
                                                 selected={inter.mTimeDisplay ? inter.mTimeDisplay : false}
@@ -669,10 +673,10 @@ export default class Popup extends Component {
                                             />
                                         </div>
                                         <div className="group">
-                                            <span>Dosage</span>
+                                            <span>{this.context.translate('dosage')}</span>
                                             <input type="number" style={{ width: '27%', marginRight: '10px' }} min="0" name="mDosage" value={inter.mDosage} onChange={this.props.changeInter('mDosage')} />
                                             <select name="mUnit" style={{ width: '32%' }} onChange={this.props.changeInter('mUnit')}>
-                                                <option disabled selected value="">-Select-</option>
+                                                <option disabled selected value="">{this.context.translate('select')}</option>
                                                 <option value="GMS">GMS</option>
                                                 <option value="in.">Inches (in.)</option>
                                                 <option value="L">Liters (L)</option>
@@ -681,27 +685,26 @@ export default class Popup extends Component {
                                             </select>
                                         </div>
                                         <div className="group">
-                                            <span>Route</span>
+                                            <span>{this.context.translate('route')}</span>
                                             <select name="mRoute" onChange={this.props.changeInter('mRoute')}>
-                                                <option disabled selected value="">-Select-</option>
+                                                <option disabled selected value="">{this.context.translate('select')}</option>
                                                 <option value="Oral">Oral</option>
                                                 <option value="IM">IM</option>
                                                 <option value="IV">IV</option>
                                                 <option value="Nasal">Nasal</option>
-                                                <option value="Inhaled">Inhaled</option>
-                                                <option value="Topical">Topical</option>
+                                                <option value="Inhalar">{this.context.translate('inhaled')}</option>
+                                                <option value="Tópico">{this.context.translate('topical')}</option>
                                                 <option value="Sublingual">Sublingual</option>
-                                                <option value="Ophthalmic">Ophthalmic</option>
-                                                <option value="Otic">Otic</option>
+                                                <option value="Oftálmico">{this.context.translate('ophthalmic')}</option>
+                                                <option value="Oidos">{this.context.translate('otic')}</option>
                                                 <option value="Rectal">Rectal</option>
                                             </select>
                                         </div>
                                         <div className="group">
-                                            <span>Crew</span>
+                                            <span>{this.context.translate('by')}</span>
                                             <input type="text" value="John Doe" disabled />
                                         </div>
-                                        <small>Note: Crew member name should be selected from current user's information.</small><br />
-                                        <small style={{ color: 'red' }}>{inter.message}</small>
+                                        <small style={{ color: 'red' }}>{this.context.translate(inter.message)}</small>
                                         <div className="bottom">
                                             <input type="button" className="left" value="Add" onClick={this.props.submitMedication} />
                                             <input type="button" className="right" value="Cancel" onClick={this.props.closePopup} />

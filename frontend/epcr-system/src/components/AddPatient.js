@@ -51,9 +51,8 @@ export default class AddPatient extends Component {
             <div className="chart">
                 <form id="patient">
                     <h2>{this.context.translate('patient-info')}</h2>
-                    <div style={{ textAlign: 'center' }}><input type="button" value="Previous Patient Search" onClick={this.toggleSearch} /></div>
-                    {/*<Button onClick={this.toggleSearch}>Previous Patient Search</Button>*/}
-                    {this.state.showPop ? <Popup text="Search Patient" closePopup={this.togglePop} selectPatient={this.selectPatient} /> : null}
+                    <div style={{ textAlign: 'center' }}><input type="button" value={this.context.translate('prev-patient-search')} onClick={this.toggleSearch} /></div>
+                    {this.state.showPop ? <Popup text="patient-search" closePopup={this.togglePop} selectPatient={this.selectPatient} /> : null}
                     <h3>{this.context.translate('patient-info')}</h3>
                     <table className="cform">
                         <tr>
@@ -172,9 +171,9 @@ export default class AddPatient extends Component {
                             <th>{this.context.translate('given-by')}</th>
                             <td>
                                 <div style={{ margin: '5px' }}>
-                                    <label className="v2"><input type="checkbox" name="historyGiven" value="Paciente" checked={values.assessmentCheckBoxes[274]} onChange={this.props.handleAssessmentCheckboxes(274)} />{this.context.translate('patient')}</label>
-                                    <label className="v2"><input type="checkbox" name="historyGiven" value="Familia" checked={values.assessmentCheckBoxes[275]} onChange={this.props.handleAssessmentCheckboxes(275)} />{this.context.translate('family')}</label>
-                                    <label className="v2"><input type="checkbox" name="historyGiven" value="Otro" checked={values.assessmentCheckBoxes[276]} onChange={this.props.handleAssessmentCheckboxes(276)} />{this.context.translate('other')}</label>
+                                    <label className="v2"><input type="checkbox" name="historyGiven" value="Paciente" checked={values.assessmentCheckBoxes[274]} onChange={this.props.handleAssessmentCheckboxes(274)} /> {this.context.translate('patient')}</label>
+                                    <label className="v2"><input type="checkbox" name="historyGiven" value="Familia" checked={values.assessmentCheckBoxes[275]} onChange={this.props.handleAssessmentCheckboxes(275)} /> {this.context.translate('family')}</label>
+                                    <label className="v2"><input type="checkbox" name="historyGiven" value="Otro" checked={values.assessmentCheckBoxes[276]} onChange={this.props.handleAssessmentCheckboxes(276)} /> {this.context.translate('other')}</label>
                                 </div>
                             </td>
                         </tr>
@@ -255,8 +254,8 @@ export default class AddPatient extends Component {
                             </td>
                         </tr>
                     </table>
-                    <Button className="left" onClick={this.back}>Previous</Button>
-                    <Button className="right" onClick={this.saveAndContinue}>Next</Button>
+                    <Button className="left" onClick={this.back}>{this.context.translate('previous')}</Button>
+                    <Button className="right" onClick={this.saveAndContinue}>{this.context.translate('next')}</Button>
                 </form>
                 {/* Bottom chart navigation */}
                 <div className="chartnav">

@@ -6,9 +6,11 @@ import ShowMed from './ShowMed'
 import '../App.css'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { MainContext } from '../Auth';
 import { da } from 'date-fns/locale'
 
 export default class AddInterventions extends Component {
+    static contextType = MainContext;
     constructor(props) {
         super(props);
         this.state = {
@@ -45,6 +47,7 @@ export default class AddInterventions extends Component {
             pCPRstartDisplay: "",
             pCPRstop: "",
             pCPRstopDisplay: "",
+            pCPRby: "",
             pOutcome: "",
             pEffective: "",
             pEnergy: "",
@@ -91,6 +94,7 @@ export default class AddInterventions extends Component {
             pCPRstartDisplay: "",
             pCPRstop: "",
             pCPRstopDisplay: "",
+            pCPRby: "",
             pOutcome: "",
             pEffective: "",
             pEnergy: "",
@@ -149,16 +153,18 @@ export default class AddInterventions extends Component {
         this.setState({ [input]: date });
     }
 
+    makeEmpty = input => { alert(input); this.setState({ [input]: "" }); }
+
     submitMedication = (event) => {
         event.preventDefault();
         if(this.state.mName === "" || this.state.mTime === "" || this.state.mDosage === "" || this.state.mUnit === "" || this.state.mRoute === "" ) {
-            this.setState({ message: "One or more required fields have been left blank. Please fill them out." });
+            this.setState({ message: "required-fields" });
         } else {
             this.setState({ message: "" });
             // change to Spanish later
-            let medications = "[Medication: " + this.state.mName + " | Time: " + this.state.mTime + " | Dosage: " + this.state.mDosage + " " + this.state.mUnit + " | Route: " + this.state.mRoute;
+            let medications = "[Medicamento: " + this.state.mName + " | Hora: " + this.state.mTime + " | Dosis: " + this.state.mDosage + " " + this.state.mUnit + " | Tomar: " + this.state.mRoute;
             // done by John Doe for now
-            medications += " | By: John Doe" + "]";
+            medications += " | Por: John Doe" + "]";
             this.props.appendMedications(medications);
             this.toggleMed();
         }
@@ -169,43 +175,43 @@ export default class AddInterventions extends Component {
     submitProcedure = (event) => {
         event.preventDefault();
         if(this.state.pName === "" || this.state.pTime === "") {
-            this.setState({ message: "One or more required fields have been left blank. Please fill them out." });
+            this.setState({ message: "required-fields" });
         } else {
             this.setState({ message: "" });
         
         // change to Spanish later
-        let procedures = "[Procedure: " + this.state.pName;
-        if (this.state.pName === "Cardiac Arrest") {
-            procedures += " | Time of arrest: " + this.state.pTime + " | Start time CPR: " + this.state.pCPRstart + " | Stop time CPR: " + this.state.pCPRstop + " | Outcome: " + this.state.pOutcome;
+        let procedures = "[Procedimiento: " + this.state.pName;
+        if (this.state.pName === "Paro cardíaco") {
+            procedures += " | Hora de lo sucedido: " + this.state.pTime + " | Hora de inicio CPR: " + this.state.pCPRstart + " | Tiempo de parar CPR: " + this.state.pCPRstop + " | Resultado: " + this.state.pOutcome;
         }
-        else { procedures += " | Time: " + this.state.pTime; }
-        if (this.state.pLocation !== "") { procedures += " | Location: " + this.state.pLocation; }
-        if (this.state.pType !== "") { procedures += " | Type: " + this.state.pType; }
-        if (this.state.pSize !== "") { procedures += " | Size: " + this.state.pSize; }
-        if (this.state.pTube !== "") { procedures += " | Tube size: " + this.state.pTube; }
-        if (this.state.pNeedle !== "") { procedures += " | Needle size: " + this.state.pNeedle; }
-        if (this.state.pFluid !== "") { procedures += " | Fluid: " + this.state.pFluid; }
-        if (this.state.pResult !== "") { procedures += " | Result: " + this.state.pResult; }
-        if (this.state.pDelivery !== "") { procedures += " | Delivery: " + this.state.pDelivery; }
-        if (this.state.pAmount !== "") { procedures += " | Amount: " + this.state.pAmount; }
-        if (this.state.pName === "Basic Airway - BVM") { procedures += "| Adjuncts: " + this.state.pAdjuncts.join(); }
-        if (this.state.pPhysician !== "") { procedures += " | Physician: " + this.state.pPhysician; }
-        if (this.state.pOrders !== "") { procedures += " | Orders: " + this.state.pOrders; }
-        if (this.state.pTeeth !== "") { procedures += " | Depth at teeth: " + this.state.pTeeth; }
-        if (this.state.pName === "Advanced Airway - Intubation") { procedures += "| Confirmation: " + this.state.pConfirm.join(); }
-        if (this.state.pName === "12 Lead EKG") { procedures += " | Findings: " + this.state.pFindings.join(); }
-        if (this.state.pRhythm !== "") { procedures += " | Rhythm: " + this.state.pRhythm; }
-        if (this.state.pMode !== "") { procedures += " | Mode: " + this.state.pMode; }
-        if (this.state.pRate !== "") { procedures += " | Rate: " + this.state.pRate; }
-        if (this.state.pOutput !== "") { procedures += " | Output: " + this.state.pOutput; }
-        if (this.state.pCapture !== "") { procedures += " | Capture: " + this.state.pCapture; }
-        if (this.state.pEffective !== "") { procedures += " | Effective: " + this.state.pEffective; }
-        if (this.state.pEnergy !== "") { procedures += " | Energy: " + this.state.pEnergy; }
-        if (this.state.pConverted !== "") { procedures += " | Converted to: " + this.state.pConverted; }
-        if (this.state.pPulseCapture !== "") { procedures += " | Pulse capture: " + this.state.pPulseCapture; }
+        else { procedures += " | Hora: " + this.state.pTime; }
+        if (this.state.pLocation !== "") { procedures += " | Ubicación: " + this.state.pLocation; }
+        if (this.state.pType !== "") { procedures += " | Tipo: " + this.state.pType; }
+        if (this.state.pSize !== "") { procedures += " | Tamaño: " + this.state.pSize; }
+        if (this.state.pTube !== "") { procedures += " | Tamaño del tubo: " + this.state.pTube; }
+        if (this.state.pNeedle !== "") { procedures += " | Tamaño de la aguja: " + this.state.pNeedle; }
+        if (this.state.pFluid !== "") { procedures += " | Fluido: " + this.state.pFluid; }
+        if (this.state.pResult !== "") { procedures += " | Resultados: " + this.state.pResult; }
+        if (this.state.pDelivery !== "") { procedures += " | Entrega: " + this.state.pDelivery; }
+        if (this.state.pAmount !== "") { procedures += " | Cantidad: " + this.state.pAmount; }
+        if (this.state.pName === "Vía aérea básica - BVM") { procedures += "| Útilizar: " + this.state.pAdjuncts.join(); }
+        if (this.state.pPhysician !== "") { procedures += " | Médico: " + this.state.pPhysician; }
+        if (this.state.pOrders !== "") { procedures += " | Órdenes: " + this.state.pOrders; }
+        if (this.state.pTeeth !== "") { procedures += " | Profundidad en los dientes: " + this.state.pTeeth; }
+        if (this.state.pName === "Vía aérea avanzada - Intubación") { procedures += "| Confirmación: " + this.state.pConfirm.join(); }
+        if (this.state.pName === "12 Lead EKG") { procedures += " | Resultados: " + this.state.pFindings.join(); }
+        if (this.state.pRhythm !== "") { procedures += " | Cadencia: " + this.state.pRhythm; }
+        if (this.state.pMode !== "") { procedures += " | Clase: " + this.state.pMode; }
+        if (this.state.pRate !== "") { procedures += " | Grado: " + this.state.pRate; }
+        if (this.state.pOutput !== "") { procedures += " | mA Salida: " + this.state.pOutput; }
+        if (this.state.pCapture !== "") { procedures += " | Capturar: " + this.state.pCapture; }
+        if (this.state.pEffective !== "") { procedures += " | Eficaz: " + this.state.pEffective; }
+        if (this.state.pEnergy !== "") { procedures += " | Energía: " + this.state.pEnergy; }
+        if (this.state.pConverted !== "") { procedures += " | Convertido a: " + this.state.pConverted; }
+        if (this.state.pPulseCapture !== "") { procedures += " | Pulso con captura: " + this.state.pPulseCapture; }
         // done by John Doe for now
-        if (this.state.pName === "Cardiac Arrest") { procedures += " | CPR done by: " + "John Doe" + "]"; }
-        else { procedures += " | By: " + "John Doe" + "]"; }
+        if (this.state.pName === "Paro cardíaco") { procedures += " | CPR hecho por: " + this.state.pCPRby + "]"; }
+        else { procedures += " | Por: " + "John Doe" + "]"; }
         this.props.appendProcedures(procedures);
         this.toggleProc();
     }
@@ -261,48 +267,49 @@ export default class AddInterventions extends Component {
         return (
             <div className="chart">
                 <form id="interventions">
-                    <h2>Interventions / Treatment</h2>
-                    <h3>Procedures</h3>
+                    <h2>{this.context.translate('inter-treatment')}</h2>
+                    <h3>{this.context.translate('procedures')}</h3>
                     {values.procedures.length >= 1 ?
                         <table className="treatment">
                             <tr>
-                                <th width="12%">Time</th>
-                                <th width="20%">Procedure</th>
-                                <th>Data</th>
-                                <th width="15%">Crew</th>
-                                <th width="10%">Action</th>
+                                <th width="12%">{this.context.translate('Time')}</th>
+                                <th width="20%">{this.context.translate('procedure')}</th>
+                                <th>{this.context.translate('data')}</th>
+                                <th width="15%">{this.context.translate('crew')}</th>
+                                <th width="10%">{this.context.translate('action')}</th>
                             </tr>
                             {procedureList}
                         </table> : null}
-                    <div style={{ textAlign: 'center' }}><input type="button" value="Add a Procedure" onClick={this.toggleProc} /></div>
+                    <div style={{ textAlign: 'center' }}><input type="button" value={this.context.translate('add-proc')} onClick={this.toggleProc} /></div>
                     {this.state.showProc ?
                         <Popup
-                            text="Add Procedure"
+                            text="add-proc"
                             changeInter={this.changeInter}
                             handleCheck={this.handleCheck}
                             handleDate={this.handleDate}
+                            makeEmpty={this.makeEmpty}
                             closePopup={this.toggleProc}
                             submitProcedure={this.submitProcedure}
                             inter={inter}
                         />
                         : null}
-                    <h3>Medications</h3>
+                    <h3>{this.context.translate('medications')}</h3>
                     {values.medications.length >= 1 ?
                         <table className="treatment">
                             <tr>
-                                <th width="12%">Time</th>
-                                <th width="20%">Medication</th>
-                                <th width="20%">Dosage</th>
-                                <th>Route</th>
-                                <th width="15%">Crew</th>
-                                <th width="10%">Action</th>
+                                <th width="12%">{this.context.translate('Time')}</th>
+                                <th width="20%">{this.context.translate('medication')}</th>
+                                <th width="20%">{this.context.translate('dosage')}</th>
+                                <th>{this.context.translate('route')}</th>
+                                <th width="15%">{this.context.translate('crew')}</th>
+                                <th width="10%">{this.context.translate('action')}</th>
                             </tr>
                             {medicationList}
                         </table> : null}
-                    <div style={{ textAlign: 'center' }}><input type="button" value="Add a Medication" onClick={this.toggleMed} /></div>
+                    <div style={{ textAlign: 'center' }}><input type="button" value={this.context.translate('add-med')} onClick={this.toggleMed} /></div>
                     {this.state.showMed ?
                         <Popup
-                            text="Add Medication"
+                            text="add-med"
                             changeInter={this.changeInter}
                             handleDate={this.handleDate}
                             closePopup={this.toggleMed}
@@ -310,19 +317,19 @@ export default class AddInterventions extends Component {
                             inter={inter}
                         />
                         : null}
-                    <h3><label className="v2"style={{lineHeight:'40px'}}>Intake Output <input type="checkbox" name="none" value="intake" checked={values.assessmentCheckBoxes[316]} onChange={this.props.handleAssessmentCheckboxes(316)} /></label></h3>
+                    <h3><label className="v2"style={{lineHeight:'40px'}}>{this.context.translate('intake-output')} <input type="checkbox" name="none" value="intake" checked={values.assessmentCheckBoxes[316]} onChange={this.props.handleAssessmentCheckboxes(316)} /></label></h3>
                     {values.assessmentCheckBoxes[316] ?
                         <table className="cform">
                             <tr>
-                                <th className="top" width="25%">Bleeding</th>
+                                <th className="top" width="25%">{this.context.translate('bleeding')}</th>
                                 <td colspan="3" width="75%">
                                     <div style={{ display: 'inline-block' }}>
                                         <input type="number" className="calculation" name="ioBleedPT" min="0" max="9999" value={values.ioBleedPT} onChange={this.props.handleChange('ioBleedPT')} />
-                                        <strong>Pre transport</strong>
+                                        <strong>{this.context.translate('bpre-transport')}</strong>
                                     </div>
                                     <div style={{ display: 'inline-block' }}>
                                         <input type="number" className="calculation" name="ioBleedT" min="0" max="9999" value={values.ioBleedT} onChange={this.props.handleChange('ioBleedT')} />
-                                        <strong>Transport</strong>
+                                        <strong>{this.context.translate('btransport')}</strong>
                                     </div>
                                     <div style={{ display: 'inline-block' }}>
                                         <input type="number" className="calculation" disabled value={parseInt(values.ioBleedPT) + parseInt(values.ioBleedT)} />
@@ -331,15 +338,15 @@ export default class AddInterventions extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <th className="top">IV fluids</th>
+                                <th className="top">{this.context.translate('iv-fluid')}</th>
                                 <td colspan="3">
                                     <div style={{ display: 'inline-block' }}>
                                         <input type="number" className="calculation" name="ioIVPT" min="0" max="9999" value={values.ioIVPT} onChange={this.props.handleChange('ioIVPT')} />
-                                        <strong>Pre transport</strong>
+                                        <strong>{this.context.translate('bpre-transport')}</strong>
                                     </div>
                                     <div style={{ display: 'inline-block' }}>
                                         <input type="number" className="calculation" name="ioIVT" min="0" max="9999" value={values.ioIVT} onChange={this.props.handleChange('ioIVT')} />
-                                        <strong>Transport</strong>
+                                        <strong>{this.context.translate('btransport')}</strong>
                                     </div>
                                     <div style={{ display: 'inline-block' }}>
                                         <input type="number" className="calculation" disabled value={parseInt(values.ioIVPT) + parseInt(values.ioIVT)} />
@@ -348,15 +355,15 @@ export default class AddInterventions extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <th className="top">Oral fluids</th>
+                                <th className="top">{this.context.translate('oral-fluid')}</th>
                                 <td colspan="3">
                                     <div style={{ display: 'inline-block' }}>
                                         <input type="number" className="calculation" name="ioOralPT" min="0" max="9999" value={values.ioOralPT} onChange={this.props.handleChange('ioOralPT')} />
-                                        <strong>Pre transport</strong>
+                                        <strong>{this.context.translate('bpre-transport')}</strong>
                                     </div>
                                     <div style={{ display: 'inline-block' }}>
                                         <input type="number" className="calculation" name="ioOralT" min="0" max="9999" value={values.ioOralT} onChange={this.props.handleChange('ioOralT')} />
-                                        <strong>Transport</strong>
+                                        <strong>{this.context.translate('btransport')}</strong>
                                     </div>
                                     <div style={{ display: 'inline-block' }}>
                                         <input type="number" className="calculation" disabled value={parseInt(values.ioOralPT) + parseInt(values.ioOralT)} />
@@ -365,15 +372,15 @@ export default class AddInterventions extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <th className="top">Vomit</th>
+                                <th className="top">{this.context.translate('vomit')}</th>
                                 <td colspan="3">
                                     <div style={{ display: 'inline-block' }}>
                                         <input type="number" className="calculation" name="ioVomitPT" min="0" max="9999" value={values.ioVomitPT} onChange={this.props.handleChange('ioVomitPT')} />
-                                        <strong>Pre transport</strong>
+                                        <strong>{this.context.translate('bpre-transport')}</strong>
                                     </div>
                                     <div style={{ display: 'inline-block' }}>
                                         <input type="number" className="calculation" name="ioVomitT" min="0" max="9999" value={values.ioVomitT} onChange={this.props.handleChange('ioVomitT')} />
-                                        <strong>Transport</strong>
+                                        <strong>{this.context.translate('btransport')}</strong>
                                     </div>
                                     <div style={{ display: 'inline-block' }}>
                                         <input type="number" className="calculation" disabled value={parseInt(values.ioVomitPT) + parseInt(values.ioVomitT)} />
@@ -382,23 +389,23 @@ export default class AddInterventions extends Component {
                                 </td>
                             </tr>
                         </table> : null}
-                    <h3><label className="v2" style={{lineHeight:'40px'}}>Obstetrics <input type="checkbox" name="none" value="obstetrics" checked={values.assessmentCheckBoxes[317]} onChange={this.props.handleAssessmentCheckboxes(317)} /></label></h3>
+                    <h3><label className="v2" style={{lineHeight:'40px'}}>{this.context.translate('obstetrics')} <input type="checkbox" name="none" value="obstetrics" checked={values.assessmentCheckBoxes[317]} onChange={this.props.handleAssessmentCheckboxes(317)} /></label></h3>
                     {values.assessmentCheckBoxes[317] ?
                         <table className="cform">
                             <tr>
-                                <th width="25%">Gravid</th>
+                                <th width="25%">{this.context.translate('gravid')}</th>
                                 <td width="75%"><input type="number" className="calculation" name="oGravid" min="0" max="99" value={values.oGravid} onChange={this.props.handleChange('oGravid')} /></td>
                             </tr>
                             <tr>
-                                <th>Para</th>
+                                <th>{this.context.translate('para')}</th>
                                 <td><input type="number" className="calculation" name="oPara" min="0" max="99" value={values.oPara} onChange={this.props.handleChange('oPara')} /></td>
                             </tr>
                             <tr>
-                                <th>Abortion</th>
+                                <th>{this.context.translate('abortion')}</th>
                                 <td><input type="number" className="calculation" name="oAbortion" min="0" max="99" value={values.oAbortion} onChange={this.props.handleChange('oAbortion')} /></td>
                             </tr>
                             <tr>
-                                <th>Due date</th>
+                                <th>{this.context.translate('due-date')}</th>
                                 <td>
                                     <DatePicker
                                         selected={values.oDuedateDisplay ? values.oDuedateDisplay : false}
@@ -410,107 +417,116 @@ export default class AddInterventions extends Component {
                                     />
                                 </td>
                             </tr>
-                            <tr><th>Gestation</th>
-                                <td><input type="text" style={{width:'80px', marginRight: '0'}} name="oGestation" value={values.oGestation} onChange={this.props.handleChange('oGestation')} /> weeks</td>
+                            <tr><th>{this.context.translate('gestation')}</th>
+                                <td><input type="text" style={{width:'80px', marginRight: '0'}} name="oGestation" value={values.oGestation} onChange={this.props.handleChange('oGestation')} /> {this.context.translate('week')}s</td>
                             </tr>
                             <tr>
-                                <th>Vaginal bleeding</th>
+                                <th>{this.context.translate('vaginal-bleed')}</th>
                                 <td>
                                     <div style={{margin:'7.5px'}} onChange={this.props.handleChange('oVaginalBleed')}>
-                                        <label className="v2"><input type="radio" name="oVaginalBleed" value="Yes" checked={values.oVaginalBleed.includes("Yes")} /> Yes</label>
+                                        <label className="v2"><input type="radio" name="oVaginalBleed" value="Sí" checked={values.oVaginalBleed.includes("Sí")} /> {this.context.translate('yes')}</label>
                                         <label className="v2"><input type="radio" name="oVaginalBleed" value="No" checked={values.oVaginalBleed.includes("No")} /> No</label>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
-                                <th>Contraction onset</th>
+                                <th>{this.context.translate('contraction')}</th>
                                 <td><input type="text" name="oContraction" value={values.oContraction} onChange={this.props.handleChange('oContraction')} /></td>
                             </tr>
                             <tr>
-                                <th>Frequency</th>
-                                <td><input type="text" style={{width:'80px', marginRight: '0'}} name="oFrequency" value={values.oFrequency} onChange={this.props.handleChange('oFrequency')} /> minutes</td>
+                                <th>{this.context.translate('frequency')}</th>
+                                <td><input type="text" style={{width:'80px', marginRight: '0'}} name="oFrequency" value={values.oFrequency} onChange={this.props.handleChange('oFrequency')} /> {this.context.translate('minute')}s</td>
                             </tr>
                             <tr>
-                                <th>Duration</th>
-                                <td><input type="text" style={{width:'80px', marginRight: '0'}} name="oDuration" value={values.oDuration} onChange={this.props.handleChange('oDuration')} /> minutes</td>
+                                <th>{this.context.translate('duration')}</th>
+                                <td><input type="text" style={{width:'80px', marginRight: '0'}} name="oDuration" value={values.oDuration} onChange={this.props.handleChange('oDuration')} /> {this.context.translate('minute')}s</td>
                             </tr>
                             <tr>
-                                <th>Bag of water ruptured</th>
+                                <th>{this.context.translate('water-rupture')}</th>
                                 <td>
                                     <div style={{margin:'7.5px'}} onChange={this.props.handleChange('oWaterRupture')}>
-                                        <label className="v2"><input type="radio" name="oWaterRupture" value="Yes" checked={values.oWaterRupture.includes("Yes")} /> Yes</label>
+                                        <label className="v2"><input type="radio" name="oWaterRupture" value="Sí" checked={values.oWaterRupture.includes("Sí")} /> {this.context.translate('yes')}</label>
                                         <label className="v2"><input type="radio" name="oWaterRupture" value="No" checked={values.oWaterRupture.includes("No")} /> No</label>
                                     </div>                                    
                                 </td>
                             </tr>
-                            {values.oWaterRupture === "Yes" ?
+                            {values.oWaterRupture === "Sí" ?
                             <tr>
-                                <th>Color of fluid</th>
+                                <th>{this.context.translate('water-color')}</th>
                                 <td>
                                     <div style={{margin:'7.5px'}} onChange={this.props.handleChange('oWaterColor')}>
-                                        <label className="v2"><input type="radio" name="oWaterColor" value="Clear" checked={values.oWaterColor.includes("Clear")} /> Clear</label>
-                                        <label className="v2"><input type="radio" name="oWaterColor" value="Bloody" checked={values.oWaterColor.includes("Bloody")} /> Bloody</label>
-                                        <label className="v2"><input type="radio" name="oWaterColor" value="Meconium" checked={values.oWaterColor.includes("Meconium")} /> Meconium</label>
+                                        <label className="v2"><input type="radio" name="oWaterColor" value="Claro" checked={values.oWaterColor.includes("Claro")} /> {this.context.translate('clear')}</label>
+                                        <label className="v2"><input type="radio" name="oWaterColor" value="Sangrienta" checked={values.oWaterColor.includes("Sangrienta")} /> {this.context.translate('bloody')}</label>
+                                        <label className="v2"><input type="radio" name="oWaterColor" value="Meconio" checked={values.oWaterColor.includes("Meconio")} /> {this.context.translate('meconium')}</label>
                                     </div>                                    
                                 </td>
                             </tr>
                             :null }
                             <tr>
-                                <th>Feel baby moving</th>
+                                <th>{this.context.translate('baby-moving')}</th>
                                 <td>
                                     <div style={{margin:'7.5px'}} onChange={this.props.handleChange('oBabyMoving')}>
-                                        <label className="v2"><input type="radio" name="oBabyMoving" value="Yes" checked={values.oBabyMoving.includes("Yes")} /> Yes</label>
+                                        <label className="v2"><input type="radio" name="oBabyMoving" value="Sí" checked={values.oBabyMoving.includes("Sí")} /> {this.context.translate('yes')}</label>
                                         <label className="v2"><input type="radio" name="oBabyMoving" value="No" checked={values.oBabyMoving.includes("No")} /> No</label>
                                     </div>                                    
                                 </td>
                             </tr>
                             <tr>
-                                <th>Delivery time</th>
+                                <th>{this.context.translate('delivery-time')}</th>
                                 <td><input type="number" className="calculation" name="oDelivery" min="0" max="99" value={values.oDelivery} onChange={this.props.handleChange('oDelivery')} /></td>
                             </tr>
                             <tr>
-                                <th>Placenta delivered</th>
+                                <th>{this.context.translate('placenta')}</th>
                                 <td>
                                     <div style={{margin:'7.5px'}} onChange={this.props.handleChange('oPlacenta')}>
-                                        <label className="v2"><input type="radio" name="oPlacenta" value="Yes" checked={values.oPlacenta.includes("Yes")} /> Yes</label>
+                                        <label className="v2"><input type="radio" name="oPlacenta" value="Sí" checked={values.oPlacenta.includes("Sí")} /> {this.context.translate('yes')}</label>
                                         <label className="v2"><input type="radio" name="oPlacenta" value="No" checked={values.oPlacenta.includes("No")} /> No</label>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
-                                <th>Baby sex</th>
+                                <th>{this.context.translate('baby-sex')}</th>
                                 <td>
                                     <div style={{margin:'7.5px'}} onChange={this.props.handleChange('oBabySex')}>
-                                        <label className="v2"><input type="radio" name="oBabySex" value="Male" checked={values.oBabySex.includes("Male")} /> Male</label>
-                                        <label className="v2"><input type="radio" name="oBabySex" value="Female" checked={values.oBabySex.includes("Female")} /> Female</label>
+                                        <label className="v2"><input type="radio" name="oBabySex" value="Hombre" checked={values.oBabySex.includes("Hombre")} /> {this.context.translate('male')}</label>
+                                        <label className="v2"><input type="radio" name="oBabySex" value="Mujer" checked={values.oBabySex.includes("Mujer")} /> {this.context.translate('female')}</label>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
-                                <th>Born</th>
+                                <th>{this.context.translate('born')}</th>
                                 <td>
                                     <div style={{margin:'7.5px'}} onChange={this.props.handleChange('oBorn')}>
-                                        <label className="v2"><input type="radio" name="oBorn" value="Alive" checked={values.oBorn.includes("Alive")} /> Alive</label>
-                                        <label className="v2"><input type="radio" name="oBorn" value="Dead" checked={values.oBorn.includes("Dead")} /> Dead</label>
+                                        <label className="v2"><input type="radio" name="oBorn" value="Vivo" checked={values.oBorn.includes("Vivo")} /> {this.context.translate('alive')}</label>
+                                        <label className="v2"><input type="radio" name="oBorn" value="Muerto" checked={values.oBorn.includes("Muerto")} /> {this.context.translate('dead')}</label>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
-                                <th className="top">APGAR score</th>
+                                <th className="top">{this.context.translate('apgar')}</th>
                                 <td>
-                                    <div style={{margin:'7.5px'}} onChange={this.props.handleChange('oAPGAR')}>
+                                    <div style={{margin:'7.5px'}}>
                                         <img width="600px" src="https://1q3nfm4evj5z1sgm624e93ka-wpengine.netdna-ssl.com/wp-content/uploads/2016/06/Apgar-Scoring-System-Diagnosing-Birth-Injuries.jpg"/><br/>
-                                        <label className="v2"><input type="radio" name="oAPGAR" value="0" checked={values.oAPGAR.includes("0")} /> 0 points</label>
-                                        <label className="v2"><input type="radio" name="oAPGAR" value="1" checked={values.oAPGAR.includes("1")} /> 1 point</label>
-                                        <label className="v2"><input type="radio" name="oAPGAR" value="2" checked={values.oAPGAR.includes("2")} /> 2 points</label>
+                                        <div style={{ display: 'block' }}>
+                                            <input type="text" style={{width:'80px'}} name="oAPGAR1" value={values.oAPGAR1} onChange={this.props.handleChange('oAPGAR1')} />
+                                            <strong>1 {this.context.translate('minute')}</strong>
+                                        </div>
+                                        <div style={{ display: 'block' }}>
+                                            <input type="text" style={{width:'80px'}} name="oAPGAR5" value={values.oAPGAR5} onChange={this.props.handleChange('oAPGAR5')} />
+                                            <strong>5 {this.context.translate('minute')}s</strong>
+                                        </div>
+                                        <div style={{ display: 'block' }}>
+                                            <input type="text" style={{width:'80px'}} name="oAPGAR10" value={values.oAPGAR10} onChange={this.props.handleChange('oAPGAR10')} />
+                                            <strong>10 {this.context.translate('minute')}s</strong>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
                         </table> : null}
                     {/*<input type="text" name="pName" value={this.state.pName} />
                     <hr/>*/}
-                    <Button className="left" onClick={this.back}>Previous</Button>
-                    <Button className="right" onClick={this.saveAndContinue}>Next</Button>
+                    <Button className="left" onClick={this.back}>{this.context.translate('previous')}</Button>
+                    <Button className="right" onClick={this.saveAndContinue}>{this.context.translate('next')}</Button>
                 </form>
                 {/* Bottom chart navigation */}
                 <div className="chartnav">

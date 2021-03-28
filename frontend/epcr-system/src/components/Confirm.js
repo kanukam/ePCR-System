@@ -33,11 +33,11 @@ export default class Confirm extends Component {
             <div className="form-confirm">
                 <form>
                     <h2>Confirm Chart Report</h2>
-                    <b>Date:</b> {values.idate}
                     <table className="crew" border="1">
+                        <tr><th>Response</th></tr>
                         <tr>
                             <td>
-                                <b>Incident #</b> {values.ino}<br/>
+                                <b>Incident date</b> {values.idate}<br/>
                                 <b>Incident #</b> {values.ino}<br/>
                                 <b>Unit #</b> {values.unit}<br/>
                                 <b>Call type</b> {values.ctype}<br/>
@@ -57,7 +57,7 @@ export default class Confirm extends Component {
                         </tr>
                         <tr>
                             <td>
-                                <b>MCI</b> {values.assessmentCheckBoxes[268] ? <text>Yes<br/><b>Patient count</b> {values.ptct}<br/><b>Triage color</b> {values.triage}</text> : "No"}
+                                <b>Mass casualty incident</b> {values.assessmentCheckBoxes[268] ? <text>Yes<br/><b>Patient count</b> {values.ptct}<br/><b>Triage color</b> {values.triage}</text> : "No"}
                             </td>
                         </tr>
                         <tr>
@@ -82,6 +82,7 @@ export default class Confirm extends Component {
                                 <b>Transfer of care</b> {values.trcare ? <Moment date={values.trcare} format="DD-MM-YY hh:mm:ss A" /> : null}
                             </td>
                         </tr>
+                        <tr><th>Demographics</th></tr>
                         <tr>
                             <td>
                                 <b>Patient name</b> {values.lname}, {values.fname}<br/>
@@ -94,6 +95,7 @@ export default class Confirm extends Component {
                                 <b>Phone</b> {values.phone}
                             </td>
                         </tr>
+                        <tr><th>History</th></tr>
                         <tr>
                             <td>
                                 <b>History of present illness</b> {values.hpi}<br/>
@@ -101,6 +103,59 @@ export default class Confirm extends Component {
                                 <b>Medical allergies</b> {values.medAllergy}<br/>
                                 <b>Environmental allergies</b> {values.envAllergy}<br/>
                                 <b>Past medical history</b> {values.pastHistory}{values.assessmentCheckBoxes[315] ? ",O - Other" + values.pastHistoryOther : null}
+                            </td>
+                        </tr>
+                        <tr><th>Assessment</th></tr>
+                        <tr>
+                            <td>
+                                <b>Skin</b> {values.skin.join()}<br/>
+                                <b>Mental</b> {values.mental.join()}<br/>
+                                <b>Neurological</b> {values.neurological.join()}<br/>
+                                <b>Head</b> {values.head.join()}<br/>
+                                <b>Neck</b> {values.neck.join()}<br/>
+                                <b>Chest</b> {values.chest}<br/>
+                                <b>Pulse</b> Strength: {values.pulse_strength} | Rate: {values.pulse_rate}<br/>
+                                <b>Abdomen</b> {values.abdomen.join()}<br/>
+                                <b>Pelvis</b> {values.pelvis.join()}<br/>
+                                <b>Back</b> {values.back.join()}<br/>
+                                <b>Left upper arm</b> {values.left_upper_arm.join()}<br/>
+                                <b>Left lower arm</b> {values.left_lower_arm.join()}<br/>
+                                <b>Left hand wrist</b> {values.left_hand_wrist.join()}<br/>
+                                <b>Left upper leg</b> {values.left_upper_leg.join()}<br/>
+                                <b>Left lower leg</b> {values.left_lower_leg.join()}<br/>
+                                <b>Left ankle foot</b> {values.left_ankle_foot.join()}<br/>
+                                <b>Right upper arm</b> {values.right_upper_arm.join()}<br/>
+                                <b>Right lower arm</b> {values.right_lower_arm.join()}<br/>
+                                <b>Right hand wrist</b> {values.right_hand_wrist.join()}<br/>
+                                <b>Right upper leg</b> {values.right_upper_leg.join()}<br/>
+                                <b>Right lower leg</b> {values.right_lower_leg.join()}<br/>
+                                <b>Right ankle foot</b> {values.right_ankle_foot.join()}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Vitals</b> {values.vital_signs.join()}
+                            </td>
+                        </tr>
+                        <tr><th>Treatment</th></tr>
+                        <tr>
+                            <td>
+                                <b>Procedures</b> {values.procedures.join()}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Medications</b> {values.medications.join()}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Intake Output</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>obstetrics</b>
                             </td>
                         </tr>
                     </table>

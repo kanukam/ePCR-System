@@ -71,9 +71,9 @@ export default class AddCall extends Component {
                     <h3>Details</h3>
                     <table className="cform">
                         <tr>
-                            <th width="20%">Incident number</th>
+                            <th width="20%">{this.context.translate('ino')}</th>
                             <td width="30%"><input type="text" name="ino" value={values.ino} onChange={this.props.handleChange('ino')} /></td>
-                            <th width="20%">Unit number</th>
+                            <th width="20%">{this.context.translate('unit')}</th>
                             <td width="30%">
                                 <select name="unit" value={values.unit} onChange={this.props.handleChange('unit')}>
                                     <option disabled selected value="">{this.context.translate('select')}</option>
@@ -84,7 +84,7 @@ export default class AddCall extends Component {
                             </td>
                         </tr>
                         <tr>
-                            <th>Incident date</th>
+                            <th>{this.context.translate('idate')}</th>
                             <td>
                                 <DatePicker
                                     selected={values.idateDisplay ? values.idateDisplay : false}
@@ -93,52 +93,52 @@ export default class AddCall extends Component {
                                     dateFormat="dd/MM/yyyy"
                                 />
                             </td>
-                            <th width="20%">Call type</th>
+                            <th width="20%">{this.context.translate('call-type')}</th>
                             <td width="30%">
                                 <select name="ctype" value={values.ctype} onChange={this.props.handleChange('ctype')}>
                                     <option disabled selected value="">{this.context.translate('select')}</option>
-                                    <option value="Clinic">Clinic</option>
-                                    <option value="Scene">Scene</option>
-                                    <option value="Transfer">Transfer</option>
+                                    <option value="Clínica">{this.context.translate('clinic')}</option>
+                                    <option value="Escena">{this.context.translate('scene')}</option>
+                                    <option value="Transferencia">{this.context.translate('transfer')}</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <th>Incident location</th>
+                            <th>{this.context.translate('ilocation')}</th>
                             <td>
                                 <select name="loctype" value={values.loctype} onChange={this.props.handleChange('loctype')}>
                                     <option disabled selected value="">{this.context.translate('select')}</option>
-                                    <option value="Rescate clinic">Rescate clinic</option>
-                                    <option value="Home">Home</option>
-                                    <option value="Business">Business</option>
-                                    <option value="School">School</option>
-                                    <option value="Public">Public</option>
-                                    <option value="Construction site">Construction site</option>
-                                    <option value="Recreation area">Recreation area</option>
-                                    <option value="Road/Highway">Road/Highway</option>
+                                    <option value="Clínica Rescate">{this.context.translate('rescate-clinic')}</option>
+                                    <option value="Casa">{this.context.translate('chome')}</option>
+                                    <option value="Negocio">{this.context.translate('business')}</option>
+                                    <option value="Escuela">{this.context.translate('school')}</option>
+                                    <option value="Publico">{this.context.translate('public')}</option>
+                                    <option value="Sitio de construcción">{this.context.translate('construction-site')}</option>
+                                    <option value="Área de recreación">{this.context.translate('recreation')}</option>
+                                    <option value="Camino/Carretera">{this.context.translate('road-hwy')}</option>
                                     <option value="Marina">Marina</option>
-                                    <option value="Medical office">Medical office</option>
-                                    <option value="Beach">Beach</option>
-                                    <option value="Ocean/Bay">Ocean/Bay</option>
-                                    <option value="Other">Other</option>
+                                    <option value="Oficina médica">{this.context.translate('med-office')}</option>
+                                    <option value="Playa">{this.context.translate('beach')}</option>
+                                    <option value="Océano/Bahía">{this.context.translate('ocean-bay')}</option>
+                                    <option value="Otro">{this.context.translate('other')}</option>
                                 </select>
                             </td>
-                            <th>Nature of call</th>
+                            <th>{this.context.translate('call-nature')}</th>
                             <td>
                                 <select name="nature" value={values.nature} onChange={this.props.handleChange('nature')}>
                                     <option disabled selected value="">{this.context.translate('select')}</option>
-                                    <option value="B/P check">B/P check</option>
-                                    <option value="Cardiac">Cardiac</option>
-                                    <option value="Injection">Injection</option>
+                                    <option value="Comprobación B/P">{this.context.translate('bp-check')}</option>
+                                    <option value="Inyección">{this.context.translate('injection')}</option>
+                                    <option value="Cardíaca">{this.context.translate('cardiac')}</option>
                                     <option value="OB">OB</option>
-                                    <option value="Pulmonary">Pulmonary</option>
+                                    <option value="Pulmonar">{this.context.translate('pulmonary')}</option>
                                     <option value="Trauma">Trauma</option>
-                                    <option value="Medical other">Medical other</option>
+                                    <option value="Otros médicos">{this.context.translate('med-other')}</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <th>Incident address</th>
+                            <th>{this.context.translate('iaddress')}</th>
                             <td><input type="text" name="loc" value={values.loc} onChange={this.props.handleChange('loc')} /></td>
                             <th>Care level</th>
                             <td>
@@ -151,22 +151,22 @@ export default class AddCall extends Component {
                             </td>
                         </tr>
                         <tr style={{borderTop:'1px solid #ddd'}}>
-                            <th>Disposition</th>
+                            <th>{this.context.translate('disposition')}</th>
                             <td>
                                 <select name="disp" value={values.disp} onChange={this.props.handleChange('disp')}>
                                     <option disabled selected value="">{this.context.translate('select')}</option>
-                                    <option value="Treat and release">Treat and release</option>
-                                    <option value="Transport">Transport</option>
-                                    <option value="DOA">DOA</option>
-                                    <option value="AMA">AMA</option>
-                                    <option value="Unable to locate">Unable to locate</option>
+                                    <option value="Tratar y descargar">{this.context.translate('treat-release')}</option>
+                                    <option value="Transportacion">{this.context.translate('transport')}</option>
+                                    <option value="(dead) Muerto">{this.context.translate('doa')}</option>
+                                    <option value="Rechazar el servicio médico">{this.context.translate('ama')}</option>
+                                    <option value="No se puede localizar">{this.context.translate('na-locate')}</option>
                                 </select>
                             </td>
-                            <th>Destination</th>
+                            <th>{this.context.translate('destination')}</th>
                             <td>
                                 <select name="dest" value={values.dest} onChange={this.props.handleChange('dest')}>
                                     <option disabled selected value="">{this.context.translate('select')}</option>
-                                    <option value="Rescate clinic">Rescate clinic</option>
+                                    <option value="Clínica Rescate">{this.context.translate('rescate-clinic')}</option>
                                     <option value="IMSS">IMSS</option>
                                     <option value="ISTESON">ISTESON</option>
                                     <option value="SEMESON">SEMESON</option>
@@ -175,71 +175,72 @@ export default class AddCall extends Component {
                                     <option value="Hospital Cima">Hospital Cima</option>
                                     <option value="Hospital Clinica Del Noroeste">Hospital Clinica Del Noroeste</option>
                                     <option value="Hospital San Benito">Hospital San Benito</option>
+                                    <option value="Hospital San Jose Guaymas">Hospital San Jose Guaymas</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <th className="top" rowSpan="2">Other agencies on scene</th>
+                            <th className="top" rowSpan="2">{this.context.translate('other-agencies')}</th>
                             <td rowSpan="2">
                                 <div id="agency">
-                                    <label><input type="checkbox" name="agency" value="Local Police" checked={values.assessmentCheckBoxes[262]} onChange={this.props.handleAssessmentCheckboxes(262)} /> Local Police</label>
-                                    <label><input type="checkbox" name="agency" value="State Police" checked={values.assessmentCheckBoxes[263]} onChange={this.props.handleAssessmentCheckboxes(263)} /> State Police</label>
-                                    <label><input type="checkbox" name="agency" value="Federal Police" checked={values.assessmentCheckBoxes[264]} onChange={this.props.handleAssessmentCheckboxes(264)} /> Federal Police</label>
+                                    <label><input type="checkbox" name="agency" value="Policía local" checked={values.assessmentCheckBoxes[262]} onChange={this.props.handleAssessmentCheckboxes(262)} /> {this.context.translate('local-police')}</label>
+                                    <label><input type="checkbox" name="agency" value="Policía estatal" checked={values.assessmentCheckBoxes[263]} onChange={this.props.handleAssessmentCheckboxes(263)} /> {this.context.translate('state-police')}</label>
+                                    <label><input type="checkbox" name="agency" value="Policía federal" checked={values.assessmentCheckBoxes[264]} onChange={this.props.handleAssessmentCheckboxes(264)} /> {this.context.translate('federal-police')}</label>
                                     <label><input type="checkbox" name="agency" value="Cruz Rojas" checked={values.assessmentCheckBoxes[265]} onChange={this.props.handleAssessmentCheckboxes(265)} /> Cruz Rojas</label>
                                     <label><input type="checkbox" name="agency" value="Bomberos" checked={values.assessmentCheckBoxes[266]} onChange={this.props.handleAssessmentCheckboxes(266)} /> Bomberos</label>
-                                    <label><input type="checkbox" name="agency" value="Other" checked={values.assessmentCheckBoxes[267]} onChange={this.props.handleAssessmentCheckboxes(267)} /> Other</label>
+                                    <label><input type="checkbox" name="agency" value="Otro" checked={values.assessmentCheckBoxes[267]} onChange={this.props.handleAssessmentCheckboxes(267)} /> {this.context.translate('other')}</label>
                                 </div>
                             </td>
-                            <th>Trauma cause</th>
+                            <th>{this.context.translate('trauma-cause')}</th>
                             <td>
                                 <select name="trauma" value={values.trauma} onChange={this.props.handleChange('trauma')}>
                                     <option disabled selected value="">{this.context.translate('select')}</option>
                                     <option value="Animal">Animal</option>
-                                    <option value="Assault">Assault</option>
-                                    <option value="Motor vehicle">Motor vehicle</option>
-                                    <option value="Bicycle">Bicycle</option>
-                                    <option value="Boat">Boat</option>
-                                    <option value="Drowning">Drowning</option>
-                                    <option value="Electrical">Electrical</option>
-                                    <option value="Explosion">Explosion</option>
-                                    <option value="Fall">Fall</option>
-                                    <option value="Fire">Fire</option>
-                                    <option value="Gun">Gun</option>
-                                    <option value="Tools">Tools</option>
-                                    <option value="Stabbing">Stabbing</option>
-                                    <option value="Stuck by object">Stuck by object</option>
-                                    <option value="Toxic substance">Toxic substance</option>
-                                    <option value="Other vehicle">Other vehicle</option>
-                                    <option value="Other">Other</option>
+                                    <option value="Asalto">{this.context.translate('assault')}</option>
+                                    <option value="Vehículo de motor">{this.context.translate('motor-vehicle')}</option>
+                                    <option value="Bicicleta">{this.context.translate('bicycle')}</option>
+                                    <option value="Barco">{this.context.translate('boat')}</option>
+                                    <option value="Ahogado">{this.context.translate('drown')}</option>
+                                    <option value="Eléctrico">{this.context.translate('electrical')}</option>
+                                    <option value="Explosión">{this.context.translate('explosion')}</option>
+                                    <option value="Caída">{this.context.translate('fall')}</option>
+                                    <option value="Fuego">{this.context.translate('fire')}</option>
+                                    <option value="Arma">{this.context.translate('gun')}</option>
+                                    <option value="Herramientas">{this.context.translate('tools')}</option>
+                                    <option value="Apuñalar">{this.context.translate('stabbing')}</option>
+                                    <option value="Atascado por objeto">{this.context.translate('object-struck')}</option>
+                                    <option value="Sustancia tóxica">{this.context.translate('toxic-subst')}</option>
+                                    <option value="Otro vehículo">{this.context.translate('other-vehicle')}</option>
+                                    <option value="Otro">{this.context.translate('other')}</option>
                                 </select>
                             </td>
                         </tr>
-                        {values.trauma === "Fall" ?
+                        {values.trauma === "Caída" ?
                         <tr>
-                            <th className="top" height="28%">Height</th>
+                            <th className="top" height="28%">{this.context.translate('fallht')}</th>
                             <td valign="top"><input style={{width:'80px', marginRight:'0px'}} type="number" name="fallht" value={values.fallht} min="0" onChange={this.props.handleChange('fallht')} /> m</td>
                         </tr>
                         : <tr><td className="top" colSpan="2" height="28%"></td></tr>}
                         <tr style={{borderTop:'1px solid #ddd'}}>
                             <th colSpan="4">
                                 <label className="v2">
-                                    <b style={{display:'inline-block', paddingRight:'10px'}}>MCI</b>
+                                    <b style={{display:'inline-block', paddingRight:'10px'}}>{this.context.translate('mci')}</b>
                                     <input type="checkbox" name="none" value="mci" checked={values.assessmentCheckBoxes[268]} onChange={this.props.handleAssessmentCheckboxes(268)} />
                                 </label>
                             </th>
                         </tr>
                         {values.assessmentCheckBoxes[268] ?
                         <tr>
-                            <th>Patient Count</th>
+                            <th>{this.context.translate('num-patients')}</th>
                             <td><input type="number" name="ptct" min="1" value={values.ptct} onChange={this.props.handleChange('ptct')} /></td>
-                            <th>Triage Color</th>
+                            <th>{this.context.translate('triage')}</th>
                             <td>
                                 <select name="triage" value={values.triage} onChange={this.props.handleChange('triage')}>
                                     <option disabled selected value="">{this.context.translate('select')}</option>
-                                    <option value="Green">Green</option>
-                                    <option value="Yellow">Yellow</option>
-                                    <option value="Red">Red</option>
-                                    <option value="Black">Black</option>
+                                    <option value="Verde">{this.context.translate('green')}</option>
+                                    <option value="Amarillo">{this.context.translate('yellow')}</option>
+                                    <option value="Rojo">{this.context.translate('red')}</option>
+                                    <option value="Negro">{this.context.translate('black')}</option>
                                 </select>
                             </td>
                         </tr>
@@ -247,70 +248,70 @@ export default class AddCall extends Component {
                         <tr>
                             <th colSpan="4">
                                 <label className="v2">
-                                    <b style={{display:'inline-block', paddingRight:'10px'}}>Vehicle Accident</b>
+                                    <b style={{display:'inline-block', paddingRight:'10px'}}>{this.context.translate('vehicle-accident')}</b>
                                     <input type="checkbox" name="none" value="va" checked={values.assessmentCheckBoxes[269]} onChange={this.props.handleAssessmentCheckboxes(269)} />
                                 </label>
                             </th>
                         </tr>
                         {values.assessmentCheckBoxes[269] ?
                         <tr>
-                            <th>Type</th>
+                            <th>{this.context.translate('type')}</th>
                             <td>
                                 <select name="vatype" value={values.vatype} onChange={this.props.handleChange('vatype')}>
                                     <option disabled selected value="">{this.context.translate('select')}</option>
-                                    <option value="Auto into object">Auto into object</option>
-                                    <option value="Auto into another auto">Auto into another auto</option>
-                                    <option value="Motorcycle">Motorcycle</option>
+                                    <option value="Auto en objeto">{this.context.translate('auto-object')}</option>
+                                    <option value="Auto en otro auto">{this.context.translate('auto-auto')}</option>
+                                    <option value="Motocicleta">{this.context.translate('motor')}</option>
                                     <option value="ATV">ATV</option>
-                                    <option value="Boat">Boat</option>
-                                    <option value="Aviation">Aviation</option>
+                                    <option value="Barco">{this.context.translate('boat')}</option>
+                                    <option value="Aviación">{this.context.translate('aviation')}</option>
                                 </select>
                             </td>
-                            <th>Safety equipment</th>
+                            <th>{this.context.translate('safety-equip')}</th>
                             <td>
                                 <select name="vasafe" value={values.vasafe} onChange={this.props.handleChange('vasafe')}>
                                     <option disabled selected value="">{this.context.translate('select')}</option>
-                                    <option value="None">None</option>
-                                    <option value="Seatbelt">Seatbelt</option>
-                                    <option value="Helmet">Helmet</option>
-                                    <option value="Airbags deployed">Airbags deployed</option>
-                                    <option value="Protective clothing">Protective clothing</option>
-                                    <option value="Life preserver">Life preserver</option>
+                                    <option value="Ninguno">{this.context.translate('none')}</option>
+                                    <option value="Cinturón">{this.context.translate('seatbelt')}</option>
+                                    <option value="Casco">{this.context.translate('helmet')}</option>
+                                    <option value="Bolsas de aire desplegadas">{this.context.translate('airbags-deployed')}</option>
+                                    <option value="Ropa protectora">{this.context.translate('protect-cloth')}</option>
+                                    <option value="Salvavidas">{this.context.translate('life-preserver')}</option>
                                 </select>
                             </td>
                         </tr>
                         : null}
                         {values.assessmentCheckBoxes[269] ?
                         <tr>
-                            <th rowSpan="2" valign="top">Impact</th>
+                            <th rowSpan="2" valign="top">{this.context.translate('impact')}</th>
                             <td rowSpan="2">
                                 <div>
-                                    <label><input type="checkbox" name="vaimpact" value="Head on" checked={values.assessmentCheckBoxes[270]} onChange={this.props.handleAssessmentCheckboxes(270)} /> Head on</label>
-                                    <label><input type="checkbox" name="vaimpact" value="Side" checked={values.assessmentCheckBoxes[271]} onChange={this.props.handleAssessmentCheckboxes(271)} /> Side</label>
-                                    <label><input type="checkbox" name="vaimpact" value="Rear" checked={values.assessmentCheckBoxes[272]} onChange={this.props.handleAssessmentCheckboxes(272)} /> Rear</label>
-                                    <label><input type="checkbox" name="vaimpact" value="Roll over" checked={values.assessmentCheckBoxes[273]} onChange={this.props.handleAssessmentCheckboxes(273)} /> Roll over</label>
+                                    <label><input type="checkbox" name="vaimpact" value="Frente" checked={values.assessmentCheckBoxes[270]} onChange={this.props.handleAssessmentCheckboxes(270)} /> {this.context.translate('head-on')}</label>
+                                    <label><input type="checkbox" name="vaimpact" value="Lado" checked={values.assessmentCheckBoxes[271]} onChange={this.props.handleAssessmentCheckboxes(271)} /> {this.context.translate('side')}</label>
+                                    <label><input type="checkbox" name="vaimpact" value="Trasero" checked={values.assessmentCheckBoxes[272]} onChange={this.props.handleAssessmentCheckboxes(272)} /> {this.context.translate('rear')}</label>
+                                    <label><input type="checkbox" name="vaimpact" value="Rodar sobre" checked={values.assessmentCheckBoxes[273]} onChange={this.props.handleAssessmentCheckboxes(273)} /> {this.context.translate('roll-over')}</label>
                                 </div>
                             </td>
-                            <th>Estimated speed</th>
-                            <td><input style={{width:'80px', marginRight:'0px'}} type="number" name="vaspd" value={values.vaspd} min="0" onChange={this.props.handleChange('vaspd')} /> mph</td>
+                            <th>{this.context.translate('est-spd')}</th>
+                            <td><input style={{width:'80px', marginRight:'0px'}} type="number" name="vaspd" value={values.vaspd} min="0" onChange={this.props.handleChange('vaspd')} /> {this.context.translate('mph')}</td>
                         </tr>
                         : null}
                         {values.assessmentCheckBoxes[269] ?
                         <tr>
-                            <th>Ejection from vehicle</th>
+                            <th>{this.context.translate('eject-vehicle')}</th>
                             <td>
                                 <div onChange={this.props.handleChange('vaeject')}>
-                                    <label><input type="radio" name="vaeject" value="Yes" defaultChecked checked={values.vaeject.includes("Yes")} /> Yes</label>
+                                    <label><input type="radio" name="vaeject" value="Sí" defaultChecked checked={values.vaeject.includes("Sí")} /> {this.context.translate('yes')}</label>
                                     <label><input type="radio" name="vaeject" value="No" checked={values.vaeject.includes("No")} /> No</label>
                                 </div>
                             </td>
                         </tr>
                         : null}
                     </table>
-                    <h3>Times</h3>
+                    <h3>{this.context.translate('response-times')}</h3>
                     <table className="cform">
                         <tr>
-                            <th width="20%">Dispatch</th>
+                            <th width="20%">{this.context.translate('dispatch')}</th>
                             <td>
                                 <DatePicker
                                     selected={values.dispatchDisplay ? values.dispatchDisplay : false}
@@ -322,7 +323,7 @@ export default class AddCall extends Component {
                             </td>
                         </tr>
                         <tr>
-                            <th>Enroute</th>
+                            <th>{this.context.translate('enroute')}</th>
                                 <td>
                                     <DatePicker
                                     selected={values.enrouteDisplay ? values.enrouteDisplay : false }
@@ -334,7 +335,7 @@ export default class AddCall extends Component {
                                 </td>
                         </tr>
                         <tr>
-                            <th>Arrive scene</th>
+                            <th>{this.context.translate('arrscn')}</th>
                             <td>
                                 <DatePicker
                                     selected={values.arrscnDisplay ? values.arrscnDisplay : false}
@@ -346,7 +347,7 @@ export default class AddCall extends Component {
                             </td>
                         </tr>
                         <tr>
-                            <th>Patient contact</th>
+                            <th>{this.context.translate('pcontact')}</th>
                             <td>
                                 <DatePicker
                                     selected={values.contactDisplay ? values.contactDisplay : false}
@@ -358,7 +359,7 @@ export default class AddCall extends Component {
                             </td>
                         </tr>
                         <tr>
-                            <th>Depart scene</th>
+                            <th>{this.context.translate('dptscn')}</th>
                             <td>
                                 <DatePicker
                                     selected={values.dptscnDisplay ? values.dptscnDisplay : false}
@@ -370,7 +371,7 @@ export default class AddCall extends Component {
                             </td>
                         </tr>
                         <tr>
-                            <th>Arrive destination</th>
+                            <th>{this.context.translate('arrdes')}</th>
                             <td>
                                 <DatePicker
                                     selected={values.arrdesDisplay ? values.arrdesDisplay : false}
@@ -382,7 +383,7 @@ export default class AddCall extends Component {
                             </td>
                         </tr>
                         <tr>
-                            <th>Transfer of care</th>
+                            <th>{this.context.translate('trcare')}</th>
                             <td>
                                 <DatePicker
                                     selected={values.trcareDisplay ? values.trcareDisplay : false}
@@ -394,7 +395,7 @@ export default class AddCall extends Component {
                             </td>
                         </tr>
                     </table>
-                    <Button className="right" onClick={this.saveAndContinue}>Next</Button>
+                    <Button className="right" onClick={this.saveAndContinue}>{this.context.translate('next')}</Button>
                 </form>
                 {/* Bottom chart navigation */}
                 <div className="chartnav">

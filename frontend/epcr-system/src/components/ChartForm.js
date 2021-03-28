@@ -157,7 +157,9 @@ export default class ChartForm extends Component {
             oPlacenta: "",
             oBabySex: "",
             oBorn: "",
-            oAPGAR: "",
+            oAPGAR1: "",
+            oAPGAR5: "",
+            oAPGAR10: "",
             none: [],
         };
     }
@@ -355,7 +357,7 @@ export default class ChartForm extends Component {
             const p_medical_allergies = this.state.medAllergy;
             const p_environmental_allergies = this.state.envAllergy;
             let p_past_medical_history = this.state.pastHistory.join();
-            if (p_past_medical_history || this.state.pastHistoryOther) { p_past_medical_history += ", [O - Other:" + this.state.pastHistoryOther + "]"; }
+            if (p_past_medical_history || this.state.pastHistoryOther) { p_past_medical_history += ", [O - Otro:" + this.state.pastHistoryOther + "]"; }
             // chart assessment
             const skin = this.state.skin.join();
             const mental = this.state.mental.join();
@@ -393,14 +395,14 @@ export default class ChartForm extends Component {
             let intake_iv_fluids = "";
             let intake_oral_fluids = "";
             let intake_vomit = "";
-            if (this.state.ioBleedPT || this.state.ioBleedPT || this.state.ioBleedT) { intake_bleeding = "Pre transport: " + this.state.ioBleedPT + " | Transport: " + this.state.ioBleedT + " | Total: " + (parseInt(this.state.ioBleedPT) + parseInt(this.state.ioBleedT));}
-            if (this.state.ioIVPT || this.state.ioIVT) { intake_iv_fluids = "Pre transport: " + this.state.ioIVPT + " | Transport: " + this.state.ioIVT + " | Total: " + (parseInt(this.state.ioIVPT) + parseInt(this.state.ioIVT));}
-            if (this.state.ioOralPT || this.state.ioOralT) { intake_oral_fluids = "Pre transport: " + this.state.ioOralPT + " | Transport: " + this.state.ioOralT + " | Total: " + (parseInt(this.state.ioOralPT) + parseInt(this.state.ioOralT));}
-            if (this.state.ioVomitPT || this.state.ioVomitT) { intake_vomit = "Pre transport: " + this.state.ioVomitPT + " | Transport: " + this.state.ioVomitT + " | Total: " + (parseInt(this.state.ioVomitPT) + parseInt(this.state.ioVomitT));}
+            if (this.state.ioBleedPT || this.state.ioBleedPT || this.state.ioBleedT) { intake_bleeding = "Pre transporte: " + this.state.ioBleedPT + " | Transporte: " + this.state.ioBleedT + " | Total: " + (parseInt(this.state.ioBleedPT) + parseInt(this.state.ioBleedT));}
+            if (this.state.ioIVPT || this.state.ioIVT) { intake_iv_fluids = "Pre transporte: " + this.state.ioIVPT + " | Transporte: " + this.state.ioIVT + " | Total: " + (parseInt(this.state.ioIVPT) + parseInt(this.state.ioIVT));}
+            if (this.state.ioOralPT || this.state.ioOralT) { intake_oral_fluids = "Pre transporte: " + this.state.ioOralPT + " | Transporte: " + this.state.ioOralT + " | Total: " + (parseInt(this.state.ioOralPT) + parseInt(this.state.ioOralT));}
+            if (this.state.ioVomitPT || this.state.ioVomitT) { intake_vomit = "Pre transporte: " + this.state.ioVomitPT + " | Transporte: " + this.state.ioVomitT + " | Total: " + (parseInt(this.state.ioVomitPT) + parseInt(this.state.ioVomitT));}
             let obstetrics = "";
-            if (this.state.oGravid || this.state.oPara || this.state.oAbortion || this.state.oDuedate || this.state.oGestation || this.state.oVaginalBleed || this.state.oContraction || this.state.oFrequency || this.state.oDuration || this.state.oWaterRupture) { obstetrics = "Gravid: " + this.state.oGravid + " | Para: " + this.state.oPara + " | Abortion: " + this.state.oAbortion + " | Due date: " + this.state.oDuedate + " | Gestation: " + this.state.oGestation + " | Vaginal bleeding: " + this.state.oVaginalBleed + " | Contraction onset: " + this.state.oContraction + " | Frequency: " + this.state.oFrequency + " | Duration: " + this.state.oDuration + " | Bag of water ruptured: " + this.state.oWaterRupture;}
-            if (this.state.oWaterRupture === "Yes") { obstetrics += " | Color of fluid: " + this.state.oWaterColor; }
-            if (this.state.oBabyMoving || this.state.oDelivery || this.state.oPlacenta || this.state.oBabySex || this.state.oBorn || this.state.oAPGAR){obstetrics += " | Feel baby moving: " + this.state.oBabyMoving + " | Delivery time: " + this.state.oDelivery + " | Placenta delivered: " + this.state.oPlacenta + " | Baby sex: " + this.state.oBabySex + " | Born: " + this.state.oBorn + " | APGAR score: " + this.state.oAPGAR;}
+            if (this.state.oGravid || this.state.oPara || this.state.oAbortion || this.state.oDuedate || this.state.oGestation || this.state.oVaginalBleed || this.state.oContraction || this.state.oFrequency || this.state.oDuration || this.state.oWaterRupture) { obstetrics = "Grávido: " + this.state.oGravid + " | Para: " + this.state.oPara + " | Aborto: " + this.state.oAbortion + " | Fecha de vencimiento: " + this.state.oDuedate + " | Gestación: " + this.state.oGestation + " | Sangrado vaginal: " + this.state.oVaginalBleed + " | Inicio de la contracción: " + this.state.oContraction + " | Frecuencia: " + this.state.oFrequency + " | Duración: " + this.state.oDuration + " | Bolsa de agua rota: " + this.state.oWaterRupture;}
+            if (this.state.oWaterRupture === "Sí") { obstetrics += " | Color del fluido: " + this.state.oWaterColor; }
+            if (this.state.oBabyMoving || this.state.oDelivery || this.state.oPlacenta || this.state.oBabySex || this.state.oBorn || this.state.oAPGAR1 || this.state.oAPGAR5 || this.state.oAPGAR10) {obstetrics += " | Siente que el bebé se mueve: " + this.state.oBabyMoving + " | Hora de nacimiento: " + this.state.oDelivery + " | Placenta entregada: " + this.state.oPlacenta + " | Sexo del bebé: " + this.state.oBabySex + " | Nacido: " + this.state.oBorn + " | Puntaje de APGAR: 1 = " + this.state.oAPGAR1 + "; 5 = " + this.state.oAPGAR5 + "; 10 = " + this.state.oAPGAR10; }
             /* patient table */
             const patientID = this.state.pid || null;
             //alert(patientID);

@@ -5,10 +5,18 @@ import '../styles/PhysicalAssessment.css'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import ShowVital from './ShowVital'
 
 
 export default class PhysicalAssessment extends Component {
     static contextType = MainContext;
+    constructor(props) {
+        super(props);
+        this.state = {
+            message: ""
+        };
+    }
+
     navigate = step => (e) => {
         e.preventDefault();
         this.props.navigate(step);
@@ -26,12 +34,33 @@ export default class PhysicalAssessment extends Component {
 
     addVitals = (e) => {
         e.preventDefault();
-        const vitals = "[Hora: " + this.props.values.vital_signs_time + " Pulso: " + this.props.values.vital_signs_pulse + " B/P: " + this.props.values.vital_signs_b_p_s + "/" + this.props.values.vital_signs_b_p_d + " Resp: " + this.props.values.vital_signs_resp + " Sp02: " + this.props.values.vital_signs_spo2 + " GCS: " + this.props.values.vital_signs_gcs + " Dolor: " + this.props.values.vital_signs_pain + " Temp: " + this.props.values.vital_signs_temp + " ETCO2: " + this.props.values.vital_signs_temp + "]";
-        this.props.appendVitals(vitals);
+        if(this.props.values.vital_signs_time === "" || this.props.values.vital_signs_pulse === "" || this.props.values.vital_signs_b_p_s === "" || this.props.values.vital_signs_b_p_d === "" || this.props.values.vital_signs_resp === "" || this.props.values.vital_signs_spo2 === "" || this.props.values.vital_signs_gcs === "" || this.props.values.vital_signs_pain === "" || this.props.values.vital_signs_temp === "" || this.props.values.vital_signs_etco2 === "") {
+            this.setState({ message: "required-fields" });
+        } else {
+            const vitals = "[Hora: " + this.props.values.vital_signs_time + " | Pulso: " + this.props.values.vital_signs_pulse + " | B/P: " + this.props.values.vital_signs_b_p_s + "/" + this.props.values.vital_signs_b_p_d + " | Resp: " + this.props.values.vital_signs_resp + " | Sp02: " + this.props.values.vital_signs_spo2 + " | GCS: " + this.props.values.vital_signs_gcs + " | Dolor: " + this.props.values.vital_signs_pain + " | Temp: " + this.props.values.vital_signs_temp + " | ETCO2: " + this.props.values.vital_signs_etco2 + "]";
+            this.props.appendVitals(vitals);
+        }
     }
 
     render() {
-        const{values} = this.props;
+        const {values} = this.props;
+        var vitalList = [];
+        for (var i = 0; i < values.vital_signs.length; i++) {
+            var current = values.vital_signs[i].split(" | ");
+            var etco2 = current[current.length - 1];
+            etco2 = etco2.substring(etco2.lastIndexOf(": ") + 2, etco2.indexOf("]"));
+            vitalList.push(<ShowVital
+                time={current[0].split(": ")[1]}
+                pulse={current[1].split(": ")[1]}
+                bp={current[2].split(": ")[1]}
+                resp={current[3].split(": ")[1]}
+                sp02={current[4].split(": ")[1]}
+                gcs={current[5].split(": ")[1]}
+                pain={current[6].split(": ")[1]}
+                temp={current[7].split(": ")[1]}
+                etco2={etco2}
+            />)
+        }
         console.log(values);
         return (
             <div className="assessment">
@@ -486,118 +515,135 @@ export default class PhysicalAssessment extends Component {
                     </Form.Group>
 
                     {values.assessmentCheckBoxes[261] ?
-                        <Form.Group as={Row}>
-                            <Form.Label column sm={2}>{this.context.translate('Time')}</Form.Label>
+                        <div>
+                            <table className="treatment">
+                                <tr>
+                                    <th>{this.context.translate('Time')}</th>
+                                    <th>{this.context.translate('Pulse')}</th>
+                                    <th>{this.context.translate('B/P')}</th>
+                                    <th>{this.context.translate('Resp')}</th>
+                                    <th>{this.context.translate('Sp02')}</th>
+                                    <th>{this.context.translate('GCS')}</th>
+                                    <th>{this.context.translate('Pain')}</th>
+                                    <th>{this.context.translate('Temp')}</th>
+                                    <th>{this.context.translate('ETCO2')}</th>
+                                </tr>
+                                {vitalList}
+                            </table>
+                            <Form.Group as={Row}>
+                                <Form.Label column sm={2}>{this.context.translate('Time')}</Form.Label>
+                                <Col sm={4} className="mt-2">
+                                    <Form.Control
+                                        required
+                                        type="text"
+                                        onChange={this.props.handleChange('vital_signs_time')}
+                                        value={values.vital_signs_time}
+                                    />
+                                </Col>
+                                <Form.Label column sm={2}>{this.context.translate('Pulse')}</Form.Label>
+                                <Col sm={4} className="mt-2">
+                                    <Form.Control
+                                        required
+                                        type="text"
+                                        placeholder=""
+                                        onChange={this.props.handleChange('vital_signs_pulse')}
+                                        value={values.vital_signs_pulse}
+                                    />
+                                </Col>
+
+                                <Form.Label column sm={2}>B/P</Form.Label>
+                                <Col sm={2} className="mt-2">
+                                    <Form.Control
+                                        required
+                                        type="text"
+                                        pattern="\d*"
+                                        maxlength="3"
+                                        placeholder=""
+                                        onChange={this.props.handleChange('vital_signs_b_p_s')}
+                                        value={values.vital_signs_b_p_s}
+                                    />
+                                </Col>
+                                <Col sm={2} className="mt-2">
+                                    <Form.Control
+                                        required
+                                        type="text"
+                                        pattern="\d*"
+                                        maxlength="3"
+                                        placeholder=""
+                                        onChange={this.props.handleChange('vital_signs_b_p_d')}
+                                        value={values.vital_signs_b_p_d}
+                                    />
+                                </Col>
+
+                            <Form.Label column sm={2}>Resp</Form.Label>
                             <Col sm={4} className="mt-2">
                                 <Form.Control
                                     required
                                     type="text"
-                                    onChange={this.props.handleChange('vital_signs_time')}
-                                    value={values.vital_signs_time}
+                                    placeholder=""
+                                    onChange={this.props.handleChange('vital_signs_resp')}
+                                    value={values.vital_signs_resp}
                                 />
                             </Col>
-                            <Form.Label column sm={2}>{this.context.translate('Pulse')}</Form.Label>
+                                
+                            <Form.Label column sm={2}>Sp02</Form.Label>
                             <Col sm={4} className="mt-2">
                                 <Form.Control
                                     required
                                     type="text"
                                     placeholder=""
-                                    onChange={this.props.handleChange('vital_signs_pulse')}
-                                    value={values.vital_signs_pulse}
+                                    onChange={this.props.handleChange('vital_signs_spo2')}
+                                    value={values.vital_signs_spo2}
                                 />
                             </Col>
 
-                            <Form.Label column sm={2}>B/P</Form.Label>
-                            <Col sm={2} className="mt-2">
+                            <Form.Label column sm={2}>GCS</Form.Label>
+                            <Col sm={4} className="mt-2">
                                 <Form.Control
                                     required
                                     type="text"
-                                    pattern="\d*"
-                                    maxlength="3"
                                     placeholder=""
-                                    onChange={this.props.handleChange('vital_signs_b_p_s')}
-                                    value={values.vital_signs_b_p_s}
+                                    onChange={this.props.handleChange('vital_signs_gcs')}
+                                    value={values.vital_signs_gcs}
                                 />
                             </Col>
-                            <Col sm={2} className="mt-2">
-                                <Form.Control
-                                    required
-                                    type="text"
-                                    pattern="\d*"
-                                    maxlength="3"
-                                    placeholder=""
-                                    onChange={this.props.handleChange('vital_signs_b_p_d')}
-                                    value={values.vital_signs_b_p_d}
-                                />
-                            </Col>
-
-                        <Form.Label column sm={2}>Resp</Form.Label>
-                        <Col sm={4} className="mt-2">
-                            <Form.Control
-                                required
-                                type="text"
-                                placeholder=""
-                                onChange={this.props.handleChange('vital_signs_resp')}
-                                value={values.vital_signs_resp}
-                            />
-                        </Col>
                             
-                        <Form.Label column sm={2}>Sp02</Form.Label>
-                        <Col sm={4} className="mt-2">
-                            <Form.Control
-                                required
-                                type="text"
-                                placeholder=""
-                                onChange={this.props.handleChange('vital_signs_spo2')}
-                                value={values.vital_signs_spo2}
-                            />
-                        </Col>
-
-                        <Form.Label column sm={2}>GCS</Form.Label>
-                        <Col sm={4} className="mt-2">
-                            <Form.Control
-                                required
-                                type="text"
-                                placeholder=""
-                                onChange={this.props.handleChange('vital_signs_gcs')}
-                                value={values.vital_signs_gcs}
-                            />
-                        </Col>
-                        
-                            <Form.Label column sm={2}>{this.context.translate('Pain')}</Form.Label>
-                        <Col sm={4} className="mt-2">
-                            <Form.Control
-                                required
-                                type="text"
-                                placeholder=""
-                                onChange={this.props.handleChange('vital_signs_pain')}
-                                value={values.vital_signs_pain}
-                            />
-                        </Col>
-
-                        <Form.Label column sm={2}>Temp</Form.Label>
-                        <Col sm={4} className="mt-2">
-                            <Form.Control
-                                required
-                                type="text"
-                                placeholder=""
-                                onChange={this.props.handleChange('vital_signs_temp')}
-                                value={values.vital_signs_temp}
-                            />
-                        </Col>
-
-                            <Form.Label column sm={2}>ETCO2</Form.Label>
+                                <Form.Label column sm={2}>{this.context.translate('Pain')}</Form.Label>
                             <Col sm={4} className="mt-2">
                                 <Form.Control
                                     required
                                     type="text"
                                     placeholder=""
-                                    onChange={this.props.handleChange('vital_signs_etco2')}
-                                    value={values.vital_signs_etco2}
+                                    onChange={this.props.handleChange('vital_signs_pain')}
+                                    value={values.vital_signs_pain}
                                 />
                             </Col>
-                            <Button className="left" onClick={this.addVitals}>{this.context.translate('add-vitals')}</Button>
-                        </Form.Group>
+
+                            <Form.Label column sm={2}>Temp</Form.Label>
+                            <Col sm={4} className="mt-2">
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    placeholder=""
+                                    onChange={this.props.handleChange('vital_signs_temp')}
+                                    value={values.vital_signs_temp}
+                                />
+                            </Col>
+
+                                <Form.Label column sm={2}>ETCO2</Form.Label>
+                                <Col sm={4} className="mt-2">
+                                    <Form.Control
+                                        required
+                                        type="text"
+                                        placeholder=""
+                                        onChange={this.props.handleChange('vital_signs_etco2')}
+                                        value={values.vital_signs_etco2}
+                                    />
+                                </Col>
+                                <Button className="left" onClick={this.addVitals}>{this.context.translate('add-vitals')}</Button>
+                            </Form.Group>
+                            <small style={{ color: 'red' }}>{this.context.translate(this.state.message)}</small>
+                        </div>
                         : null}
                             
 
@@ -609,8 +655,8 @@ export default class PhysicalAssessment extends Component {
                     </Form.Group>
 
 
-                    <Button className="left" onClick={this.back}>Previous</Button>
-                    <Button className="right" onClick={this.saveAndContinue}>Next</Button>
+                    <Button className="left" onClick={this.back}>{this.context.translate('previous')}</Button>
+                    <Button className="right" onClick={this.saveAndContinue}>{this.context.translate('next')}</Button>
                 </div>
                 {/* Bottom chart navigation */}
                 <div className="chartnav">
