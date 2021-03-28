@@ -65,12 +65,12 @@ export default class CallChart extends Component {
             data: [{
                 type: "column",
                 dataPoints: [
-                    { label: "0000-0400", y: zeroToFour },
-                    { label: "0500-0800", y: fiveToEight },
-                    { label: "0900-1200", y: nineToTwelve },
-                    { label: "1300-1600", y: thirteenToSixteen },
-                    { label: "1700-2000", y: seventeenToTwenty },
-                    { label: "2100-2400", y: twentyOneToTwentyFour }
+                    { label: "00:00-04:00", y: zeroToFour },
+                    { label: "05:00-08:00", y: fiveToEight },
+                    { label: "09:00-12:00", y: nineToTwelve },
+                    { label: "13:00-16:00", y: thirteenToSixteen },
+                    { label: "17:00-20:00", y: seventeenToTwenty },
+                    { label: "21:00-24:00", y: twentyOneToTwentyFour }
                 ]
             }]
         }
