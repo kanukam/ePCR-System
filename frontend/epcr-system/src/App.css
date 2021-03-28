@@ -60,7 +60,7 @@ table.treatment tr:last-child td { border-bottom:none; }
 
 /* popup styles */
 .overlay { display:block; position:fixed; width:100%; height:100%; background:rgba(0,0,0,0.25); z-index:1; }
-.popup { position:absolute; top:20%; left:27.5%; width:45%; padding-bottom:15px; background:#fff; z-index:2; }
+.popup { position:absolute; top:20%; left:25%; width:50%; padding-bottom:15px; background:#fff; z-index:2; }
 .popup h2 { margin-bottom:0; padding:10px; background:#C4C4C4; color:#000; }
 .popup form { width:100%; margin:0; padding:0; }
 .popup input, .popup select, .popup textarea { width:245px; }
@@ -77,7 +77,8 @@ table.info, table.crew { width:100%; }
 table.info th, table.crew th { text-align:center; background:#ddd; border:1px solid #ddd; }
 table.info td, table.crew td { padding:0 3px; vertical-align:top; border:1px solid #ddd; font-size:smaller; }
 table.info td:nth-child(odd) { font-weight:bold; text-align:right; }
-table.crew { margin-bottom:50px; }
+table.crew { margin-bottom:50px; font-size:20px; }
+table.crew b { display:inline-block; width:200px; }
 .top { padding:10px 20px !important; vertical-align:top; }
 
 .bigchecks { width:100px; height:35px; line-height:35px; color:#4C8DA4; background-color:#E5E5E5; text-align:center; }
