@@ -8,6 +8,7 @@ import Col from 'react-bootstrap/Col'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import { MainContext } from '../Auth'
 import NavDropdown from 'react-bootstrap/NavDropdown'
+import { Link } from "react-router-dom";
 
 export default class Reset extends Component {
     static contextType = MainContext;
@@ -37,7 +38,6 @@ export default class Reset extends Component {
                 },
                 credentials: 'include'
             }
-            // Check if login is successful, redirect to dashbaord on success
             fetch(url, options).then((response) => {
                 if (!response.ok) {
                     throw Error("Failed");
@@ -73,7 +73,7 @@ export default class Reset extends Component {
                         <Row>
                             <Col>
                                 <Jumbotron fluid>
-                                    {/* Login Text */}
+                                    {/* Reset Text */}
                                     <Container>
                                         <h1>{this.context.translate('reset-password')}</h1>
                                     </Container>
@@ -90,8 +90,12 @@ export default class Reset extends Component {
                                     </Button>
                                 </Form>
 
-                                {/* Message displayed telling results of registration */}
+                                {/* Message displayed telling results of reset */}
                                 {this.state.message && <p className="text-dark mt-1"> {this.state.message} </p>}
+                                
+                                <div className='mt-2'>
+                                    <Link to="/">{this.context.translate('login')}</Link>
+                                </div>
 
                             </Col>
                         </Row>

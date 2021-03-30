@@ -156,7 +156,7 @@ export default class SummaryReport extends Component {
                                             {summary.injection}
                                         </Col>
 
-                                        <Form.Label column xs={4}>{this.context.translate('medical-other')}:</Form.Label>
+                                        <Form.Label column xs={4}>{this.context.translate('med-other')}:</Form.Label>
                                         <Col xs={2} className="mt-2">
                                             {summary.medical_other}
                                         </Col>
