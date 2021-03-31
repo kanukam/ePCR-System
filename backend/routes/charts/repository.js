@@ -76,6 +76,7 @@ function updateChart(userID, chartID, patientID, body, callback){
 function viewPatientChart(id, callback){
     db.query(`SELECT * FROM charts INNER JOIN patients on charts.id =${id} AND charts.patientID = patients.id;`, (err, results) => {
         if (err) {
+            console.log(err);
             return callback(err);
         }
         callback(null, results);
@@ -253,13 +254,13 @@ function addMedication(body, callback) {
 }
 
 function downloadPdf(id, locale, pipeTo, callback){
-    viewChart(id, (err, res)=>{
+    viewPatientChart(id, (err, res)=>{
         err
             ? callback(err)
             : notesRepo.viewAllNotes(id, (err, notes) => {
                 err
                     ? callback(err)
-                    : pdf.createChartPDF({ ...res, notes: notes }, locale, pipeTo, callback)
+                    : pdf.createChartPDF({ ...res[0], notes: notes }, locale.toUpperCase(), pipeTo, callback)
             })
 
     })
