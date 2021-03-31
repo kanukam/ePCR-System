@@ -77,37 +77,92 @@ function createChartPDF(info, locale, pipeTo, cb){
         p_history_given,
         p_medical_allergies,
         p_environmental_allergies,
-        p_past_medical_historyL,
+        p_past_medical_history,
+        intake_bleeding,
+        intake_iv_fluids,
+        intake_oral_fluids,
+        intake_vomit,
+        obstetrics,
+        notes
     } = info;
 
-    fs.readFile(`./locales/${locale}.json`, 'utf8', (err, data) => {
+    fs.readFile(`./pdf/locales/${locale}.json`, 'utf8', (err, data) => {
         let tags;
+        const HEADERS = {align: 'center', stroke: true};
+        const TAG_LAYOUT = { continued: true, stroke: true };
         if (err)
-            return callback(err)
+            return cb(err)
         else
             tags = JSON.parse(data);
-            const doc = new PDFDocument;
+            const HEADER_HEIGHT = 18;
+            
+            const doc = new PDFDocument({margin: 10, bufferedPages: true});
             doc.pipe(pipeTo);
+            doc.info.title= `${lname}_${incident_number}_pcr`;
+
+            let calc_height = 0;
 
             // pipe the document to a blob
             //const stream = doc.pipe(blobStream());
-        
-            // add your content to the document here, as usual
-            doc.addPage()
-                .fontSize(18)
-                .text(`
-                ${tags.patientName}: ${fname} ${lname}
-                ${tags.ePCR}`, {
-                    align: 'center'
+            let physExamBody = "\n";
+            physExamBody += skin ? tags.skin + ": " + skin + "\n" : "";
+            physExamBody += mental ? tags.mental + ": " + mental + "\n" : "";
+            physExamBody += neurological ? tags.neurological + ": " + neurological + "\n" : "";
+            physExamBody += head ? tags.head + ": " + head + "\n" : "";
+            physExamBody += neck ? tags.neck + ": " + neck + "\n" : "";
+            physExamBody += chest ? tags.chest + ": " + chest + "\n" : "";
+            physExamBody += pulse_strength ? tags.pulse 
+                + "\n    " + tags.strength + ": " + pulse_strength + "\n    " 
+                + tags.rate + ": " + pulse_rate + "\n": "";
+            physExamBody += abdomen ? tags.abdomen + ": " + abdomen + "\n" : "";
+            physExamBody += pelvis ? tags.pelvis + ": " + pelvis + "\n" : "";
+            physExamBody += back ? tags.back + ": " + back + "\n" : "";
+            physExamBody += left_upper_arm ? tags.leftUpperArm + ": " + left_upper_arm + "\n" : "";
+            physExamBody += left_lower_arm ? tags.leftLowerArm + ": " + left_lower_arm + "\n" : "";
+            physExamBody += left_hand_wrist ? tags.leftHandWrist + ": " + left_hand_wrist + "\n" : "";
+            physExamBody += right_upper_arm ? tags.rightUpperArm + ": " + right_upper_arm + "\n" : "";
+            physExamBody += right_lower_arm ? tags.rightLowerArm + ": " + right_lower_arm + "\n" : "";
+            physExamBody += right_hand_wrist ? tags.rightHandWrist + ": " + right_hand_wrist + "\n" : "";
+            physExamBody += left_upper_leg ? tags.leftUpperLeg + ": " + left_upper_leg + "\n" : "";
+            physExamBody += left_lower_leg ? tags.leftLowerLeg + ": " + left_lower_leg + "\n" : "";
+            physExamBody += left_ankle_foot ? tags.leftAnkleFoot + ": " + left_ankle_foot + "\n" : "";
+            physExamBody += right_upper_leg ? tags.rightUpperLeg + ": " + right_upper_leg + "\n" : "";
+            physExamBody += right_lower_leg ? tags.rightLowerLeg + ": " + right_lower_leg + "\n" : "";
+            physExamBody += right_ankle_foot ? tags.rightAnkleFoot + ": " + right_ankle_foot + "\n" : "";
+            physExamBody += extra_findings ? tags.additionalFindings + ": " + extra_findings + "\n" : "";
+
+            doc.on('pageAdded', () => {
+                doc
+                    //Top:
+                    .image('pdf/img/lightgray.jpg', 0, 0, {width: 1600, height: 38})
+                    .text(`${tags.patientName}:`, TAG_LAYOUT)
+                    .text(` ${fname} ${lname}\n${tags.ePCR}`, {
+                        stroke: false,
+                        
+                    })
+                })  
+            doc
+                //Top:
+                .fontSize(10)
+                .image('pdf/img/lightgray.jpg', 0, 0, {width: 1600, height: 38})
+                .text(`${tags.patientName}:`, TAG_LAYOUT)
+                .text(` ${fname} ${lname}\n${tags.ePCR}`, {
+                    stroke: false, 
                 })
+                
                 .moveDown()
-                // Demogrphics:
+
+                //Demo:
+                .image('pdf/img/gray.jpg', 0, 38, {width: 1600, height: HEADER_HEIGHT})
+                .text(tags.demographics, HEADERS)
+
                 .text(`
-                    ${tags.demographics}
                     ${tags.fName}: ${fname}
                     ${tags.lName}: ${lname}
-                    ${tags.classificationText}: ${p_classify}
-                    ${tags.DOB}: ${birth}
+                    ${tags.classificationText}: 
+                        ${p_classify}
+                    ${tags.DOB}: ${formatDate(birth)}
+                    
                     ${tags.weight}: ${p_weight} kg
                     ${tags.braslow}: ${p_bcolor}
                     ${tags.sex}: ${gender}
@@ -115,102 +170,111 @@ function createChartPDF(info, locale, pipeTo, cb){
                     ${tags.phone}: ${p_phone}
                     
                 `, {
-                     align: 'left'
+                     align: 'left',
+                     columns: 2,
+                     height: 80
                 })
-                .moveDown()
-
-                .text(tags.callInformation, {align: 'center', width: 410})
+                .moveDown();
+            doc
+                //Call info:
+                .image('pdf/img/gray.jpg', 0, 130, {width: 1600, height: HEADER_HEIGHT})
+                .text(tags.callInformation, HEADERS)
                 .text(`
                     ${tags.incidentNumber}: ${incident_number}
                     ${tags.unitNumber}: ${unit_number}
                     ${tags.callType}: ${call_type}
                     ${tags.callNature}: ${call_nature}
-                    ${tags.incidentDate}: ${incident_date}
+                    ${tags.incidentDate}: ${formatDateTime(incident_date)}
                     ${tags.location}: ${location}
+
                     ${tags.incidentAddress}: ${incident_address}
                     ${tags.disposition}: ${disposition}
                     ${tags.destination}: ${destination}
-                    ${tags.agency}: ${agencies}
-                    ${trags.trauma}: ${trauma_cause}
-                `, { align: 'left' })
-                .moveDown()
-
-                .text(`MCI`, {align: 'center', width: 410})
-                .moveDown()
+                    ${tags.agency}: 
+                        ${agencies}
+                    ${tags.trauma}: ${trauma_cause}
+                `, { align: 'left', columns: 2, height: 90 })
+                .moveDown();
+            doc
+                //Mci:
+                .image('pdf/img/gray.jpg', 0, 234, {width: 1600, height: HEADER_HEIGHT})
+                .text(`MCI`, HEADERS)
                 .text(`
-                    ${tags.numberOfPatients}: ${patient_count}
-                    ${tags.triageColor}: ${triage_color}
+                    ${tags.numberOfPatients}: ${patient_count || ""}
+                    ${tags.triageColor}: ${triage_color || ""}
                 `, { align: 'left' })
+                .moveDown();
+
+            doc
+                //Vehicle:
+                .image('pdf/img/gray.jpg', 0, 304, {width: 1600, height: HEADER_HEIGHT})
+                .text(tags.vehicleAccident, HEADERS);
             if(vehicle_accident_type){
                 doc
-                    .text(tags.vehicleAccident, {align: 'center', width: 410})
                     .text(`
                         ${tags.vehicleAccidentType}: ${vehicle_accident_type}
                         ${tags.vehicleAccidentImpact}: ${vehicle_accident_impact}
                         ${tags.vehicleAccidentSafetyEquipment}: ${vehicle_accident_safety_equipment}
                         ${tags.vehicleAccidentSpeed}: ${vehicle_accident_mph}mph / ${(vehicle_accident_mph*1.61).toFixed(2)}kmph
-                        ${tags.vehicleAccidentEjection}: ${tags.yesNo[vehicle_accident_ejected]}
+                        ${tags.vehicleAccidentEjection}: ${vehicle_accident_ejected}
                         `, { align: 'left'})
             }
-            doc
-                .text(tags.responseTimes, {align: 'center', width: 410})
+            else{
+                doc
                 .text(`
-                    ${tags.dispatch}: ${dispatch_date_time}
-                    ${tags.enroute}: ${enroute_date_time}
-                    ${tags.arriveScene}: ${arrive_date_time}
-                    ${tags.patientContact}: ${patient_contact_date_time}
-                    ${tags.departScene}: ${depart_date_time}
-                    ${tags.arriveDestination}: ${arrive_destination_date_time}
-                    ${tags.transferCare}: ${transfer_date_time}
+                    
+                    
+                    
+                    
+                    
+                    `, { align: 'left'})   
+            }
+            doc
+                //Response times:
+                .image('pdf/img/gray.jpg', 0, 396, {width: 1600, height: HEADER_HEIGHT})
+                .text(tags.responseTimes, HEADERS)
+                .text(`
+                    ${tags.dispatch}: ${formatDateTime(dispatch_date_time)}
+                    ${tags.enroute}: ${formatDateTime(enroute_date_time)}
+                    ${tags.arriveScene}: ${formatDateTime(arrive_date_time)}
+                    ${tags.patientContact}: ${formatDateTime(patient_contact_date_time)}
+                    ${tags.departScene}: ${formatDateTime(depart_date_time)}
+                    ${tags.arriveDestination}: ${formatDateTime(arrive_destination_date_time)}
+                    ${tags.transferCare}: ${formatDateTime(transfer_date_time)}
                 `, { align: 'left'})
-                .moveDown()
+                .moveDown();
 
-                .text("HPI", {align: 'center', width: 410})
+            doc
+                //HPI:
+                .image('pdf/img/gray.jpg', 0, 523, {width: 1600, height: HEADER_HEIGHT})
+                .text("HPI", HEADERS)
+                .moveDown()
                 .text(p_hpi, {align: "left"})
-                .moveDown()
+                .moveDown();
 
-                .text(tags.medicalHistory, {align: 'center', width: 410})
+            doc
+                //Medical History:
+                .image('pdf/img/gray.jpg', 0, calc_height += 10 + 547 + doc.heightOfString(p_hpi), {width: 1600, height: HEADER_HEIGHT})
+                .text(tags.medicalHistory, HEADERS)
                 .text(`
                     ${tags.medicationAllergies}: ${p_medical_allergies}
                     ${tags.environmentalAllergies}: ${p_environmental_allergies}
-                    ${tags.pastMedicalHistory}: ${p_past_medical_historyL}
+                    ${tags.pastMedicalHistory}: ${p_past_medical_history}
                     ${tags.medications}: ${medications}
                     `, { align: 'left'})
+                .moveDown();
+            doc.addPage();
+            doc
+                .moveDown()
+                //Physical Exam
+                .image('pdf/img/gray.jpg', 0, calc_height = 38, {width: 1600, height: HEADER_HEIGHT})
+                .text(tags.physicalExam, HEADERS)
+                .text(physExamBody, { align: 'left'})
                 .moveDown()
 
-                .text(tags.physicalExam, {align: 'center', width: 410})
-                .text(`
-                    ${tags.skin}: ${skin}
-                    ${tags.mental}: ${mental}
-                    ${tags.neurological}: ${neurological}
-                    ${tags.head}: ${head}
-                    ${tags.neck}: ${neck}
-                    ${tags.chest}: ${chest}
-
-                    ${tags.pulse}
-                        ${tags.strength}: ${pulse_strength}
-                        ${tags.rate}: ${pulse_rate}
-                    
-                    ${tags.abdomen}: ${abdomen}
-                    ${tags.pelvis}: ${pelvis}
-                    ${tags.back}: ${back}
-                    ${tags.leftUpperArm}: ${left_upper_arm}
-                    ${tags.leftLowerArm}: ${left_lower_arm}
-                    ${tags.leftHandWrist}: ${left_hand_wrist}
-                    ${tags.rightUpperArm}: ${right_upper_arm}
-                    ${tags.rightLowerArm}: ${right_lower_arm}
-                    ${tags.rightHandWrist}: ${right_hand_wrist}
-                    ${tags.leftUpperLeg}: ${left_upper_leg}
-                    ${tags.leftLowerLeg}: ${left_lower_leg}
-                    ${tags.leftAnkleFoot}: ${left_ankle_foot}
-                    ${tags.rightUpperLeg}: ${right_upper_leg}
-                    ${tags.rightLowerLeg}: ${right_lower_leg}
-                    ${tags.rightAnkleFoot}: ${right_ankle_foot}
-                    ${tags.additionalFindings}: ${extra_findings}
-                `, { align: left })
-                .moveDown()
-
-                .text(tags.stroke, {align: 'center', width: 410})
+            doc
+                //Stroke
+                .image('pdf/img/gray.jpg', 0, calc_height += 23 + doc.heightOfString(physExamBody), {width: 1600, height: HEADER_HEIGHT}).text(tags.stroke, HEADERS)
                 .text(`
                     ${tags.strokeTime}: ${stroke_time}
                         ${tags.strokeFacialDroop}: ${stroke_facial_droop}
@@ -218,17 +282,68 @@ function createChartPDF(info, locale, pipeTo, cb){
                         ${tags.strokeAbnormalSpeech}: ${stroke_abnormal_speech}
                 `, {align: "left"})
                 .moveDown()
-
-                .text(tags.vitalSigns, {align: 'center', width: 410})
+            console.log(procedures);
+            doc
+                //Vital Signs
+                .image('pdf/img/gray.jpg', 0, calc_height += 18 + 74, {width: 1600, height: HEADER_HEIGHT})
+                .text(tags.vitalSigns, HEADERS)
                 .text(`
                     ${vital_signs}
                 `, {align: "left"})
+                .moveDown()
+
+                .image('pdf/img/gray.jpg', 0, calc_height += 58 + doc.heightOfString(vital_signs) - (vital_signs ? 10 : 0), {width: 1600, height: HEADER_HEIGHT})
+                .text(tags.procedures, HEADERS)
+                .text(`
+                    ${procedures}
+                `)
+                .moveDown()
+
+                .image('pdf/img/gray.jpg', 0, calc_height += 58 + doc.heightOfString(procedures) - (procedures ? 10 : 0), {width: 1600, height: HEADER_HEIGHT})
+                .text(tags.intakeOutput, HEADERS)
+                .text(`
+                    ${tags.bleeding}: ${intake_bleeding}
+                    ${tags.ivFluids}: ${intake_iv_fluids}
+                    ${tags.oralFluids}: ${intake_oral_fluids}
+                    ${tags.vomit}: ${intake_vomit}
+                `)
+                .moveDown()
+
+                .image('pdf/img/gray.jpg', 0, calc_height += 92, {width: 1600, height: HEADER_HEIGHT})
+                .text(tags.obstetrics, HEADERS)
+                .moveDown()
+                .text(obstetrics)
                 // get a blob when you're done
-            
+            doc.addPage();
+
+            doc.moveDown()
+                .image('pdf/img/gray.jpg', 0, calc_height = 38, {width: 1600, height: HEADER_HEIGHT})
+                .text(tags.notes, HEADERS)
+                .moveDown()
+            for(let i = 0; i < notes.length; i++)
+                doc.text(`${formatDateTime(notes[i].dateAdded)}           ${notes[i].name}\n     ${notes[i].note}\n`, { align: 'left'});
+
             doc.end();
             cb();
     });
 
+}
+
+function formatDateTime(date){
+    if(!date) return "";
+    let x = new Date(date);
+    return x.getDate() + 
+    "/" +  (x.getMonth() + 1) +
+    "/" +  x.getFullYear()
+    + " " + x.toLocaleTimeString();
+}
+
+function formatDate(date){
+    if(!date) return "";
+    let x = new Date(date);
+    return x.getDate() + 
+    "/" +  (x.getMonth() + 1) +
+    "/" +  x.getFullYear();
 }
 
 module.exports = {
