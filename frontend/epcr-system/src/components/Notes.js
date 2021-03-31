@@ -93,13 +93,15 @@ export default class Notes extends Component {
     render() {
         let notesComps = [];
         this.state.notes.forEach(note => {
+            let time = note['dateAdded'].substring(11, 19);
+            console.log(time);
             let date = new Date(note['dateAdded']);
             notesComps.push(
                 <Container className="chart shadow" key={note['noteID']}>
                     <p>{note['note']}</p>
                     <b>{note['name']}</b>
                     <br />
-                    <i>{date.toLocaleDateString() + ' ' + date.toLocaleTimeString()}</i>
+                    <i>{date.toLocaleDateString() + ' ' + time}</i>
                 </Container>
             );
         });
