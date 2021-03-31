@@ -110,16 +110,17 @@ function calls(req, res) {
 function downloadPdf(req, res){
   const id = req.params.chartId;
   let locale = req.query.locale ? req.query.locale : 'EN';
-  res.header('Content-disposition', 'inline; filename=' + `${id}_chart`);
+  res.header('Content-disposition', 'inline; filename=' + `${id}_chart.pdf`);
   res.header('Content-type', 'application/pdf');
   repo.downloadPdf(id, locale, res, (err) => {
   })
 }
 
 function downloadPdfTest(req, res){
-  res.header('Content-disposition', 'inline; filename=' + `test_chart`);
+  let locale = req.query.locale ? req.query.locale : 'EN';
+  res.header('Content-disposition', 'inline; filename=' + `test_chart.pdf`);
   res.header('Content-type', 'application/pdf');
-  repo.downloadPdfTest(res, (err) => {
+  repo.downloadPdfTest(res, locale, (err) => {
     console.log(err);
   })
 }
