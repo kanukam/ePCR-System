@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import { MainContext } from '../Auth'
 import { Link } from 'react-router-dom'
 import Row from 'react-bootstrap/Row';
@@ -48,7 +49,11 @@ export class ChartPreview extends Component {
                     </Col>
                     <div >
                         <br /><br /><br />
-                        <Button variant="primary" as={Link} to={`/ViewChart/${this.props.id}`}>View</Button>
+                        <ButtonGroup>
+                            <Button variant="primary" as={Link} to={`/ViewChart/${this.props.id}`}>View</Button>
+                            <Button variant="outline-primary" href={`http://localhost:3000/charts/${this.props.id}/pdf`}>Download</Button>
+                        </ButtonGroup>
+
                     </div>
                 </Row>
             </Container>
