@@ -130,7 +130,7 @@ con.connect(err => {
         chartID INT(11) UNSIGNED, 
         userID INT(11) UNSIGNED, 
         note MEDIUMTEXT, 
-        dateAdded DATE,
+        dateAdded DATETIME,
         PRIMARY KEY (id)
         )`, (err, res) => {
         if (err) return console.log(err);

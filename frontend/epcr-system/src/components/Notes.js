@@ -99,7 +99,7 @@ export default class Notes extends Component {
                     <p>{note['note']}</p>
                     <b>{note['name']}</b>
                     <br />
-                    <i>{date.toLocaleDateString()}</i>
+                    <i>{date.toLocaleDateString() + ' ' + date.toLocaleTimeString()}</i>
                 </Container>
             );
         });

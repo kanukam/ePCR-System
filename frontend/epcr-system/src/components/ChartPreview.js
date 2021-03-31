@@ -29,10 +29,10 @@ export class ChartPreview extends Component {
                         {this.props.birth && this.year(this.props.birth)}
                         <br />
                         <b>{this.context.translate('address')}: </b>
-                        {this.props.address}
+                        {/*{this.props.address}*/}123 testing, testville
                         <br />
                         <b>{this.context.translate('phone')}: </b>
-                        {this.props.phone}
+                        {/*{this.props.phone}*/}123456789
                         <br />
                         {this.props.history}
                     </Col>
@@ -43,7 +43,7 @@ export class ChartPreview extends Component {
                         <b>{this.context.translate('call-type')}: </b>
                         {this.props.call_type}
                         <br />
-                        <b>{this.context.translate('incedent-date')}: </b>
+                        <b>{this.context.translate('idate')}: </b>
                         {this.props.incident_date && this.year(this.props.incident_date)}
                     </Col>
                     <div >
