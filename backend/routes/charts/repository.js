@@ -1,6 +1,7 @@
 // @ts-check
 const db = require('../../sql/database');
 const pdf = require('../../pdf');
+const notesRepo = require('../notes/repository');
 
 function addChart(body, pbody, callback) {
     // insert into patient table first
@@ -254,14 +255,16 @@ function addMedication(body, callback) {
 function downloadPdf(id, locale, pipeTo, callback){
     viewChart(id, (err, res)=>{
         err
-        ? callback(err)
-        : pdf.createChartPDF(res, locale, pipeTo, (err) => {
-            callback(err);
-        } )
+            ? callback(err)
+            : notesRepo.viewAllNotes(id, (err, notes) => {
+                err
+                    ? callback(err)
+                    : pdf.createChartPDF({ ...res, notes: notes }, locale, pipeTo, callback)
+            })
+
     })
 }
-
-function downloadPdfTest(pipeTo, cb){
+function downloadPdfTest(pipeTo, locale, cb){
     pdf.createChartPDF({
         incident_number:'0001',
         incident_date:'3/1/2021',
@@ -331,11 +334,17 @@ function downloadPdfTest(pipeTo, cb){
         p_bcolor: 'GREEN',
         p_address: '100 S. Virginia',
         p_phone: '775-867-5309',
-        p_hpi:'',
+        p_hpi:'TEST',
         p_medical_allergies:'None',
         p_environmental_allergies:'None',
-        p_past_medical_historyL:''
-    }, 'EN', pipeTo, cb)
+        p_past_medical_history:'TEST',
+        intake_bleeding: "Y",
+        intake_iv_fluids: "Y",
+        intake_oral_fluids: "Y",
+        intake_vomit: "Y",
+        obstetrics: "TEST",
+        notes:[{dateAdded: "9/9/2019", note:"TEST1", name:"A MOORE"}]
+    }, locale, pipeTo, cb)
 }
 
 module.exports = { 
