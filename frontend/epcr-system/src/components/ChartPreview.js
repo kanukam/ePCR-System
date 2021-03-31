@@ -19,6 +19,7 @@ export class ChartPreview extends Component {
         
     }
     render() {
+        console.log(this.context);
         return (
             <Container className='chart shadow'>
                 <Row>
@@ -51,7 +52,7 @@ export class ChartPreview extends Component {
                         <br /><br /><br />
                         <ButtonGroup>
                             <Button variant="primary" as={Link} to={`/ViewChart/${this.props.id}`}>View</Button>
-                            <Button variant="outline-primary" href={`http://localhost:3000/charts/${this.props.id}/pdf`}>Download</Button>
+                            <Button variant="outline-primary" href={`http://localhost:3000/charts/${this.props.id}/pdf?locale=${this.context.language}`}>Download</Button>
                         </ButtonGroup>
 
                     </div>
