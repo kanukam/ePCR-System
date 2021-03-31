@@ -137,6 +137,18 @@ con.connect(err => {
         if (res.changedRows > 0) console.log("\t...'notes' table created/updated");
         else console.log("\t'notes' table up to date.");
     });
+
+    con.query(`CREATE TABLE IF NOT EXISTS ratelimiters (
+        id INT(11) UNSIGNED AUTO_INCREMENT, 
+        ip VARCHAR(255),
+        hits INT(11) UNSIGNED,
+        expiry DATETIME,
+        PRIMARY KEY (id)
+        )`, (err, res) => {
+        if (err) return console.log(err);
+        if (res.changedRows > 0) console.log("\t...'ratelimiters' table created/updated");
+        else console.log("\t'ratelimiters' table up to date.");
+    });
 });
 
 module.exports = con;
