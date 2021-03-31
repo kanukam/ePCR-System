@@ -1,12 +1,4 @@
 {
-    "yesNo": {
-        "true": "Yes",
-        "false": "No",
-        "Yes": "Yes",
-        "No": "No",
-        "yes": "Yes",
-        "no": "No"
-    },
 
     "patientName": "Patient Name",
     "ePCR": "Patient Care Record",
@@ -15,12 +7,6 @@
     "fName": "First Name",
     "lName": "Last  Name",
     "classificationText": "Patient Classification",
-    "classifications": {
-        "Adult": "Adult - 15 yr to 65 yr",
-        "Senior Adult": "Senior Adult - >65 yr",
-        "Pediatric": "Pediatric - 28 days to 15 yr",
-        "Neonatal": "Neonatal - 0 to 28 days"
-    },
     "DOB": "DOB",
     "sex": "Sex",
     "address": "Address",
@@ -32,107 +18,24 @@
     "incidentNumber": "Incident Number",
     "unitNumber": "Unit Number",
     "callType": "Call Type",
-    "callTypes": {
-        "Clinic": "Clinic",
-        "Scene": "Scene",
-        "Transfer": "Transfer"
-    },
     "callNature": "Nature of Call",
-    "callNatures":{
-        "B/P check": "B/P check",
-        "Injection": "Injection",
-        "Medical other": "Medical other",
-        "Cardiac": "Cardiac",
-        "Pulmonary": "Pulmonary",
-        "Trauma": "Trauma",
-        "OB": "OB"
-    },
     "disposition": "Disposition",
-    "dispositions": {
-        "Treat and release": "Treat and release",
-        "Transport": "Transport",
-        "Unable to locate": "Unable to locate",
-        "DOA": "DOA",
-        "AMA": "AMA"
-    },
     "destination":"Destination",
     "incidentDate": "Incident Date",
     "incidentAddress": "Incident Address",
     "agency": "Agency",
-    "agencies":{
-
-    },
     "trauma": "Trauma",
-    "traumas":{
-        "Animal": "Animal",
-        "Assault": "Assault",
-        "Motor vehicle": "Motor Vehicle",
-        "Bicycle": "Bicycle",
-        "Boat":"Boat",
-        "Drowning": "Drowning",
-        "Electrical": "Electrical",
-        "Explosion": "Explosion",
-        "Fall": "Fall",
-        "Fire": "Fire",
-        "Gun": "Gun",
-        "Tools": "Tools",
-        "Stabbing": "Stabbing",
-        "Struck by object": "Struck by object",
-        "Toxic substance": "Toxic substance",
-        "Other vehicle": "Other vehicle",
-        "Other": "Other"
-    },
 
     "numberOfPatients": "Number of Patients",
     "triageColor": "Triage Color",
-    "triageColors":{
-        "Green": "Green",
-        "Yellow": "Yellow",
-        "Red": "Red",
-        "Black": "Black"
-    },
 
     "vehicleAccident": "Vehicle Accident",
     "vehicleAccidentType": "Accident Type",
-    "vehicleAccidentTypes":{
-        "Auto into object": "Auto into object",
-        "Auto into another auto": "Auto into another auto",
-        "Motorcycle": "Motorcycle",
-        "Boat": "Boat",
-        "Aviation": "Aviation"
-    },
     "vehicleAccidentImpact":"Impact",
-    "vehicleAccidentImpacts":{
-        "Head on": "Head on",
-        "Side": "Side",
-        "Rear": "Rear",
-        "Roll over": "Roll over"
-    },
     "vehicleAccidentSafetyEquipment": "Safety Equipment",
-    "vehicleAccidentSafetyEquipments":{
-        "None": "None",
-        "Seatbelt": "Seatbelt",
-        "Helmet": "Helmet",
-        "Airbags deployed": "Airbags deployed",
-        "Protective clothing": "Protective clothing",
-        "Life preserver": "Life preserver"
-    },
     "vehicleAccidentSpeed": "Estimated Speed",
     "vehicleAccidentEjection": "Ejection",
     "location": "Location",
-    "locations":{
-        "Rescate clinic": "Rescate clinic",
-        "Home": "Home",
-        "Business": "Business",
-        "Road / Hwy": "Road / Hwy",
-        "Construction site": "Construction site",
-        "Ocean / Bay": "Ocean / Bay",
-        "Beach": "Beach",
-        "Marina": "Marina",
-        "Medical office": "Medical office",
-        "School": "School",
-        "Other": "Other"
-    },
     "responseTimes":"Response Times",
     "dispatch": "Dispatched",
     "enroute": "Enroute",

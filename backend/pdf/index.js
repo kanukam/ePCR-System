@@ -282,7 +282,7 @@ function createChartPDF(info, locale, pipeTo, cb){
                         ${tags.strokeAbnormalSpeech}: ${stroke_abnormal_speech}
                 `, {align: "left"})
                 .moveDown()
-            console.log(procedures);
+            
             doc
                 //Vital Signs
                 .image('pdf/img/gray.jpg', 0, calc_height += 18 + 74, {width: 1600, height: HEADER_HEIGHT})

@@ -23,107 +23,25 @@
     "incidentNumber": "Incidente #",
     "unitNumber": "Número de unidad",
     "callType": "Tipo de llamada",
-    "callTypes": {
-        "Clinic": "Clinic",
-        "Scene": "Scene",
-        "Transfer": "Transfer"
-    },
     "callNature": "La Razón de la llamada",
-    "callNatures":{
-        "B/P check": "B/P check",
-        "Injection": "Injection",
-        "Medical other": "Medical other",
-        "Cardiac": "Cardiac",
-        "Pulmonary": "Pulmonary",
-        "Trauma": "Trauma",
-        "OB": "OB"
-    },
     "disposition": "Disposition",
-    "dispositions": {
-        "Treat and release": "Treat and release",
-        "Transport": "Transport",
-        "Unable to locate": "Unable to locate",
-        "DOA": "DOA",
-        "AMA": "AMA"
-    },
     "destination":"Destino",
     "incidentDate": "Incident Date",
     "incidentAddress": "Dirección del incidente",
     "agency": "Agencias",
-    "agencies":{
-
-    },
     "trauma": "Causa de trauma",
-    "traumas":{
-        "Animal": "Animal",
-        "Assault": "Assault",
-        "Motor vehicle": "Motor Vehicle",
-        "Bicycle": "Bicycle",
-        "Boat":"Boat",
-        "Drowning": "Drowning",
-        "Electrical": "Electrical",
-        "Explosion": "Explosion",
-        "Fall": "Fall",
-        "Fire": "Fire",
-        "Gun": "Gun",
-        "Tools": "Tools",
-        "Stabbing": "Stabbing",
-        "Struck by object": "Struck by object",
-        "Toxic substance": "Toxic substance",
-        "Other vehicle": "Other vehicle",
-        "Other": "Other"
-    },
 
     "numberOfPatients": "Número de pacientes",
     "triageColor": "Color de clasificación",
-    "triageColors":{
-        "Green": "Green",
-        "Yellow": "Yellow",
-        "Red": "Red",
-        "Black": "Black"
-    },
 
     "vehicleAccident": "Accidente Vehiculoso",
     "vehicleAccidentType": "Tipo",
-    "vehicleAccidentTypes":{
-        "Auto into object": "Auto into object",
-        "Auto into another auto": "Auto into another auto",
-        "Motorcycle": "Motorcycle",
-        "Boat": "Boat",
-        "Aviation": "Aviation"
-    },
     "vehicleAccidentImpact":"Impacto",
-    "vehicleAccidentImpacts":{
-        "Head on": "Head on",
-        "Side": "Side",
-        "Rear": "Rear",
-        "Roll over": "Roll over"
-    },
     "vehicleAccidentSafetyEquipment": "Equipos de seguridad",
-    "vehicleAccidentSafetyEquipments":{
-        "None": "None",
-        "Seatbelt": "Seatbelt",
-        "Helmet": "Helmet",
-        "Airbags deployed": "Airbags deployed",
-        "Protective clothing": "Protective clothing",
-        "Life preserver": "Life preserver"
-    },
     "vehicleAccidentSpeed": "Velocidad estimada",
     "vehicleAccidentEjection": "Expulsión del vehículo",
     "location": "Ubicación",
-    "locations":{
-        "Rescate clinic": "Rescate clinic",
-        "Home": "Home",
-        "Business": "Business",
-        "Road / Hwy": "Road / Hwy",
-        "Construction site": "Construction site",
-        "Ocean / Bay": "Ocean / Bay",
-        "Beach": "Beach",
-        "Marina": "Marina",
-        "Medical office": "Medical office",
-        "School": "School",
-        "Other": "Other"
-    },
+
     "responseTimes":"Tiempos de respuesta",
     "dispatch": "Envío",
     "enroute": "Ruta",
@@ -156,23 +74,32 @@
     "leftLowerArm": "Brazo inferior izquierdo",
     "leftHandWrist": "Mano izquierda / Muñeca",
     "rightUpperArm": "Parte superior derecha del brazo",
-    "rightLowerArm": "Right Lower Arm",
-    "rightHandWrist": "Right Hand Wrist",
-    "leftUpperLeg": "Left Upper Leg",
-    "leftLowerLeg": "Left Lower Leg",
-    "leftAnkleFoot": "Left Ankle Foot",
-    "rightUpperLeg": "Right Upper Leg",
-    "rightLowerLeg": "Right Lower Leg",
-    "rightAnkleFoot": "Right Ankle Foot",
-    "additionalFindings": "Additional Findings",
+    "rightLowerArm": "Brazo inferior derecho",
+    "rightHandWrist": "Mano derecha / Muñeca",
+    "leftUpperLeg": "Parte superior izquierda de la pierna",
+    "leftLowerLeg": "Pierna inferior izquierda",
+    "leftAnkleFoot": "Tobillo izquierdo / Pie",
+    "rightUpperLeg": "Parte superior derecha de la pierna",
+    "rightLowerLeg": "Parte inferior derecha de la pierna",
+    "rightAnkleFoot": "Tobillo derecho / Pie",
+    "additionalFindings": "Hallazgos adicionales",
 
-    "stroke": "Stroke",
-    "strokeTime": "Stroke Time",
-    "strokeFacialDroop": "Facial Droop",
-    "strokeArmDrift": "Arm Drift",
-    "strokeAbnormalSpeech": "Abnormal Speech",
+    "stroke": "Golpe",
+    "strokeTime": "Tiempo de inicio",
+    "strokeFacialDroop": "Caída facial",
+    "strokeArmDrift": "Deriva del brazo",
+    "strokeAbnormalSpeech": "Discurso anormal",
 
-    "vitalSigns": "Vital Signs"
+    "vitalSigns": "Signos vitales",
+    "procedures": "Procedures",
+    "intakeOutput": "Ingesta / Salida",
+    "bleeding": "Sangrado",
+    "ivFluids": "IV fluidos",
+    "oralFluids": "Líquidos orales",
+    "vomit": "Vómito",
+
+    "obstetrics": "Obstetricia",
+    "notes": "Notas"
 
 
 
