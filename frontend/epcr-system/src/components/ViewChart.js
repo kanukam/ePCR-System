@@ -5,6 +5,7 @@ import MainNav from './MainNav';
 import Notes from './Notes';
 import ShowVital from './ShowVital';
 import '../App.css'
+import moment from 'moment'
 
 export default class ViewChart extends Component {
     static contextType = MainContext;
@@ -48,15 +49,14 @@ export default class ViewChart extends Component {
         this.setState({sidebarHide : !this.state.sidebarHide});
     }
 
-    year(date) {
-        let temp = date.split('T')[0]
-        temp = temp.split('-');
-        let year = temp[0];
-        let month = temp[1];
-        let day = temp[2];
-        return day + '/' + month + '/' + year;
-
+    dateOnly(year) {
+        return moment(year).format('MM/DD/YYYY hh:mm A');
     }
+
+    dateAndTime(year) {
+        return moment(year).format('MM/DD/YYYY hh:mm A');
+    }
+
 
     render() {
         // Will error if object destructuring happens and chart isn't sent yet, if statement prevents the error
@@ -90,7 +90,7 @@ export default class ViewChart extends Component {
                             </div>
                             <table className="simpleview">
                                 <tr>
-                                    <td colspan="2"><b>{this.context.translate('idate')}</b>{incident_date}</td>
+                                    <td colspan="2"><b>{this.context.translate('idate')}</b>{incident_date && this.dateOnly(incident_date)}</td>
                                     <td colspan="2"><b>{this.context.translate('ino')}</b>{incident_number}</td>
                                     <td colspan="3"><b>{this.context.translate('unit')}</b>{unit_number}</td>
                                 </tr>
@@ -130,13 +130,13 @@ export default class ViewChart extends Component {
                                     <th colspan="7">{this.context.translate('response-times')}</th>
                                 </tr>
                                 <tr>
-                                    <td width="14%"><b>{this.context.translate('dispatch')}</b>{dispatch_date_time}</td>
-                                    <td width="14%"><b>{this.context.translate('enroute')}</b>{enroute_date_time}</td>
-                                    <td width="14%"><b>{this.context.translate('arrscn')}</b>{arrive_date_time}</td>
-                                    <td width="14%"><b>{this.context.translate('pcontact')}</b>{patient_contact_date_time}</td>
-                                    <td width="14%"><b>{this.context.translate('dptscn')}</b>{depart_date_time}</td>
-                                    <td width="14%"><b>{this.context.translate('arrdes')}</b>{arrive_destination_date_time}</td>
-                                    <td width="14%"><b>{this.context.translate('trcare')}</b>{transfer_date_time}</td>
+                                    <td width="14%"><b>{this.context.translate('dispatch')}</b>{dispatch_date_time && this.dateAndTime(dispatch_date_time)}</td>
+                                    <td width="14%"><b>{this.context.translate('enroute')}</b>{enroute_date_time && this.dateAndTime(dispatch_date_time)}</td>
+                                    <td width="14%"><b>{this.context.translate('arrscn')}</b>{arrive_date_time && this.dateAndTime(dispatch_date_time)}</td>
+                                    <td width="14%"><b>{this.context.translate('pcontact')}</b>{patient_contact_date_time && this.dateAndTime(dispatch_date_time)}</td>
+                                    <td width="14%"><b>{this.context.translate('dptscn')}</b>{depart_date_time && this.dateAndTime(dispatch_date_time)}</td>
+                                    <td width="14%"><b>{this.context.translate('arrdes')}</b>{arrive_destination_date_time && this.dateAndTime(dispatch_date_time)}</td>
+                                    <td width="14%"><b>{this.context.translate('trcare')}</b>{transfer_date_time && this.dateAndTime(dispatch_date_time)}</td>
                                 </tr>
                                 <tr>
                                     <th colspan="7">{this.context.translate('patient-info')}</th>
@@ -144,7 +144,7 @@ export default class ViewChart extends Component {
                                 <tr>
                                     <td colspan="2"><b>{this.context.translate('lname')}</b>{lname}</td>
                                     <td colspan="2"><b>{this.context.translate('fname')}</b>{fname}</td>
-                                    <td><b>{this.context.translate('dob')}</b>{birth}</td>
+                                    <td><b>{this.context.translate('dob')}</b>{birth && this.dateOnly(birth)}</td>
                                     <td><b>{this.context.translate('classify')}</b>{p_classify}</td>
                                     <td><b>{this.context.translate('psex')}</b>{gender}</td>
                                 </tr>
