@@ -115,6 +115,7 @@
     "road-hwy": "Road/Highway",
     "ocean-bay": "Ocean/Bay",
     "beach": "Beach",
+    "marina": "Marina",
     "med-office": "Medical office",
     "iaddress": "Incident address",
     "disposition": "Disposition",
@@ -217,6 +218,7 @@
     "given-by": "Given by",
     "patient": "Patient",
     "family": "Family",
+    "allergy": "Allergies",
     "med-allergy": "Medication allergies",
     "env-allergy": "Environmental allergies",
     "seperate-comma": "Separate multiple items with a comma",
@@ -513,5 +515,6 @@
     "inhaled": "Inhaled",
     "topical": "Topical",
     "ophthalmic": "Ophthalmic",
-    "otic": "Otic"
+    "otic": "Otic",
+    "view-chart-message": "To access the entire chart form, we suggest you email or print the downloadable PDF."
 }
