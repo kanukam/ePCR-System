@@ -61,6 +61,7 @@ export default class PhysicalAssessment extends Component {
                 etco2={etco2}
             />)
         }
+        console.log(values);
         return (
             <div className="assessment">
                 <div className="content">
@@ -384,7 +385,7 @@ export default class PhysicalAssessment extends Component {
 
                         <Form.Label column sm={2}>{this.context.translate('Right-lower-leg')}</Form.Label>
                         <Col sm={4} className="mt-2">
-                            <Form.Check type="checkbox" label={this.context.translate('Normal')} name="right_lower_leg" value="Normal" checked={values.assessmentCheckBoxes[223]} onChange={this.props.handleAssessmentCheckboxes(233)} />
+                            <Form.Check type="checkbox" label={this.context.translate('Normal')} name="right_lower_leg" value="Normal" checked={values.assessmentCheckBoxes[223]} onChange={this.props.handleAssessmentCheckboxes(223)} />
                             <Form.Check type="checkbox" label={this.context.translate('Abrasion')} name="right_lower_leg" value="Abrasión" checked={values.assessmentCheckBoxes[224]} onChange={this.props.handleAssessmentCheckboxes(224)} />
                             <Form.Check type="checkbox" label={this.context.translate('Laceration')} name="right_lower_leg" value="Laceración" checked={values.assessmentCheckBoxes[225]} onChange={this.props.handleAssessmentCheckboxes(225)} />
                             <Form.Check type="checkbox" label={this.context.translate('Puncture-wound')} name="right_lower_leg" value="Herida punzante" checked={values.assessmentCheckBoxes[226]} onChange={this.props.handleAssessmentCheckboxes(227)} />
