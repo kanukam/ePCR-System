@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button'
 import Moment from 'react-moment';
+import { MainContext } from '../Auth';
 import '../App.css'
 
 export default class Confirm extends Component {
+    static contextType = MainContext;
     constructor(props) {
         super(props);
         this.state = {
@@ -159,7 +161,7 @@ export default class Confirm extends Component {
                             </td>
                         </tr>
                     </table>
-                    <small style={{color:'red'}} className="ml-2">{values.message}</small>
+                    <small style={{color:'red'}} className="ml-2">{this.context.translate(values.message)}</small>
                     <Button className="left" onClick={this.back}>Previous</Button>
                     <Button className="right" onClick={this.props.handleSubmit}>Submit</Button>
                 </form>

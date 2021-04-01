@@ -256,7 +256,7 @@ export default class ChartForm extends Component {
             vital_signs_temp: "",
             vital_signs_etco2: "",
             vital_signs_b_p_d: "",
-            vital_signs_b_p_s: "",
+            vital_signs_b_p_s: ""
         });
     }
 
@@ -303,8 +303,8 @@ export default class ChartForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        if (this.state.idate === "") {
-            this.setState({ message: "One or more required fields have been left blank. Please fill them out." });
+        if (this.state.idate === "" || this.state.lname === "" || this.state.fname === "" || this.state.gender === "" || this.state.birth === "") {
+            this.setState({ message: "required-fields" });
         } else {
             /* chart table */
             // chart call
@@ -318,8 +318,9 @@ export default class ChartForm extends Component {
             const enroute_date_time = this.state.enroute || null;
             const arrive_date_time = this.state.arrscn || null;
             const patient_contact_date_time = this.state.contact || null;
-            const transfer_date_time = this.state.trcare || null;
             const depart_date_time = this.state.dptscn || null;
+            const arrive_destination_date_time = this.state.arrdes || null;
+            const transfer_date_time = this.state.trcare || null;
             const unit_number = this.state.unit;
             const call_type = this.state.ctype;
             const call_nature = this.state.nature;
@@ -418,7 +419,7 @@ export default class ChartForm extends Component {
                 method: 'POST',
                 body: JSON.stringify({
                     body: {
-                        incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, medications, procedures, skin, mental, neurological, head, neck, chest, pulse_strength, pulse_rate, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot, extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech, vital_signs, p_weight, p_classify, p_bcolor, p_address, p_phone, p_hpi, p_history_given, p_medical_allergies, p_environmental_allergies, p_past_medical_history, intake_bleeding, intake_iv_fluids, intake_oral_fluids, intake_vomit, obstetrics
+                        incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, arrive_destination_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, medications, procedures, skin, mental, neurological, head, neck, chest, pulse_strength, pulse_rate, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot, extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech, vital_signs, p_weight, p_classify, p_bcolor, p_address, p_phone, p_hpi, p_history_given, p_medical_allergies, p_environmental_allergies, p_past_medical_history, intake_bleeding, intake_iv_fluids, intake_oral_fluids, intake_vomit, obstetrics
                     },
                     pbody: { fname, lname, birth, gender },
                     patientID: patientID

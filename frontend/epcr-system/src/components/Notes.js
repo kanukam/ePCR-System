@@ -107,7 +107,7 @@ export default class Notes extends Component {
         });
         return (
             <React.Fragment>
-                <Container className="chart shadow">
+                <Container className="chart shadow" style={{marginTop:'5rem'}}>
                     <h2>Notes:</h2>
                     {notesComps}
                     <Container className="chart shadow">
