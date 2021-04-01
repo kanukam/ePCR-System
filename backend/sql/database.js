@@ -45,6 +45,7 @@ con.connect(err => {
         arrive_date_time DATETIME NULL,
         patient_contact_date_time DATETIME NULL,
         depart_date_time DATETIME NULL,
+        arrive_destination_date_time DATETIME NULL,
         transfer_date_time DATETIME NULL,
         unit_number VARCHAR(15) NULL,
         call_type VARCHAR(15) NULL,
