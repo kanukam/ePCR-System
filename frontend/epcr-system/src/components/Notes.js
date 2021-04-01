@@ -94,7 +94,6 @@ export default class Notes extends Component {
         let notesComps = [];
         this.state.notes.forEach(note => {
             let time = note['dateAdded'].substring(11, 19);
-            console.log(time);
             let date = new Date(note['dateAdded']);
             notesComps.push(
                 <Container className="chart shadow" key={note['noteID']}>
