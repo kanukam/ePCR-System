@@ -122,8 +122,8 @@ function summary(from, to, callback) {
             var animal, assault, motor, bike, boat, drown, electrical, explosion, fall, fire, gun, tools, stabbing, struck, toxic, vehicle, trauma_other;
             animal = assault = motor = bike = boat = drown = electrical = explosion = fall = fire = gun = tools = stabbing = struck = toxic = vehicle = trauma_other = 0;
             // Procedures
-            var io, pleural, airway_lma, airway_intub, crico, cardiac_arrest, cardiac_aed, cardiac_defib, cardiac_pacing, procedure_ob;
-            io = pleural = airway_lma = airway_intub = crico = cardiac_arrest = cardiac_aed = cardiac_defib = cardiac_pacing = procedure_ob = 0;
+            var io, pleural, airway_lma, airway_intub, crico, cardiac_arrest, cardiac_defib_manual, cardiac_defib_aed, cardiac_pacing, procedure_ob;
+            io = pleural = airway_lma = airway_intub = crico = cardiac_arrest = cardiac_defib_manual = cardiac_defib_aed = cardiac_pacing = procedure_ob = 0;
             results.forEach(element => {
                 const { p_classify, gender, call_nature, location, disposition, destination, trauma_cause, procedures, obstetrics} = element;
                 // Patient classification
@@ -195,13 +195,14 @@ function summary(from, to, callback) {
                 airway_lma += checkData("LMA", procedures);
                 airway_intub += checkData("Intubación", procedures);
                 crico += checkData("Cricotirotomía", procedures);
-                cardiac_arrest += checkData("AED", procedures);
-                cardiac_defib += checkData("Manual", procedures);
-                cardiac_pacing += checkData("Ritmo", procedures);
+                cardiac_arrest += checkData("Paro cardíaco", procedures);
+                cardiac_defib_aed += checkData("Defib cardíaco - AED", procedures);
+                cardiac_defib_manual += checkData("Defib cardíaco - Manual", procedures);
+                cardiac_pacing += checkData("Ritmo cardíaco", procedures);
                 if (obstetrics) { procedure_ob += 1;}
             });
             const chartSummary = {
-                adults, seniors, pediatrics, neonatals, males, females, other_sex, bp, injection, medical_other, cardiac, pulmonary, trauma, ob, il_rescate, home, business, road, construction, ocean, beach, marina, medical_office, school, other, treat_release, transport, unable, doa, ama, dest_rescate, imss, isteson, semeson, isste, pabellon, hospital_cima, hospital_clinica, hospital_san, animal, assault, motor, bike, boat, drown, electrical, explosion, fall, fire, gun, tools, stabbing, struck, toxic, vehicle, trauma_other, io, pleural, airway_lma, airway_intub, crico, cardiac_arrest, cardiac_aed, cardiac_defib, cardiac_pacing, procedure_ob
+                adults, seniors, pediatrics, neonatals, males, females, other_sex, bp, injection, medical_other, cardiac, pulmonary, trauma, ob, il_rescate, home, business, road, construction, ocean, beach, marina, medical_office, school, other, treat_release, transport, unable, doa, ama, dest_rescate, imss, isteson, semeson, isste, pabellon, hospital_cima, hospital_clinica, hospital_san, animal, assault, motor, bike, boat, drown, electrical, explosion, fall, fire, gun, tools, stabbing, struck, toxic, vehicle, trauma_other, io, pleural, airway_lma, airway_intub, crico, cardiac_arrest, cardiac_defib_aed, cardiac_defib_manual, cardiac_pacing, procedure_ob
             }
             callback(null, chartSummary);
         }
