@@ -113,10 +113,10 @@
     "construction-site": "Sitio de construcción",
     "recreation": "Área de recreación",
     "road-hwy": "Camino/Carretera",
-    "marina": "Marina",
     "med-office": "Oficina médica",
     "ocean-bay": "Océano/Bahía",
     "beach": "Playa",
+    "marina": "Marina",
     "iaddress": "Dirección del incidente",
     "disposition": "Disposición",
     "treat-release": "Tratar y descargar",
@@ -218,6 +218,7 @@
     "given-by":"Dado por",
     "patient": "Paciente",
     "family": "Familia",
+    "allergy": "Alergias",
     "med-allergy": "Alergias a medicamentos",
     "env-allergy": "Alergias ambientales",
     "seperate-comma": "Separar varios elementos con una coma",
@@ -519,5 +520,6 @@
     "inhaled": "Inhalar",
     "topical": "Tópico",
     "ophthalmic": "Oftálmico",
-    "otic": "Oidos"
+    "otic": "Oidos",
+    "view-chart-message": "Para acceder a todo el formulario del gráfico, le sugerimos que envíe un correo electrónico o imprima el PDF descargable."
 }
