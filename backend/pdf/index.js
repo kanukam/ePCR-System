@@ -1,5 +1,6 @@
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
+const moment = require('moment')
 
 function createChartPDF(info, locale, pipeTo, cb){
     // create a document the same way as above
@@ -184,7 +185,7 @@ function createChartPDF(info, locale, pipeTo, cb){
                     ${tags.unitNumber}: ${unit_number}
                     ${tags.callType}: ${call_type}
                     ${tags.callNature}: ${call_nature}
-                    ${tags.incidentDate}: ${formatDateTime(incident_date)}
+                    ${tags.incidentDate}: ${formatDate(incident_date)}
                     ${tags.location}: ${location}
 
                     ${tags.incidentAddress}: ${incident_address}
@@ -331,19 +332,14 @@ function createChartPDF(info, locale, pipeTo, cb){
 
 function formatDateTime(date){
     if(!date) return "";
-    let x = new Date(date);
-    return x.getDate() + 
-    "/" +  (x.getMonth() + 1) +
-    "/" +  x.getFullYear()
-    + " " + x.toLocaleTimeString();
+    let x = moment(date).format('MM/DD/YYYY hh:mm A');
+    return x;
 }
 
 function formatDate(date){
     if(!date) return "";
-    let x = new Date(date);
-    return x.getDate() + 
-    "/" +  (x.getMonth() + 1) +
-    "/" +  x.getFullYear();
+    let x = moment(date).format('MM/DD/YYYY');
+    return x;
 }
 
 module.exports = {
