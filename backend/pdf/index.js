@@ -332,12 +332,12 @@ function createChartPDF(info, locale, pipeTo, cb){
 
 function formatDateTime(date){
     if(!date) return "";
-    return moment(year).utc().format('DD/MM/YYYY hh:mm A');
+    return moment(date).utc().format('DD/MM/YYYY hh:mm A');
 }
 
 function formatDate(date){
     if(!date) return "";
-    return moment(year).utc().format('DD/MM/YYYY');
+    return moment(date).utc().format('DD/MM/YYYY');
 }
 
 module.exports = {
