@@ -28,7 +28,8 @@ export default class MainNav extends Component {
 			this.context.setAuth(false);
 			this.context.setPrivilege("");
 		}).catch((error) => {
-			console.log("Logout Failed");
+			this.context.setAuth(false);
+			this.context.setPrivilege("");
 		})
 	}
 
