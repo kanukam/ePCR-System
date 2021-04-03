@@ -93,6 +93,20 @@ function summary(req, res) {
   }
 }
 
+function updateCerts(req, res) {
+  const { certifications, email } = req.body;
+  if (certifications && email && req.user.privilege === "admin") {
+    repo.updateCerts(certifications, email, (err, data) => {
+      err
+        ? res.status(500).json({ error: "Internal Server error" })
+        : res.status(200).json({ userInfo: data })
+    })
+  }
+  else {
+    res.status(400).json({ status: "Bad Request" });
+  }
+}
+
 function calls(req, res) {
   const { from, to } = req.body;
   if (from && to && req.user.privilege === "admin") {
@@ -135,5 +149,6 @@ module.exports = {
   summary,
   calls,
   downloadPdf,
-  downloadPdfTest
+  downloadPdfTest,
+  updateCerts
 };

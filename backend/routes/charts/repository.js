@@ -228,30 +228,25 @@ function checkData(word, target){
     return 0;
 }
 
-function addProcedure(body, callback) {
-    var sql = 'INSERT INTO procedures SET ?';
-    db.query(sql, body, (err, res) => {
+function updateCerts(certifications, email, callback){
+    db.query(`UPDATE users SET certifications='${certifications}' WHERE email='${email}'`, (err, res) => {
         if (err) {
             console.log(err);
             callback(err);
         }
         else {
-            callback(null);
+            const sql = 'SELECT users.name, users.email, users.phone, users.username, users.privilege, users.certifications FROM users';
+            db.query(sql, (err, res) => {
+                if (err) {
+                    console.log(err);
+                    callback(err);
+                }
+                else {
+                    callback(err, res);
+                }
+            });
         }
-    });
-}
-
-function addMedication(body, callback) {
-    var sql = 'INSERT INTO medications SET ?';
-    db.query(sql, body, (err, res) => {
-        if (err) {
-            console.log(err);
-            callback(err);
-        }
-        else {
-            callback(null);
-        }
-    });
+    })
 }
 
 function downloadPdf(id, locale, pipeTo, callback){
@@ -355,8 +350,7 @@ module.exports = {
     viewAllChartsFromPatientID, 
     addChart,
     addChartFromPatientID,
-    addProcedure,
-    addMedication,
+    updateCerts,
     updateChart, 
     viewPatientChart, 
     viewAllPatientCharts,

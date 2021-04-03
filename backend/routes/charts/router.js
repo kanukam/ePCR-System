@@ -21,6 +21,8 @@ router.get("/:chartId", auth, controller.viewChart);
 
 router.post("/:chartId/update", auth, controller.updateChart);
 
+router.post("/certifications", auth, controller.updateCerts);
+
 router.get("/:chartId/pdf", auth, controller.downloadPdf);
 
 router.get("/:chartId/pdfTest", controller.downloadPdfTest);

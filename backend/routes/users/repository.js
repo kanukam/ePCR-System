@@ -14,7 +14,7 @@ function viewUser(userName, callback){
 }
 
 function viewUsers(callback) {
-    const sql = 'SELECT users.name, users.email, users.phone, users.username, users.privilege FROM users';
+    const sql = 'SELECT users.name, users.email, users.phone, users.username, users.privilege, users.certifications FROM users';
     db.query(sql, (err, res) => {
         if (err) {
             callback(err);
@@ -90,7 +90,7 @@ function deleteUserByUsername(username, callback) {
             callback(err);
         }
         else {
-            const sql = 'SELECT users.name, users.email, users.phone, users.username, users.privilege FROM users';
+            const sql = 'SELECT users.name, users.email, users.phone, users.username, users.privilege, users.certifications FROM users';
             db.query(sql, (err, res) => {
                 if (err) {
                     callback(err);
@@ -109,7 +109,7 @@ function deleteUserByEmail(email, callback) {
             callback(err);
         }
         else {
-            const sql = 'SELECT users.name, users.email, users.phone, users.username, users.privilege FROM users';
+            const sql = 'SELECT users.name, users.email, users.phone, users.username, users.privilege, users.certifications FROM users';
             db.query(sql, (err, res) => {
                 if (err) {
                     callback(err);
@@ -138,7 +138,7 @@ function addUser(email, callback) { // Guarantee Email isnt in database
                         return callback(err)
                     }
                     else{
-                        const sql = 'SELECT users.name, users.email, users.phone, users.username, users.privilege FROM users';
+                        const sql = 'SELECT users.name, users.email, users.phone, users.username, users.privilege, users.certifications FROM users';
                         db.query(sql, (err, res) => {
                             if (err) {
                                 callback(err);
@@ -168,7 +168,7 @@ function elevateUser(email, callback) {
                         return callback(err)
                     }
                     else {
-                        const sql = 'SELECT users.name, users.email, users.phone, users.username, users.privilege FROM users';
+                        const sql = 'SELECT users.name, users.email, users.phone, users.username, users.privilege, users.certifications FROM users';
                         db.query(sql, (err, res) => {
                             if (err) {
                                 callback(err);

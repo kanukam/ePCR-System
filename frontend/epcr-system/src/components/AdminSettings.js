@@ -73,6 +73,33 @@ export default class Settings extends Component {
         }
     }
 
+    // Update certifications
+    updateCertifications = (certifications, email) => {
+        // Update user certifications
+        const url = `http://localhost:3000/charts/certifications`;
+        const options = {
+            method: 'POST',
+            body: JSON.stringify({ certifications, email }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include'
+        }
+            // Post request to update certs
+            fetch(url, options).then(response => {
+                if (!response.ok) {
+                    throw Error("Failed");
+                }
+                return response.json()
+            })
+            .then(data => {
+                this.setState({ users: data["userInfo"] });
+            })
+            .catch((error) => {
+
+            })
+    }
+
     // Adding User, must be an admin for it to work.
     addUser = event => {
         event.preventDefault();
@@ -129,10 +156,11 @@ export default class Settings extends Component {
             .catch((error) => {
                 this.setState({ userMessage: this.context.translate('failed') });
             })
-    }
+        }
 
     render() {
-        if(this.state.users) {
+        const { users } = this.state;
+        if(users) {
             return (
                 <React.Fragment>
                     <Card className='mt-5 mb-5'>
@@ -149,13 +177,14 @@ export default class Settings extends Component {
                                         <th>{this.context.translate('phone')}</th>
                                         <th>{this.context.translate('role')}</th>
                                         <th> </th>
+                                        <th>{this.context.translate('cert')}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {
-                                        this.state.users.map(({ name, username, email, phone, privilege }, idx) => {
+                                        this.state.users.map(({ name, username, email, phone, privilege, certifications }, idx) => {
                                             return (
-                                                <UserDetails name={name} username={username} email={email} phone={phone} privilege={privilege} key={idx} idx={idx} delete={this.deleteUser} />
+                                                <UserDetails name={name} username={username} email={email} phone={phone} privilege={privilege} certifications={certifications} key={idx} idx={idx} delete={this.deleteUser} updateCertifications={this.updateCertifications}/>
                                             )
                                         })
                                     }
