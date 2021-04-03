@@ -95,7 +95,7 @@ function summary(req, res) {
 
 function updateCerts(req, res) {
   const { certifications, email } = req.body;
-  if (certifications && email && req.user.privilege === "admin") {
+  if (email && req.user.privilege === "admin") {
     repo.updateCerts(certifications, email, (err, data) => {
       err
         ? res.status(500).json({ error: "Internal Server error" })
