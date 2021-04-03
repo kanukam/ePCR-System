@@ -50,11 +50,11 @@ export default class ViewChart extends Component {
     }
 
     dateOnly(year) {
-        return moment(year).format('DD/MM/YYYY');
+        return moment(year).utc().format('DD/MM/YYYY');
     }
 
     dateAndTime(year) {
-        return moment(year).format('DD/MM/YYYY hh:mm A');
+        return moment(year).utc().format('DD/MM/YYYY hh:mm A');
     }
 
 
