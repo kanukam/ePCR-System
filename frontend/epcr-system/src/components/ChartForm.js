@@ -436,13 +436,13 @@ export default class ChartForm extends Component {
                     throw Error;
                 }
                 this.setState({ message: "Add Successful" });
+                this.nextStep();
             }).catch((error) => {
                 this.setState({ message: "Add Failed" });
             })
             this.setState({
                 success: true
             })
-            this.nextStep();
         }
     }
 
