@@ -89,35 +89,35 @@ export default class ViewChart extends Component {
                             </div>
                             <table className="simpleview">
                                 <tr>
-                                    <td colspan="2"><b>{this.context.translate('idate')}</b>{incident_date && this.dateOnly(incident_date)}</td>
-                                    <td colspan="2"><b>{this.context.translate('ino')}</b>{incident_number}</td>
-                                    <td colspan="3"><b>{this.context.translate('unit')}</b>{unit_number}</td>
+                                    <td colSpan="2"><b>{this.context.translate('idate')}</b>{incident_date && this.dateOnly(incident_date)}</td>
+                                    <td colSpan="2"><b>{this.context.translate('ino')}</b>{incident_number}</td>
+                                    <td colSpan="3"><b>{this.context.translate('unit')}</b>{unit_number}</td>
                                 </tr>
                                 <tr>
-                                    <th colspan="7">Incident Information</th>
+                                    <th colSpan="7">Incident Information</th>
                                 </tr>
                                 <tr>
-                                    <td colspan="4"><b>{this.context.translate('iaddress')}</b>{incident_address}</td>
+                                    <td colSpan="4"><b>{this.context.translate('iaddress')}</b>{incident_address}</td>
                                     <td><b>{this.context.translate('ilocation')}</b>{location}</td>
-                                    <td colspan="2"><b>{this.context.translate('other-agencies')}</b>{agencies}</td>
+                                    <td colSpan="2"><b>{this.context.translate('other-agencies')}</b>{agencies}</td>
                                 </tr>
                                 <tr>
                                     <td><b>{this.context.translate('call-type')}</b>{call_type}</td>
                                     <td><b>{this.context.translate('call-nature')}</b>{call_nature}</td>
                                     <td><b>{this.context.translate('disposition')}</b>{disposition}</td>
-                                    <td colspan="2"><b>{this.context.translate('destination')}</b>{destination}</td>
-                                    <td colspan="2"><b>{this.context.translate('trauma-cause')}</b>{trauma_cause}</td>
+                                    <td colSpan="2"><b>{this.context.translate('destination')}</b>{destination}</td>
+                                    <td colSpan="2"><b>{this.context.translate('trauma-cause')}</b>{trauma_cause}</td>
                                 </tr>
                                 {patient_count !== null ?
                                     <tr>
-                                        <td colspan="2"><em>{this.context.translate('mci')}</em>{this.context.translate('yes')}</td>
-                                        <td colspan="2"><em>{this.context.translate('num-patients')}</em>{patient_count}</td>
-                                        <td colspan="3"><em>{this.context.translate('triage')}</em>{triage_color}</td>
+                                        <td colSpan="2"><em>{this.context.translate('mci')}</em>{this.context.translate('yes')}</td>
+                                        <td colSpan="2"><em>{this.context.translate('num-patients')}</em>{patient_count}</td>
+                                        <td colSpan="3"><em>{this.context.translate('triage')}</em>{triage_color}</td>
                                     </tr>
                                 : null}
                                 {vehicle_accident_type !== null ?
                                     <tr>
-                                        <td colspan="2"><em>{this.context.translate('vehicle-accident')}</em>{this.context.translate('yes')}</td>
+                                        <td colSpan="2"><em>{this.context.translate('vehicle-accident')}</em>{this.context.translate('yes')}</td>
                                         <td><em>{this.context.translate('type')}</em>{vehicle_accident_type}</td>
                                         <td><em>{this.context.translate('impact')}</em>{vehicle_accident_impact}</td>
                                         <td><em>{this.context.translate('safety-equip')}</em>{vehicle_accident_safety_equipment}</td>
@@ -126,7 +126,7 @@ export default class ViewChart extends Component {
                                     </tr>
                                 : null}
                                 <tr>
-                                    <th colspan="7">{this.context.translate('response-times')}</th>
+                                    <th colSpan="7">{this.context.translate('response-times')}</th>
                                 </tr>
                                 <tr>
                                     <td width="14%"><b>{this.context.translate('dispatch')}</b>{dispatch_date_time && this.dateAndTime(dispatch_date_time)}</td>
@@ -138,18 +138,18 @@ export default class ViewChart extends Component {
                                     <td width="14%"><b>{this.context.translate('trcare')}</b>{transfer_date_time && this.dateAndTime(dispatch_date_time)}</td>
                                 </tr>
                                 <tr>
-                                    <th colspan="7">{this.context.translate('patient-info')}</th>
+                                    <th colSpan="7">{this.context.translate('patient-info')}</th>
                                 </tr>
                                 <tr>
-                                    <td colspan="2"><b>{this.context.translate('lname')}</b>{lname}</td>
-                                    <td colspan="2"><b>{this.context.translate('fname')}</b>{fname}</td>
+                                    <td colSpan="2"><b>{this.context.translate('lname')}</b>{lname}</td>
+                                    <td colSpan="2"><b>{this.context.translate('fname')}</b>{fname}</td>
                                     <td><b>{this.context.translate('dob')}</b>{birth && this.dateOnly(birth)}</td>
                                     <td><b>{this.context.translate('classify')}</b>{p_classify}</td>
                                     <td><b>{this.context.translate('psex')}</b>{gender}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="5"><b>{this.context.translate('address')}</b>{p_address}</td>
-                                    <td colspan="2"><b>{this.context.translate('phone')}</b>{p_phone}</td>
+                                    <td colSpan="5"><b>{this.context.translate('address')}</b>{p_address}</td>
+                                    <td colSpan="2"><b>{this.context.translate('phone')}</b>{p_phone}</td>
                                 </tr>
                                 <tr>
                                     <td><b>{this.context.translate('pweight')}</b>{p_weight} kg</td>
