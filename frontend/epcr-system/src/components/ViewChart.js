@@ -61,7 +61,6 @@ export default class ViewChart extends Component {
     render() {
         // Will error if object destructuring happens and chart isn't sent yet, if statement prevents the error
         if (this.state.chart){
-            console.log(this.state.chart);
             const {
                 fname, lname, birth, gender, p_weight, p_classify, p_bcolor, p_address, p_phone, p_hpi, p_history_given, p_medical_allergies, p_environmental_allergies, p_past_medical_history,
                 incident_date, incident_number, unit_number, location, incident_address, disposition, agencies, call_type, call_nature, care_level, destination, trauma_cause,

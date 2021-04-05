@@ -19,7 +19,6 @@ export class ChartPreview extends Component {
         
     }
     render() {
-        console.log(this.context);
         return (
             <Container className='chart shadow'>
                 <Row>

@@ -4,9 +4,9 @@ const chartRepo = require('../notes/repository');
 function createNote(req, res){
     const { chartId } = req.params;
     const { note } = req.body;
-    const userId = req.user.id;
+    const username = req.user.username;
 
-    chartRepo.addNote(userId, chartId, note, err => {
+    chartRepo.addNote(username, chartId, note, err => {
       err
         ? res.status(500).json({ error: err })
         : res.status(200).json({});
