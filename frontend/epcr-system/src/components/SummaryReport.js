@@ -43,8 +43,7 @@ export default class SummaryReport extends Component {
                 return response.json()
                 })
                 .then(data => {
-                    this.setState({ summary: data["data"], });
-                    console.log(this.state.summary);
+                    this.setState({ summary: data["data"] });
                 })
                 .catch((error) => {
                     this.setState({ message: this.context.translate('error') });
@@ -62,7 +61,7 @@ export default class SummaryReport extends Component {
 
     saveAsPdf = (event) => {
         event.preventDefault();
-        window.print();
+        document.execCommand("print");
     }
 
     render() {
