@@ -108,13 +108,13 @@ export default class Notes extends Component {
         return (
             <React.Fragment>
                 <Container className="chart shadow" style={{marginTop:'5rem'}}>
-                    <h2>Notes:</h2>
+                    <h2>{this.context.translate("note-title")}</h2>
                     {notesComps}
                     <Container className="chart shadow">
                         <textarea style={{resize:'none', width:'100%', height:'100px'}} value={this.state.noteBox} onChange={this.textInput}></textarea>
                         {this.state.emptyMessage && <b>{this.state.emptyMessage}</b>}
                     </Container>
-                    <Button onClick={this.addNote}>Add Note</Button>
+                    <Button onClick={this.addNote}>{this.context.translate('add-note')}</Button>
                 </Container>
             </React.Fragment>
         )

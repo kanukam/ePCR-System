@@ -50,8 +50,8 @@ export class ChartPreview extends Component {
                     <div >
                         <br /><br /><br />
                         <ButtonGroup>
-                            <Button variant="primary" as={Link} to={`/ViewChart/${this.props.id}`}>View</Button>
-                            <Button variant="outline-primary" href={`http://localhost:3000/charts/${this.props.id}/pdf?locale=${this.context.language}`}>Download</Button>
+                            <Button variant="primary" as={Link} to={`/ViewChart/${this.props.id}`}>{this.context.translate('view')}</Button>
+                            <Button variant="outline-primary" href={`http://localhost:3000/charts/${this.props.id}/pdf?locale=${this.context.language}`}>{this.context.translate('download')}</Button>
                         </ButtonGroup>
 
                     </div>
