@@ -545,7 +545,7 @@ export default class Popup extends Component {
                     if(certifications[j] === "Enfermera") { certifications[j] = this.context.translate('nurse'); }
                     else if(certifications[j] === "Paramedico") { certifications[j] = this.context.translate('paramedic'); }
                 }
-                certifications.join(', ');
+                certifications = certifications.join(', ');
             } else { certifications = "N/A"; }
             userComponents.push(<UserDropdown
                 name={this.state.users[i]["name"]}
