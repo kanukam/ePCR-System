@@ -11,7 +11,7 @@ export default class ShowMed extends Component {
                 <td>{this.props.name}</td>
                 <td>{this.props.dosage}</td>
                 <td>{this.props.route}</td>
-                <td>{this.props.crew}</td>
+                <td>{this.props.by}</td>
                 <td><input type="button" value={this.props.removeText} onClick={this.props.deleteMed(this.props.index)} /></td>
             </tr>
         )

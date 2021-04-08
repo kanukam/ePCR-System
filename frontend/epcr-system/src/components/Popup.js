@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
 import PatientRow from './PatientRow'
+import UserDropdown from './UserDropdown'
 import '../App.css'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -16,6 +16,7 @@ export default class Popup extends Component {
             type: "",
             surgicalcheck: false,
             needlecheck: false,
+            users: [],
             patients: [],
             patientList: []
         };
@@ -43,6 +44,23 @@ export default class Popup extends Component {
             .catch((error) => {
                 console.log(error);
             });
+        
+        const url2 = 'http://localhost:3000/users';
+        const options2 = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include'
+        }
+        // Post request
+        fetch(url2, options2).then(response => response.json())
+            .then(data => {
+                this.setState({ users: data["userInfo"] });
+           })
+            .catch((error) => {
+                this.setState({ errorMessage: this.context.translate('error') });
+            })
     }
 
     showSomething = input => (e) => {
@@ -518,10 +536,27 @@ export default class Popup extends Component {
             var pat = this.state.patients[i].id + "," + this.state.patients[i]["fname"] + "," + this.state.patients[i]["lname"] + "," + this.state.patients[i]["birth"] + "," + this.state.patients[i]["gender"] + ",;";
             this.state.patientList.push(pat);
         }
+        var userComponents = [];
+        for(var i = 0; i < this.state.users.length; i++) {
+            var certifications = '';
+            if(this.state.users[i]["certifications"] !== null) {
+                certifications = this.state.users[i]["certifications"].split(',');
+                for(var j = 0; j < certifications.length; j++) {
+                    if(certifications[j] === "Enfermera") { certifications[j] = this.context.translate('nurse'); }
+                    else if(certifications[j] === "Paramedico") { certifications[j] = this.context.translate('paramedic'); }
+                }
+                certifications.join(', ');
+            } else { certifications = "N/A"; }
+            userComponents.push(<UserDropdown
+                name={this.state.users[i]["name"]}
+                certification={certifications}
+            />)
+        }
         return (
             <div>
                 {this.props.text.includes("patient") ?
                     <div className="popup shadow psearch">
+                        {/*<input type="button" class="closebutton" onClick={this.props.closePopup} value="&#x2715;"/>*/}
                         <h2>{this.context.translate(this.props.text)}</h2>
                         <div style={{ height: '282px', overflow: 'auto' }}>
                             <table className="treatment" style={{ marginBottom: '0' }}>
@@ -536,6 +571,7 @@ export default class Popup extends Component {
                         </div>
                     </div>
                     : <div className="popup shadow">
+                        <input type="button" class="closebutton" onClick={this.props.closePopup} value="&#x2715;"/>
                         <h2>{this.context.translate(this.props.text)}</h2>
                         {this.props.text.includes("proc") ?
                             <form>
@@ -611,12 +647,27 @@ export default class Popup extends Component {
                                                 </div>
                                                 <div className="group">
                                                     <span>{this.context.translate('cpr-by')}</span>
-                                                    <select name="pCPRby" value={this.props.pConverted} onChange={this.props.changeInter('pCPRby')}>
+                                                    <select name="pCPRby" value={inter.pCPRby} onChange={this.props.changeInter('pCPRby')}>
                                                         <option disabled selected value="">{this.context.translate('select')}</option>
                                                         <option value="Espectador">{this.context.translate('bystander')}</option>
                                                         <option value="Personal médico">{this.context.translate('med-personnel')}</option>
                                                     </select>
                                                 </div>
+                                                {inter.pCPRby === "Personal médico" ?
+                                                    <div className="group">
+                                                        <span>{this.context.translate('med-name')}</span>
+                                                        <select name="pCPRbyName" value={inter.pCPRbyName} onChange={this.props.changeInter('pCPRbyName')}>
+                                                            <option disabled selected value="">{this.context.translate('select')}</option>
+                                                            {userComponents}
+                                                        </select>
+                                                    </div>
+                                                : null}
+                                                {inter.pCPRby === "Espectador" ?
+                                                    <div className="group">
+                                                        <span>{this.context.translate('other-name')}</span>
+                                                        <input type="text" name="pCPRbyName" value={inter.pCPRbyName} onChange={this.props.changeInter('pCPRbyName')} />
+                                                    </div>
+                                                : null}
                                             </div>
                                             : <div>
                                                 <div>
@@ -633,13 +684,23 @@ export default class Popup extends Component {
                                                 {this.renderProc(inter.pName)}
                                                 <div className="group">
                                                     <span>{this.context.translate('by')}</span>
-                                                    <input type="text" value="John Doe" disabled />
+                                                    <select name="pBy" value={inter.pBy} onChange={this.props.changeInter('pBy')}>
+                                                        <option disabled selected value="">{this.context.translate('select')}</option>
+                                                        {userComponents}
+                                                        <option value="Otro">{this.context.translate('other')}</option>
+                                                    </select>
                                                 </div>
+                                                {inter.pBy === "Otro" ?
+                                                    <div className="group">
+                                                        <span>{this.context.translate('other-name')}</span>
+                                                        <input type="text" name="pByOther" value={inter.pByOther} onChange={this.props.changeInter('pByOther')} />
+                                                    </div>
+                                                : null}
                                             </div>}
                                         <small style={{ color: 'red' }}>{this.context.translate(inter.message)}</small>
                                         <div className="bottom">
-                                            <input type="button" className="left" value="Add" onClick={this.props.submitProcedure} />
-                                            <input type="button" className="right" value="Cancel" onClick={this.props.closePopup} />
+                                            <input type="button" className="left" value={this.context.translate('add')} onClick={this.props.submitProcedure} />
+                                            <input type="button" className="right" value={this.context.translate('cancel')} onClick={this.props.closePopup} />
                                         </div>
                                     </Col>
                                 </Row>
@@ -674,8 +735,8 @@ export default class Popup extends Component {
                                         </div>
                                         <div className="group">
                                             <span>{this.context.translate('dosage')}</span>
-                                            <input type="number" style={{ width: '27%', marginRight: '10px' }} min="0" name="mDosage" value={inter.mDosage} onChange={this.props.changeInter('mDosage')} />
-                                            <select name="mUnit" style={{ width: '32%' }} onChange={this.props.changeInter('mUnit')}>
+                                            <input type="number" style={{ width: '22%', marginRight: '10px' }} min="0" name="mDosage" value={inter.mDosage} onChange={this.props.changeInter('mDosage')} />
+                                            <select name="mUnit" style={{ width: '30%' }} onChange={this.props.changeInter('mUnit')}>
                                                 <option disabled selected value="">{this.context.translate('select')}</option>
                                                 <option value="GMS">GMS</option>
                                                 <option value="in.">Inches (in.)</option>
@@ -702,12 +763,22 @@ export default class Popup extends Component {
                                         </div>
                                         <div className="group">
                                             <span>{this.context.translate('by')}</span>
-                                            <input type="text" value="John Doe" disabled />
+                                            <select name="mBy" value={inter.mBy} onChange={this.props.changeInter('mBy')}>
+                                                <option disabled selected value="">{this.context.translate('select')}</option>
+                                                {userComponents}
+                                                <option value="Otro">{this.context.translate('other')}</option>
+                                            </select>
                                         </div>
+                                        {inter.mBy === "Otro" ?
+                                            <div className="group">
+                                                <span>{this.context.translate('other-name')}</span>
+                                                <input type="text" name="mByOther" value={inter.mByOther} onChange={this.props.changeInter('mByOther')} />
+                                            </div>
+                                        : null}
                                         <small style={{ color: 'red' }}>{this.context.translate(inter.message)}</small>
                                         <div className="bottom">
-                                            <input type="button" className="left" value="Add" onClick={this.props.submitMedication} />
-                                            <input type="button" className="right" value="Cancel" onClick={this.props.closePopup} />
+                                            <input type="button" className="left" value={this.context.translate('add')} onClick={this.props.submitMedication} />
+                                            <input type="button" className="right" value={this.context.translate('cancel')} onClick={this.props.closePopup} />
                                         </div>
                                     </Col>
                                 </Row>

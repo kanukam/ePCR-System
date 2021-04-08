@@ -660,25 +660,25 @@ export default class PhysicalAssessment extends Component {
                 </div>
                 {/* Bottom chart navigation */}
                 <div className="chartnav">
-                    <div className="tab" onClick={this.navigate(1)}>
-                        <img src="/profile.png" />
-                        <b>Call</b>
+                <div className="tab" onClick={this.navigate(1)}>
+                        <img src="/callIcon.png" />
+                        <b>{this.context.translate('call')}</b>
                     </div>
                     <div className="tab" onClick={this.navigate(2)}>
-                        <img src="/profile.png" />
-                        <b>Patient</b>
+                        <img src="/patientIcon.png" />
+                        <b>{this.context.translate('patient')}</b>
                     </div>
                     <div className="tab active" onClick={this.navigate(3)}>
-                        <img src="/profile.png" />
-                        <b>Physical Exam</b>
+                        <img src="/assessmentIcon.png" />
+                        <b>{this.context.translate('physical-exam')}</b>
                     </div>
                     <div className="tab" onClick={this.navigate(4)}>
-                        <img src="/profile.png" />
-                        <b>Interventions</b>
+                        <img src="/interventionsIcon.png" />
+                        <b>{this.context.translate('interventions')}</b>
                     </div>
                     <div className="tab" onClick={this.navigate(5)}>
-                        <img src="/profile.png" />
-                        <b>Confirm</b>
+                        <img src="/confirmIcon.png" />
+                        <b>{this.context.translate('confirm')}</b>
                     </div>
                 </div>
             </div>

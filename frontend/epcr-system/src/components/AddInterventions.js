@@ -48,11 +48,14 @@ export default class AddInterventions extends Component {
             pCPRstop: "",
             pCPRstopDisplay: "",
             pCPRby: "",
+            pCPRbyName: "",
             pOutcome: "",
             pEffective: "",
             pEnergy: "",
             pConverted: "",
             pPulseCapture: "",
+            pBy: "",
+            pByOther: "",
             // medications
             mName: "",
             mTime: "",
@@ -60,6 +63,8 @@ export default class AddInterventions extends Component {
             mDosage: "",
             mUnit: "",
             mRoute: "",
+            mBy: "",
+            mByOther: "",
             testing: ""
         };
     }
@@ -95,11 +100,14 @@ export default class AddInterventions extends Component {
             pCPRstop: "",
             pCPRstopDisplay: "",
             pCPRby: "",
+            pCPRbyName: "",
             pOutcome: "",
             pEffective: "",
             pEnergy: "",
             pConverted: "",
-            pPulseCapture: ""
+            pPulseCapture: "",
+            pBy: "",
+            pByOther: ""
         });
     }
 
@@ -111,7 +119,9 @@ export default class AddInterventions extends Component {
             mTimeDisplay: "",
             mDosage: "",
             mUnit: "",
-            mRoute: ""
+            mRoute: "",
+            mBy: "",
+            mByOther: ""
         });
     }
 
@@ -161,10 +171,11 @@ export default class AddInterventions extends Component {
             this.setState({ message: "required-fields" });
         } else {
             this.setState({ message: "" });
-            // change to Spanish later
-            let medications = "[Medicamento: " + this.state.mName + " | Hora: " + this.state.mTime + " | Dosis: " + this.state.mDosage + " " + this.state.mUnit + " | Tomar: " + this.state.mRoute;
-            // done by John Doe for now
-            medications += " | Por: John Doe" + "]";
+            let medications = "[Medicamento: " + this.state.mName + " | Hora: " + this.state.mTime + " | Dosis: " + this.state.mDosage + " " + this.state.mUnit + " | Tomar: " + this.state.mRoute + " | Por: ";
+            // done by
+            if(this.state.mBy === "Otro") { medications += this.state.mByOther; }
+            else { medications += this.state.mBy; }
+            medications += "]";
             this.props.appendMedications(medications);
             this.toggleMed();
         }
@@ -209,9 +220,14 @@ export default class AddInterventions extends Component {
         if (this.state.pEnergy !== "") { procedures += " | Energía: " + this.state.pEnergy; }
         if (this.state.pConverted !== "") { procedures += " | Convertido a: " + this.state.pConverted; }
         if (this.state.pPulseCapture !== "") { procedures += " | Pulso con captura: " + this.state.pPulseCapture; }
-        // done by John Doe for now
-        if (this.state.pName === "Paro cardíaco") { procedures += " | CPR hecho por: " + this.state.pCPRby + "]"; }
-        else { procedures += " | Por: " + "John Doe" + "]"; }
+        // done by
+        if (this.state.pName === "Paro cardíaco") { procedures += " | CPR hecho por: " + this.state.pCPRbyName + "]"; }
+        else {
+            procedures += " | Por: ";
+            if(this.state.pBy === "Otro") { procedures += this.state.pByOther; }
+            else { procedures += this.state.pBy; }
+            procedures += "]";
+        }
         this.props.appendProcedures(procedures);
         this.toggleProc();
     }
@@ -236,13 +252,13 @@ export default class AddInterventions extends Component {
             var lastIndex = values.procedures[i].lastIndexOf(" | ");
             var data = values.procedures[i].substring(index, lastIndex);
             if (data === " | ") { data = "N/A"; }
-            var crew = current[current.length - 1];
-            crew = crew.substring(crew.lastIndexOf(":") + 2, crew.indexOf("]"));
+            var by = current[current.length - 1];
+            by = by.substring(by.lastIndexOf(":") + 2, by.indexOf("]"));
             procedureList.push(<ShowProc
                 time={this.displayTime(time[1])}
                 name={current[0].split(": ")[1]}
                 data={data}
-                crew={crew}
+                by={by}
                 index={i}
                 deleteProc={this.deleteProcedure}
                 removeText={this.context.translate('remove')}
@@ -252,14 +268,14 @@ export default class AddInterventions extends Component {
         for (var i = 0; i < values.medications.length; i++) {
             var current = values.medications[i].split(" | ");
             var time = current[1].split(": ");
-            var crew = current[current.length - 1];
-            crew = crew.substring(crew.lastIndexOf(":") + 2, crew.indexOf("]"));
+            var by = current[current.length - 1];
+            by = by.substring(by.lastIndexOf(":") + 2, by.indexOf("]"));
             medicationList.push(<ShowMed
                 time={this.displayTime(time[1])}
                 name={current[0].split(": ")[1]}
                 dosage={current[2].split(": ")[1]}
                 route={current[3].split(": ")[1]}
-                crew={crew}
+                by={by}
                 index={i}
                 deleteMed={this.deleteMedication}
                 removeText={this.context.translate('remove')}
@@ -277,7 +293,7 @@ export default class AddInterventions extends Component {
                                 <th width="12%">{this.context.translate('Time')}</th>
                                 <th width="20%">{this.context.translate('procedure')}</th>
                                 <th>{this.context.translate('data')}</th>
-                                <th width="15%">{this.context.translate('crew')}</th>
+                                <th width="15%">{this.context.translate('by')}</th>
                                 <th width="10%">{this.context.translate('action')}</th>
                             </tr>
                             {procedureList}
@@ -303,7 +319,7 @@ export default class AddInterventions extends Component {
                                 <th width="20%">{this.context.translate('medication')}</th>
                                 <th width="20%">{this.context.translate('dosage')}</th>
                                 <th>{this.context.translate('route')}</th>
-                                <th width="15%">{this.context.translate('crew')}</th>
+                                <th width="15%">{this.context.translate('by')}</th>
                                 <th width="10%">{this.context.translate('action')}</th>
                             </tr>
                             {medicationList}
@@ -532,25 +548,25 @@ export default class AddInterventions extends Component {
                 </form>
                 {/* Bottom chart navigation */}
                 <div className="chartnav">
-                    <div className="tab" onClick={this.navigate(1)}>
-                        <img src="/profile.png" />
-                        <b>Call</b>
+                <div className="tab" onClick={this.navigate(1)}>
+                        <img src="/callIcon.png" />
+                        <b>{this.context.translate('call')}</b>
                     </div>
                     <div className="tab" onClick={this.navigate(2)}>
-                        <img src="/profile.png" />
-                        <b>Patient</b>
+                        <img src="/patientIcon.png" />
+                        <b>{this.context.translate('patient')}</b>
                     </div>
                     <div className="tab" onClick={this.navigate(3)}>
-                        <img src="/profile.png" />
-                        <b>Physical Exam</b>
+                        <img src="/assessmentIcon.png" />
+                        <b>{this.context.translate('physical-exam')}</b>
                     </div>
                     <div className="tab active" onClick={this.navigate(4)}>
-                        <img src="/profile.png" />
-                        <b>Interventions</b>
+                        <img src="/interventionsIcon.png" />
+                        <b>{this.context.translate('interventions')}</b>
                     </div>
                     <div className="tab" onClick={this.navigate(5)}>
-                        <img src="/profile.png" />
-                        <b>Confirm</b>
+                        <img src="/confirmIcon.png" />
+                        <b>{this.context.translate('confirm')}</b>
                     </div>
                 </div>
             </div>
