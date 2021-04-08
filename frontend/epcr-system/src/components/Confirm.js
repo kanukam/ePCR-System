@@ -95,7 +95,7 @@ export default class Confirm extends Component {
                                     <i>{this.context.translate('classify')}</i> {values.classify}<br/>
                                     <i>{this.context.translate('psex')}</i> {values.gender}<br/>
                                     <i>{this.context.translate('pweight')}</i> {values.weight} kg<br/>
-                                    <i>{this.context.translate('braslow')}</i> {values.bcolor}<br/>
+                                    <i>{this.context.translate('braslow')}</i> {values.braslow}<br/>
                                     <i>{this.context.translate('address')}</i> {values.street}, {values.city}, {values.state}, {values.country} {values.zip}<br/>
                                     <i>{this.context.translate('phone')}</i> {values.phone}
                                 </td>
