@@ -163,7 +163,6 @@ export default class Confirm extends Component {
                                     <i>{this.context.translate('obstetrics')}</i>
                                 </td>
                             </tr>
-                        </tbody>
                         <tr><th>{this.context.translate('response')}</th></tr>
                         <tr>
                             <td>
@@ -290,6 +289,7 @@ export default class Confirm extends Component {
                                 <i>{this.context.translate('obstetrics')}</i>
                             </td>
                         </tr>
+                        </tbody>
                     </table>
                     <small style={{color:'red'}} className="ml-2">{this.context.translate(values.message)}</small>
                     <Button className="left" onClick={this.back}>{this.context.translate('previous')}</Button>
