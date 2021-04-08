@@ -60,16 +60,16 @@ export default class Confirm extends Component {
                             </tr>
                             <tr>
                                 <td>
-                                    <i>{this.context.translate('mci')}</i> {values.assessmentCheckBoxes[268] ? <text>Yes<br/>
+                                    <i>{this.context.translate('mci')}</i> {values.ptct ? <text>Yes<br/>
                                     <i>{this.context.translate('num-patients')}</i> {values.ptct}<br/>
                                     <i>{this.context.translate('triage')}</i> {values.triage}</text> : "No"}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <i>{this.context.translate('vehicle-accident')}</i> {values.assessmentCheckBoxes[269] ? <text>Yes<br/>
+                                    <i>{this.context.translate('vehicle-accident')}</i> {values.vatype ? <text>Yes<br/>
                                         <i>{this.context.translate('type')}</i> {values.vatype}<br/>
-                                        <i>{this.context.translate('impact')}</i> {values.impact}<br/>
+                                        <i>{this.context.translate('impact')}</i> {values.vaimpact}<br/>
                                         <i>{this.context.translate('safety-equip')}</i> {values.vasafe}<br/>
                                         <i>{this.context.translate('est-spd')}</i> {values.vaspd}<br/>
                                         <i>{this.context.translate('eject-vehicle')}</i> {values.vaeject}
