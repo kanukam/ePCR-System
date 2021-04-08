@@ -709,7 +709,7 @@ export default class Popup extends Component {
                             </div>
                             : null}
                         {this.props.text.includes("med") ?
-                            <form>
+                            <div>
                                 <Row>
                                     <Col>
                                         <div className="group">
@@ -784,7 +784,7 @@ export default class Popup extends Component {
                                         </div>
                                     </Col>
                                 </Row>
-                            </form>
+                            </div>
                             : null}
                     </div>}
             </div>
