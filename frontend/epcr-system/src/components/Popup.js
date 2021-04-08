@@ -560,13 +560,15 @@ export default class Popup extends Component {
                         <h2>{this.context.translate(this.props.text)}</h2>
                         <div style={{ height: '282px', overflow: 'auto' }}>
                             <table className="treatment" style={{ marginBottom: '0' }}>
-                                <tr>
-                                    <th>{this.context.translate('fname')}</th>
-                                    <th>{this.context.translate('lname')}</th>
-                                    <th>{this.context.translate('pbirth')}</th>
-                                    <th width="100px">{this.context.translate('action')}</th>
-                                </tr>
-                                {patientComponents}
+                                <tbody>
+                                    <tr>
+                                        <th>{this.context.translate('fname')}</th>
+                                        <th>{this.context.translate('lname')}</th>
+                                        <th>{this.context.translate('pbirth')}</th>
+                                        <th width="100px">{this.context.translate('action')}</th>
+                                    </tr>
+                                    {patientComponents}
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -574,7 +576,7 @@ export default class Popup extends Component {
                         <input type="button" class="closebutton" onClick={this.props.closePopup} value="&#x2715;"/>
                         <h2>{this.context.translate(this.props.text)}</h2>
                         {this.props.text.includes("proc") ?
-                            <form>
+                            <div>
                                 <Row>
                                     <Col>
                                         <div className="group">
@@ -704,10 +706,10 @@ export default class Popup extends Component {
                                         </div>
                                     </Col>
                                 </Row>
-                            </form>
+                            </div>
                             : null}
                         {this.props.text.includes("med") ?
-                            <form>
+                            <div>
                                 <Row>
                                     <Col>
                                         <div className="group">
@@ -782,7 +784,7 @@ export default class Popup extends Component {
                                         </div>
                                     </Col>
                                 </Row>
-                            </form>
+                            </div>
                             : null}
                     </div>}
             </div>
