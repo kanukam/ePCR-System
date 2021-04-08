@@ -101,7 +101,7 @@ export default class Notes extends Component {
                     <p>{note['note']}</p>
                     <b>{note['name']} - {note['certifications']}</b>
                     <br />
-                    <i>{date.toLocaleDateString() + ' ' + date.toLocaleTimeString()}</i>
+                    <i>{date.toLocaleDateString(this.context.language) + ' ' + date.toLocaleTimeString(this.context.language)}</i>
                 </Container>
             );
         });
