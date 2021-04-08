@@ -61,7 +61,6 @@ export default class PhysicalAssessment extends Component {
                 etco2={etco2}
             />)
         }
-        console.log(values);
         return (
             <div className="assessment">
                 <div className="content">
