@@ -30,10 +30,11 @@ export class ChartPreview extends Component {
                         {this.props.birth && this.year(this.props.birth)}
                         <br />
                         <b>{this.context.translate('address')}: </b>
-                        {this.props.address}
+                        {processAddress(this.props.address)}
                         <br />
-                        <b>{this.context.translate('phone')}: </b>
-                        {this.props.phone}
+                        { this.props.phone !== ''  &&
+                            <div><b>{this.context.translate('phone')}: </b> {this.props.phone}</div>
+                        }
                         <br />
                         {this.props.history}
                     </Col>
@@ -59,6 +60,18 @@ export class ChartPreview extends Component {
             </Container>
         )
     }
+}
+
+function processAddress(address){
+    let addressArray = address.split(',');
+    let address_trimmed = '';
+    for(let i =0; i < addressArray.length; i++){
+        if(addressArray[i].trim() !== ''){
+            address_trimmed += addressArray[i] + ', ';
+        }
+    }
+
+    return address_trimmed.substring(0, address_trimmed.length - ', '.length);
 }
 
 export default ChartPreview
