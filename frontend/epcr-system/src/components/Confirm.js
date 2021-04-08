@@ -36,7 +36,7 @@ export default class Confirm extends Component {
                 <form>
                     <h2>Confirm Chart Report</h2>
                     <table className="simpleview">
-                        <tr><th>Response</th></tr>
+                        <tr><th>{this.context.translate('response')}</th></tr>
                         <tr>
                             <td>
                                 <i>{this.context.translate('idate')}</i> {values.idate}<br/>
@@ -44,7 +44,7 @@ export default class Confirm extends Component {
                                 <i>{this.context.translate('unit')}</i> {values.unit}<br/>
                                 <i>{this.context.translate('call-type')}</i> {values.ctype}<br/>
                                 <i>{this.context.translate('call-nature')}</i> {values.nature}<br/>
-                                <i>Care level</i> {values.care}
+                                <i>{this.context.translate('care-level')}</i> {values.care}
                             </td>
                         </tr>
                         <tr>
@@ -86,7 +86,7 @@ export default class Confirm extends Component {
                                 <i>{this.context.translate('trcare')}</i> {values.trcare ? <Moment date={values.trcare} format="DD-MM-YY hh:mm:ss A" /> : null}
                             </td>
                         </tr>
-                        <tr><th>Demographics</th></tr>
+                        <tr><th>{this.context.translate('demographics')}</th></tr>
                         <tr>
                             <td>
                                 <i>{this.context.translate('full-name')}</i> {values.lname}, {values.fname}<br/>
@@ -99,7 +99,7 @@ export default class Confirm extends Component {
                                 <i>{this.context.translate('phone')}</i> {values.phone}
                             </td>
                         </tr>
-                        <tr><th>History</th></tr>
+                        <tr><th>{this.context.translate('history')}</th></tr>
                         <tr>
                             <td>
                                 <i>{this.context.translate('hpi')}</i> {values.hpi}<br/>
@@ -109,7 +109,7 @@ export default class Confirm extends Component {
                                 <i>{this.context.translate('past-history')}</i> {values.pastHistory}{values.assessmentCheckBoxes[315] ? ",O - Other" + values.pastHistoryOther : null}
                             </td>
                         </tr>
-                        <tr><th>Assessment</th></tr>
+                        <tr><th>{this.context.translate('assessments')}</th></tr>
                         <tr>
                             <td>
                                 <i>{this.context.translate('Skin')}</i> {values.skin.join()}<br/>
@@ -138,7 +138,7 @@ export default class Confirm extends Component {
                         </tr>
                         <tr>
                             <td>
-                                <i>Vitals</i> {values.vital_signs.join()}
+                                <i>{this.context.translate('vitals')}</i> {values.vital_signs.join()}
                             </td>
                         </tr>
                         <tr><th>{this.context.translate('interventions')}</th></tr>
@@ -164,8 +164,8 @@ export default class Confirm extends Component {
                         </tr>
                     </table>
                     <small style={{color:'red'}} className="ml-2">{this.context.translate(values.message)}</small>
-                    <Button className="left" onClick={this.back}>Previous</Button>
-                    <Button className="right" onClick={this.props.handleSubmit}>Submit</Button>
+                    <Button className="left" onClick={this.back}>{this.context.translate('previous')}</Button>
+                    <Button className="right" onClick={this.props.handleSubmit}>{this.context.translate('submit')}</Button>
                 </form>
                 {/* Bottom chart navigation */}
                 <div className="chartnav">

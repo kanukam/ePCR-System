@@ -539,6 +539,13 @@
     "start-date": "Start Date",
     "end-date": "End Date",
     "search": "Search",
-    "note-title": "Notes:"
+    "note-title": "Notes:",
+    "care-level": "Care Level",
+    "submit": "Submit",
+    "vitals": "Vitals",
+    "assessments": "Assessments",
+    "history": "History",
+    "demographics": "Demographics",
+    "response": "Response"
 
 }
