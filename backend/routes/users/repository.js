@@ -25,6 +25,18 @@ function viewUsers(callback) {
     });
 }
 
+function viewUsersLimited(callback){
+    const sql = 'SELECT users.name, users.certifications FROM users';
+    db.query(sql, (err, res) => {
+        if (err) {
+            callback(err);
+        }
+        else {
+            callback(err, res);
+        }
+    });
+}
+
 function updateUser(username, name, phone, email, callback) {
     const sql = 'UPDATE users SET users.name = ?, users.phone = ?, users.email = ? WHERE username = ?';
     db.query(sql, [name, phone, email, username], (err, res) => {
@@ -187,6 +199,7 @@ module.exports = {
     updateUser, 
     changePassword, 
     viewUsers, 
+    viewUsersLimited,
     deleteUserByUsername,
     deleteUserByEmail,
     addUser,

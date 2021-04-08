@@ -61,7 +61,7 @@ export default class TrendCall extends Component {
 
     saveAsPdf = (event) => {
         event.preventDefault();
-        window.print();
+        document.execCommand("print");
     }
 
     render() {

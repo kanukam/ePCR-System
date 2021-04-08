@@ -26,9 +26,17 @@ function viewUser(req, response) {
 
 // Get all users account information
 function viewUsers(req, response) {
-  // Check if the user is viewing their own account info
+  // Check if the user is an admin
   if (req.user.privilege === "admin") {
     repo.viewUsers((err, res) => {
+      err
+        ? response.status(500).json({ error: "Internal Server Error, try again" })
+        : response.status(200).json({ userInfo: res });
+    })
+  }
+  // Check if the user is a standard user
+  else if (req.user.privilege === "standard"){
+    repo.viewUsersLimited((err, res) => {
       err
         ? response.status(500).json({ error: "Internal Server Error, try again" })
         : response.status(200).json({ userInfo: res });
@@ -154,6 +162,19 @@ function deleteSelf(req, res) {
   }
 }
 
+function deleteSelf(req, res) {
+  const { username } = req.user;
+  if (username) {
+    repo.deleteUserByUsername(username, (err) => {
+      err
+        ? res.status(500).json({ error: "Internal Server Error, try again" })
+        : res.cookie("token", "", { httpOnly: true }).clearCookie("token").sendStatus(200);
+    });
+  }
+  else {
+    res.status(401).json({ status: "unauthorized" });
+  }
+}
 
 
 module.exports = { viewUser, updateUser, changePassword, viewUsers, deleteUser, addUser, elevateUser, deleteSelf };
