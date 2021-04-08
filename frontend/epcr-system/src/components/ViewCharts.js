@@ -146,9 +146,9 @@ export default class ViewCharts extends Component {
                         <TextField 
                             id="firstname" 
                             size="small"
-                            label="First Name" 
+                            label={this.context.translate('first-name')} 
                             type="search" 
-                            style={{width: '100px'}}
+                            style={{width: '125px'}}
                             value={this.state.firstname}
                             onChange={this.searchChange('firstname')} 
                         />
@@ -156,9 +156,9 @@ export default class ViewCharts extends Component {
                         <TextField 
                             id="lastname" 
                             size="small" 
-                            label="Last Name" 
+                            label={this.context.translate('last-name')} 
                             type="search" 
-                            style={{width: '100px'}}
+                            style={{width: '125px'}}
                             value={this.state.lastname}
                             onChange={this.searchChange('lastname')} 
                         />
@@ -171,7 +171,7 @@ export default class ViewCharts extends Component {
                                 format="dd-MM-yyyy"
                                 margin="normal"
                                 id="dob"
-                                label="DOB"
+                                label={this.context.translate('dob')}
                                 value={this.state.dob}
                                 onChange={this.dateChange('dob')}
                                 style={{maxWidth: '140px', margin: '0 0 0 0'}}
@@ -189,10 +189,10 @@ export default class ViewCharts extends Component {
                                 format="dd-MM-yyyy"
                                 margin="normal"
                                 id="startdate"
-                                label="Start Date"
+                                label={this.context.translate('start-date')}
                                 value={this.state.startdate}
                                 onChange={this.dateChange('startdate')}
-                                style={{maxWidth: '140px', margin: '0 0 0 0'}}
+                                style={{maxWidth: '150px', margin: '0 0 0 0'}}
                                 KeyboardButtonProps={{
                                     'aria-label': 'change date',
                                 }}
@@ -207,17 +207,17 @@ export default class ViewCharts extends Component {
                                 format="dd-MM-yyyy"
                                 margin="normal"
                                 id="enddate"
-                                label="End Date"
+                                label={this.context.translate('end-date')}
                                 value={this.state.enddate}
                                 onChange={this.dateChange('enddate')}
-                                style={{maxWidth: '140px', margin: '0 0 0 0'}}
+                                style={{maxWidth: '150px', margin: '0 0 0 0'}}
                                 KeyboardButtonProps={{
                                     'aria-label': 'change date',
                                 }}
                             />
                         </MuiPickersUtilsProvider>
-                        <MatButton style={{ marginTop: '10px' }} type="submit" color="default">search</MatButton>
-                        <MatButton style={{ marginTop: '10px' }} color="default" onClick={this.searchClear}>Clear</MatButton>
+                        <MatButton style={{ marginTop: '10px' }} type="submit" color="default">{this.context.translate('search')}</MatButton>
+                        <MatButton style={{ marginTop: '10px' }} color="default" onClick={this.searchClear}>{this.context.translate('clear')}</MatButton>
                     </form>
                 </div>
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>

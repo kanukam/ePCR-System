@@ -533,5 +533,22 @@
     "topical": "Tópico",
     "ophthalmic": "Oftálmico",
     "otic": "Oidos",
-    "view-chart-message": "Para acceder a todo el formulario del gráfico, le sugerimos que envíe un correo electrónico o imprima el PDF descargable."
+    "view-chart-message": "Para acceder a todo el formulario del gráfico, le sugerimos que envíe un correo electrónico o imprima el PDF descargable.",
+
+    "add-note": "Añadir la nota",
+    "view": "Ver",
+    "download": "Descargar",
+    "first-name": "Primer Nombre",
+    "last-name": "Apellido",
+    "start-date": "Fecha de Inicio",
+    "end-date": "Fecha Final",
+    "search": "Búsqueda",
+    "note-title": "Notas:",
+    "care-level": "Nivel de Cuidado",
+    "submit": "Entregar",
+    "vitals": "Vitales",
+    "assessments": "Evaluaciones",
+    "history": "Historia",
+    "demographics": "Demografia",
+    "response": "Respuesta"
 }

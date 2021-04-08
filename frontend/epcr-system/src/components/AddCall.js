@@ -141,7 +141,7 @@ export default class AddCall extends Component {
                                 <tr>
                                     <th>{this.context.translate('iaddress')}</th>
                                     <td><input type="text" name="loc" value={values.loc} onChange={this.props.handleChange('loc')} /></td>
-                                    <th>Care level</th>
+                                    <th>{this.context.translate('care-level')}</th>
                                     <td>
                                         <select name="care" value={values.care} onChange={this.props.handleChange('care')}>
                                             <option disabled selected value="">{this.context.translate('select')}</option>

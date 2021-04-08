@@ -99,22 +99,22 @@ export default class Notes extends Component {
             notesComps.push(
                 <Container className="chart shadow" key={note['noteID']}>
                     <p>{note['note']}</p>
-                    <b>{note['name']}</b>
+                    <b>{note['name']} - {note['certifications']}</b>
                     <br />
-                    <i>{date.toLocaleDateString() + ' ' + date.toLocaleTimeString()}</i>
+                    <i>{date.toLocaleDateString(this.context.language) + ' ' + date.toLocaleTimeString(this.context.language)}</i>
                 </Container>
             );
         });
         return (
             <React.Fragment>
                 <Container className="chart shadow" style={{marginTop:'5rem'}}>
-                    <h2>Notes:</h2>
+                    <h2>{this.context.translate("note-title")}</h2>
                     {notesComps}
                     <Container className="chart shadow">
                         <textarea style={{resize:'none', width:'100%', height:'100px'}} value={this.state.noteBox} onChange={this.textInput}></textarea>
                         {this.state.emptyMessage && <b>{this.state.emptyMessage}</b>}
                     </Container>
-                    <Button onClick={this.addNote}>Add Note</Button>
+                    <Button onClick={this.addNote}>{this.context.translate('add-note')}</Button>
                 </Container>
             </React.Fragment>
         )
