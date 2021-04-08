@@ -7,9 +7,9 @@
 .chartnav { position:fixed; bottom:0; display:flex; clear:both; margin-top:50px; padding:0 50px; width:960px; background:#fff; border-top:1px solid #ddd; font-size:12px; }
 .chartnav .tab { padding:5px; width:100px; height:80px; text-align:center; cursor:pointer; }
 .chartnav .tab.active { background:#eee; }
-.chartnav .tab img { width:50px; height:50px; background:#007bff; border:2px solid #80bdff; border-radius:50%; }
-.chartnav .tab b { display:block; font-weight:normal; color:#117a8b; }
-.chartnav .tab.active b { font-weight:bold; }
+.chartnav .tab img { width:50px; height:50px; background:#007bff; border:2px solid #80bdff; border-radius:50%; transition:all 150ms ease-in-out; }
+.chartnav .tab.active img, .chartnav .tab:hover img { background:#216ba5; border-color:#6297c1; }
+.chartnav .tab b { display:block; font-weight:normal; color:#007bff; }
+.chartnav .tab.active b { color:#216ba5; font-weight:bold; }
 .content input[type="checkbox"] { width:auto; height:auto; }
-label {display: block}
-
+label { display:block; }
