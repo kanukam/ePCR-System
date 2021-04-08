@@ -99,7 +99,7 @@ export default class Notes extends Component {
             notesComps.push(
                 <Container className="chart shadow" key={note['noteID']}>
                     <p>{note['note']}</p>
-                    <b>{note['name']}</b>
+                    <b>{note['name']} - {note['certifications']}</b>
                     <br />
                     <i>{date.toLocaleDateString() + ' ' + date.toLocaleTimeString()}</i>
                 </Container>
