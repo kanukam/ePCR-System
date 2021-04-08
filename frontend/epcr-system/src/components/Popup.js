@@ -576,7 +576,7 @@ export default class Popup extends Component {
                         <input type="button" class="closebutton" onClick={this.props.closePopup} value="&#x2715;"/>
                         <h2>{this.context.translate(this.props.text)}</h2>
                         {this.props.text.includes("proc") ?
-                            <form>
+                            <div>
                                 <Row>
                                     <Col>
                                         <div className="group">
@@ -706,7 +706,7 @@ export default class Popup extends Component {
                                         </div>
                                     </Col>
                                 </Row>
-                            </form>
+                            </div>
                             : null}
                         {this.props.text.includes("med") ?
                             <form>
