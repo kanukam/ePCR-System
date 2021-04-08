@@ -7,7 +7,6 @@ import '../App.css'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { MainContext } from '../Auth';
-import { da } from 'date-fns/locale'
 
 export default class AddInterventions extends Component {
     static contextType = MainContext;
@@ -245,14 +244,20 @@ export default class AddInterventions extends Component {
         const { values } = this.props;
         const inter = this.state;
         var procedureList = [];
+        var current = ""
+        var time = ""
+        var index = ""
+        var lastIndex = ""
+        var data = ""
+        var by = ""
         for (var i = 0; i < values.procedures.length; i++) {
-            var current = values.procedures[i].split(" | ");
-            var time = current[1].split(": ");
-            var index = values.procedures[i].indexOf(current[2]);
-            var lastIndex = values.procedures[i].lastIndexOf(" | ");
-            var data = values.procedures[i].substring(index, lastIndex);
+            current = values.procedures[i].split(" | ");
+            time = current[1].split(": ");
+            index = values.procedures[i].indexOf(current[2]);
+            lastIndex = values.procedures[i].lastIndexOf(" | ");
+            data = values.procedures[i].substring(index, lastIndex);
             if (data === " | ") { data = "N/A"; }
-            var by = current[current.length - 1];
+            by = current[current.length - 1];
             by = by.substring(by.lastIndexOf(":") + 2, by.indexOf("]"));
             procedureList.push(<ShowProc
                 time={this.displayTime(time[1])}
@@ -266,9 +271,9 @@ export default class AddInterventions extends Component {
         }
         var medicationList = [];
         for (var i = 0; i < values.medications.length; i++) {
-            var current = values.medications[i].split(" | ");
-            var time = current[1].split(": ");
-            var by = current[current.length - 1];
+            current = values.medications[i].split(" | ");
+            time = current[1].split(": ");
+            by = current[current.length - 1];
             by = by.substring(by.lastIndexOf(":") + 2, by.indexOf("]"));
             medicationList.push(<ShowMed
                 time={this.displayTime(time[1])}
@@ -449,7 +454,7 @@ export default class AddInterventions extends Component {
                                     <th>{this.context.translate('vaginal-bleed')}</th>
                                     <td>
                                         <div style={{ margin: '7.5px' }} onChange={this.props.handleChange('oVaginalBleed')}>
-                                            <label className="v2"><input type="radio" name="oVaginalBleed" value="Sí" checked={values.oVaginalBleed.includes("Sí")} /> {this.context.translate('yes')}</label>
+                                            <label className="v2"><input type="radio" name="oVaginalBleed" value="Sí" checked={values.oVaginalBleed.includes("Sí") } /> {this.context.translate('yes')}</label>
                                             <label className="v2"><input type="radio" name="oVaginalBleed" value="No" checked={values.oVaginalBleed.includes("No")} /> No</label>
                                         </div>
                                     </td>
