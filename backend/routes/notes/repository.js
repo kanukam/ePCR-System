@@ -2,7 +2,7 @@
 const db = require('../../sql/database');
 
 function viewAllNotes(chartID, callback){
-    db.query(`SELECT notes.id AS noteID, notes.note, notes.dateAdded, notes.name, notes.certifications, notes.chartID FROM notes INNER JOIN charts ON charts.id=${chartID}`, (err, res) => {
+    db.query(`SELECT notes.id AS noteID, notes.note, notes.dateAdded, notes.name, notes.certifications, notes.chartID FROM notes where notes.chartID=${chartID}`, (err, res) => {
         return err
             ? callback(err)
             : callback(false, res);
