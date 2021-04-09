@@ -12,6 +12,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import '../App.css';
+import moment from 'moment';
 
 export default class ViewCharts extends Component {
     static contextType = MainContext;
@@ -105,8 +106,8 @@ export default class ViewCharts extends Component {
         if (this.state.dob) {
             var a = new Date(this.state.dob);
             filtered = filtered.filter(chart => {
-                var b = new Date(chart.birth);
-                return (a.getDate() === b.getDate()) && (a.getDay() === b.getDay()) && ((a.getFullYear() === b.getFullYear()));
+                var b = moment(chart.birth).utc();
+                return (a.getMonth() === b.month()) && (a.getDate() === b.date()) && ((a.getFullYear() === b.year()));
             })
         }
         // filter start date
