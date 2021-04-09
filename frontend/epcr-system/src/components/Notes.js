@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { MainContext } from '../Auth'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
+import moment from 'moment'
 import '../App.css'
 
 export default class Notes extends Component {
@@ -47,8 +48,9 @@ export default class Notes extends Component {
         }
         fetch(url, options)
             .then((response) => {
-                if(response.ok)
+                if(response.ok){
                     return response.json();
+                }
                 else
                     throw Error("Failed");
             })
@@ -63,12 +65,14 @@ export default class Notes extends Component {
     addNote(){
         const note = this.state.noteBox;
         if(note !== ''){
+            var date = new Date();
+            date = moment(date).format("YYYY-MM-DDTHH:mm");
             this.setState({emptyMessage: null});
             /* send to backend */
             const url = 'http://localhost:3000/notes/chart/' + this.props.chartId + '/add';
             const options = {
                 method: 'POST',
-                body: JSON.stringify({ note }),
+                body: JSON.stringify({ note, date}),
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -93,15 +97,13 @@ export default class Notes extends Component {
     render() {
         let notesComps = [];
         this.state.notes.forEach(note => {
-            let time = note['dateAdded'].substring(11, 19);
-            let date = note['dateAdded'].substring(0, 10);
-            date = new Date(Date.parse(date + ' ' + time));
+            let date = note['dateAdded'];
             notesComps.push(
                 <Container className="chart shadow" key={note['noteID']}>
                     <p>{note['note']}</p>
                     <b>{note['name']} - {note['certifications']}</b>
                     <br />
-                    <i>{date.toLocaleDateString(this.context.language) + ' ' + date.toLocaleTimeString(this.context.language)}</i>
+                    <i>{moment(date).format("DD/MM/YYYY hh:mm:ss A")}</i>
                 </Container>
             );
         });

@@ -129,8 +129,9 @@ con.connect(err => {
     con.query(`CREATE TABLE IF NOT EXISTS notes (
         id INT(11) UNSIGNED AUTO_INCREMENT, 
         chartID INT(11) UNSIGNED, 
-        username VARCHAR(255), 
+        name VARCHAR(255), 
         note MEDIUMTEXT, 
+        certifications VARCHAR(255),
         dateAdded DATETIME,
         PRIMARY KEY (id)
         )`, (err, res) => {
