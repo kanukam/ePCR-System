@@ -66,7 +66,7 @@ export default class Notes extends Component {
         const note = this.state.noteBox;
         if(note !== ''){
             var date = new Date();
-            date = moment(date).format("YYYY-MM-DDTHH:mm");
+            date = moment().format("YYYY-MM-DDTHH:mm");
             this.setState({emptyMessage: null});
             /* send to backend */
             const url = 'http://localhost:3000/notes/chart/' + this.props.chartId + '/add';
@@ -103,7 +103,7 @@ export default class Notes extends Component {
                     <p>{note['note']}</p>
                     <b>{note['name']} - {note['certifications']}</b>
                     <br />
-                    <i>{moment(date).format("DD/MM/YYYY hh:mm:ss A")}</i>
+                    <i>{moment(date).utc().format("DD/MM/YYYY hh:mm:ss A")}</i>
                 </Container>
             );
         });
