@@ -267,8 +267,14 @@ function createChartPDF(info, locale, pipeTo, cb){
             doc.addPage();
             doc
                 .moveDown()
-                //Physical Exam
                 .image('pdf/img/gray.jpg', 0, calc_height = 38, {width: 1600, height: HEADER_HEIGHT})
+                .text(tags.obstetrics, HEADERS)
+                .moveDown()
+                .text(obstetrics)
+                .moveDown()
+            doc
+                //Physical Exam
+                .image('pdf/img/gray.jpg', 0, calc_height += 35 + doc.heightOfString(obstetrics), {width: 1600, height: HEADER_HEIGHT})
                 .text(tags.physicalExam, HEADERS)
                 .text(physExamBody, { align: 'left'})
                 .moveDown()
@@ -308,12 +314,7 @@ function createChartPDF(info, locale, pipeTo, cb){
                     ${tags.oralFluids}: ${intake_oral_fluids}
                     ${tags.vomit}: ${intake_vomit}
                 `)
-                .moveDown()
 
-                .image('pdf/img/gray.jpg', 0, calc_height += 92, {width: 1600, height: HEADER_HEIGHT})
-                .text(tags.obstetrics, HEADERS)
-                .moveDown()
-                .text(obstetrics)
                 // get a blob when you're done
             doc.addPage();
 
