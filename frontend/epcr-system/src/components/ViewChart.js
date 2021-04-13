@@ -80,10 +80,12 @@ export default class ViewChart extends Component {
                         contentSpacing={this.state.contentSpacing}
                         toggleCollapse={this.toggleCollapse}
                     />
-                    <Container className="main-content" style={{ padding: this.state.contentSpacing }}>
+                    <div >
+                        <embed src={`http://localhost:3000/charts/${this.props.match.params.id}/pdf?locale=${this.context.language}#scrollbar=1`}  type="application/pdf" width={"100%"} style={{width: "100%", height:"700px"}}>
 
-                        <h2 style={{textAlign:'center'}}>Rescate Ambulance Service Patient Care Report</h2>
-                        <div className="box">
+                        </embed>
+                        {/* <h2 style={{textAlign:'center'}}>Rescate Ambulance Service Patient Care Report</h2>
+                        <div>
                             <div className="preview">
                                 <div><span>{this.context.translate('view-chart-message')}</span></div>
                             </div>
@@ -157,8 +159,8 @@ export default class ViewChart extends Component {
                                 </tr>
                             </table>
                         </div>
-                        {this.state.chart['id'] && <Notes chartId={this.state.chart['id']} />}
-                    </Container>
+                        {this.state.chart['id'] && <Notes chartId={this.state.chart['id']} />} */}
+                    </div>
                 </React.Fragment>
             )
         }
