@@ -160,6 +160,7 @@ export default class ViewChart extends Component {
                             </table>
                         </div>
                         {this.state.chart['id'] && <Notes chartId={this.state.chart['id']} />} */}
+                        {this.state.chart['id'] && <Notes chartId={this.state.chart['id']} />}
                     </div>
                 </React.Fragment>
             )
