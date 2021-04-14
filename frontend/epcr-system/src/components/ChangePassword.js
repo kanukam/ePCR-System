@@ -27,6 +27,32 @@ export default class ChangePassword extends Component {
         this.context.setLanguage(language);
     }
 
+    passwordWordCheck = (password) => {
+        let regularExp = /[a-zA-Z]/g;
+        let capital = new RegExp("[A-Z]");
+        let number = /\d/g;
+        // Check at least 8 chars
+        if (password.length < 8) {
+            this.setState({ message: this.context.translate('password-length') });
+            return false;
+        }
+        else if (!regularExp.test(password)) {
+            this.setState({ message: this.context.translate('password-letter') });
+            return false;
+        }
+        else if (!capital.test(password)) {
+            this.setState({ message: this.context.translate('password-capital') });
+            return false;
+        }
+        else if (!number.test(password)) {
+            this.setState({ message: this.context.translate('password-number') });
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
     handleSubmit = (event => {
         event.preventDefault();
         const {password, confirmedPassword, token} = this.state;
@@ -35,24 +61,27 @@ export default class ChangePassword extends Component {
             this.setState({ message: this.context.translate('passwordMismatch') });
         }
         else if (password) {
-            const url = 'http://localhost:3000/change-password';
-            const options = {
-                method: 'POST',
-                body: JSON.stringify({ token, password}),
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include'
-            }
-            // Check if password reset is successful
-            fetch(url, options).then((response) => {
-                if (!response.ok) {
-                    throw Error("Failed");
+            if (this.passwordWordCheck(password)) {
+                const url = 'http://localhost:3000/change-password';
+                const options = {
+                    method: 'POST',
+                    body: JSON.stringify({ token, password }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include'
                 }
-                this.setState({ message: this.context.translate('success') });
-            }).catch((error) => {
-                this.setState({ message: this.context.translate('error') });
-            })
+                // Check if password reset is successful
+                fetch(url, options).then((response) => {
+                    if (!response.ok) {
+                        throw Error("Failed");
+                    }
+                    this.setState({ message: this.context.translate('success') });
+                }).catch((error) => {
+                    this.setState({ message: this.context.translate('error') });
+                })
+            }
+            
         }
         else {
             this.setState({ message: this.context.translate('all-fields') });
@@ -89,11 +118,11 @@ export default class ChangePassword extends Component {
                                 <Form onSubmit={this.handleSubmit}>
                                     <Form.Group>
                                         <Form.Label>{this.context.translate('enter-password')}</Form.Label>
-                                        <Form.Control type="password" value={this.state.password} onChange={e => this.setState({ password: e.target.value })} />
+                                        <Form.Control type="password" pattern="[a-zA-Z0-9!@?]{0,100}" value={this.state.password} onChange={e => this.setState({ password: e.target.value })} />
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Label>{this.context.translate('enter-password')}</Form.Label>
-                                        <Form.Control type="password" value={this.state.confirmedPassword} onChange={e => this.setState({ confirmedPassword: e.target.value })} />
+                                        <Form.Control type="password" pattern="[a-zA-Z0-9!@?]{0,100}" value={this.state.confirmedPassword} onChange={e => this.setState({ confirmedPassword: e.target.value })} />
                                     </Form.Group>
                                     {/* Button for submitting form */}
                                     <Button variant="primary" type="submit">
