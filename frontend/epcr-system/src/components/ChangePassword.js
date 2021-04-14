@@ -9,6 +9,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import { MainContext } from '../Auth'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import { Link } from "react-router-dom";
+import { Redirect } from 'react-router-dom'
 
 export default class ChangePassword extends Component {
     static contextType = MainContext;
@@ -19,6 +20,7 @@ export default class ChangePassword extends Component {
             message: "",
             password: "",
             confirmedPassword: "",
+            authorized: "",
         };
 
     }
@@ -76,7 +78,7 @@ export default class ChangePassword extends Component {
                     if (!response.ok) {
                         throw Error("Failed");
                     }
-                    this.setState({ message: this.context.translate('success') });
+                    this.setState({ message: this.context.translate('success'), authorized: "Yes" });
                 }).catch((error) => {
                     this.setState({ message: this.context.translate('error') });
                 })
