@@ -177,7 +177,7 @@ export default class AddInterventions extends Component {
             this.setState({ message: "required-fields" });
         } else {
             this.setState({ message: "" });
-            let medications = "[Medicamento: " + this.state.mName + " | Hora: " + this.state.mTimeDisplay + " | Dosis: " + this.state.mDosage + " " + this.state.mUnit + " | Tomar: " + this.state.mRoute + " | Por: ";
+            let medications = "[Medicamento: " + this.state.mName + " | Hora: " + this.state.mTime + " | Dosis: " + this.state.mDosage + " " + this.state.mUnit + " | Tomar: " + this.state.mRoute + " | Por: ";
             // done by
             if(this.state.mBy === "Otro") { medications += this.state.mByOther; }
             else { medications += this.state.mBy; }
@@ -199,9 +199,9 @@ export default class AddInterventions extends Component {
         // change to Spanish later
         let procedures = "[Procedimiento: " + this.state.pName;
         if (this.state.pName === "Paro cardíaco") {
-            procedures += " | Hora de lo sucedido: " + this.state.pTimeDisplay + " | Hora de inicio CPR: " + this.state.pCPRstart + " | Tiempo de parar CPR: " + this.state.pCPRstop + " | Resultado: " + this.state.pOutcome;
+            procedures += " | Hora de lo sucedido: " + this.state.pTime + " | Hora de inicio CPR: " + this.state.pCPRstart + " | Tiempo de parar CPR: " + this.state.pCPRstop + " | Resultado: " + this.state.pOutcome;
         }
-        else { procedures += " | Hora: " + this.state.pTimeDisplay; }
+        else { procedures += " | Hora: " + this.state.pTime; }
         if (this.state.pLocation !== "") { procedures += " | Ubicación: " + this.state.pLocation; }
         if (this.state.pType !== "") { procedures += " | Tipo: " + this.state.pType; }
         if (this.state.pSize !== "") { procedures += " | Tamaño: " + this.state.pSize; }
