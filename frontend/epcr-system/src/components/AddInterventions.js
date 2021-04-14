@@ -158,14 +158,14 @@ export default class AddInterventions extends Component {
     handleDate = input => date => {
         var displayedDate = input + "Display";
         this.setState({ [displayedDate]: date });
-        date = moment(date).format("YYYY-MM-DD hh:mm A");
+        date = moment(date).format("DD/MM/YYYY hh:mm A");
         this.setState({ [input]: date });
     }
 
     handleDateNoTime = input => date => {
         var displayedDate = input + "Display";
         this.setState({ [displayedDate]: date });
-        date = moment(date).format("YYYY-MM-DD");
+        date = moment(date).format("DD/MM/YYYY");
         this.setState({ [input]: date });
     }
 
