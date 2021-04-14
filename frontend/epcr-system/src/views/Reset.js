@@ -9,6 +9,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import { MainContext } from '../Auth'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import { Link } from "react-router-dom";
+import { Redirect } from 'react-router-dom'
 
 export default class Reset extends Component {
     static contextType = MainContext;
@@ -17,6 +18,7 @@ export default class Reset extends Component {
         this.state = {
             email: "",
             message: "",
+            authorized: "",
         };
 
     }
@@ -42,7 +44,7 @@ export default class Reset extends Component {
                 if (!response.ok) {
                     throw Error("Failed");
                 }
-                this.setState({ message: this.context.translate('email-sent') });
+                this.setState({ message: this.context.translate('email-sent'), authorized: "Yes" });
             }).catch((error) => {
                 this.setState({ message: this.context.translate('error') });
             })

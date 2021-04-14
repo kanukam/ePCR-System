@@ -89,6 +89,9 @@ export default class ChangePassword extends Component {
     })
 
     render() {
+        if (this.state.authorized) {
+            return <Redirect to="/" />
+        }
 
         return (
             <React.Fragment>
