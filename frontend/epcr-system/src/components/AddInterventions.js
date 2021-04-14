@@ -7,6 +7,7 @@ import '../App.css'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { MainContext } from '../Auth';
+import moment from 'moment'
 
 export default class AddInterventions extends Component {
     static contextType = MainContext;
@@ -154,11 +155,17 @@ export default class AddInterventions extends Component {
             else if (input === "pFindings") { this.state.pFindings.splice(value, 1); }
         }
     }
-
     handleDate = input => date => {
         var displayedDate = input + "Display";
         this.setState({ [displayedDate]: date });
-        date = date.toISOString().slice(0, 19).replace('T', " ");
+        date = moment(date).format("YYYY-MM-DDTHH:mm");
+        this.setState({ [input]: date });
+    }
+
+    handleDateNoTime = input => date => {
+        var displayedDate = input + "Display";
+        this.setState({ [displayedDate]: date });
+        date = moment(date).format("YYYY-MM-DD");
         this.setState({ [input]: date });
     }
 
@@ -170,7 +177,7 @@ export default class AddInterventions extends Component {
             this.setState({ message: "required-fields" });
         } else {
             this.setState({ message: "" });
-            let medications = "[Medicamento: " + this.state.mName + " | Hora: " + this.state.mTime + " | Dosis: " + this.state.mDosage + " " + this.state.mUnit + " | Tomar: " + this.state.mRoute + " | Por: ";
+            let medications = "[Medicamento: " + this.state.mName + " | Hora: " + this.state.mTimeDisplay + " | Dosis: " + this.state.mDosage + " " + this.state.mUnit + " | Tomar: " + this.state.mRoute + " | Por: ";
             // done by
             if(this.state.mBy === "Otro") { medications += this.state.mByOther; }
             else { medications += this.state.mBy; }
@@ -192,9 +199,9 @@ export default class AddInterventions extends Component {
         // change to Spanish later
         let procedures = "[Procedimiento: " + this.state.pName;
         if (this.state.pName === "Paro cardíaco") {
-            procedures += " | Hora de lo sucedido: " + this.state.pTime + " | Hora de inicio CPR: " + this.state.pCPRstart + " | Tiempo de parar CPR: " + this.state.pCPRstop + " | Resultado: " + this.state.pOutcome;
+            procedures += " | Hora de lo sucedido: " + this.state.pTimeDisplay + " | Hora de inicio CPR: " + this.state.pCPRstart + " | Tiempo de parar CPR: " + this.state.pCPRstop + " | Resultado: " + this.state.pOutcome;
         }
-        else { procedures += " | Hora: " + this.state.pTime; }
+        else { procedures += " | Hora: " + this.state.pTimeDisplay; }
         if (this.state.pLocation !== "") { procedures += " | Ubicación: " + this.state.pLocation; }
         if (this.state.pType !== "") { procedures += " | Tipo: " + this.state.pType; }
         if (this.state.pSize !== "") { procedures += " | Tamaño: " + this.state.pSize; }
