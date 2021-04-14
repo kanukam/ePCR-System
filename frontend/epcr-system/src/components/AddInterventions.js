@@ -283,7 +283,7 @@ export default class AddInterventions extends Component {
             by = current[current.length - 1];
             by = by.substring(by.lastIndexOf(":") + 2, by.indexOf("]"));
             medicationList.push(<ShowMed
-                time={this.displayTime(time[1])}
+                time={moment(time[1]).format("hh:mm A")}
                 name={current[0].split(": ")[1]}
                 dosage={current[2].split(": ")[1]}
                 route={current[3].split(": ")[1]}
