@@ -4,6 +4,7 @@ import { CanvasJSChart } from 'canvasjs-react-charts';
 import Button from 'react-bootstrap/Button';
 import moment from 'moment';
 
+
 export default class CallChart extends Component {
     static contextType = MainContext;
     constructor(props) {
@@ -13,8 +14,7 @@ export default class CallChart extends Component {
         };
     }
 
-    saveAsPdf = (event) => {
-        event.preventDefault();
+    saveAsPdf = () => {
         window.print();
     }
 

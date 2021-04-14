@@ -59,9 +59,8 @@ export default class SummaryReport extends Component {
         this.setState({ sidebarHide: !this.state.sidebarHide });
     }
 
-    saveAsPdf = (event) => {
-        event.preventDefault();
-        document.execCommand("print");
+    saveAsPdf = () => {
+        window.print();
     }
 
     render() {
@@ -74,6 +73,7 @@ export default class SummaryReport extends Component {
                         sidebarHide={this.state.sidebarHide}
                         contentSpacing={this.state.contentSpacing}
                         toggleCollapse={this.toggleCollapse}
+                        className="removePrint"
                     />
                     <Container className="mt-5 main-content" style={{ padding: this.state.contentSpacing }}>
                         <h1>{this.context.translate("error")}</h1>

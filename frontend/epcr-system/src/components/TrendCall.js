@@ -59,8 +59,7 @@ export default class TrendCall extends Component {
         this.setState({ sidebarHide: !this.state.sidebarHide });
     }
 
-    saveAsPdf = (event) => {
-        event.preventDefault();
+    saveAsPdf = () => {
         document.execCommand("print");
     }
 
