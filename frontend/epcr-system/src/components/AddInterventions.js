@@ -158,7 +158,7 @@ export default class AddInterventions extends Component {
     handleDate = input => date => {
         var displayedDate = input + "Display";
         this.setState({ [displayedDate]: date });
-        date = moment(date).format("YYYY-MM-DDTHH:mm");
+        date = moment(date).format("YYYY-MM-DD hh:mm A");
         this.setState({ [input]: date });
     }
 
@@ -267,7 +267,7 @@ export default class AddInterventions extends Component {
             by = current[current.length - 1];
             by = by.substring(by.lastIndexOf(":") + 2, by.indexOf("]"));
             procedureList.push(<ShowProc
-                time={this.displayTime(time[1])}
+                time={moment(time[1]).format("hh:mm A")}
                 name={current[0].split(": ")[1]}
                 data={data}
                 by={by}
