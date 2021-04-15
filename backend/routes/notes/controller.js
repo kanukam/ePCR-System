@@ -19,7 +19,7 @@ function createNote(req, res){
     const { chartId } = req.params;
     chartRepo.viewAllNotes(chartId, (err, notes) => {
       err
-        ? res.status(500).json({ error: err })
+        ? res.status(500).json({ error: "Error, internal server error"  })
         : res.status(200).send(notes);
     })
   }
