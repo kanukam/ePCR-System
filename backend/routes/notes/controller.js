@@ -8,9 +8,8 @@ function createNote(req, res){
     certifications = certifications || "";
     
     chartRepo.addNote(name, chartId, note, date, certifications, err => {
-      console.log(err);
       err
-        ? res.status(500).json({ error: err })
+        ? res.status(500).json({ error: "Error, internal server error" })
         : res.status(200).json({});
     })
   
