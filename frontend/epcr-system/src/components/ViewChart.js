@@ -3,7 +3,6 @@ import { MainContext } from '../Auth';
 import MainNav from './MainNav';
 import Notes from './Notes';
 import '../App.css'
-import moment from 'moment'
 
 export default class ViewChart extends Component {
     static contextType = MainContext;
