@@ -61,7 +61,7 @@ table.treatment tr:last-child td { border-bottom:none; }
 
 /* popup styles */
 .overlay { display:block; position:fixed; width:100%; height:100%; background:rgba(0,0,0,0.25); z-index:1; }
-.popup { position:absolute; top:20%; left:25%; width:50%; padding-bottom:15px; background:#fff; z-index:2; }
+.popup { position:absolute; top:15%; left:25%; width:50%; padding-bottom:15px; background:#fff; z-index:2; }
 .popup h2 { margin-bottom:0; padding:10px; background:#C4C4C4; color:#000; }
 .popup form { width:100%; margin:0; padding:0; }
 .popup input, .popup select, .popup textarea { width:245px; }
@@ -71,6 +71,7 @@ table.treatment tr:last-child td { border-bottom:none; }
 .popup ::-webkit-scrollbar { width:10px; height:10px; padding:3px 3px 3px 15px }
 .popup ::-webkit-scrollbar-track { background:#FFF; }
 .popup ::-webkit-scrollbar-thumb { background:#E5E5E5; }
+.popup .group:first-child { margin-top:5px; }
 .popup .bottom { margin:10px auto; width:180px; }
 .popup .closebutton { float:right; min-width:50px !important; height:50px !important; line-height:50px !important; background:#C4C4C4 !important; border-radius:0; font-size:25px; font-weight:bold; cursor:pointer; }
 
@@ -86,9 +87,10 @@ table.simpleview th { background:#ddd; text-align:center; font-size:15px; }
 table.simpleview td { vertical-align:top; padding:5px; border-bottom:1px solid #ddd; border-right:1px solid #ddd; }
 table.simpleview tr td:last-child { border-right:none; }
 table.simpleview tr:last-child td { border-bottom:none; }
-table.simpleview i { display:inline-block; font-style:normal; font-weight:bold; width:240px; }
+table.simpleview i { display:inline-block; font-style:normal; font-weight:bold; width:25%; vertical-align:top; }
 table.simpleview b { display:block; }
 table.simpleview em { font-weight:bold; font-style:normal; display:inline-block; padding-right:5px; }
+table.simpleview span { display:inline-block; width:75%; vertical-align:top; }
 
 .box { position:relative; min-height:575px; }
 .preview { position:absolute; top:0; left:0; width:100%; height:100%; background:rgb(255,255,255); background:linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 75%, rgba(255,255,255,1) 100%); }
