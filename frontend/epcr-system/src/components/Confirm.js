@@ -94,7 +94,7 @@ export default class Confirm extends Component {
                                     <i>{this.context.translate('pbirth')}</i><span>{values.birth ? <Moment date={values.birth} format="DD-MM-YYYY" /> : null}</span><br/>
                                     <i>{this.context.translate('classify')}</i><span>{values.classify}</span><br/>
                                     <i>{this.context.translate('psex')}</i><span>{values.gender}</span><br/>
-                                    <i>{this.context.translate('pweight')}</i><span>{values.weight} kg</span><br/>
+                                    <i>{this.context.translate('pweight')}</i><span>{values.weight? values.weight + " kg" : null} </span><br/>
                                     <i>{this.context.translate('braslow')}</i><span>{values.braslow}</span><br/>
                                     <i>{this.context.translate('address')}</i><span>{values.subdivision}, {values.street}, {values.blvd}, {values.km}, {values.city}, {values.state}</span><br/>
                                     <i>{this.context.translate('phone')}</i><span>{values.phone}</span>
@@ -119,7 +119,7 @@ export default class Confirm extends Component {
                                     <i>{this.context.translate('Head')}</i><span>{values.head.join()}</span><br/>
                                     <i>{this.context.translate('Neck')}</i><span>{values.neck.join()}</span><br/>
                                     <i>{this.context.translate('Chest')}</i><span>{values.chest.join()}</span><br/>
-                                    <i>{this.context.translate('Pulse')}</i><span>{this.context.translate('Pulse-Strength')}: {values.pulse_strength} | {this.context.translate('Pulse-Rate')}: {values.pulse_rate}</span><br/>
+                                    <i>{this.context.translate('Pulse')}</i><span>{(values.pulse_strength || values.pulse_rate) && this.context.translate('Pulse-Strength') + ":"} {(values.pulse_strength || values.pulse_rate) && values.pulse_strength + " | "}  {(values.pulse_strength || values.pulse_rate) && this.context.translate('Pulse-Rate') + ":"} {values.pulse_rate}</span><br/>
                                     <i>{this.context.translate('Abdomen')}</i><span>{values.abdomen.join()}</span><br/>
                                     <i>{this.context.translate('Pelvis')}</i><span>{values.pelvis.join()}</span><br/>
                                     <i>{this.context.translate('Back')}</i><span>{values.back.join()}</span><br/>
