@@ -714,18 +714,10 @@ export default class Popup extends Component {
                                     <Col>
                                         <div className="group">
                                             <span>{this.context.translate('medication')}</span>
-                                            <select className="multiple" name="mName" style={{ height: '150px' }} onChange={this.props.changeInter('mName')} multiple>
-                                                <option value="Nitroglycerine">Nitroglycerine</option>
-                                                <option value="Ondansetron">Ondansetron</option>
-                                                <option value="Oxygen">Oxygen</option>
-                                                <option value="Phenylephrine">Phenylephrine</option>
-                                                <option value="Procardia">Procardia</option>
-                                                <option value="Propanalol">Propanalol</option>
-                                            </select>
+                                            <input type="text" name="mName" value={inter.mName} onChange={this.props.changeInter('mName')} />
                                         </div>
                                         <div>
                                             <span>{this.context.translate('Time')}</span>
-                                            {/*<input type="datetime-local" name="mTime" value={inter.mTime} onChange={this.props.changeInter('mTime')} />*/}
                                             <DatePicker
                                                 selected={inter.mTimeDisplay ? inter.mTimeDisplay : false}
                                                 placeholderText="dd/mm/yyyy --:-- --"

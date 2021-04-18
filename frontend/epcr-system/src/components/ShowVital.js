@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Button from 'react-bootstrap/Button'
 import '../App.css'
 
 export default class ShowVital extends Component {
