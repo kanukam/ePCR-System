@@ -30,7 +30,10 @@ export default class Confirm extends Component {
 
     render() {
         const { values } = this.props;
-        console.log(values.dispatch);
+        if (values.subdivision || values.street || values.blvd || values.km || values.city || values.state) {
+            var p_address = values.subdivision + ", " + values.street + ", " + values.blvd + ", " + values.km + ", " + values.city + ", " + values.state;
+        }
+
         return (
             <div className="form-confirm">
                 <form>
@@ -96,7 +99,7 @@ export default class Confirm extends Component {
                                     <i>{this.context.translate('psex')}</i><span>{values.gender}</span><br/>
                                     <i>{this.context.translate('pweight')}</i><span>{values.weight? values.weight + " kg" : null} </span><br/>
                                     <i>{this.context.translate('braslow')}</i><span>{values.braslow}</span><br/>
-                                    <i>{this.context.translate('address')}</i><span>{values.subdivision}, {values.street}, {values.blvd}, {values.km}, {values.city}, {values.state}</span><br/>
+                                    <i>{this.context.translate('address')}</i><span>{p_address}</span><br/>
                                     <i>{this.context.translate('phone')}</i><span>{values.phone}</span>
                                 </td>
                             </tr>
