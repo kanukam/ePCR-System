@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { MainContext } from '../Auth';
-import Container from 'react-bootstrap/Container';
 import MainNav from './MainNav';
 import Notes from './Notes';
-import ShowVital from './ShowVital';
 import '../App.css'
 import moment from 'moment'
 
