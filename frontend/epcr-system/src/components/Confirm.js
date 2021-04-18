@@ -200,23 +200,23 @@ export default class Confirm extends Component {
                 {/* Bottom chart navigation */}
                 <div className="chartnav">
                 <div className="tab" onClick={this.navigate(1)}>
-                        <img src="/callIcon.png" />
+                        <img src="/callIcon.png" alt="Call" />
                         <b>{this.context.translate('call')}</b>
                     </div>
                     <div className="tab" onClick={this.navigate(2)}>
-                        <img src="/patientIcon.png" />
+                        <img src="/patientIcon.png" alt="Patient" />
                         <b>{this.context.translate('patient')}</b>
                     </div>
                     <div className="tab" onClick={this.navigate(3)}>
-                        <img src="/assessmentIcon.png" />
+                        <img src="/assessmentIcon.png" alt="Physical Exam" />
                         <b>{this.context.translate('physical-exam')}</b>
                     </div>
                     <div className="tab" onClick={this.navigate(4)}>
-                        <img src="/interventionsIcon.png" />
+                        <img src="/interventionsIcon.png" alt="Interventions" />
                         <b>{this.context.translate('interventions')}</b>
                     </div>
                     <div className="tab active" onClick={this.navigate(5)}>
-                        <img src="/confirmIcon.png" />
+                        <img src="/confirmIcon.png" alt="Confirm" />
                         <b>{this.context.translate('confirm')}</b>
                     </div>
                 </div>

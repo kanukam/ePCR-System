@@ -61,16 +61,6 @@ export default class ViewChart extends Component {
     render() {
         // Will error if object destructuring happens and chart isn't sent yet, if statement prevents the error
         if (this.state.chart){
-            const {
-                fname, lname, birth, gender, p_weight, p_classify, p_bcolor, p_address, p_phone, p_hpi, p_history_given, p_medical_allergies, p_environmental_allergies, p_past_medical_history,
-                incident_date, incident_number, unit_number, location, incident_address, disposition, agencies, call_type, call_nature, care_level, destination, trauma_cause,
-                patient_count, triage_color, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected,
-                dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, arrive_destination_date_time, transfer_date_time,
-                medications, procedures, skin, mental, neurological, head, neck, chest, pulse_strength, pulse_rate, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot,
-                extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech, vital_signs,
-                intake_bleeding, intake_iv_fluids, intake_oral_fluids, intake_vomit, obstetrics
-            } = this.state.chart;
-            var vitalList = [];
             return (
                 <React.Fragment>
                     <MainNav
