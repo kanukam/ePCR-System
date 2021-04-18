@@ -107,8 +107,8 @@ class Statistics extends Component {
                         <Card.Body>
                             <Form>
                                     <Form.Group as={Row}>
-                                        <Form.Label column xs={6}>{this.context.translate('from')}</Form.Label>
-                                        <Col xs={6}>
+                                        <Form.Label column sm={6}>{this.context.translate('from')}</Form.Label>
+                                        <Col sm={6}>
                                             <DatePicker
                                                 selected={this.state.fromSummaryDateDisplay ? this.state.fromSummaryDateDisplay : false}
                                                 placeholderText="dd/mm/yyyy"
@@ -116,8 +116,8 @@ class Statistics extends Component {
                                                 dateFormat="dd/MM/yyyy"
                                             />
                                         </Col>
-                                        <Form.Label column xs={6}>{this.context.translate('to')}</Form.Label>
-                                        <Col xs={6}>
+                                        <Form.Label column sm={6}>{this.context.translate('to')}</Form.Label>
+                                        <Col sm={6}>
                                             <DatePicker
                                                 selected={this.state.toSummaryDateDisplay ? this.state.toSummaryDateDisplay : false}
                                                 placeholderText="dd/mm/yyyy"
@@ -125,7 +125,7 @@ class Statistics extends Component {
                                                 dateFormat="dd/MM/yyyy"
                                             />
                                         </Col>
-                                        <Col xs={6} className="offset-3">
+                                        <Col sm={6} className="offset-3">
                                             <Button className="" onClick={this.createSummary}>{this.context.translate('create')}</Button>
                                         </Col>
                                     </Form.Group>
@@ -140,8 +140,8 @@ class Statistics extends Component {
                         <Card.Body>
                             <Form>
                                 <Form.Group as={Row}>
-                                    <Form.Label column xs={6}>{this.context.translate('from')}</Form.Label>
-                                    <Col xs={6}>
+                                    <Form.Label column sm={6}>{this.context.translate('from')}</Form.Label>
+                                    <Col sm={6}>
                                         <DatePicker
                                             selected={this.state.fromCallDateDisplay ? this.state.fromCallDateDisplay : false}
                                             placeholderText="dd/mm/yyyy"
@@ -149,8 +149,8 @@ class Statistics extends Component {
                                             dateFormat="dd/MM/yyyy"
                                         />
                                     </Col>
-                                    <Form.Label column xs={6}>{this.context.translate('to')}</Form.Label>
-                                    <Col xs={6}>
+                                    <Form.Label column sm={6}>{this.context.translate('to')}</Form.Label>
+                                    <Col sm={6}>
                                         <DatePicker
                                             selected={this.state.toCallDateDisplay ? this.state.toCallDateDisplay : false}
                                             placeholderText="dd/mm/yyyy"
@@ -158,7 +158,7 @@ class Statistics extends Component {
                                             dateFormat="dd/MM/yyyy"
                                         />
                                     </Col>
-                                    <Col xs={6} className="offset-3">
+                                    <Col sm={6} className="offset-3">
                                         <Button className="" onClick={this.trendAnalysis}>{this.context.translate('create')}</Button>
                                     </Col>
                                 </Form.Group>
