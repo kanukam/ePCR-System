@@ -257,6 +257,7 @@ export default class AddInterventions extends Component {
         var lastIndex = ""
         var data = ""
         var by = ""
+        console.log(values.medications);
         for (var i = 0; i < values.procedures.length; i++) {
             current = values.procedures[i].split(" | ");
             time = current[1].split(": ");
@@ -266,8 +267,11 @@ export default class AddInterventions extends Component {
             if (data === " | ") { data = "N/A"; }
             by = current[current.length - 1];
             by = by.substring(by.lastIndexOf(":") + 2, by.indexOf("]"));
+            let t = time[1].split(" ")[1];
+            let am_pm = time[1].split(" ")[2];
+            time[1] = t + " " + am_pm;
             procedureList.push(<ShowProc
-                time={moment(time[1]).format("hh:mm A")}
+                time={time[1]}
                 name={current[0].split(": ")[1]}
                 data={data}
                 by={by}
@@ -282,8 +286,11 @@ export default class AddInterventions extends Component {
             time = current[1].split(": ");
             by = current[current.length - 1];
             by = by.substring(by.lastIndexOf(":") + 2, by.indexOf("]"));
+            let t = time[1].split(" ")[1];
+            let am_pm = time[1].split(" ")[2];
+            time[1] = t + " " + am_pm;
             medicationList.push(<ShowMed
-                time={moment(time[1]).format("hh:mm A")}
+                time={time[1]}
                 name={current[0].split(": ")[1]}
                 dosage={current[2].split(": ")[1]}
                 route={current[3].split(": ")[1]}
