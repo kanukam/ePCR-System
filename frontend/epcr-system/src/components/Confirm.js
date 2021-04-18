@@ -34,7 +34,7 @@ export default class Confirm extends Component {
         return (
             <div className="form-confirm">
                 <form>
-                    <h2>Confirm Chart Report</h2>
+                    <h2>{this.context.translate('confirm-chart')}</h2>
                     <table className="simpleview">
                         <tbody>
                             <tr><th>{this.context.translate('response')}</th></tr>
