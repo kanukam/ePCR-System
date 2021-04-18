@@ -195,7 +195,7 @@ export default class Confirm extends Component {
                                         <i>{this.context.translate('gravid')}</i><span>{values.oGravid}</span><br/>
                                         <i>{this.context.translate('para')}</i><span>{values.oPara}</span><br/>
                                         <i>{this.context.translate('abortion')}</i><span>{values.oAbortion}</span><br/>
-                                        <i>{this.context.translate('due-date')}</i><span>{values.oDuedate}</span><br/>
+                                        <i>{this.context.translate('due-date')}</i><span>{values.oDuedate && <Moment date={values.oDuedate} format="DD-MM-YYYY" />}</span><br/>
                                         <i>{this.context.translate('gestation')}</i><span>{values.oGestation} {this.context.translate('week')}s</span><br/>
                                         <i>{this.context.translate('vaginal-bleed')}</i><span>{values.oVaginalBleed}</span><br/>
                                         <i>{this.context.translate('contraction')}</i><span>{values.oContraction}</span><br/>
