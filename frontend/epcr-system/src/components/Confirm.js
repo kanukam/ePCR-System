@@ -119,7 +119,7 @@ export default class Confirm extends Component {
                                     <i>{this.context.translate('Head')}</i><span>{values.head.join()}</span><br/>
                                     <i>{this.context.translate('Neck')}</i><span>{values.neck.join()}</span><br/>
                                     <i>{this.context.translate('Chest')}</i><span>{values.chest.join()}</span><br/>
-                                    <i>{this.context.translate('Pulse')}</i><span>{(values.pulse_strength || values.pulse_rate) && this.context.translate('Pulse-Strength') + ":"} {(values.pulse_strength || values.pulse_rate) && values.pulse_strength + " | "}  {(values.pulse_strength || values.pulse_rate) && this.context.translate('Pulse-Rate') + ":"} {values.pulse_rate}</span><br/>
+                                    <i>{this.context.translate('Pulse')}</i><span>{(values.pulse_strength || values.pulse_rate) && this.context.translate('Pulse-Strength') + ":"} {(values.pulse_strength || values.pulse_rate) && values.pulse_strength + "  |  "}  {(values.pulse_strength || values.pulse_rate) && this.context.translate('Pulse-Rate') + ":"} {values.pulse_rate}</span><br/>
                                     <i>{this.context.translate('Abdomen')}</i><span>{values.abdomen.join()}</span><br/>
                                     <i>{this.context.translate('Pelvis')}</i><span>{values.pelvis.join()}</span><br/>
                                     <i>{this.context.translate('Back')}</i><span>{values.back.join()}</span><br/>
