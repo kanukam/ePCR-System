@@ -3,6 +3,7 @@ import { MainContext } from '../Auth';
 import MainNav from './MainNav';
 import Notes from './Notes';
 import '../App.css'
+import moment from 'moment'
 
 export default class ViewChart extends Component {
     static contextType = MainContext;
@@ -15,7 +16,6 @@ export default class ViewChart extends Component {
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
     }
-
 
     toggleCollapse (){
         this.setState({contentSpacing : (this.state.sidebarHide ? '0 0 0 0' : '0 0 0 150px')})
@@ -36,7 +36,7 @@ export default class ViewChart extends Component {
                     <embed src={`http://localhost:3000/charts/${this.props.match.params.id}/pdf?locale=${this.context.language}#scrollbar=1`}  type="application/pdf" width={"100%"} style={{width: "100%", height:"700px"}}>
 
                     </embed>
-                    {this.state.chart['id'] && <Notes chartId={this.state.chart['id']} />}
+                    <Notes chartId={this.props.match.params.id} />
                 </div>
             </React.Fragment>
         )
