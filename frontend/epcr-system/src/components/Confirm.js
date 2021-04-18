@@ -150,12 +150,26 @@ export default class Confirm extends Component {
                             <tr><th>{this.context.translate('interventions')}</th></tr>
                             <tr>
                                 <td>
-                                    <i>{this.context.translate('procedures')}</i><span>{values.procedures.join()}</span>
+                                    <i>{this.context.translate('procedures')}</i><span>{values.medications && values.procedures.map((element, idx) => {
+                                        return (
+                                            <div>
+                                                {element}
+                                                <br />
+                                            </div>
+                                        )
+                                    })}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <i>{this.context.translate('medications')}</i><span>{values.medications.join()}</span>
+                                    <i>{this.context.translate('medications')}</i><span>{values.medications && values.medications.map((element, idx) => {
+                                            return (
+                                                <div>
+                                                   {element}
+                                                    <br/>
+                                                </div>
+                                            )
+                                        })}</span>
                                 </td>
                             </tr>
                             <tr>
