@@ -257,7 +257,6 @@ export default class AddInterventions extends Component {
         var lastIndex = ""
         var data = ""
         var by = ""
-        console.log(values.medications);
         for (var i = 0; i < values.procedures.length; i++) {
             current = values.procedures[i].split(" | ");
             time = current[1].split(": ");
