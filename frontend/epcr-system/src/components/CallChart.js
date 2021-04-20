@@ -78,7 +78,7 @@ export default class CallChart extends Component {
         return(
             <React.Fragment>
                 {options && <CanvasJSChart options={options}/>}
-                {options && <div className="text-center"><Button className="mt-3 text-center" onClick={this.saveAsPdf}>{this.context.translate('save')}</Button></div>}
+                {options && <div className="text-center"><Button className="mt-3 text-center" onClick={this.saveAsPdf}>{this.context.translate('print')}</Button></div>}
             </React.Fragment>         
             )
         }

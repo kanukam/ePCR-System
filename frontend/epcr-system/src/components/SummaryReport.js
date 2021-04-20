@@ -472,7 +472,7 @@ export default class SummaryReport extends Component {
                                     </Form.Group>
                                 </Card.Body>
                             </Card>
-                            <Button className="mt-3 mb-3" onClick={this.saveAsPdf}>{this.context.translate('save')}</Button>
+                            <Button className="mt-3 mb-3" onClick={this.saveAsPdf}>{this.context.translate('print')}</Button>
                         </Container>
                     </React.Fragment>
                 )
