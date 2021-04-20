@@ -100,6 +100,11 @@ table.simpleview span { display:inline-block; width:75%; vertical-align:top; }
 .main-content{
 	padding: 0 0 0 150px;
 }
+
+.iframe-padding{
+    padding: 0 25px 0 25px;
+}
+
 /*
 @media (max-width: 768px){
     .main-content{
