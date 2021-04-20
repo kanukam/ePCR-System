@@ -43,7 +43,7 @@ export default class ViewChart extends Component {
                     contentSpacing={this.state.contentSpacing}
                     toggleCollapse={this.toggleCollapse}
                 />
-                <div>
+                <div className="main-content">
                     <iframe title="chart" id='pdfpreview' src={this.state.chartsrc} key={this.state.random}  type="application/pdf" width={"100%"} style={{width: "100%", height:"700px"}}>
 
                     </iframe>
