@@ -13,7 +13,7 @@ export default class Settings extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: [],
+            users: "",
             error: "",
             message: "",
             userMessage: "",
@@ -23,23 +23,25 @@ export default class Settings extends Component {
     }
 
     componentDidMount() {
-        // Getting all user data from database
-        const url = 'http://localhost:3000/users';
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'include'
+        if (this.context.privilege == "admin"){
+            // Getting all user data from database
+            const url = 'http://localhost:3000/users';
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include'
+            }
+            // Post request
+            fetch(url, options).then(response => response.json())
+                .then(data => {
+                    this.setState({ users: data["userInfo"] });
+                })
+                .catch((error) => {
+                    this.setState({ errorMessage: this.context.translate('error') });
+                })
         }
-        // Post request
-        fetch(url, options).then(response => response.json())
-            .then(data => {
-                this.setState({ users: data["userInfo"] });
-            })
-            .catch((error) => {
-                this.setState({ errorMessage: this.context.translate('error') });
-            })
     }
 
     // Delete user, must be an admin for it to work.
@@ -170,7 +172,7 @@ export default class Settings extends Component {
                             <Table responsive bordered className="mt-3">
                                 <thead>
                                     <tr>
-                                        <th>id</th>
+                                        <th>ID</th>
                                         <th>{this.context.translate('name')}</th>
                                         <th>{this.context.translate('username')}</th>
                                         <th>{this.context.translate('email')}</th>
