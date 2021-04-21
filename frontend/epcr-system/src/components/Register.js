@@ -80,7 +80,14 @@ export default class Register extends Component {
                     if (!response.ok) {
                         throw Error;
                     }
-                    this.setState({ message: this.context.translate('reg-succ') });
+                    // Clear form fields + Set Message
+                    this.setState({
+                        message: this.context.translate('reg-succ'), 
+                        username: "",
+                        password: "",
+                        email: "",
+                        phone: "",
+                        name: ""});
                 }).catch((error) => {
                     this.setState({ message: this.context.translate('reg-failed') });
                 })
