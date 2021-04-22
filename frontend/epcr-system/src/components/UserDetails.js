@@ -67,9 +67,6 @@ export class UserDetails extends Component {
             <React.Fragment>
                 <tr>
                     <td>
-                        {this.props.idx}
-                    </td>
-                    <td>
                         {this.props.name}
                     </td>
                     <td>

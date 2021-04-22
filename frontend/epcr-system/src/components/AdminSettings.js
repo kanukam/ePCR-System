@@ -171,7 +171,6 @@ export default class Settings extends Component {
                             <Table responsive bordered className="mt-3">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
                                         <th>{this.context.translate('name')}</th>
                                         <th>{this.context.translate('username')}</th>
                                         <th>{this.context.translate('email')}</th>
