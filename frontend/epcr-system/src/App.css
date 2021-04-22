@@ -71,7 +71,7 @@ table.treatment th { background:#eee; color:#0098f2; }
 table.treatment td { border-bottom:1px solid #eee; }
 table.treatment tr:last-child td { border-bottom:none; }
 table.psearch th, table.psearch td { border-bottom:1px solid #dee2e6; }
-table.psearch th { background:#eee; }
+table.psearch th { background:#eee; position:sticky; top:0; }
 table.psearch tr:last-child td { border:none; }
 .filterfield { padding:10px; border-bottom:5px solid #0098f2; }
 .filterfield span, .filterfield input[type="search"] { vertical-align:top; display:inline-block; height:35px; border:1px solid #dee2e6; }
