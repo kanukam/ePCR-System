@@ -48,7 +48,7 @@ export default class Settings extends Component {
         const email = this.state.email;
         const phone = this.state.phone.replace(/-/g, "");
         const name = this.state.name;
-
+        console.log(phone);
         if (name && phone && email) {
             const url = `http://localhost:3000/users/${this.context.username}/update`;
             const options = {
