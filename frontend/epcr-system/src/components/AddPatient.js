@@ -119,29 +119,33 @@ export default class AddPatient extends Component {
                         </Modal.Header>
                         <Modal.Body>
                             <div className="filterfield">
-                            <span><FaSearch/></span><input type="search" placeholder={this.context.translate('full-name')} value={this.state.search} onChange={this.search.bind(this)} />
+                                <span><FaSearch /></span><input type="search" placeholder={this.context.translate('full-name')} value={this.state.search} onChange={this.search.bind(this)} />
                             </div>
-                            <table className="psearch">
-                                <tbody>
-                                    <tr>
-                                        <th>{this.context.translate('fname')}</th>
-                                        <th>{this.context.translate('lname')}</th>
-                                        <th>{this.context.translate('pbirth')}</th>
-                                        <th width="100px">{this.context.translate('action')}</th>
-                                    </tr>
-                                    {filteredPatients.map((patient, index) => {
-                                        return <PatientRow
-                                            fname={patient["fname"]}
-                                            lname={patient["lname"]}
-                                            dob={patient["birth"] ? this.displayTime(patient["birth"]) : null}
-                                            id={patient.id}
-                                            index={index}
-                                            select={this.selectPatient}
-                                            selectText={this.context.translate('select1')}
-                                        />
-                                    })}
-                                </tbody>
-                            </table>
+                            <div style={{ height: '525px', overflow: 'auto' }}>
+                                <table className="psearch">
+                                    <thead>
+                                        <tr>
+                                            <th>{this.context.translate('fname')}</th>
+                                            <th>{this.context.translate('lname')}</th>
+                                            <th>{this.context.translate('pbirth')}</th>
+                                            <th width="100px">{this.context.translate('action')}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {filteredPatients.map((patient, index) => {
+                                            return <PatientRow
+                                                fname={patient["fname"]}
+                                                lname={patient["lname"]}
+                                                dob={patient["birth"] ? this.displayTime(patient["birth"]) : null}
+                                                id={patient.id}
+                                                index={index}
+                                                select={this.selectPatient}
+                                                selectText={this.context.translate('select1')}
+                                            />
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
                         </Modal.Body>
                     </Modal>
                     <h3>{this.context.translate('patient-info')}</h3>
