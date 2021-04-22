@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
 import MainNav from '../components/MainNav';
 import { MainContext } from '../Auth';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -472,7 +471,7 @@ export default class SummaryReport extends Component {
                                     </Form.Group>
                                 </Card.Body>
                             </Card>
-                            <Button className="mt-3 mb-3" onClick={this.saveAsPdf}>{this.context.translate('print')}</Button>
+                            <input type="button" className="left" onClick={this.saveAsPdf} value={this.context.translate('print')} />
                         </Container>
                     </React.Fragment>
                 )

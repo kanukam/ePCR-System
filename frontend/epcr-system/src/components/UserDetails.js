@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import { MainContext } from '../Auth'
 import { Link } from "react-router-dom";
@@ -86,7 +85,7 @@ export class UserDetails extends Component {
                         {this.context.translate(this.props.privilege)}
                     </td>
                     <td>
-                        {this.props.privilege === "standard" && <Button onClick={this.props.delete(this.props.email)}>{this.context.translate('delete')}</Button>}
+                        {this.props.privilege === "standard" && <input type="button" onClick={this.props.delete(this.props.email)} value={this.context.translate('delete')} />}
                     </td>
                     <td>
                         <Link onClick={this.handleOpen} to="/Settings">{this.context.translate('edit')}</Link>
@@ -115,10 +114,8 @@ export class UserDetails extends Component {
                         </Form.Group>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={this.handleClose}>
-                            {this.context.translate('close')}
-                        </Button>
-                        <Button variant="primary" onClick={this.updateCert}>{this.context.translate('save')}</Button>
+                        <input type="button" className="cancel" onClick={this.handleClose} value={this.context.translate('close')} />
+                        <input type="button" onClick={this.updateCert} value={this.context.translate('save')} />
                     </Modal.Footer>
                 </Modal>
 

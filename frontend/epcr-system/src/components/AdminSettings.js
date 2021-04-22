@@ -5,7 +5,6 @@ import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import UserDetails from './UserDetails'
-import Button from 'react-bootstrap/Button'
 import { MainContext } from '../Auth'
 
 export default class Settings extends Component {
@@ -192,6 +191,7 @@ export default class Settings extends Component {
                                     }
                                 </tbody>
                             </Table>
+                            <hr/>
                             <Card.Title className="mt-4">{this.context.translate('add-elevate')}</Card.Title>
                             {this.state.userMessage && <p className="text-info"> {this.state.userMessage} </p>}
                             <Form>
@@ -203,7 +203,7 @@ export default class Settings extends Component {
                                         <Form.Control type="email" placeholder={this.context.translate('enter-email')} value={this.state.addedUser} onChange={e => this.setState({ addedUser: e.target.value })}/>
                                     </Col>
                                     <Col sm="4">
-                                        <Button variant="primary" onClick={this.addUser}>{this.context.translate('add')}</Button>{' '}
+                                        <input type="button" onClick={this.addUser} value={this.context.translate('add')} />
                                     </Col>
                                 </Form.Group>
 
@@ -215,7 +215,7 @@ export default class Settings extends Component {
                                         <Form.Control type="email" placeholder={this.context.translate('enter-email')} value={this.state.elevatedUser} onChange={e => this.setState({ elevatedUser: e.target.value })}/>
                                     </Col>
                                     <Col sm="4">
-                                        <Button variant="primary" onClick={this.elevateUser}>{this.context.translate('elevate')}</Button>{' '}
+                                        <input type="button" onClick={this.elevateUser} value={this.context.translate('elevate')} />
                                     </Col>
                                 </Form.Group>
 

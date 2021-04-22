@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { MainContext } from '../Auth'
 import Container from 'react-bootstrap/Container'
-import Button from 'react-bootstrap/Button'
 import moment from 'moment'
 import '../App.css'
 
@@ -117,7 +116,7 @@ export default class Notes extends Component {
                         <textarea style={{resize:'none', width:'100%', height:'100px'}} value={this.state.noteBox} onChange={this.textInput}></textarea>
                         {this.state.emptyMessage && <b>{this.state.emptyMessage}</b>}
                     </Container>
-                    <Button onClick={this.addNote}>{this.context.translate('add-note')}</Button>
+                    <input type="button" onClick={this.addNote} value={this.context.translate('add-note')} />
                 </Container>
             </React.Fragment>
         )

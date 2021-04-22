@@ -1,7 +1,6 @@
 import React, { Component } from 'react'; 
 import { MainContext } from '../Auth';
 import { CanvasJSChart } from 'canvasjs-react-charts';
-import Button from 'react-bootstrap/Button';
 import moment from 'moment';
 
 
@@ -78,7 +77,7 @@ export default class CallChart extends Component {
         return(
             <React.Fragment>
                 {options && <CanvasJSChart options={options}/>}
-                {options && <div className="text-center"><Button className="mt-3 text-center" onClick={this.saveAsPdf}>{this.context.translate('print')}</Button></div>}
+                {options && <div className="text-center"><input type="button" style={{marginTop: '20px'}} onClick={this.saveAsPdf} value={this.context.translate('print')} /></div>}
             </React.Fragment>         
             )
         }

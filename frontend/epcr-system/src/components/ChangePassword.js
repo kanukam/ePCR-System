@@ -57,9 +57,9 @@ export default class ChangePassword extends Component {
 
     handleSubmit = (event => {
         event.preventDefault();
-        const {password, confirmedPassword, token} = this.state;
+        const { password, confirmedPassword, token } = this.state;
         console.log(token);
-        if(password !== confirmedPassword){
+        if (password !== confirmedPassword) {
             this.setState({ message: this.context.translate('passwordMismatch') });
         }
         else if (password) {
@@ -83,7 +83,7 @@ export default class ChangePassword extends Component {
                     this.setState({ message: this.context.translate('error') });
                 })
             }
-            
+
         }
         else {
             this.setState({ message: this.context.translate('all-fields') });
@@ -111,41 +111,28 @@ export default class ChangePassword extends Component {
 
                 <div className='mt-5'>
                     <Container>
-                        <Row>
-                            <Col>
-                                <Jumbotron fluid>
-                                    {/* Login Text */}
-                                    <Container>
-                                        <h1>{this.context.translate('reset-password')}</h1>
-                                    </Container>
-                                </Jumbotron>
-
-                                <Form onSubmit={this.handleSubmit}>
-                                    <Form.Group>
-                                        <Form.Label>{this.context.translate('enter-password')}</Form.Label>
-                                        <Form.Control type="password" pattern="[a-zA-Z0-9!@?]{0,100}" value={this.state.password} onChange={e => this.setState({ password: e.target.value })} />
-                                    </Form.Group>
-                                    <Form.Group>
-                                        <Form.Label>{this.context.translate('enter-password')}</Form.Label>
-                                        <Form.Control type="password" pattern="[a-zA-Z0-9!@?]{0,100}" value={this.state.confirmedPassword} onChange={e => this.setState({ confirmedPassword: e.target.value })} />
-                                    </Form.Group>
-                                    {/* Button for submitting form */}
-                                    <Button variant="primary" type="submit">
-                                        {this.context.translate('reset')}
-                                    </Button>
-                                </Form>
-
-                                {/* Message displayed telling results of registration */}
-                                {this.state.message && <p className="text-dark mt-2"> {this.state.message} </p>}
-
-                                {/* Login */}
-                                <div className='mt-1 float-left'>
-                                    <Link to="/">{this.context.translate('login')}</Link>
-                                </div>
-
-
-                            </Col>
-                        </Row>
+                        <div className="authentication">
+                            {/* Login Text */}
+                            <h1>{this.context.translate('reset-password')}</h1>
+                            {/* Message displayed telling results of registration */}
+                            {this.state.message && <p className="text-dark mt-2"> {this.state.message} </p>}
+                            <Form onSubmit={this.handleSubmit}>
+                                <Form.Group>
+                                    <Form.Label>{this.context.translate('enter-password')}</Form.Label>
+                                    <Form.Control type="password" pattern="[a-zA-Z0-9!@?]{0,100}" value={this.state.password} onChange={e => this.setState({ password: e.target.value })} />
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>{this.context.translate('enter-password')}</Form.Label>
+                                    <Form.Control type="password" pattern="[a-zA-Z0-9!@?]{0,100}" value={this.state.confirmedPassword} onChange={e => this.setState({ confirmedPassword: e.target.value })} />
+                                </Form.Group>
+                                {/* Button for submitting form */}
+                                <input type="submit" value={this.context.translate('reset')} />
+                            </Form>
+                            {/* Login */}
+                            <div className='link'>
+                                <Link to="/">{this.context.translate('login')}</Link>
+                            </div>
+                        </div>
                     </Container>
                 </div>
             </React.Fragment>

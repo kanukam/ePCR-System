@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Jumbotron from 'react-bootstrap/Jumbotron';
 import { Link } from "react-router-dom";
 import { MainContext } from '../Auth'
 import NavDropdown from 'react-bootstrap/NavDropdown'
@@ -35,7 +31,7 @@ export default class Register extends Component {
         let capital = new RegExp("[A-Z]");
         let number = /\d/g;
         // Check at least 8 chars
-        if(password.length < 8){
+        if (password.length < 8) {
             this.setState({ message: this.context.translate('password-length') });
             return false;
         }
@@ -51,7 +47,7 @@ export default class Register extends Component {
             this.setState({ message: this.context.translate('password-number') });
             return false;
         }
-        else{
+        else {
             return true;
         }
     }
@@ -63,9 +59,8 @@ export default class Register extends Component {
         const email = this.state.email;
         const phone = this.state.phone;
         const name = this.state.name;
-        if(username && password && email)
-        {
-            if(this.passwordWordCheck(password)){
+        if (username && password && email) {
+            if (this.passwordWordCheck(password)) {
                 const url = 'http://localhost:3000/register';
                 const options = {
                     method: 'POST',
@@ -82,18 +77,19 @@ export default class Register extends Component {
                     }
                     // Clear form fields + Set Message
                     this.setState({
-                        message: this.context.translate('reg-succ'), 
+                        message: this.context.translate('reg-succ'),
                         username: "",
                         password: "",
                         email: "",
                         phone: "",
-                        name: ""});
+                        name: ""
+                    });
                 }).catch((error) => {
                     this.setState({ message: this.context.translate('reg-failed') });
                 })
             }
         }
-        else{
+        else {
             this.setState({ message: this.context.translate('reg-fields') });
         }
     })
@@ -103,9 +99,9 @@ export default class Register extends Component {
         return (
             <React.Fragment>
                 {/* Navigation Bar */}
-                <Navbar bg="light">
+                <Navbar className="light">
                     <Navbar.Brand>
-                        <img alt="" src="/Rescate-Logo.jpg" width="10%" height="10%" className="d-inline-block align-top"/>{' '}
+                        <img alt="" src="/Rescate-Logo.jpg" width="10%" height="10%" className="d-inline-block align-top" />{' '}
                         Rescate de San Carlos
                     </Navbar.Brand>
                     <NavDropdown title="Language/Idioma" id="basic-nav-dropdown" className="ml-auto">
@@ -116,56 +112,45 @@ export default class Register extends Component {
 
                 <div className='mt-5'>
                     <Container>
-                        <Row>
-                            <Col>
-                                <Jumbotron fluid>
-                                    {/* Login Text */}
-                                    <Container>
-                                        <h1>{this.context.translate('register')}</h1>
-                                    </Container>
-                                </Jumbotron>
-
-                                <Form onSubmit={this.handleSubmit}>
-                                    {/* Name Field */}
-                                    <Form.Group>
-                                        <Form.Label>{this.context.translate('enter-name')}</Form.Label>
-                                        <Form.Control type="text" placeholder={this.context.translate('enter-name')} value={this.state.name} onChange={e => this.setState({ name: e.target.value })} />
-                                    </Form.Group>
-                                    {/* Name Field */}
-                                    <Form.Group>
-                                        <Form.Label>{this.context.translate('enter-email')}</Form.Label>
-                                        <Form.Control type="email" placeholder={this.context.translate('enter-email')} value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
-                                    </Form.Group>
-                                    {/* Username Field */}
-                                    <Form.Group>
-                                        <Form.Label>{this.context.translate('username')}</Form.Label>
-                                        <Form.Control type="text" placeholder={this.context.translate('enter-username')} value ={this.state.username} onChange={e => this.setState({ username: e.target.value }) }/>
-                                    </Form.Group>
-                                    {/* Password Field */}
-                                    <Form.Group>
-                                        <Form.Label>{this.context.translate('enter-password')}</Form.Label>
-                                        <Form.Control type="password" pattern="[a-zA-Z0-9!@?]{0,100}" placeholder={this.context.translate('password-requirements')} value={this.state.password} onChange={e => this.setState({ password: e.target.value })}/>
-                                    </Form.Group>
-                                    {/* Phone Field */}
-                                    <Form.Group>
-                                        <Form.Label>{this.context.translate('enter-phone')}</Form.Label>
-                                        <Form.Control type="tel" placeholder={this.context.translate('enter-phone')} value={this.state.phone} onChange={e => this.setState({ phone: e.target.value })} />
-                                    </Form.Group>
-                                    {/* Login */}
-                                    <div className='my-2'>
-                                        <Link to="/">{this.context.translate('login')}</Link>
-                                    </div>
-                                    {/* Button for submitting form */}
-                                    <Button variant="primary" type="submit">
-                                        {this.context.translate('register')}
-                                    </Button>
-                                </Form>
-
-                                {/* Message displayed telling results of registration */}
-                                {this.state.message && <p className="text-dark mt-1"> { this.state.message } </p>}
-                                
-                            </Col>
-                        </Row>
+                        <div className="authentication">
+                            {/* Login Text */}
+                            <h1>{this.context.translate('register')}</h1>
+                            {/* Message displayed telling results of registration */}
+                            {this.state.message && <p className="text-dark mt-1"> {this.state.message} </p>}
+                            <Form onSubmit={this.handleSubmit}>
+                                {/* Name Field */}
+                                <Form.Group>
+                                    <Form.Label>{this.context.translate('enter-name')}</Form.Label>
+                                    <Form.Control type="text" placeholder={this.context.translate('enter-name')} value={this.state.name} onChange={e => this.setState({ name: e.target.value })} />
+                                </Form.Group>
+                                {/* Name Field */}
+                                <Form.Group>
+                                    <Form.Label>{this.context.translate('enter-email')}</Form.Label>
+                                    <Form.Control type="email" placeholder={this.context.translate('enter-email')} value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
+                                </Form.Group>
+                                {/* Username Field */}
+                                <Form.Group>
+                                    <Form.Label>{this.context.translate('username')}</Form.Label>
+                                    <Form.Control type="text" placeholder={this.context.translate('enter-username')} value={this.state.username} onChange={e => this.setState({ username: e.target.value })} />
+                                </Form.Group>
+                                {/* Password Field */}
+                                <Form.Group>
+                                    <Form.Label>{this.context.translate('enter-password')}</Form.Label>
+                                    <Form.Control type="password" pattern="[a-zA-Z0-9!@?]{0,100}" placeholder={this.context.translate('password-requirements')} value={this.state.password} onChange={e => this.setState({ password: e.target.value })} />
+                                </Form.Group>
+                                {/* Phone Field */}
+                                <Form.Group>
+                                    <Form.Label>{this.context.translate('enter-phone')}</Form.Label>
+                                    <Form.Control type="tel" placeholder={this.context.translate('enter-phone')} value={this.state.phone} onChange={e => this.setState({ phone: e.target.value })} />
+                                </Form.Group>
+                                {/* Button for submitting form */}
+                                <input type="submit" value={this.context.translate('register')} />
+                                {/* Login */}
+                                <div className='link'>
+                                    <Link to="/">{this.context.translate('login')}</Link>
+                                </div>
+                            </Form>
+                        </div>
                     </Container>
                 </div>
             </React.Fragment>

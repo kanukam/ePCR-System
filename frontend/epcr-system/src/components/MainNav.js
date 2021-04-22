@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import { MainContext } from '../Auth'
@@ -44,7 +43,7 @@ export default class MainNav extends Component {
 		    	{/* Navigation Bar */}
 		        <Navbar bg="light">
 		            <Nav.Item style={{padding: this.props.contentSpacing}} className="hamburger-shift">
-		                <Button onClick={this.props.toggleCollapse}>
+		                <div className="menu" onClick={this.props.toggleCollapse}>
 		                    <img 
 		                        src="/hamburger.svg" 
 		                        alt="hamburger" 
@@ -52,7 +51,8 @@ export default class MainNav extends Component {
 		                        height="30" 
 		                        style={{marginLeft:0, marginRight: 0}}
 		                    />
-		                </Button>
+							<span>Rescate de San Carlos</span>
+		                </div>
 		            </Nav.Item>
 
 		            <Nav className="ml-auto">
@@ -82,7 +82,7 @@ export default class MainNav extends Component {
 			        <Navbar className="col-md-1 d-none d-md-block bg-light sidebar">
 			            {this.props.chart ?
 				            <Nav.Item className="sidebar-section active">
-				                <Nav.Link style={{color:'white'}} as={Link} to="/Chart">
+				                <Nav.Link as={Link} to="/Chart">
 									{this.context.translate('chart')}
 				                </Nav.Link>
 				            </Nav.Item>
@@ -95,7 +95,7 @@ export default class MainNav extends Component {
 				        }
 			            {this.props.viewcharts ?
 				            <Nav.Item className="sidebar-section active">
-				                <Nav.Link style={{color:'white'}} as={Link} to="/ViewCharts">
+				                <Nav.Link as={Link} to="/ViewCharts">
 									{this.context.translate('view-charts')}
 				                </Nav.Link>
 				            </Nav.Item>
@@ -108,7 +108,7 @@ export default class MainNav extends Component {
 				        }
 						{privilege === 'admin' && this.props.statistics ?
 							<Nav.Item className="sidebar-section active">
-								<Nav.Link as={Link} to="/Statistics" style={{ color: 'white' }}>
+								<Nav.Link as={Link} to="/Statistics">
 									{this.context.translate('statistics')}
 								</Nav.Link>
 							</Nav.Item>
@@ -124,7 +124,7 @@ export default class MainNav extends Component {
 						}
 						{this.props.settings ?
 							<Nav.Item className="sidebar-section active">
-								<Nav.Link style={{ color: 'white' }} as={Link} to="/Settings">
+								<Nav.Link as={Link} to="/Settings">
 									{this.context.translate('settings')}
 				                </Nav.Link>
 							</Nav.Item>

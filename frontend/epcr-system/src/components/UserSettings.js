@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
@@ -145,7 +144,6 @@ export default class Settings extends Component {
                         <Card className='mt-4'>
                             <Card.Body>
                                 <Card.Title>{this.context.translate('account-settings')}</Card.Title>
-                                <hr></hr>
                                 {this.state.message && <p className="text-info"> {this.state.message} </p>}
                                 <Form>
                                     <Form.Row>
@@ -165,13 +163,10 @@ export default class Settings extends Component {
                                         <Form.Control type="tel" value={this.state.phone} onChange={e => this.setState({ phone: e.target.value })} />
                                     </Form.Group>
 
-                                    <Button variant="primary" onClick={this.handleUpdate}>
-                                        {this.context.translate('save')}
-                                    </Button>
+                                    <input type="button" onClick={this.handleUpdate} value={this.context.translate('save')}/>
                                 </Form>
-
+                                <hr/>
                                 <Card.Title className='mt-4'>{this.context.translate('change-pw')}</Card.Title>
-                                <hr></hr>
                                 <Form onSubmit={this.handlePassword}>
                                     <Form.Row>
                                         <Form.Group as={Col}>
@@ -190,9 +185,7 @@ export default class Settings extends Component {
                                         </Form.Group>
                                     </Form.Row>
 
-                                    <Button variant="primary" type="submit">
-                                        {this.context.translate('change')}
-                                    </Button>
+                                    <input type="button" onClick={this.handlePassword} value={this.context.translate('change')}/>
                                 </Form>
                             </Card.Body>
                         </Card>
