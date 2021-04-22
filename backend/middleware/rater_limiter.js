@@ -1,3 +1,5 @@
+// This will limit login attempts
+
 const db = require('../sql/database');
 
 // 10 Attempts are allowed over a period of 1 hour
@@ -7,7 +9,7 @@ const HOURS_TIL_EXPIRY = process.env.HOURS_TIL_EXPIRY || 1;
 module.exports = (req, res, next) => {
     const { ip } = req;
     let now = new Date();
-    let expiry = new Date(this.getTime() + (HOURS_TIL_EXPIRY*60*60*1000));
+    let expiry = new Date(now.getTime() + (HOURS_TIL_EXPIRY*60*60*1000));
 
     db.query(`SELECT * from ratelimiters where ip='${ip}'`, (err, res) => {
         if(res.length <= 0){ // IP doesn't exist
@@ -36,10 +38,4 @@ module.exports = (req, res, next) => {
             next();
         }
     })
-}
-
-function decide(res, hits, next){
-    if(hits + 1 > MAX_LOGIN_ATTEMPTS)
-        return res.status(400).send('Access denied');
-    else next();
 }
