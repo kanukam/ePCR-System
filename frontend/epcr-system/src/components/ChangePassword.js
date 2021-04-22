@@ -98,7 +98,7 @@ export default class ChangePassword extends Component {
         return (
             <React.Fragment>
                 {/* Navigation Bar */}
-                <Navbar bg="light">
+                <Navbar className="light">
                     <Navbar.Brand>
                         <img alt="" src="/Rescate-Logo.jpg" width="10%" height="10%" className="d-inline-block align-top" />{' '}
                         Rescate de San Carlos
