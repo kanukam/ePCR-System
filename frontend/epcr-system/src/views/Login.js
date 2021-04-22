@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Jumbotron from 'react-bootstrap/Jumbotron'
 import { Redirect } from 'react-router-dom'
 import { MainContext } from '../Auth'
 import { Link } from "react-router-dom";
@@ -23,7 +19,7 @@ export default class Login extends Component {
         };
 
     }
-    
+
     toggleLanguage = (language) => event => {
         this.context.setLanguage(language);
     }
@@ -57,8 +53,7 @@ export default class Login extends Component {
         event.preventDefault();
         const username = this.state.username;
         const password = this.state.password;
-        if(username && password)
-        {
+        if (username && password) {
             const url = 'http://localhost:3000/login';
             const options = {
                 method: 'POST',
@@ -82,23 +77,22 @@ export default class Login extends Component {
                 this.setState({ errorMessage: this.context.translate('invalid-user') });
             })
         }
-        else
-        {
+        else {
             this.setState({ errorMessage: this.context.translate('all-fields') });
-        } 
+        }
     })
 
     render() {
-        if(this.state.authorized) {
+        if (this.state.authorized) {
             return <Redirect to="/Chart" />
         }
 
         return (
             <React.Fragment>
                 {/* Navigation Bar */}
-                <Navbar bg="light">
+                <Navbar className="light">
                     <Navbar.Brand>
-                        <img alt="" src="/Rescate-Logo.jpg" width="10%" height="10%" className="d-inline-block align-top"/>{' '}
+                        <img alt="" src="/Rescate-Logo.jpg" width="10%" height="10%" className="d-inline-block align-top" />{' '}
                         Rescate de San Carlos
                     </Navbar.Brand>
                     <NavDropdown title="Language/Idioma" id="basic-nav-dropdown" className="ml-auto">
@@ -109,49 +103,29 @@ export default class Login extends Component {
 
                 <div className='mt-5'>
                     <Container>
-                        <Row>
-                            <Col>
-                                <Jumbotron fluid>
-                                    {/* Login Text */}
-                                    <Container>
-                                        <h1>{this.context.translate('login')}</h1>
-                                    </Container>
-                                </Jumbotron>
-
-                                <Form onSubmit={this.handleSubmit}>
-                                    {/* Username Field */}
-                                    <Form.Group>
-                                        <Form.Label>{this.context.translate('username')}</Form.Label>
-                                        <Form.Control type="text" placeholder={this.context.translate('username')} value ={this.state.username} onChange={e => this.setState({ username: e.target.value }) }/>
-                                    </Form.Group>
-                                    {/* Password Field */}
-                                    <Form.Group>
-                                        <Form.Label>{this.context.translate('password')}</Form.Label>
-                                        <Form.Control type="password" placeholder={this.context.translate('password')} value={this.state.password} onChange={e => this.setState({ password: e.target.value })}/>
-                                    </Form.Group>
-                                    {/* Button for submitting form */}
-                                    <Button variant="primary" type="submit">
-                                        {this.context.translate('sign-in')}
-                                    </Button>
-                                </Form>
-                                {/* Error Message displayed if invalid login attempt */}
-                                {this.state.errorMessage && <p className="text-danger"> {this.state.errorMessage} </p>}
-                                <Jumbotron className='mt-3' fluid>
-                                    <Container>
-                                        <div>
-                                            {/* Register */}
-                                            <div className='float-left'>
-                                                <Link to="/Register">{this.context.translate('register')}</Link>
-                                            </div>
-                                            {/* Forgot Password */}
-                                            <div className='float-right'>
-                                                <Link to="/Reset">{this.context.translate('forgot-password')}</Link>
-                                            </div>
-                                        </div>
-                                    </Container>
-                                </Jumbotron>
-                            </Col>
-                        </Row>
+                        <div className="authentication">
+                            {/* Login Text */}
+                            <h1>{this.context.translate('login')}</h1>
+                            {/* Error Message displayed if invalid login attempt */}
+                            {this.state.errorMessage && <p className="text-danger"> {this.state.errorMessage} </p>}
+                            <Form onSubmit={this.handleSubmit}>
+                                {/* Username Field */}
+                                <Form.Group>
+                                    <Form.Label>{this.context.translate('username')}</Form.Label>
+                                    <Form.Control type="text" placeholder={this.context.translate('username')} value={this.state.username} onChange={e => this.setState({ username: e.target.value })} />
+                                </Form.Group>
+                                {/* Password Field */}
+                                <Form.Group>
+                                    <Form.Label>{this.context.translate('password')}</Form.Label>
+                                    <Form.Control type="password" placeholder={this.context.translate('password')} value={this.state.password} onChange={e => this.setState({ password: e.target.value })} />
+                                </Form.Group>
+                                {/* Button for submitting form */}
+                                <input type="submit" value={this.context.translate('sign-in')} />
+                                <div className="forgot"><Link to="/Reset">{this.context.translate('forgot-password')}</Link></div>
+                            </Form>
+                            <hr/>
+                            <div className="link"><Link to="/Register">{this.context.translate('register')}</Link></div>
+                        </div>
                     </Container>
                 </div>
             </React.Fragment>

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import UserSettings from '../components/UserSettings'
 import AdminSettings from '../components/AdminSettings'
 import Container from 'react-bootstrap/Container'
-import Button from 'react-bootstrap/Button'
 import MainNav from '../components/MainNav'
 import { MainContext } from '../Auth'
 
@@ -55,11 +54,11 @@ export default class Settings extends Component {
                     contentSpacing={this.state.contentSpacing}
                     toggleCollapse={this.toggleCollapse}
                 />
-                <Container className='main-content' style={{ padding: this.state.contentSpacing }}>
+                <Container className='mt-4 main-content' style={{ padding: this.state.contentSpacing }}>
                     <UserSettings />
                     <AdminSettings />
                     <div className="text-center">
-                        <Button variant="danger" type="submit" className="mb-5 mt-5" onClick={this.remove}>{this.context.translate('delete-account')}</Button>
+                        <input type="button" className="danger" onClick={this.remove} value={this.context.translate('delete-account')} />
                     </div>
                     {this.state.message && <p className="text-info"> {this.state.message} </p>}
                 </Container>  

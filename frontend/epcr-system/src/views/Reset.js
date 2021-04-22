@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Jumbotron from 'react-bootstrap/Jumbotron'
 import { MainContext } from '../Auth'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import { Link } from "react-router-dom";
@@ -27,7 +23,7 @@ export default class Reset extends Component {
 
     handleSubmit = (event => {
         event.preventDefault();
-        const {email} = this.state;
+        const { email } = this.state;
         if (email) {
             const url = 'http://localhost:3000/forgot';
             const options = {
@@ -57,7 +53,7 @@ export default class Reset extends Component {
         return (
             <React.Fragment>
                 {/* Navigation Bar */}
-                <Navbar bg="light">
+                <Navbar className="light">
                     <Navbar.Brand>
                         <img alt="" src="/Rescate-Logo.jpg" width="10%" height="10%" className="d-inline-block align-top" />{' '}
                         Rescate de San Carlos
@@ -70,35 +66,23 @@ export default class Reset extends Component {
 
                 <div className='mt-5'>
                     <Container>
-                        <Row>
-                            <Col>
-                                <Jumbotron fluid>
-                                    {/* Reset Text */}
-                                    <Container>
-                                        <h1>{this.context.translate('reset-password')}</h1>
-                                    </Container>
-                                </Jumbotron>
-
-                                <Form onSubmit={this.handleSubmit}>
-                                    <Form.Group>
-                                        <Form.Label>{this.context.translate('enter-email')}</Form.Label>
-                                        <Form.Control type="email" placeholder={this.context.translate('enter-email')} value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
-                                    </Form.Group>
-                                    {/* Button for submitting form */}
-                                    <Button variant="primary" type="submit">
-                                        {this.context.translate('reset')}
-                                    </Button>
-                                </Form>
-
-                                {/* Message displayed telling results of reset */}
-                                {this.state.message && <p className="text-dark mt-1"> {this.state.message} </p>}
-                                
-                                <div className='mt-2'>
-                                    <Link to="/">{this.context.translate('login')}</Link>
-                                </div>
-
-                            </Col>
-                        </Row>
+                        <div className="authentication">
+                            {/* Reset Text */}
+                            <h1>{this.context.translate('reset-password')}</h1>
+                            {/* Message displayed telling results of reset */}
+                            {this.state.message && <p className="text-dark mt-1"> {this.state.message} </p>}
+                            <Form onSubmit={this.handleSubmit}>
+                                <Form.Group>
+                                    <Form.Label>{this.context.translate('enter-email')}</Form.Label>
+                                    <Form.Control type="email" placeholder={this.context.translate('enter-email')} value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
+                                </Form.Group>
+                                {/* Button for submitting form */}
+                                <input type="submit" value={this.context.translate('reset')} />
+                            </Form>
+                            <div className='link'>
+                                <Link to="/">{this.context.translate('login')}</Link>
+                            </div>
+                        </div>
                     </Container>
                 </div>
             </React.Fragment>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
 import MainNav from '../components/MainNav';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -126,7 +125,7 @@ class Statistics extends Component {
                                             />
                                         </Col>
                                         <Col sm={6} className="offset-3">
-                                            <Button className="" onClick={this.createSummary}>{this.context.translate('create')}</Button>
+                                            <input type="button" onClick={this.createSummary} value={this.context.translate('create')} />
                                         </Col>
                                     </Form.Group>
                             </Form>
@@ -159,7 +158,7 @@ class Statistics extends Component {
                                         />
                                     </Col>
                                     <Col sm={6} className="offset-3">
-                                        <Button className="" onClick={this.trendAnalysis}>{this.context.translate('create')}</Button>
+                                        <input type="button" onClick={this.trendAnalysis} value={this.context.translate('create')} />
                                     </Col>
                                 </Form.Group>
                             </Form>
