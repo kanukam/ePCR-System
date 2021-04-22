@@ -98,6 +98,7 @@
     "remove": "Eliminar",
     "confirm-chart": "Confirmar informe gráfico",
     "required-fields": "Se han dejado en blanco uno o más campos obligatorios. Por favor llénelos.",
+    "too-many-attempts":"Demasiados intentos de acceso.",
 
     "call": "Llamada",
     "response-details": "Detalles de la respuesta",
