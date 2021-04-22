@@ -46,7 +46,7 @@ export default class Settings extends Component {
     handleUpdate = (event => {
         event.preventDefault();
         const email = this.state.email;
-        const phone = this.state.phone.replace(/-/g, "");
+        const phone = this.state.phone;
         const name = this.state.name;
         console.log(phone);
         if (name && phone && email) {
