@@ -34,6 +34,11 @@ export default class ViewChart extends Component {
     }
 
     render() {
+        var spacing = (this.state.contentSpacing === '0 0 0 150px') ? "0 0 0 150px" : "0 25px 0 25px";
+        console.log(spacing);
+        const mystyle = {
+            padding: spacing
+        };
         return (
             <React.Fragment>
                 <MainNav
@@ -43,7 +48,7 @@ export default class ViewChart extends Component {
                     contentSpacing={this.state.contentSpacing}
                     toggleCollapse={this.toggleCollapse}
                 />
-                <div className="main-content">
+                <div style={mystyle}>
                     <iframe title="chart" id='pdfpreview' src={this.state.chartsrc} key={this.state.random}  type="application/pdf" width={"100%"} style={{width: "100%", height:"700px"}}>
 
                     </iframe>
@@ -51,5 +56,6 @@ export default class ViewChart extends Component {
                 </div>
             </React.Fragment>
         )
+        
     }
 }
