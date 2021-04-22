@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import Button from 'react-bootstrap/Button'
-import Popup from './Popup'
+import Modal from 'react-bootstrap/Modal'
+import { FaSearch } from 'react-icons/fa'
+import PatientRow from './PatientRow'
 import DatePicker from "react-datepicker";
 import '../App.css';
 import { MainContext } from '../Auth';
@@ -11,9 +12,36 @@ export default class AddPatient extends Component {
         super(props);
         this.state = {
             message: "",
+            search: "",
             showPop: false,
             patient: "",
+            patients: [],
+            patientList: []
         };
+    }
+
+    componentDidMount() {
+        const url = 'http://localhost:3000/patients/';
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        }
+        fetch(url, options)
+            .then((response) => {
+                if (response.ok)
+                    return response.json();
+                else
+                    throw Error("Failed");
+            })
+            .then((data) => {
+                this.setState({ patients: data['patients'] });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     navigate = step => (e) => {
@@ -32,30 +60,95 @@ export default class AddPatient extends Component {
     }
 
     toggleSearch = () => {
-        this.setState({
-            showPop: !this.state.showPop
-        });
+        this.setState({ showPop: !this.state.showPop });
     }
 
-    selectPatient = existingPatient => {
-        //alert(existingPatient);
-        this.props.setPatient(existingPatient);
-        this.toggleSearch();
+    hideSearch = () => {
+        this.setState({ showPop: false });
+    }
+
+    displayTime(time) {
+        var index = time.indexOf("-");
+        var lastIndex = time.lastIndexOf("-");
+        var year = time.substring(0, index);
+        var month = time.substring(index + 1, index + 3);
+        var day = time.substring(lastIndex + 1);
+        return day + "/" + month + "/" + year;
+    }
+
+    selectPatient = index => (event) => {
+        var patient = this.state.patientList[index];
+        //this.props.selectPatient(patient);
+        this.props.setPatient(patient);
+        this.hideSearch();
+    }
+
+    search(event) {
+        this.setState({ search: event.target.value.substr(0, 20) });
     }
 
     render() {
         const { values } = this.props;
+        for (var i = 0; i < this.state.patients.length; i++) {
+            var pat = this.state.patients[i].id + "," + this.state.patients[i]["fname"] + "," + this.state.patients[i]["lname"] + "," + this.state.patients[i]["birth"] + "," + this.state.patients[i]["gender"] + ",;";
+            this.state.patientList.push(pat);
+        }
+        let filteredPatients = this.state.patients.filter(
+            (patient) => {
+                var fullname = patient["fname"] + " " + patient["lname"];
+                var fullnameR = patient["lname"] + " " + patient["fname"];
+                var full = fullname.toLowerCase().indexOf(this.state.search.toLowerCase());
+                var fullR = fullnameR.toLowerCase().indexOf(this.state.search.toLowerCase());
+                if (full !== -1) { return full !== -1; }
+                else if (fullR !== -1) { return fullR !== -1; }
+            }
+        );
         return (
             <div className="chart">
                 <form id="patient">
                     <h2>{this.context.translate('patient-info')}</h2>
                     <div style={{ textAlign: 'center' }}><input type="button" value={this.context.translate('prev-patient-search')} onClick={this.toggleSearch} /></div>
-                    {this.state.showPop ? <Popup text="patient-search" closePopup={this.togglePop} selectPatient={this.selectPatient} /> : null}
+                    <Modal
+                        show={this.state.showPop}
+                        onHide={this.hideSearch}
+                        size="lg"
+                        aria-labelledby="contained-modal-title-vcenter"
+                    >
+                        <Modal.Header closeButton>
+                            <Modal.Title>{this.context.translate('prev-patient-search')}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <div className="filterfield">
+                            <span><FaSearch/></span><input type="search" placeholder={this.context.translate('full-name')} value={this.state.search} onChange={this.search.bind(this)} />
+                            </div>
+                            <table className="psearch">
+                                <tbody>
+                                    <tr>
+                                        <th>{this.context.translate('fname')}</th>
+                                        <th>{this.context.translate('lname')}</th>
+                                        <th>{this.context.translate('pbirth')}</th>
+                                        <th width="100px">{this.context.translate('action')}</th>
+                                    </tr>
+                                    {filteredPatients.map((patient, index) => {
+                                        return <PatientRow
+                                            fname={patient["fname"]}
+                                            lname={patient["lname"]}
+                                            dob={patient["birth"] ? this.displayTime(patient["birth"]) : null}
+                                            id={patient.id}
+                                            index={index}
+                                            select={this.selectPatient}
+                                            selectText={this.context.translate('select1')}
+                                        />
+                                    })}
+                                </tbody>
+                            </table>
+                        </Modal.Body>
+                    </Modal>
                     <h3>{this.context.translate('patient-info')}</h3>
                     <table className="cform">
                         <tbody>
                             <tr>
-                                <th width="25%">{this.context.translate('full-name')}</th>
+                                <th width="25%">{this.context.translate('full-name')}<em>*</em></th>
                                 <td width="75%">
                                     <div style={{ display: 'inline-block' }}>
                                         <input type="text" name="fname" id="fname" value={values.fname} onChange={this.props.handleChange('fname')} />
@@ -68,7 +161,7 @@ export default class AddPatient extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <th>{this.context.translate('pbirth')}</th>
+                                <th>{this.context.translate('pbirth')}<em>*</em></th>
                                 <td>
                                     <DatePicker
                                         selected={values.birth ? values.birthDisplay : false}
@@ -79,7 +172,7 @@ export default class AddPatient extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <th>{this.context.translate('classify')}</th>
+                                <th>{this.context.translate('classify')}<em>*</em></th>
                                 <td>
                                     <select name="classify" value={values.classify} onChange={this.props.handleChange('classify')}>
                                         <option disabled selected value="">{this.context.translate('select')}</option>
@@ -91,7 +184,7 @@ export default class AddPatient extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <th>{this.context.translate('psex')}</th>
+                                <th>{this.context.translate('psex')}<em>*</em></th>
                                 <td>
                                     <select name="gender" value={values.gender} onChange={this.props.handleChange('gender')}>
                                         <option disabled selected value="">{this.context.translate('select')}</option>
@@ -260,12 +353,12 @@ export default class AddPatient extends Component {
                             </tr>
                         </tbody>
                     </table>
-                    <Button className="left" onClick={this.back}>{this.context.translate('previous')}</Button>
-                    <Button className="right" onClick={this.saveAndContinue}>{this.context.translate('next')}</Button>
+                    <input type="button" className="left" onClick={this.back} value={this.context.translate('previous')} />
+                    <input type="button" className="right" onClick={this.saveAndContinue} value={this.context.translate('next')} />
                 </form>
                 {/* Bottom chart navigation */}
                 <div className="chartnav">
-                <div className="tab" onClick={this.navigate(1)}>
+                    <div className="tab" onClick={this.navigate(1)}>
                         <img src="/callIcon.png" alt="Call" />
                         <b>{this.context.translate('call')}</b>
                     </div>

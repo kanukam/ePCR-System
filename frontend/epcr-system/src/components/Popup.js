@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import PatientRow from './PatientRow'
 import UserDropdown from './UserDropdown'
 import '../App.css'
 import DatePicker from "react-datepicker";
@@ -23,30 +22,8 @@ export default class Popup extends Component {
     }
 
     componentDidMount() {
-        const url = 'http://localhost:3000/patients/';
+        const url = 'http://localhost:3000/users';
         const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-        }
-        fetch(url, options)
-            .then((response) => {
-                if (response.ok)
-                    return response.json();
-                else
-                    throw Error("Failed");
-            })
-            .then((data) => {
-                this.setState({ patients: data['patients'] });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        
-        const url2 = 'http://localhost:3000/users';
-        const options2 = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -54,10 +31,10 @@ export default class Popup extends Component {
             credentials: 'include'
         }
         // Post request
-        fetch(url2, options2).then(response => response.json())
+        fetch(url, options).then(response => response.json())
             .then(data => {
                 this.setState({ users: data["userInfo"] });
-           })
+            })
             .catch((error) => {
                 this.setState({ errorMessage: this.context.translate('error') });
             })
@@ -506,44 +483,16 @@ export default class Popup extends Component {
         }
     }
 
-    selectPatient = index => (event) => {
-        var patient = this.state.patientList[index];
-        this.props.selectPatient(patient);
-    }
-
-    displayTime(time) {
-        var index = time.indexOf("-");
-        var lastIndex = time.lastIndexOf("-");
-        var year = time.substring(0, index);
-        var month = time.substring(index + 1, index + 3);
-        var day = time.substring(lastIndex + 1);
-        return day + "/" + month + "/" + year;
-    }
-
     render() {
         const { inter } = this.props;
-        var patientComponents = [];
-        for (var i = 0; i < this.state.patients.length; i++) {
-            patientComponents.push(<PatientRow
-                fname={this.state.patients[i]["fname"]}
-                lname={this.state.patients[i]["lname"]}
-                dob={this.state.patients[i]["birth"] ? this.displayTime(this.state.patients[i]["birth"]) : null}
-                id={this.state.patients[i].id}
-                index={i}
-                select={this.selectPatient}
-                selectText={this.context.translate('select1')}
-            />)
-            var pat = this.state.patients[i].id + "," + this.state.patients[i]["fname"] + "," + this.state.patients[i]["lname"] + "," + this.state.patients[i]["birth"] + "," + this.state.patients[i]["gender"] + ",;";
-            this.state.patientList.push(pat);
-        }
         var userComponents = [];
-        for(var i = 0; i < this.state.users.length; i++) {
+        for (var i = 0; i < this.state.users.length; i++) {
             var certifications = '';
-            if(this.state.users[i]["certifications"] !== null) {
+            if (this.state.users[i]["certifications"] !== null) {
                 certifications = this.state.users[i]["certifications"].split(',');
-                for(var j = 0; j < certifications.length; j++) {
-                    if(certifications[j] === "Enfermera") { certifications[j] = this.context.translate('nurse'); }
-                    else if(certifications[j] === "Paramedico") { certifications[j] = this.context.translate('paramedic'); }
+                for (var j = 0; j < certifications.length; j++) {
+                    if (certifications[j] === "Enfermera") { certifications[j] = this.context.translate('nurse'); }
+                    else if (certifications[j] === "Paramedico") { certifications[j] = this.context.translate('paramedic'); }
                 }
                 certifications = certifications.join(', ');
             } else { certifications = "N/A"; }
@@ -553,232 +502,212 @@ export default class Popup extends Component {
             />)
         }
         return (
-            <div>
-                {this.props.text.includes("patient") ?
-                    <div className="popup shadow psearch">
-                        {/*<input type="button" class="closebutton" onClick={this.props.closePopup} value="&#x2715;"/>*/}
-                        <h2>{this.context.translate(this.props.text)}</h2>
-                        <div style={{ height: '282px', overflow: 'auto' }}>
-                            <table className="treatment" style={{ marginBottom: '0' }}>
-                                <tbody>
-                                    <tr>
-                                        <th>{this.context.translate('fname')}</th>
-                                        <th>{this.context.translate('lname')}</th>
-                                        <th>{this.context.translate('pbirth')}</th>
-                                        <th width="100px">{this.context.translate('action')}</th>
-                                    </tr>
-                                    {patientComponents}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    : <div className="popup shadow">
-                        <input type="button" class="closebutton" onClick={this.props.closePopup} value="&#x2715;"/>
-                        <h2>{this.context.translate(this.props.text)}</h2>
-                        {this.props.text.includes("proc") ?
-                            <div>
-                                <Row>
-                                    <Col>
-                                        <div className="group">
-                                            <span>{this.context.translate('procedure')}</span>
-                                            <select className="multiple" name="pName" style={{ height: '150px' }} onChange={this.props.changeInter('pName')} multiple>
-                                                <option value="Glucosa en sangre">{this.context.translate('blood_glucose')}</option>
-                                                <option value="Control de hemorragia">{this.context.translate('hemo_control')}</option>
-                                                <option value="Entablillado">{this.context.translate('splinting')}</option>
-                                                <option value="Oxígeno">{this.context.translate('oxygen')}</option>
-                                                <option value="Precauciones de la columna vertebral">{this.context.translate('spinal_precaution')}</option>
-                                                <option value="Aglutinante pélvic">{this.context.translate('pelvic_binder')}</option>
-                                                <option value="Succión">{this.context.translate('suction')}</option>
-                                                <option value="Vía aérea básica - BVM">{this.context.translate('airway_bvm')}</option>
-                                                <option value="MD Consultar">{this.context.translate('md_consult')}</option>
-                                                <option value="Intravenosa">{this.context.translate('iv')}</option>
-                                                <option value="IO Intravenosa">{this.context.translate('io_iv')}</option>
-                                                <option value="Descompresión pleural">{this.context.translate('pleural_decomp')}</option>
-                                                <option value="Vía aérea avanzada - LMA">{this.context.translate('airway_lma')}</option>
-                                                <option value="Vía aérea avanzada - Intubación">{this.context.translate('airway_intub')}</option>
-                                                <option value="Cricotirotomía">{this.context.translate('crico')}</option>
-                                                <option value="12 Lead EKG">12 Lead EKG</option>
-                                                <option value="Paro cardíaco">{this.context.translate('cardiac_arrest')}</option>
-                                                <option value="Defib cardíaco - AED">{this.context.translate('cardiac_aed')}</option>
-                                                <option value="Defib cardíaco - Manual">{this.context.translate('cardiac_manual')}</option>
-                                                <option value="Ritmo cardíaco">{this.context.translate('cardiac_pacing')}</option>
-                                            </select>
-                                        </div>
-                                        {inter.pName === "Paro cardíaco" ?
-                                            <div>
-                                                <div>
-                                                    <span>{this.context.translate('time-arrest')}</span>
-                                                    <DatePicker
-                                                        selected={inter.pTimeDisplay ? inter.pTimeDisplay : false}
-                                                        placeholderText="dd/mm/yyyy --:-- --"
-                                                        onChange={this.props.handleDate('pTime')}
-                                                        timeInputLabel="Time:"
-                                                        dateFormat="dd/MM/yyyy h:mm aa"
-                                                        showTimeInput
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <span>{this.context.translate('cpr-start')}</span>
-                                                    <DatePicker
-                                                        selected={inter.pCPRstartDisplay ? inter.pCPRstartDisplay : false}
-                                                        placeholderText="dd/mm/yyyy --:-- --"
-                                                        onChange={this.props.handleDate('pCPRstart')}
-                                                        timeInputLabel="Time:"
-                                                        dateFormat="dd/MM/yyyy h:mm aa"
-                                                        showTimeInput
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <span>{this.context.translate('cpr-stop')}</span>
-                                                    <DatePicker
-                                                        selected={inter.pCPRstopDisplay ? inter.pCPRstopDisplay : false}
-                                                        placeholderText="dd/mm/yyyy --:-- --"
-                                                        onChange={this.props.handleDate('pCPRstop')}
-                                                        timeInputLabel="Time:"
-                                                        dateFormat="dd/MM/yyyy h:mm aa"
-                                                        showTimeInput
-                                                    />
-                                                </div>
-                                                <div className="group">
-                                                    <span>{this.context.translate('outcome')}</span>
-                                                    <select name="pOutcome" value={inter.pOutcome} onChange={this.props.changeInter('pOutcome')}>
-                                                        <option disabled selected value="">{this.context.translate('select')}</option>
-                                                        <option value="Retorno de pulso">{this.context.translate('pulse-return')}</option>
-                                                        <option value="Muerto">{this.context.translate('expired')}</option>
-                                                    </select>
-                                                </div>
-                                                <div className="group">
-                                                    <span>{this.context.translate('cpr-by')}</span>
-                                                    <select name="pCPRby" value={inter.pCPRby} onChange={this.props.changeInter('pCPRby')}>
-                                                        <option disabled selected value="">{this.context.translate('select')}</option>
-                                                        <option value="Espectador">{this.context.translate('bystander')}</option>
-                                                        <option value="Personal médico">{this.context.translate('med-personnel')}</option>
-                                                    </select>
-                                                </div>
-                                                {inter.pCPRby === "Personal médico" ?
-                                                    <div className="group">
-                                                        <span>{this.context.translate('med-name')}</span>
-                                                        <select name="pCPRbyName" value={inter.pCPRbyName} onChange={this.props.changeInter('pCPRbyName')}>
-                                                            <option disabled selected value="">{this.context.translate('select')}</option>
-                                                            {userComponents}
-                                                        </select>
-                                                    </div>
-                                                : null}
-                                                {inter.pCPRby === "Espectador" ?
-                                                    <div className="group">
-                                                        <span>{this.context.translate('other-name')}</span>
-                                                        <input type="text" name="pCPRbyName" value={inter.pCPRbyName} onChange={this.props.changeInter('pCPRbyName')} />
-                                                    </div>
-                                                : null}
-                                            </div>
-                                            : <div>
-                                                <div>
-                                                    <span>{this.context.translate('Time')}</span>
-                                                    <DatePicker
-                                                        selected={inter.pTimeDisplay ? inter.pTimeDisplay : false}
-                                                        placeholderText="dd/mm/yyyy --:-- --"
-                                                        onChange={this.props.handleDate('pTime')}
-                                                        timeInputLabel="Time:"
-                                                        dateFormat="dd/MM/yyyy h:mm aa"
-                                                        showTimeInput
-                                                    />
-                                                </div>
-                                                {this.renderProc(inter.pName)}
-                                                <div className="group">
-                                                    <span>{this.context.translate('by')}</span>
-                                                    <select name="pBy" value={inter.pBy} onChange={this.props.changeInter('pBy')}>
-                                                        <option disabled selected value="">{this.context.translate('select')}</option>
-                                                        {userComponents}
-                                                        <option value="Otro">{this.context.translate('other')}</option>
-                                                    </select>
-                                                </div>
-                                                {inter.pBy === "Otro" ?
-                                                    <div className="group">
-                                                        <span>{this.context.translate('other-name')}</span>
-                                                        <input type="text" name="pByOther" value={inter.pByOther} onChange={this.props.changeInter('pByOther')} />
-                                                    </div>
-                                                : null}
-                                            </div>}
-                                        <small style={{ color: 'red' }}>{this.context.translate(inter.message)}</small>
-                                        <div className="bottom">
-                                            <input type="button" className="left" value={this.context.translate('add')} onClick={this.props.submitProcedure} />
-                                            <input type="button" className="right" value={this.context.translate('cancel')} onClick={this.props.closePopup} />
-                                        </div>
-                                    </Col>
-                                </Row>
-                            </div>
-                            : null}
-                        {this.props.text.includes("med") ?
-                            <div>
-                                <Row>
-                                    <Col>
-                                        <div className="group">
-                                            <span>{this.context.translate('medication')}</span>
-                                            <input type="text" name="mName" value={inter.mName} onChange={this.props.changeInter('mName')} />
+            <div className="popup shadow">
+                <input type="button" class="closebutton" onClick={this.props.closePopup} value="&#x2715;" />
+                <h2>{this.context.translate(this.props.text)}</h2>
+                {this.props.text.includes("proc") ?
+                    <div>
+                        <Row>
+                            <Col>
+                                <div className="group">
+                                    <span>{this.context.translate('procedure')}</span>
+                                    <select className="multiple" name="pName" style={{ height: '150px' }} onChange={this.props.changeInter('pName')} multiple>
+                                        <option value="Glucosa en sangre">{this.context.translate('blood_glucose')}</option>
+                                        <option value="Control de hemorragia">{this.context.translate('hemo_control')}</option>
+                                        <option value="Entablillado">{this.context.translate('splinting')}</option>
+                                        <option value="Oxígeno">{this.context.translate('oxygen')}</option>
+                                        <option value="Precauciones de la columna vertebral">{this.context.translate('spinal_precaution')}</option>
+                                        <option value="Aglutinante pélvic">{this.context.translate('pelvic_binder')}</option>
+                                        <option value="Succión">{this.context.translate('suction')}</option>
+                                        <option value="Vía aérea básica - BVM">{this.context.translate('airway_bvm')}</option>
+                                        <option value="MD Consultar">{this.context.translate('md_consult')}</option>
+                                        <option value="Intravenosa">{this.context.translate('iv')}</option>
+                                        <option value="IO Intravenosa">{this.context.translate('io_iv')}</option>
+                                        <option value="Descompresión pleural">{this.context.translate('pleural_decomp')}</option>
+                                        <option value="Vía aérea avanzada - LMA">{this.context.translate('airway_lma')}</option>
+                                        <option value="Vía aérea avanzada - Intubación">{this.context.translate('airway_intub')}</option>
+                                        <option value="Cricotirotomía">{this.context.translate('crico')}</option>
+                                        <option value="12 Lead EKG">12 Lead EKG</option>
+                                        <option value="Paro cardíaco">{this.context.translate('cardiac_arrest')}</option>
+                                        <option value="Defib cardíaco - AED">{this.context.translate('cardiac_aed')}</option>
+                                        <option value="Defib cardíaco - Manual">{this.context.translate('cardiac_manual')}</option>
+                                        <option value="Ritmo cardíaco">{this.context.translate('cardiac_pacing')}</option>
+                                    </select>
+                                </div>
+                                {inter.pName === "Paro cardíaco" ?
+                                    <div>
+                                        <div>
+                                            <span>{this.context.translate('time-arrest')}</span>
+                                            <DatePicker
+                                                selected={inter.pTimeDisplay ? inter.pTimeDisplay : false}
+                                                placeholderText="dd/mm/yyyy --:-- --"
+                                                onChange={this.props.handleDate('pTime')}
+                                                timeInputLabel="Time:"
+                                                dateFormat="dd/MM/yyyy h:mm aa"
+                                                showTimeInput
+                                            />
                                         </div>
                                         <div>
-                                            <span>{this.context.translate('Time')}</span>
+                                            <span>{this.context.translate('cpr-start')}</span>
                                             <DatePicker
-                                                selected={inter.mTimeDisplay ? inter.mTimeDisplay : false}
+                                                selected={inter.pCPRstartDisplay ? inter.pCPRstartDisplay : false}
                                                 placeholderText="dd/mm/yyyy --:-- --"
-                                                onChange={this.props.handleDate('mTime')}
+                                                onChange={this.props.handleDate('pCPRstart')}
+                                                timeInputLabel="Time:"
+                                                dateFormat="dd/MM/yyyy h:mm aa"
+                                                showTimeInput
+                                            />
+                                        </div>
+                                        <div>
+                                            <span>{this.context.translate('cpr-stop')}</span>
+                                            <DatePicker
+                                                selected={inter.pCPRstopDisplay ? inter.pCPRstopDisplay : false}
+                                                placeholderText="dd/mm/yyyy --:-- --"
+                                                onChange={this.props.handleDate('pCPRstop')}
                                                 timeInputLabel="Time:"
                                                 dateFormat="dd/MM/yyyy h:mm aa"
                                                 showTimeInput
                                             />
                                         </div>
                                         <div className="group">
-                                            <span>{this.context.translate('dosage')}</span>
-                                            <input type="number" style={{ width: '22%', marginRight: '10px' }} min="0" name="mDosage" value={inter.mDosage} onChange={this.props.changeInter('mDosage')} />
-                                            <select name="mUnit" style={{ width: '30%' }} onChange={this.props.changeInter('mUnit')}>
+                                            <span>{this.context.translate('outcome')}</span>
+                                            <select name="pOutcome" value={inter.pOutcome} onChange={this.props.changeInter('pOutcome')}>
                                                 <option disabled selected value="">{this.context.translate('select')}</option>
-                                                <option value="GMS">GMS</option>
-                                                <option value="in.">Inches (in.)</option>
-                                                <option value="L">Liters (L)</option>
-                                                <option value="kg">Kilograms (kg)</option>
-                                                <option value="tablet">Tablets</option>
+                                                <option value="Retorno de pulso">{this.context.translate('pulse-return')}</option>
+                                                <option value="Muerto">{this.context.translate('expired')}</option>
                                             </select>
                                         </div>
                                         <div className="group">
-                                            <span>{this.context.translate('route')}</span>
-                                            <select name="mRoute" onChange={this.props.changeInter('mRoute')}>
+                                            <span>{this.context.translate('cpr-by')}</span>
+                                            <select name="pCPRby" value={inter.pCPRby} onChange={this.props.changeInter('pCPRby')}>
                                                 <option disabled selected value="">{this.context.translate('select')}</option>
-                                                <option value="Oral">Oral</option>
-                                                <option value="IM">IM</option>
-                                                <option value="IV">IV</option>
-                                                <option value="Nasal">Nasal</option>
-                                                <option value="Inhalar">{this.context.translate('inhaled')}</option>
-                                                <option value="Tópico">{this.context.translate('topical')}</option>
-                                                <option value="Sublingual">Sublingual</option>
-                                                <option value="Oftálmico">{this.context.translate('ophthalmic')}</option>
-                                                <option value="Oidos">{this.context.translate('otic')}</option>
-                                                <option value="Rectal">Rectal</option>
+                                                <option value="Espectador">{this.context.translate('bystander')}</option>
+                                                <option value="Personal médico">{this.context.translate('med-personnel')}</option>
                                             </select>
                                         </div>
+                                        {inter.pCPRby === "Personal médico" ?
+                                            <div className="group">
+                                                <span>{this.context.translate('med-name')}</span>
+                                                <select name="pCPRbyName" value={inter.pCPRbyName} onChange={this.props.changeInter('pCPRbyName')}>
+                                                    <option disabled selected value="">{this.context.translate('select')}</option>
+                                                    {userComponents}
+                                                </select>
+                                            </div>
+                                            : null}
+                                        {inter.pCPRby === "Espectador" ?
+                                            <div className="group">
+                                                <span>{this.context.translate('other-name')}</span>
+                                                <input type="text" name="pCPRbyName" value={inter.pCPRbyName} onChange={this.props.changeInter('pCPRbyName')} />
+                                            </div>
+                                            : null}
+                                    </div>
+                                    : <div>
+                                        <div>
+                                            <span>{this.context.translate('Time')}</span>
+                                            <DatePicker
+                                                selected={inter.pTimeDisplay ? inter.pTimeDisplay : false}
+                                                placeholderText="dd/mm/yyyy --:-- --"
+                                                onChange={this.props.handleDate('pTime')}
+                                                timeInputLabel="Time:"
+                                                dateFormat="dd/MM/yyyy h:mm aa"
+                                                showTimeInput
+                                            />
+                                        </div>
+                                        {this.renderProc(inter.pName)}
                                         <div className="group">
                                             <span>{this.context.translate('by')}</span>
-                                            <select name="mBy" value={inter.mBy} onChange={this.props.changeInter('mBy')}>
+                                            <select name="pBy" value={inter.pBy} onChange={this.props.changeInter('pBy')}>
                                                 <option disabled selected value="">{this.context.translate('select')}</option>
                                                 {userComponents}
                                                 <option value="Otro">{this.context.translate('other')}</option>
                                             </select>
                                         </div>
-                                        {inter.mBy === "Otro" ?
+                                        {inter.pBy === "Otro" ?
                                             <div className="group">
                                                 <span>{this.context.translate('other-name')}</span>
-                                                <input type="text" name="mByOther" value={inter.mByOther} onChange={this.props.changeInter('mByOther')} />
+                                                <input type="text" name="pByOther" value={inter.pByOther} onChange={this.props.changeInter('pByOther')} />
                                             </div>
-                                        : null}
-                                        <small style={{ color: 'red' }}>{this.context.translate(inter.message)}</small>
-                                        <div className="bottom">
-                                            <input type="button" className="left" value={this.context.translate('add')} onClick={this.props.submitMedication} />
-                                            <input type="button" className="right" value={this.context.translate('cancel')} onClick={this.props.closePopup} />
-                                        </div>
-                                    </Col>
-                                </Row>
-                            </div>
-                            : null}
-                    </div>}
+                                            : null}
+                                    </div>}
+                                <small style={{ color: 'red' }}>{this.context.translate(inter.message)}</small>
+                                <div className="bottom">
+                                    <input type="button" className="left" value={this.context.translate('add')} onClick={this.props.submitProcedure} />
+                                    <input type="button" className="right cancel" value={this.context.translate('cancel')} onClick={this.props.closePopup} />
+                                </div>
+                            </Col>
+                        </Row>
+                    </div>
+                    : null}
+                {this.props.text.includes("med") ?
+                    <div>
+                        <Row>
+                            <Col>
+                                <div className="group">
+                                    <span>{this.context.translate('medication')}</span>
+                                    <input type="text" name="mName" value={inter.mName} onChange={this.props.changeInter('mName')} />
+                                </div>
+                                <div>
+                                    <span>{this.context.translate('Time')}</span>
+                                    <DatePicker
+                                        selected={inter.mTimeDisplay ? inter.mTimeDisplay : false}
+                                        placeholderText="dd/mm/yyyy --:-- --"
+                                        onChange={this.props.handleDate('mTime')}
+                                        timeInputLabel="Time:"
+                                        dateFormat="dd/MM/yyyy h:mm aa"
+                                        showTimeInput
+                                    />
+                                </div>
+                                <div className="group">
+                                    <span>{this.context.translate('dosage')}</span>
+                                    <input type="number" style={{ width: '22%', marginRight: '10px' }} min="0" name="mDosage" value={inter.mDosage} onChange={this.props.changeInter('mDosage')} />
+                                    <select name="mUnit" style={{ width: '30%' }} onChange={this.props.changeInter('mUnit')}>
+                                        <option disabled selected value="">{this.context.translate('select')}</option>
+                                        <option value="GMS">GMS</option>
+                                        <option value="in.">Inches (in.)</option>
+                                        <option value="L">Liters (L)</option>
+                                        <option value="kg">Kilograms (kg)</option>
+                                        <option value="tablet">Tablets</option>
+                                    </select>
+                                </div>
+                                <div className="group">
+                                    <span>{this.context.translate('route')}</span>
+                                    <select name="mRoute" onChange={this.props.changeInter('mRoute')}>
+                                        <option disabled selected value="">{this.context.translate('select')}</option>
+                                        <option value="Oral">Oral</option>
+                                        <option value="IM">IM</option>
+                                        <option value="IV">IV</option>
+                                        <option value="Nasal">Nasal</option>
+                                        <option value="Inhalar">{this.context.translate('inhaled')}</option>
+                                        <option value="Tópico">{this.context.translate('topical')}</option>
+                                        <option value="Sublingual">Sublingual</option>
+                                        <option value="Oftálmico">{this.context.translate('ophthalmic')}</option>
+                                        <option value="Oidos">{this.context.translate('otic')}</option>
+                                        <option value="Rectal">Rectal</option>
+                                    </select>
+                                </div>
+                                <div className="group">
+                                    <span>{this.context.translate('by')}</span>
+                                    <select name="mBy" value={inter.mBy} onChange={this.props.changeInter('mBy')}>
+                                        <option disabled selected value="">{this.context.translate('select')}</option>
+                                        {userComponents}
+                                        <option value="Otro">{this.context.translate('other')}</option>
+                                    </select>
+                                </div>
+                                {inter.mBy === "Otro" ?
+                                    <div className="group">
+                                        <span>{this.context.translate('other-name')}</span>
+                                        <input type="text" name="mByOther" value={inter.mByOther} onChange={this.props.changeInter('mByOther')} />
+                                    </div>
+                                    : null}
+                                <small style={{ color: 'red' }}>{this.context.translate(inter.message)}</small>
+                                <div className="bottom">
+                                    <input type="button" className="left" value={this.context.translate('add')} onClick={this.props.submitMedication} />
+                                    <input type="button" className="right cancel" value={this.context.translate('cancel')} onClick={this.props.closePopup} />
+                                </div>
+                            </Col>
+                        </Row>
+                    </div>
+                    : null}
             </div>
         )
     }
