@@ -57,7 +57,7 @@ export default class Register extends Component {
         const username = this.state.username;
         const password = this.state.password;
         const email = this.state.email;
-        const phone = this.state.phone;
+        const phone = this.state.phone.replace(/-/g, "");
         const name = this.state.name;
         if (username && password && email) {
             if (this.passwordWordCheck(password)) {
