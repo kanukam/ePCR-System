@@ -65,16 +65,17 @@ export default class Login extends Component {
             }
             // Check if login is successful, redirect to dashbaord on success
             fetch(url, options).then((response) => {
-                if (!response.ok) {
-                    throw Error("Failed");
+                 if (!response.ok) {
+                    throw Error(response.status);
                 }
                 this.setState({ errorMessage: "" });
                 this.setState({ authorized: true })
                 this.context.setAuth(true);
                 this.context.setUsername(this.state.username);
                 this.getRole();
-            }).catch((error) => {
-                this.setState({ errorMessage: this.context.translate('invalid-user') });
+            }).catch(error => {
+                if(error == 403) this.setState({ errorMessage: this.context.translate('too-many-attempts') });
+                else this.setState({ errorMessage: this.context.translate('invalid-user') });
             })
         }
         else {
