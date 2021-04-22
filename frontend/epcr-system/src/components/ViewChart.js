@@ -35,7 +35,6 @@ export default class ViewChart extends Component {
 
     render() {
         var spacing = (this.state.contentSpacing === '0 0 0 150px') ? "0 0 0 150px" : "0 25px 0 25px";
-        console.log(spacing);
         const mystyle = {
             padding: spacing
         };
