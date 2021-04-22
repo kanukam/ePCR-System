@@ -57,7 +57,7 @@ export default class Settings extends Component {
                 <Container className='mt-4 main-content' style={{ padding: this.state.contentSpacing }}>
                     <UserSettings />
                     <AdminSettings />
-                    <div className="text-center">
+                    <div className="text-center mt-2">
                         <input type="button" className="danger" onClick={this.remove} value={this.context.translate('delete-account')} />
                     </div>
                     {this.state.message && <p className="text-info"> {this.state.message} </p>}
