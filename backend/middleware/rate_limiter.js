@@ -38,7 +38,7 @@ module.exports = (req, res, next) => {
         }
 
         if(newhits + 1 > MAX_LOGIN_ATTEMPTS)
-            return res.status(400).send('Access denied');
+            return res.status(403).send('Access denied');
         else {
             next();
         }
