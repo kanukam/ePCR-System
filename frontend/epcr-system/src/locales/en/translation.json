@@ -98,6 +98,7 @@
     "remove": "Remove",
     "confirm-chart": "Confirm Chart Report",
     "required-fields": "One or more required fields have been left blank. Please fill them out.",
+    "too-many-attempts":"Too many login attempts. Please wait to try again.",
 
     "call": "Call",
     "response-details": "Details",
