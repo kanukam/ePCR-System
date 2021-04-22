@@ -629,7 +629,7 @@ export default class Popup extends Component {
                                             </div>
                                             : null}
                                     </div>}
-                                <small style={{ color: 'red' }}>{this.context.translate(inter.message)}</small>
+                                <small className="message">{this.context.translate(inter.message)}</small>
                                 <div className="bottom">
                                     <input type="button" className="left" value={this.context.translate('add')} onClick={this.props.submitProcedure} />
                                     <input type="button" className="right cancel" value={this.context.translate('cancel')} onClick={this.props.closePopup} />
@@ -699,7 +699,7 @@ export default class Popup extends Component {
                                         <input type="text" name="mByOther" value={inter.mByOther} onChange={this.props.changeInter('mByOther')} />
                                     </div>
                                     : null}
-                                <small style={{ color: 'red' }}>{this.context.translate(inter.message)}</small>
+                                <small className="message">{this.context.translate(inter.message)}</small>
                                 <div className="bottom">
                                     <input type="button" className="left" value={this.context.translate('add')} onClick={this.props.submitMedication} />
                                     <input type="button" className="right cancel" value={this.context.translate('cancel')} onClick={this.props.closePopup} />

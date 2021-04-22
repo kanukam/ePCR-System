@@ -216,7 +216,7 @@ export default class Confirm extends Component {
                             </tr>
                         </tbody>
                     </table>
-                    <small style={{color:'red'}} className="ml-2">{this.context.translate(values.message)}</small>
+                    <small className="message">{this.context.translate(values.message)}</small>
                     <input type="button" className="left" onClick={this.back} value={this.context.translate('previous')} />
                     <input type="button" className="right" onClick={this.props.handleSubmit} value={this.context.translate('submit')} />
                 </form>
