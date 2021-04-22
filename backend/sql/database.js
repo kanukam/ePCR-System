@@ -21,10 +21,10 @@ con.connect(err => {
         username VARCHAR(255), 
         password VARCHAR(255), 
         email VARCHAR(255), 
-        phone VARCHAR(30), 
+        phone VARCHAR(255), 
         certifications VARCHAR(500),
-        name VARCHAR(50),
-        privilege varchar(30) DEFAULT 'standard',
+        name VARCHAR(100),
+        privilege varchar(100) DEFAULT 'standard',
         PRIMARY KEY (id)
         )`, (err, res) => {
         if (err) return console.log(err);
