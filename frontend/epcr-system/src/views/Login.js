@@ -74,7 +74,7 @@ export default class Login extends Component {
                 this.context.setUsername(this.state.username);
                 this.getRole();
             }).catch(error => {
-                if(error == 403) this.setState({ errorMessage: this.context.translate('too-many-attempts') });
+                if(error.toString() === 'Error: 403') this.setState({ errorMessage: this.context.translate('too-many-attempts') });
                 else this.setState({ errorMessage: this.context.translate('invalid-user') });
             })
         }
