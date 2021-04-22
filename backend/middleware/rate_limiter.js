@@ -11,15 +11,18 @@ module.exports = (req, res, next) => {
     let now = new Date();
     let expiry = new Date(now.getTime() + (HOURS_TIL_EXPIRY*60*60*1000));
 
-    db.query(`SELECT * from ratelimiters where ip='${ip}'`, (err, res) => {
-        if(res.length <= 0){ // IP doesn't exist
+    db.query(`SELECT * from ratelimiters where ip='${ip}'`, (err, dbRes) => {
+        if(err)
+            return res.status(500).send(err);
+            
+        if(dbRes.length <= 0){ // IP doesn't exist
             db.query(`UPDATE ratelimiters SET expiry=${expiry}, hits=1 WHERE ip='${ip}'`)
             return next();
         }
 
-        let newhits = res[0].hits || 0;
-        if(res[0].expiry){ // IP exists, has logged expiry
-            let c = new Date(res[0].expiry);
+        let newhits = dbRes[0].hits || 0;
+        if(dbRes[0].expiry){ // IP exists, has logged expiry
+            let c = new Date(dbRes[0].expiry);
 
             if(now.getTime() >= c.getTime()){ // Expired time has passed
                 db.query(`UPDATE ratelimiters SET expiry=${expiry}, hits=${newhits + 1} WHERE ip='${ip}'`)
