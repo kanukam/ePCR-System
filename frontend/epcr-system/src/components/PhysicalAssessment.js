@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { MainContext } from '../Auth'
@@ -554,7 +553,7 @@ export default class PhysicalAssessment extends Component {
                                     <tr>
                                         <th>ETC02</th>
                                         <td><input type="text" name="vital_signs_etco2" value={values.vital_signs_etco2} onChange={this.props.handleChange('vital_signs_etco2')} /></td>
-                                        <td colSpan="2"><Button className="left" onClick={this.addVitals}>{this.context.translate('add-vitals')}</Button></td>
+                                        <td colSpan="2"><input type="button" className="left" onClick={this.addVitals} value={this.context.translate('add-vitals')} /></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -565,8 +564,8 @@ export default class PhysicalAssessment extends Component {
                     <div>
                         <textarea type="text" placeholder="Enter Text" className="mb-3" rows="10" cols="100" onChange={this.props.handleChange('extra_findings')} value={values.extra_findings} />
                     </div>
-                    <Button className="left" onClick={this.back}>{this.context.translate('previous')}</Button>
-                    <Button className="right" onClick={this.saveAndContinue}>{this.context.translate('next')}</Button>
+                    <input type="button" className="left" onClick={this.back} value={this.context.translate('previous')} />
+                    <input type="button" className="right" onClick={this.saveAndContinue} value={this.context.translate('next')} />
                 </div>
                 {/* Bottom chart navigation */}
                 <div className="chartnav">

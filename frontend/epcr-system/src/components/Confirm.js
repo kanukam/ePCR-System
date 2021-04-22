@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Button from 'react-bootstrap/Button'
 import Moment from 'react-moment';
 import { MainContext } from '../Auth';
 import '../App.css'
@@ -35,7 +34,7 @@ export default class Confirm extends Component {
         }
 
         return (
-            <div className="form-confirm">
+            <div className="confirm">
                 <form>
                     <h2>{this.context.translate('confirm-chart')}</h2>
                     <table className="simpleview">
@@ -218,8 +217,8 @@ export default class Confirm extends Component {
                         </tbody>
                     </table>
                     <small style={{color:'red'}} className="ml-2">{this.context.translate(values.message)}</small>
-                    <Button className="left" onClick={this.back}>{this.context.translate('previous')}</Button>
-                    <Button className="right" onClick={this.props.handleSubmit}>{this.context.translate('submit')}</Button>
+                    <input type="button" className="left" onClick={this.back} value={this.context.translate('previous')} />
+                    <input type="button" className="right" onClick={this.props.handleSubmit} value={this.context.translate('submit')} />
                 </form>
                 {/* Bottom chart navigation */}
                 <div className="chartnav">

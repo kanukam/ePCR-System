@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button';
 import '../App.css';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -28,40 +27,6 @@ export default class AddCall extends Component {
         this.props.nextStep();
     }
 
-    /*
-    fetchInput = (e) => {
-        //e.preventDefault();
-        var form = document.getElementById("call");
-        var data = new FormData(form);
-        var object = {};
-        data.forEach(function(value, key){
-            object[key] = value;
-        });
-        this.state.jsonData = JSON.stringify(object);
-        alert(this.state.jsonData);
-        this.props.fetchNewInput(this.state.jsonData, 1);
-    }
-    */    
-
-    //handleCheckbox = (e) => {
-        /*const target = e.target;
-        var value = target.value;
-        if(target.checked) {
-            this.props.agency.push(value);
-        } else {
-            this.props.agency.splice(value, 1);
-        }
-        alert(this.props.agency);
-        /*let object = [];
-        let container = document.querySelector("#agency");
-        let match = container.querySelectorAll("input[type=checkbox]:checked");
-        match.forEach(function(item) {
-            alert(item);
-            object.push(item);
-        });*/
-        //alert(object);
-    //}
-
     render() {
         const { values } = this.props;
         return (
@@ -72,9 +37,9 @@ export default class AddCall extends Component {
                     <table className="cform">
                         <tbody>
                                 <tr>
-                                    <th width="20%">{this.context.translate('ino')}</th>
+                                    <th width="20%">{this.context.translate('ino')}<em>*</em></th>
                                     <td width="30%"><input type="text" name="ino" value={values.ino} onChange={this.props.handleChange('ino')} /></td>
-                                    <th width="20%">{this.context.translate('unit')}</th>
+                                    <th width="20%">{this.context.translate('unit')}<em>*</em></th>
                                     <td width="30%">
                                         <select name="unit" value={values.unit} onChange={this.props.handleChange('unit')}>
                                             <option disabled selected value="">{this.context.translate('select')}</option>
@@ -85,7 +50,7 @@ export default class AddCall extends Component {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>{this.context.translate('idate')}</th>
+                                    <th>{this.context.translate('idate')}<em>*</em></th>
                                     <td>
                                         <DatePicker
                                             selected={values.idateDisplay ? values.idateDisplay : false}
@@ -94,7 +59,7 @@ export default class AddCall extends Component {
                                             dateFormat="dd/MM/yyyy"
                                         />
                                     </td>
-                                    <th width="20%">{this.context.translate('call-type')}</th>
+                                    <th width="20%">{this.context.translate('call-type')}<em>*</em></th>
                                     <td width="30%">
                                         <select name="ctype" value={values.ctype} onChange={this.props.handleChange('ctype')}>
                                             <option disabled selected value="">{this.context.translate('select')}</option>
@@ -105,7 +70,7 @@ export default class AddCall extends Component {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>{this.context.translate('ilocation')}</th>
+                                    <th>{this.context.translate('ilocation')}<em>*</em></th>
                                     <td>
                                         <select name="loctype" value={values.loctype} onChange={this.props.handleChange('loctype')}>
                                             <option disabled selected value="">{this.context.translate('select')}</option>
@@ -124,7 +89,7 @@ export default class AddCall extends Component {
                                             <option value="Otro">{this.context.translate('other')}</option>
                                         </select>
                                     </td>
-                                    <th>{this.context.translate('call-nature')}</th>
+                                    <th>{this.context.translate('call-nature')}<em>*</em></th>
                                     <td>
                                         <select name="nature" value={values.nature} onChange={this.props.handleChange('nature')}>
                                             <option disabled selected value="">{this.context.translate('select')}</option>
@@ -139,7 +104,7 @@ export default class AddCall extends Component {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>{this.context.translate('iaddress')}</th>
+                                    <th>{this.context.translate('iaddress')}<em>*</em></th>
                                     <td><input type="text" name="loc" value={values.loc} onChange={this.props.handleChange('loc')} /></td>
                                     <th>{this.context.translate('care-level')}</th>
                                     <td>
@@ -152,7 +117,7 @@ export default class AddCall extends Component {
                                     </td>
                                 </tr>
                                 <tr style={{borderTop:'1px solid #ddd'}}>
-                                    <th>{this.context.translate('disposition')}</th>
+                                    <th>{this.context.translate('disposition')}<em>*</em></th>
                                     <td>
                                         <select name="disp" value={values.disp} onChange={this.props.handleChange('disp')}>
                                             <option disabled selected value="">{this.context.translate('select')}</option>
@@ -163,7 +128,7 @@ export default class AddCall extends Component {
                                             <option value="No se puede localizar">{this.context.translate('na-locate')}</option>
                                         </select>
                                     </td>
-                                    <th>{this.context.translate('destination')}</th>
+                                    <th>{this.context.translate('destination')}<em>*</em></th>
                                     <td>
                                         <select name="dest" value={values.dest} onChange={this.props.handleChange('dest')}>
                                             <option disabled selected value="">{this.context.translate('select')}</option>
@@ -314,7 +279,7 @@ export default class AddCall extends Component {
                         <table className="cform">
                             <tbody>
                             <tr>
-                                <th width="20%">{this.context.translate('dispatch')}</th>
+                                <th width="20%">{this.context.translate('dispatch')}<em>*</em></th>
                                 <td>
                                     <DatePicker
                                         selected={values.dispatchDisplay ? values.dispatchDisplay : false}
@@ -326,7 +291,7 @@ export default class AddCall extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <th>{this.context.translate('enroute')}</th>
+                                <th>{this.context.translate('enroute')}<em>*</em></th>
                                     <td>
                                         <DatePicker
                                         selected={values.enrouteDisplay ? values.enrouteDisplay : false }
@@ -338,7 +303,7 @@ export default class AddCall extends Component {
                                     </td>
                             </tr>
                             <tr>
-                                <th>{this.context.translate('arrscn')}</th>
+                                <th>{this.context.translate('arrscn')}<em>*</em></th>
                                 <td>
                                     <DatePicker
                                         selected={values.arrscnDisplay ? values.arrscnDisplay : false}
@@ -350,7 +315,7 @@ export default class AddCall extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <th>{this.context.translate('pcontact')}</th>
+                                <th>{this.context.translate('pcontact')}<em>*</em></th>
                                 <td>
                                     <DatePicker
                                         selected={values.contactDisplay ? values.contactDisplay : false}
@@ -362,7 +327,7 @@ export default class AddCall extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <th>{this.context.translate('dptscn')}</th>
+                                <th>{this.context.translate('dptscn')}<em>*</em></th>
                                 <td>
                                     <DatePicker
                                         selected={values.dptscnDisplay ? values.dptscnDisplay : false}
@@ -374,7 +339,7 @@ export default class AddCall extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <th>{this.context.translate('arrdes')}</th>
+                                <th>{this.context.translate('arrdes')}<em>*</em></th>
                                 <td>
                                     <DatePicker
                                         selected={values.arrdesDisplay ? values.arrdesDisplay : false}
@@ -386,7 +351,7 @@ export default class AddCall extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <th>{this.context.translate('trcare')}</th>
+                                <th>{this.context.translate('trcare')}<em>*</em></th>
                                 <td>
                                     <DatePicker
                                         selected={values.trcareDisplay ? values.trcareDisplay : false}
@@ -399,7 +364,7 @@ export default class AddCall extends Component {
                             </tr>
                         </tbody>
                     </table>
-                    <Button className="right" onClick={this.saveAndContinue}>{this.context.translate('next')}</Button>
+                    <input type="button" className="right" onClick={this.saveAndContinue} value={this.context.translate('next')} />
                 </form>
                 {/* Bottom chart navigation */}
                 <div className="chartnav">

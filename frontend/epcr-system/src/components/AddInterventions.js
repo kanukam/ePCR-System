@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Button from 'react-bootstrap/Button'
 import Popup from './Popup'
 import ShowProc from './ShowProc'
 import ShowMed from './ShowMed'
@@ -569,8 +568,8 @@ export default class AddInterventions extends Component {
                         </table> : null}
                     {/*<input type="text" name="pName" value={this.state.pName} />
                     <hr/>*/}
-                    <Button className="left" onClick={this.back}>{this.context.translate('previous')}</Button>
-                    <Button className="right" onClick={this.saveAndContinue}>{this.context.translate('next')}</Button>
+                    <input type="button" className="left" onClick={this.back} value={this.context.translate('previous')} />
+                    <input type="button" className="right" onClick={this.saveAndContinue} value={this.context.translate('next')} />
                 </form>
                 {/* Bottom chart navigation */}
                 <div className="chartnav">
