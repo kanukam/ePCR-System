@@ -9,7 +9,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { MainContext } from '../Auth';
 import moment from 'moment';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class Statistics extends Component {
     static contextType = MainContext;
@@ -46,23 +46,23 @@ class Statistics extends Component {
 
     createSummary = event => {
         event.preventDefault();
-        const { fromSummaryDate, toSummaryDate} = this.state;
-        if (fromSummaryDate && toSummaryDate){
+        const { fromSummaryDate, toSummaryDate } = this.state;
+        if (fromSummaryDate && toSummaryDate) {
             this.setState({ message: "" });
             const fromDate = new Date(fromSummaryDate);
             const toDate = new Date(toSummaryDate);
-            if(fromDate < toDate){
+            if (fromDate < toDate) {
                 // Redirect to page with summary
                 this.props.history.push({
                     pathname: '/SummaryReport',
                     state: { from: this.state.fromSummaryDate, to: this.state.toSummaryDate }
                 })
             }
-            else{
+            else {
                 this.setState({ message: this.context.translate('date-error') });
             }
         }
-        else{
+        else {
             this.setState({ message: this.context.translate('all-fields') });
         }
     }
@@ -101,38 +101,37 @@ class Statistics extends Component {
                     toggleCollapse={this.toggleCollapse}
                 />
                 <Container className="mt-5 main-content" style={{ padding: this.state.contentSpacing }}>
-                    <Card className="text-center mb-5">
+                    <Card className="text-center mt-5">
                         <Card.Header>{this.context.translate('summary-report')}</Card.Header>
                         <Card.Body>
                             <Form>
-                                    <Form.Group as={Row}>
-                                        <Form.Label column sm={6}>{this.context.translate('from')}</Form.Label>
-                                        <Col sm={6}>
-                                            <DatePicker
-                                                selected={this.state.fromSummaryDateDisplay ? this.state.fromSummaryDateDisplay : false}
-                                                placeholderText="dd/mm/yyyy"
-                                                onChange={this.handleDateNoTime('fromSummaryDate')}
-                                                dateFormat="dd/MM/yyyy"
-                                            />
-                                        </Col>
-                                        <Form.Label column sm={6}>{this.context.translate('to')}</Form.Label>
-                                        <Col sm={6}>
-                                            <DatePicker
-                                                selected={this.state.toSummaryDateDisplay ? this.state.toSummaryDateDisplay : false}
-                                                placeholderText="dd/mm/yyyy"
-                                                onChange={this.handleDateNoTime('toSummaryDate')}
-                                                dateFormat="dd/MM/yyyy"
-                                            />
-                                        </Col>
-                                        <Col sm={6} className="offset-3">
-                                            <input type="button" onClick={this.createSummary} value={this.context.translate('create')} />
-                                        </Col>
-                                    </Form.Group>
+                                <Form.Group as={Row}>
+                                    <Form.Label column sm={6}>{this.context.translate('from')}</Form.Label>
+                                    <Col sm={6}>
+                                        <DatePicker
+                                            selected={this.state.fromSummaryDateDisplay ? this.state.fromSummaryDateDisplay : false}
+                                            placeholderText="dd/mm/yyyy"
+                                            onChange={this.handleDateNoTime('fromSummaryDate')}
+                                            dateFormat="dd/MM/yyyy"
+                                        />
+                                    </Col>
+                                    <Form.Label column sm={6}>{this.context.translate('to')}</Form.Label>
+                                    <Col sm={6}>
+                                        <DatePicker
+                                            selected={this.state.toSummaryDateDisplay ? this.state.toSummaryDateDisplay : false}
+                                            placeholderText="dd/mm/yyyy"
+                                            onChange={this.handleDateNoTime('toSummaryDate')}
+                                            dateFormat="dd/MM/yyyy"
+                                        />
+                                    </Col>
+                                    <Col sm={6} className="offset-3">
+                                        <input type="button" onClick={this.createSummary} value={this.context.translate('create')} />
+                                    </Col>
+                                </Form.Group>
                             </Form>
                         </Card.Body>
                     </Card>
-
-                    {this.state.message && <p> {this.state.message} </p>}
+                    {this.state.message && <div className="message">{this.state.message}</div>}
 
                     <Card className="text-center mt-5">
                         <Card.Header>{this.context.translate('trend-call')}</Card.Header>
@@ -164,7 +163,7 @@ class Statistics extends Component {
                             </Form>
                         </Card.Body>
                     </Card>
-                    {this.state.trendMessage && <p> {this.state.trendMessage} </p>}
+                    {this.state.trendMessage && <div className="message">{this.state.trendMessage}</div>}
                 </Container>
             </React.Fragment>
         )
