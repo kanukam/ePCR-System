@@ -20,6 +20,7 @@ em { color:red; }
 .left { float:left; margin:10px 0; }
 .right { float:right; margin:10px 0; }
 .top { padding:10px 20px !important; vertical-align:top; }
+.message { margin:5px 0; display:block; color:red; font-size:smaller; text-align:center; }
 
 /* navbar styles */
 .navbar { background-color:#16A8DC !important; color:#fff !important; }
@@ -55,7 +56,7 @@ em { color:red; }
 .chart .row { margin:0; }
 .chart .group { display:block; }
 .chart .group div { display:inline-block; width:auto; }
-.chart .message, .confirm .message { display:block; margin:1rem 0; color:red; font-size:12px; }
+.chart .message, .confirm .message { margin:1rem 0; font-size:12px; }
 .chartnav { position:fixed; bottom:0; display:flex; clear:both; margin-top:50px; padding:0 50px; width:960px; background:#fff; border-top:1px solid #ddd; font-size:12px; }
 .chartnav .tab { padding:5px; width:100px; height:75px; text-align:center; cursor:pointer; }
 .chartnav .tab.active { background:#eee; }
