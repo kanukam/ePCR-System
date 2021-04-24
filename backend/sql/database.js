@@ -101,6 +101,7 @@ con.connect(err => {
         p_history_given MEDIUMTEXT NULL,
         p_medical_allergies MEDIUMTEXT NULL,
         p_environmental_allergies MEDIUMTEXT NULL,
+        p_immunizations MEDIUMTEXT NULL,
         p_past_medical_history MEDIUMTEXT NULL,
         intake_bleeding VARCHAR(500) NULL,
         intake_iv_fluids VARCHAR(500) NULL,
