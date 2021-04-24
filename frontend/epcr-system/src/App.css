@@ -99,7 +99,7 @@ table.psearch tr:last-child td { border:none; }
 .popup { position:absolute; top:15%; left:25%; width:50%; padding-bottom:15px; background:#fff; z-index:2; }
 .popup h2 { margin-bottom:0; padding:10px; background:#C4C4C4; color:#000; }
 .popup form { width:100%; margin:0; padding:0; }
-.popup input, .popup select, .popup textarea { width:245px; }
+.popup input, .popup select, .popup textarea { width:250px; }
 .popup option { padding:5px; height:30px; background:#FFF; color:#888; }
 .popup option:hover, .popup option:checked { color:#000; }
 .popup label { width:150px; }
