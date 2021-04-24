@@ -57,7 +57,6 @@ export default class PhysicalAssessment extends Component {
     
     selectPain = input => event => {
         var pain = document.getElementsByClassName('pain');
-        var value = document.getElementById('pain');
         for(var i = 0; i < pain.length; i++) {
             if(input === i) {
                 pain[i].classList.add('selected');
@@ -592,6 +591,8 @@ export default class PhysicalAssessment extends Component {
                                                     <label><input type="radio" name="vital_signs_gcs_e" value="2" checked={values.vital_signs_gcs_e.includes("2")} /> 2 - {this.context.translate('to-pain')}</label>
                                                     <label><input type="radio" name="vital_signs_gcs_e" value="3" checked={values.vital_signs_gcs_e.includes("3")} /> 3 - {this.context.translate('to-voice')}</label>
                                                     <label><input type="radio" name="vital_signs_gcs_e" value="4" checked={values.vital_signs_gcs_e.includes("4")} /> 4 - {this.context.translate('spontaneous')}</label>
+                                                    <label>-</label>
+                                                    <label>-</label>
                                                 </Col>
                                                 <Col onChange={this.props.handleChange('vital_signs_gcs_v')}>
                                                     <b>{this.context.translate('GCS-v')}</b>
@@ -600,6 +601,7 @@ export default class PhysicalAssessment extends Component {
                                                     <label><input type="radio" name="vital_signs_gcs_v" value="3" checked={values.vital_signs_gcs_v.includes("3")} /> 3 - {this.context.translate('ina-words')}</label>
                                                     <label><input type="radio" name="vital_signs_gcs_v" value="4" checked={values.vital_signs_gcs_v.includes("4")} /> 4 - {this.context.translate('confused')}</label>
                                                     <label><input type="radio" name="vital_signs_gcs_v" value="5" checked={values.vital_signs_gcs_v.includes("5")} /> 5 - {this.context.translate('oriented')}</label>
+                                                    <label>-</label>
                                                 </Col>
                                                 <Col onChange={this.props.handleChange('vital_signs_gcs_m')}>
                                                     <b>{this.context.translate('GCS-m')}</b>
@@ -614,7 +616,7 @@ export default class PhysicalAssessment extends Component {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colSpan="4"><input type="button" className="left" onClick={this.addVitals} value={this.context.translate('add-vitals')} /></td>
+                                        <td colSpan="4"><div className="addvital"><input type="button" onClick={this.addVitals} value={this.context.translate('add-vitals')} /></div></td>
                                     </tr>
                                 </tbody>
                             </table>
