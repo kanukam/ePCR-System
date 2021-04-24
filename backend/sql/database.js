@@ -84,6 +84,7 @@ con.connect(err => {
         right_upper_leg VARCHAR(500) NULL,
         right_lower_leg VARCHAR(500) NULL,
         right_ankle_foot VARCHAR(500) NULL,
+        burn_calculation VARCHAR(45) NULL,
         extra_findings MEDIUMTEXT NULL,
         stroke_time VARCHAR(50) NULL,
         stroke_facial_droop VARCHAR(50) NULL,
