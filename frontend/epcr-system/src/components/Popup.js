@@ -451,16 +451,16 @@ export default class Popup extends Component {
                             <span>{this.context.translate('mode')}</span>
                             <div style={{ margin: '7px' }}>
                                 <label className="v2"><input type="radio" name="pMode" value="Fijo" defaultChecked /> {this.context.translate('fixed')}</label>
-                                <label className="v2"><input type="radio" name="pMode" value="Demanda" /> {this.context.translate('demanda')}</label>
+                                <label className="v2"><input type="radio" name="pMode" value="Demanda" /> {this.context.translate('demand')}</label>
                             </div>
                         </div>
                         <div className="group">
                             <span>{this.context.translate('rate')}</span>
-                            <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pRate" value={this.props.pRate} maxLength="3" min="0" max="999" onChange={this.props.changeInter('pRate')} />
+                            <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pRate" value={this.props.pRate} maxLength="3" min="0" max="999" onChange={this.props.changeInter('pRate')} /> bpm
                         </div>
                         <div className="group">
                             <span>{this.context.translate('ma-output')}</span>
-                            <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pOutput" value={this.props.pOutput} maxLength="3" min="0" max="999" onChange={this.props.changeInter('pOutput')} />
+                            <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pOutput" value={this.props.pOutput} maxLength="3" min="0" max="999" onChange={this.props.changeInter('pOutput')} /> mA
                         </div>
                         <div className="group" onChange={this.props.changeInter('pCapture')}>
                             <span>{this.context.translate('capture')}</span>
@@ -659,14 +659,34 @@ export default class Popup extends Component {
                                 </div>
                                 <div className="group">
                                     <span>{this.context.translate('dosage')}</span>
-                                    <input type="number" style={{ width: '22%', marginRight: '10px' }} min="0" name="mDosage" value={inter.mDosage} onChange={this.props.changeInter('mDosage')} />
+                                    <input type="number" style={{ width: '23%', marginRight: '10px' }} min="0" name="mDosage" value={inter.mDosage} onChange={this.props.changeInter('mDosage')} />
                                     <select name="mUnit" style={{ width: '30%' }} onChange={this.props.changeInter('mUnit')}>
                                         <option disabled selected value="">{this.context.translate('select')}</option>
-                                        <option value="GMS">GMS</option>
-                                        <option value="in.">Inches (in.)</option>
-                                        <option value="L">Liters (L)</option>
-                                        <option value="kg">Kilograms (kg)</option>
-                                        <option value="tablet">Tablets</option>
+                                        <option value="%">%</option>
+                                        <option value="AU">AU</option>
+                                        <option value="bar">bar</option>
+                                        <option value="BAU">BAU</option>
+                                        <option value="bead">bead</option>
+                                        <option value="BU">BU</option>
+                                        <option value="capsule">capsule</option>
+                                        <option value="cc">cc</option>
+                                        <option value="Ci">Ci</option>
+                                        <option value="drop">drop</option>
+                                        <option value="g">g</option>
+                                        <option value="in.">in.</option>
+                                        <option value="IU">IU</option>
+                                        <option value="L">L</option>
+                                        <option value="LPM">LPM</option>
+                                        <option value="kg">kg</option>
+                                        <option value="mEq">mEq</option>
+                                        <option value="mg">mg</option>
+                                        <option value="mL">mL</option>
+                                        <option value="mmol">mmol</option>
+                                        <option value="mol">mol</option>
+                                        <option value="puff">puff</option>
+                                        <option value="tablet">tablet</option>
+                                        <option value="U">U</option>
+                                        <option value="otro">{this.context.translate('other')}</option>
                                     </select>
                                 </div>
                                 <div className="group">

@@ -212,31 +212,95 @@ export default class ChartForm extends Component {
             this.setState({ assessmentCheckBoxes });
             this.setState({ [bodyPart]: [...vals] });
         }
-        // handle burn calculations
-        var total = this.state.bsa;
-        if (boxNumber === 51) { total += 3.5; } // head front
-        if (boxNumber === 52) { total += 3.5; } // head back
-        if (boxNumber === 62) { total += 1.0; } // neck front
-        if (boxNumber === 63) { total += 1.0; } // neck back
-        if (boxNumber === 80) { total += 13.0; } // chest
-        if (boxNumber === 91) { total += 5.0; } // abdomen
-        if (boxNumber === 102) { total += 5.0; } // pelvis (using buttocks value)
-        if (boxNumber === 114) { total += 13.0; } // back
-        if (boxNumber === 126) { total += 4.0; } // upper arm left (front + back)
-        if (boxNumber === 138) { total += 4.0; } // upper arm right (front + back)
-        if (boxNumber === 150) { total += 3.0; } // lower arm left (front + back)
-        if (boxNumber === 162) { total += 3.0; } // lower arm right (front + back)
-        if (boxNumber === 174) { total += 3.0; } // hand wrist left (front + back)
-        if (boxNumber === 186) { total += 3.0; } // hand wrist right (front + back)
-        if (boxNumber === 198) { total += 9.5; } // upper leg left (front + back)
-        if (boxNumber === 210) { total += 9.5; } // upper leg left (front + back)
-        if (boxNumber === 222) { total += 7.0; } // lower leg left (front + back)
-        if (boxNumber === 234) { total += 7.0; } // lower leg right (front + back)
-        if (boxNumber === 246) { total += 3.5; } // ankle foot left (front + back)
-        if (boxNumber === 258) { total += 3.5; } // ankle foot right (front + back)
-        this.setState({ bsa: total });
+        this.calculateBurn(boxNumber);        
     }
 
+    calculateBurn(boxNumber) {
+        // handle burn calculations
+        var assessmentCheckBoxes = this.state.assessmentCheckBoxes;
+        var total = this.state.bsa;
+        if (boxNumber === 51) {
+            if(assessmentCheckBoxes[boxNumber]) { total += 3.5; }
+            else { total -= 3.5; }
+        } // head front
+        if (boxNumber === 52) {
+            if(assessmentCheckBoxes[boxNumber]) { total += 3.5; }
+            else { total -= 3.5; }
+        } // head back
+        if (boxNumber === 62) {
+            if(assessmentCheckBoxes[boxNumber]) { total += 1.0; }
+            else { total -= 1.0; }
+        } // neck front
+        if (boxNumber === 63) {
+            if(assessmentCheckBoxes[boxNumber]) { total += 1.0; }
+            else { total -= 1.0; }
+        } // neck back
+        if (boxNumber === 80) {
+            if(assessmentCheckBoxes[boxNumber]) { total += 13.0; }
+            else { total -= 13.0; }
+        } // chest
+        if (boxNumber === 91) {
+            if(assessmentCheckBoxes[boxNumber]) { total += 5.0; }
+            else { total -= 5.0; }
+        } // abdomen
+        if (boxNumber === 102) {
+            if(assessmentCheckBoxes[boxNumber]) { total += 5.0; }
+            else { total -= 5.0; }
+        } // pelvis (using buttocks value)
+        if (boxNumber === 114) {
+            if(assessmentCheckBoxes[boxNumber]) { total += 13.0; }
+            else { total -= 13.0; }
+        } // back
+        if (boxNumber === 126) {
+            if(assessmentCheckBoxes[boxNumber]) { total += (2 * 2.0); }
+            else { total -= (2 * 2.0); }
+        } // upper arm left (front + back)
+        if (boxNumber === 138) {
+            if(assessmentCheckBoxes[boxNumber]) { total += (2 * 2.0); }
+            else { total -= (2 * 2.0); }
+        } // upper arm right (front + back)
+        if (boxNumber === 150) {
+            if(assessmentCheckBoxes[boxNumber]) { total += (2 * 1.5); }
+            else { total -= (2 * 1.5); }
+        } // lower arm left (front + back)
+        if (boxNumber === 162) {
+            if(assessmentCheckBoxes[boxNumber]) { total += (2 * 1.5); }
+            else { total -= (2 * 1.5); }
+        } // lower arm right (front + back)
+        if (boxNumber === 174) {
+            if(assessmentCheckBoxes[boxNumber]) { total += (2 * 1.0); }
+            else { total -= (2 * 1.0); }
+        } // hand wrist left (front + back)
+        if (boxNumber === 186) {
+            if(assessmentCheckBoxes[boxNumber]) { total += (2 * 1.0); }
+            else { total -= (2 * 1.0); }
+        } // hand wrist right (front + back)
+        if (boxNumber === 198) {
+            if(assessmentCheckBoxes[boxNumber]) { total += (2 * 4.5); }
+            else { total -= (2 * 4.5); }
+        } // upper leg left (front + back)
+        if (boxNumber === 210) {
+            if(assessmentCheckBoxes[boxNumber]) { total += (2 * 4.5); }
+            else { total -= (2 * 4.5); }
+        } // upper leg left (front + back)
+        if (boxNumber === 222) {
+            if(assessmentCheckBoxes[boxNumber]) { total += (2 * 3.0); }
+            else { total -= (2 * 3.0); }
+        } // lower leg left (front + back)
+        if (boxNumber === 234) {
+            if(assessmentCheckBoxes[boxNumber]) { total += (2 * 3.0); }
+            else { total -= (2 * 3.0); }
+        } // lower leg right (front + back)
+        if (boxNumber === 246) {
+            if(assessmentCheckBoxes[boxNumber]) { total += (2 * 1.5); }
+            else { total -= (2 * 1.5); }
+        } // ankle foot left (front + back)
+        if (boxNumber === 258) {
+            if(assessmentCheckBoxes[boxNumber]) { total += (2 * 1.5); }
+            else { total -= (2 * 1.5); }
+        } // ankle foot right (front + back)
+        this.setState({ bsa: total });
+    }
 
     handleDate = input => date => {
         var displayedDate = input + "Display";
