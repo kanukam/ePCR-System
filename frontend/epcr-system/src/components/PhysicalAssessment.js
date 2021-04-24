@@ -620,7 +620,7 @@ export default class PhysicalAssessment extends Component {
                                     </tr>
                                 </tbody>
                             </table>
-                            <small style={{ color: 'red' }}>{this.context.translate(this.state.message)}</small>
+                            <div className="message">{this.context.translate(this.state.message)}</div>
                         </div>
                         : null}
                     <h3>{this.context.translate('Additional-findings')}</h3>
