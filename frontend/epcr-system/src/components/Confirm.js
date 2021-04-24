@@ -141,6 +141,16 @@ export default class Confirm extends Component {
                             </tr>
                             <tr>
                                 <td>
+                                <i>{this.context.translate('Stroke-')}</i>{values.assessmentCheckBoxes[259] ? <text><span>Sí</span><br/>
+                                        <i>{this.context.translate('Time-of-onset')}</i><span>{values.stroke_time}</span><br/>
+                                        <i>{this.context.translate('Facial-droop')}</i><span>{values.stroke_facial_droop}</span><br/>
+                                        <i>{this.context.translate('Arm-Drift')}</i><span>{values.stroke_arm_drift}</span><br/>
+                                        <i>{this.context.translate('Abnormal-Speech')}</i><span>{values.stroke_abnormal_speech}</span>
+                                    </text> : <span>No</span>}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <i>{this.context.translate('vitals')}</i><span>{values.medications && values.vital_signs.map((element, idx) => {
                                         return (
                                             <div>
