@@ -109,6 +109,7 @@ export default class Confirm extends Component {
                                     <i>{this.context.translate('given-by')}</i><span>{values.historyGiven.join()}</span><br/>
                                     <i>{this.context.translate('med-allergy')}</i><span>{values.medAllergy}</span><br/>
                                     <i>{this.context.translate('env-allergy')}</i><span>{values.envAllergy}</span><br/>
+                                    <i>{this.context.translate('immunization')}</i><span>{values.immunization}</span><br/>
                                     <i>{this.context.translate('past-history')}</i><span>{values.pastHistory}{values.assessmentCheckBoxes[315] ? ",O - Other" + values.pastHistoryOther : null}</span>
                                 </td>
                             </tr>
@@ -138,6 +139,9 @@ export default class Confirm extends Component {
                                     <i>{this.context.translate('Right-lower-leg')}</i><span>{values.right_lower_leg.join()}</span><br/>
                                     <i>{this.context.translate('Right-ankle-/-foot')}</i><span>{values.right_ankle_foot.join()}</span>
                                 </td>
+                            </tr>
+                            <tr>
+                                <td><i>{this.context.translate('burn-calculation')}</i><span>{values.bsa}%</span></td>
                             </tr>
                             <tr>
                                 <td>

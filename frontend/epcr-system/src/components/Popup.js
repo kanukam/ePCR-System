@@ -706,6 +706,15 @@ export default class Popup extends Component {
                                     </select>
                                 </div>
                                 <div className="group">
+                                    <span>{this.context.translate('results')}</span>
+                                    <select name="mResult" onChange={this.props.changeInter('mResult')}>
+                                        <option disabled selected value="">{this.context.translate('select')}</option>
+                                        <option value="Mejorada">{this.context.translate('improved')}</option>
+                                        <option value="Igual">{this.context.translate('unchanged')}</option>
+                                        <option value="Peor">{this.context.translate('worse')}</option>
+                                    </select>
+                                </div>
+                                <div className="group">
                                     <span>{this.context.translate('by')}</span>
                                     <select name="mBy" value={inter.mBy} onChange={this.props.changeInter('mBy')}>
                                         <option disabled selected value="">{this.context.translate('select')}</option>

@@ -62,6 +62,7 @@ export default class AddInterventions extends Component {
             mDosage: "",
             mUnit: "",
             mRoute: "",
+            mResult: "",
             mBy: "",
             mByOther: "",
             testing: ""
@@ -119,6 +120,7 @@ export default class AddInterventions extends Component {
             mDosage: "",
             mUnit: "",
             mRoute: "",
+            mResult: "",
             mBy: "",
             mByOther: ""
         });
@@ -172,11 +174,11 @@ export default class AddInterventions extends Component {
 
     submitMedication = (event) => {
         event.preventDefault();
-        if(this.state.mName === "" || this.state.mTime === "" || this.state.mDosage === "" || this.state.mUnit === "" || this.state.mRoute === "" ) {
+        if(this.state.mName === "" || this.state.mTime === "" || this.state.mDosage === "" || this.state.mUnit === "" || this.state.mRoute === "" || this.state.mResult === "") {
             this.setState({ message: "required-fields" });
         } else {
             this.setState({ message: "" });
-            let medications = "[Medicamento: " + this.state.mName + " | Hora: " + this.state.mTime + " | Dosis: " + this.state.mDosage + " " + this.state.mUnit + " | Tomar: " + this.state.mRoute + " | Por: ";
+            let medications = "[Medicamento: " + this.state.mName + " | Hora: " + this.state.mTime + " | Dosis: " + this.state.mDosage + " " + this.state.mUnit + " | Tomar: " + this.state.mRoute + " | Resultados: " + this.state.mResult + " | Por: ";
             // done by
             if(this.state.mBy === "Otro") { medications += this.state.mByOther; }
             else { medications += this.state.mBy; }

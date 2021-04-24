@@ -87,6 +87,7 @@ export default class ChartForm extends Component {
             historyGiven: [],
             medAllergy: "",
             envAllergy: "",
+            immunization: "",
             pastHistory: [],
             pastHistoryOther: "",
             // physical exam
@@ -212,7 +213,7 @@ export default class ChartForm extends Component {
             this.setState({ assessmentCheckBoxes });
             this.setState({ [bodyPart]: [...vals] });
         }
-        this.calculateBurn(boxNumber);        
+        //this.calculateBurn(boxNumber);        
     }
 
     calculateBurn(boxNumber) {
@@ -456,6 +457,7 @@ export default class ChartForm extends Component {
             const p_history_given = this.state.historyGiven.join();
             const p_medical_allergies = this.state.medAllergy;
             const p_environmental_allergies = this.state.envAllergy;
+            const p_immunizations = this.state.immunization;
             let p_past_medical_history = this.state.pastHistory.join();
             if (p_past_medical_history || this.state.pastHistoryOther) { p_past_medical_history += ", [O - Otro:" + this.state.pastHistoryOther + "]"; }
             // chart assessment
@@ -482,6 +484,7 @@ export default class ChartForm extends Component {
             const right_upper_leg = this.state.right_upper_leg.join();
             const right_lower_leg = this.state.right_lower_leg.join();
             const right_ankle_foot = this.state.right_ankle_foot.join();
+            const burn_calculation = this.state.bsa;
             let stroke_time = "";
             let stroke_facial_droop = "";
             let stroke_arm_drift = "";
@@ -527,7 +530,7 @@ export default class ChartForm extends Component {
                 method: 'POST',
                 body: JSON.stringify({
                     body: {
-                        incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, arrive_destination_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, medications, procedures, skin, mental, neurological, head, neck, chest, pulse_strength, pulse_rate, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot, extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech, vital_signs, p_weight, p_classify, p_bcolor, p_address, p_phone, p_hpi, p_history_given, p_medical_allergies, p_environmental_allergies, p_past_medical_history, intake_bleeding, intake_iv_fluids, intake_oral_fluids, intake_vomit, obstetrics
+                        incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, arrive_destination_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, medications, procedures, skin, mental, neurological, head, neck, chest, pulse_strength, pulse_rate, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot, burn_calculation, extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech, vital_signs, p_weight, p_classify, p_bcolor, p_address, p_phone, p_hpi, p_history_given, p_medical_allergies, p_environmental_allergies, p_immunizations, p_past_medical_history, intake_bleeding, intake_iv_fluids, intake_oral_fluids, intake_vomit, obstetrics
                     },
                     pbody: { fname, lname, birth, gender },
                     patientID: patientID

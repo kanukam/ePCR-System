@@ -89,7 +89,36 @@ export default class PhysicalAssessment extends Component {
             <div className="assessment">
                 <div className="content">
                     <h2 className="mb-2">{this.context.translate('physical-exam')}</h2>
-                    <h3>{this.context.translate('assessments')}</h3>
+                    <h3>{this.context.translate('primary')}</h3>
+                    <table className="cform">
+                        <tbody>
+                            <tr>
+                                <th width="20%">{this.context.translate('airway')}</th>
+                                <td width="30%">
+                                    <select name="pulse_strength" value={values.pulse_strength} onChange={this.props.handleChange('pulse_strength')}>
+                                        <option disabled selected value="">{this.context.translate('select')}</option>
+                                        <option value="Normal">Normal</option>
+                                        <option value="Débil">{this.context.translate('Weak')}</option>
+                                        <option value="Ausente">{this.context.translate('Absent')}</option>
+                                        <option value="Delimitador">{this.context.translate('Bounding')}</option>
+                                    </select>
+                                </td>
+                                <th width="20%">{this.context.translate('breathing')}</th>
+                                <td width="30%">
+                                    <select name="pulse_rate" value={values.pulse_rate} onChange={this.props.handleChange('pulse_rate')}>
+                                        <option disabled selected value="">{this.context.translate('select')}</option>
+                                        <option value="Regular">{this.context.translate('Regular')}</option>
+                                        <option value="Irregular">{this.context.translate('Irregular')}</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>{this.context.translate('circulation')}</th>
+                                <td><input type="number" className="calculation" min="0" max="100" value={values.bsa} onChange={this.props.handleChange('bsa')} /> (BSA%)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h3>{this.context.translate('secondary')}</h3>
                     <Row>
                         <Col>
                             <div className="exam_label active" onClick={this.showOptions(0)}>{this.context.translate('Skin')}</div>
@@ -481,7 +510,7 @@ export default class PhysicalAssessment extends Component {
                             </tr>
                             <tr>
                                 <th>{this.context.translate('burn-calculation')}</th>
-                                <td><input type="number" className="calculation" disabled value={values.bsa} /> (BSA%)</td>
+                                <td><input type="number" className="calculation" min="0" max="100" value={values.bsa} onChange={this.props.handleChange('bsa')} /> (BSA%)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -625,7 +654,7 @@ export default class PhysicalAssessment extends Component {
                         : null}
                     <h3>{this.context.translate('Additional-findings')}</h3>
                     <div>
-                        <textarea type="text" placeholder="Enter Text" className="mb-3" rows="10" cols="100" onChange={this.props.handleChange('extra_findings')} value={values.extra_findings} />
+                        <textarea type="text" placeholder={this.context.translate('enter-text')} className="mb-3" rows="10" cols="100" onChange={this.props.handleChange('extra_findings')} value={values.extra_findings} />
                     </div>
                     <input type="button" className="left" onClick={this.back} value={this.context.translate('previous')} />
                     <input type="button" className="right" onClick={this.saveAndContinue} value={this.context.translate('next')} />

@@ -10,10 +10,15 @@ export default class AddCall extends Component {
         super(props);
         this.state = {
             message: "",
+            charts: [],
             mci: "",
             va: "",
             jsonData: { "call": [] }
         };
+    }
+
+    componentDidMount() {
+        //alert("21-" + Math.floor(Math.random() * 10) + 1);
     }
 
     navigate = step => (e) => {
@@ -37,8 +42,8 @@ export default class AddCall extends Component {
                     <table className="cform">
                         <tbody>
                             <tr>
-                                <th width="20%">{this.context.translate('ino')}<em>*</em></th>
-                                <td width="30%"><input type="text" name="ino" value={values.ino} onChange={this.props.handleChange('ino')} /></td>
+                                <th width="20%">{this.context.translate('ino')}</th>
+                                <td width="30%"><input type="text" name="ino" disabled value={values.ino} /></td>
                                 <th width="20%">{this.context.translate('unit')}<em>*</em></th>
                                 <td width="30%">
                                     <select name="unit" value={values.unit} onChange={this.props.handleChange('unit')}>

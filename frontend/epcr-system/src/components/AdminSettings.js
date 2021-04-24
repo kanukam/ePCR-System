@@ -22,7 +22,7 @@ export default class Settings extends Component {
     }
 
     componentDidMount() {
-        if (this.context.privilege == "admin"){
+        if (this.context.privilege === "admin"){
             // Getting all user data from database
             const url = 'http://localhost:3000/users';
             const options = {
