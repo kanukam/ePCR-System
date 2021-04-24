@@ -140,7 +140,7 @@ export default class Popup extends Component {
                         </div>
                         <div className="group">
                             <span>{this.context.translate('amount')}</span>
-                            <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pAmount" value={this.props.pAmount} maxlength="2" min="1" max="15" onChange={this.props.changeInter('pAmount')} /> L/min
+                            <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pAmount" value={this.props.pAmount} maxLength="2" min="1" max="15" onChange={this.props.changeInter('pAmount')} /> L/min
                         </div>
                     </div>
                 );
@@ -291,7 +291,7 @@ export default class Popup extends Component {
                 return (
                     <div className="group">
                         <span>{this.context.translate('size')}</span>
-                        <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pSize" value={this.props.pSize} maxlength="1" min="0" max="5" onChange={this.props.changeInter('pSize')} />
+                        <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pSize" value={this.props.pSize} maxLength="1" min="0" max="5" onChange={this.props.changeInter('pSize')} />
                     </div>
                 );
             case "Vía aérea avanzada - Intubación":
@@ -316,7 +316,7 @@ export default class Popup extends Component {
                         </div>
                         <div className="group">
                             <span>{this.context.translate('depth-teeth')}</span>
-                            <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pTeeth" value={this.props.pTeeth} maxlength="2" min="0" max="99" onChange={this.props.changeInter('pTeeth')} /> cm
+                            <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pTeeth" value={this.props.pTeeth} maxLength="2" min="0" max="99" onChange={this.props.changeInter('pTeeth')} /> cm
                         </div>
                         <div className="group">
                             <span>{this.context.translate('confirmation')}</span>
@@ -429,7 +429,7 @@ export default class Popup extends Component {
                         </div>
                         <div className="group">
                             <span>{this.context.translate('energy')}</span>
-                            <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pEnergy" value={this.props.pEnergy} maxlength="3" min="0" max="999" onChange={this.props.changeInter('pEnergy')} /> jules
+                            <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pEnergy" value={this.props.pEnergy} maxLength="3" min="0" max="999" onChange={this.props.changeInter('pEnergy')} /> jules
                         </div>
                         <div className="group">
                             <span>{this.context.translate('converted')}</span>
@@ -456,11 +456,11 @@ export default class Popup extends Component {
                         </div>
                         <div className="group">
                             <span>{this.context.translate('rate')}</span>
-                            <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pRate" value={this.props.pRate} maxlength="3" min="0" max="999" onChange={this.props.changeInter('pRate')} />
+                            <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pRate" value={this.props.pRate} maxLength="3" min="0" max="999" onChange={this.props.changeInter('pRate')} />
                         </div>
                         <div className="group">
                             <span>{this.context.translate('ma-output')}</span>
-                            <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pOutput" value={this.props.pOutput} maxlength="3" min="0" max="999" onChange={this.props.changeInter('pOutput')} />
+                            <input type="number" style={{ width: '80px', marginRight: '0px' }} name="pOutput" value={this.props.pOutput} maxLength="3" min="0" max="999" onChange={this.props.changeInter('pOutput')} />
                         </div>
                         <div className="group" onChange={this.props.changeInter('pCapture')}>
                             <span>{this.context.translate('capture')}</span>

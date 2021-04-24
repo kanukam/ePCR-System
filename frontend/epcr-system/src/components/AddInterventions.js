@@ -362,7 +362,7 @@ export default class AddInterventions extends Component {
                             <tbody>
                                 <tr>
                                     <th className="top" width="25%">{this.context.translate('bleeding')}</th>
-                                    <td colspan="3" width="75%">
+                                    <td colSpan="3" width="75%">
                                         <div style={{ display: 'inline-block' }}>
                                             <input type="number" className="calculation" name="ioBleedPT" min="0" max="9999" value={values.ioBleedPT} onChange={this.props.handleChange('ioBleedPT')} />
                                             <strong>{this.context.translate('bpre-transport')}</strong>
@@ -379,7 +379,7 @@ export default class AddInterventions extends Component {
                                 </tr>
                                 <tr>
                                     <th className="top">{this.context.translate('iv-fluid')}</th>
-                                    <td colspan="3">
+                                    <td colSpan="3">
                                         <div style={{ display: 'inline-block' }}>
                                             <input type="number" className="calculation" name="ioIVPT" min="0" max="9999" value={values.ioIVPT} onChange={this.props.handleChange('ioIVPT')} />
                                             <strong>{this.context.translate('bpre-transport')}</strong>
@@ -396,7 +396,7 @@ export default class AddInterventions extends Component {
                                 </tr>
                                 <tr>
                                     <th className="top">{this.context.translate('oral-fluid')}</th>
-                                    <td colspan="3">
+                                    <td colSpan="3">
                                         <div style={{ display: 'inline-block' }}>
                                             <input type="number" className="calculation" name="ioOralPT" min="0" max="9999" value={values.ioOralPT} onChange={this.props.handleChange('ioOralPT')} />
                                             <strong>{this.context.translate('bpre-transport')}</strong>
@@ -413,7 +413,7 @@ export default class AddInterventions extends Component {
                                 </tr>
                                 <tr>
                                     <th className="top">{this.context.translate('vomit')}</th>
-                                    <td colspan="3">
+                                    <td colSpan="3">
                                         <div style={{ display: 'inline-block' }}>
                                             <input type="number" className="calculation" name="ioVomitPT" min="0" max="9999" value={values.ioVomitPT} onChange={this.props.handleChange('ioVomitPT')} />
                                             <strong>{this.context.translate('bpre-transport')}</strong>
@@ -465,9 +465,9 @@ export default class AddInterventions extends Component {
                                 <tr>
                                     <th>{this.context.translate('vaginal-bleed')}</th>
                                     <td>
-                                        <div style={{ margin: '7.5px' }} onChange={this.props.handleChange('oVaginalBleed')}>
-                                            <label className="v2"><input type="radio" name="oVaginalBleed" value="Sí" checked={values.oVaginalBleed.includes("Sí") } /> {this.context.translate('yes')}</label>
-                                            <label className="v2"><input type="radio" name="oVaginalBleed" value="No" checked={values.oVaginalBleed.includes("No")} /> No</label>
+                                        <div style={{ margin: '7.5px' }}>
+                                            <label className="v2"><input type="radio" name="oVaginalBleed" value="Sí" checked={values.oVaginalBleed.includes("Sí")} onChange={this.props.handleChange('oVaginalBleed')} /> {this.context.translate('yes')}</label>
+                                            <label className="v2"><input type="radio" name="oVaginalBleed" value="No" checked={values.oVaginalBleed.includes("No")} onChange={this.props.handleChange('oVaginalBleed')} /> No</label>
                                         </div>
                                     </td>
                                 </tr>
@@ -486,9 +486,9 @@ export default class AddInterventions extends Component {
                                 <tr>
                                     <th>{this.context.translate('water-rupture')}</th>
                                     <td>
-                                        <div style={{ margin: '7.5px' }} onChange={this.props.handleChange('oWaterRupture')}>
-                                            <label className="v2"><input type="radio" name="oWaterRupture" value="Sí" checked={values.oWaterRupture.includes("Sí")} /> {this.context.translate('yes')}</label>
-                                            <label className="v2"><input type="radio" name="oWaterRupture" value="No" checked={values.oWaterRupture.includes("No")} /> No</label>
+                                        <div style={{ margin: '7.5px' }}>
+                                            <label className="v2"><input type="radio" name="oWaterRupture" value="Sí" checked={values.oWaterRupture.includes("Sí")} onChange={this.props.handleChange('oWaterRupture')} /> {this.context.translate('yes')}</label>
+                                            <label className="v2"><input type="radio" name="oWaterRupture" value="No" checked={values.oWaterRupture.includes("No")} onChange={this.props.handleChange('oWaterRupture')} /> No</label>
                                         </div>
                                     </td>
                                 </tr>
@@ -496,10 +496,10 @@ export default class AddInterventions extends Component {
                                     <tr>
                                         <th>{this.context.translate('water-color')}</th>
                                         <td>
-                                            <div style={{ margin: '7.5px' }} onChange={this.props.handleChange('oWaterColor')}>
-                                                <label className="v2"><input type="radio" name="oWaterColor" value="Claro" checked={values.oWaterColor.includes("Claro")} /> {this.context.translate('clear')}</label>
-                                                <label className="v2"><input type="radio" name="oWaterColor" value="Sangrienta" checked={values.oWaterColor.includes("Sangrienta")} /> {this.context.translate('bloody')}</label>
-                                                <label className="v2"><input type="radio" name="oWaterColor" value="Meconio" checked={values.oWaterColor.includes("Meconio")} /> {this.context.translate('meconium')}</label>
+                                            <div style={{ margin: '7.5px' }}>
+                                                <label className="v2"><input type="radio" name="oWaterColor" value="Claro" checked={values.oWaterColor.includes("Claro")} onChange={this.props.handleChange('oWaterColor')} /> {this.context.translate('clear')}</label>
+                                                <label className="v2"><input type="radio" name="oWaterColor" value="Sangrienta" checked={values.oWaterColor.includes("Sangrienta")} onChange={this.props.handleChange('oWaterColor')} /> {this.context.translate('bloody')}</label>
+                                                <label className="v2"><input type="radio" name="oWaterColor" value="Meconio" checked={values.oWaterColor.includes("Meconio")} onChange={this.props.handleChange('oWaterColor')} /> {this.context.translate('meconium')}</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -507,9 +507,9 @@ export default class AddInterventions extends Component {
                                 <tr>
                                     <th>{this.context.translate('baby-moving')}</th>
                                     <td>
-                                        <div style={{ margin: '7.5px' }} onChange={this.props.handleChange('oBabyMoving')}>
-                                            <label className="v2"><input type="radio" name="oBabyMoving" value="Sí" checked={values.oBabyMoving.includes("Sí")} /> {this.context.translate('yes')}</label>
-                                            <label className="v2"><input type="radio" name="oBabyMoving" value="No" checked={values.oBabyMoving.includes("No")} /> No</label>
+                                        <div style={{ margin: '7.5px' }}>
+                                            <label className="v2"><input type="radio" name="oBabyMoving" value="Sí" checked={values.oBabyMoving.includes("Sí")} onChange={this.props.handleChange('oBabyMoving')} /> {this.context.translate('yes')}</label>
+                                            <label className="v2"><input type="radio" name="oBabyMoving" value="No" checked={values.oBabyMoving.includes("No")} onChange={this.props.handleChange('oBabyMoving')} /> No</label>
                                         </div>
                                     </td>
                                 </tr>
@@ -520,27 +520,27 @@ export default class AddInterventions extends Component {
                                 <tr>
                                     <th>{this.context.translate('placenta')}</th>
                                     <td>
-                                        <div style={{ margin: '7.5px' }} onChange={this.props.handleChange('oPlacenta')}>
-                                            <label className="v2"><input type="radio" name="oPlacenta" value="Sí" checked={values.oPlacenta.includes("Sí")} /> {this.context.translate('yes')}</label>
-                                            <label className="v2"><input type="radio" name="oPlacenta" value="No" checked={values.oPlacenta.includes("No")} /> No</label>
+                                        <div style={{ margin: '7.5px' }}>
+                                            <label className="v2"><input type="radio" name="oPlacenta" value="Sí" checked={values.oPlacenta.includes("Sí")} onChange={this.props.handleChange('oPlacenta')} /> {this.context.translate('yes')}</label>
+                                            <label className="v2"><input type="radio" name="oPlacenta" value="No" checked={values.oPlacenta.includes("No")} onChange={this.props.handleChange('oPlacenta')} /> No</label>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>{this.context.translate('baby-sex')}</th>
                                     <td>
-                                        <div style={{ margin: '7.5px' }} onChange={this.props.handleChange('oBabySex')}>
-                                            <label className="v2"><input type="radio" name="oBabySex" value="Hombre" checked={values.oBabySex.includes("Hombre")} /> {this.context.translate('male')}</label>
-                                            <label className="v2"><input type="radio" name="oBabySex" value="Mujer" checked={values.oBabySex.includes("Mujer")} /> {this.context.translate('female')}</label>
+                                        <div style={{ margin: '7.5px' }}>
+                                            <label className="v2"><input type="radio" name="oBabySex" value="Hombre" checked={values.oBabySex.includes("Hombre")} onChange={this.props.handleChange('oBabySex')} /> {this.context.translate('male')}</label>
+                                            <label className="v2"><input type="radio" name="oBabySex" value="Mujer" checked={values.oBabySex.includes("Mujer")} onChange={this.props.handleChange('oBabySex')} /> {this.context.translate('female')}</label>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>{this.context.translate('born')}</th>
                                     <td>
-                                        <div style={{ margin: '7.5px' }} onChange={this.props.handleChange('oBorn')}>
-                                            <label className="v2"><input type="radio" name="oBorn" value="Vivo" checked={values.oBorn.includes("Vivo")} /> {this.context.translate('alive')}</label>
-                                            <label className="v2"><input type="radio" name="oBorn" value="Muerto" checked={values.oBorn.includes("Muerto")} /> {this.context.translate('dead')}</label>
+                                        <div style={{ margin: '7.5px' }}>
+                                            <label className="v2"><input type="radio" name="oBorn" value="Vivo" checked={values.oBorn.includes("Vivo")} onChange={this.props.handleChange('oBorn')} /> {this.context.translate('alive')}</label>
+                                            <label className="v2"><input type="radio" name="oBorn" value="Muerto" checked={values.oBorn.includes("Muerto")} onChange={this.props.handleChange('oBorn')} /> {this.context.translate('dead')}</label>
                                         </div>
                                     </td>
                                 </tr>
@@ -548,7 +548,7 @@ export default class AddInterventions extends Component {
                                     <th className="top">{this.context.translate('apgar')}</th>
                                     <td>
                                         <div style={{ margin: '7.5px' }}>
-                                            <img width="600px" src="https://1q3nfm4evj5z1sgm624e93ka-wpengine.netdna-ssl.com/wp-content/uploads/2016/06/Apgar-Scoring-System-Diagnosing-Birth-Injuries.jpg" /><br />
+                                            <img width="600px" alt="APGAR Scoring System" src="https://1q3nfm4evj5z1sgm624e93ka-wpengine.netdna-ssl.com/wp-content/uploads/2016/06/Apgar-Scoring-System-Diagnosing-Birth-Injuries.jpg" /><br />
                                             <div style={{ display: 'block' }}>
                                                 <input type="text" style={{ width: '80px' }} name="oAPGAR1" value={values.oAPGAR1} onChange={this.props.handleChange('oAPGAR1')} />
                                                 <strong>1 {this.context.translate('minute')}</strong>

@@ -31,7 +31,7 @@ export default class PhysicalAssessment extends Component {
 
     addVitals = (e) => {
         e.preventDefault();
-        if (this.props.values.vital_signs_time === "" || this.props.values.vital_signs_pulse === "" || this.props.values.vital_signs_b_p_s === "" || this.props.values.vital_signs_b_p_d === "" || this.props.values.vital_signs_resp === "" || this.props.values.vital_signs_spo2 === "" || this.props.values.vital_signs_gcs_e === "" || this.props.values.vital_signs_gcs_v === "" || this.props.values.vital_signs_gcs_m === "" || this.props.values.vital_signs_pain === "" || this.props.values.vital_signs_temp === "" || this.props.values.vital_signs_etco2 === "") {
+        if (this.props.values.vital_signs_time === "" || this.props.values.vital_signs_pulse === "" || this.props.values.vital_signs_b_p_s === "" || this.props.values.vital_signs_b_p_d === "" || this.props.values.vital_signs_resp === "" || this.props.values.vital_signs_spo2 === "" || this.props.values.vital_signs_gcs_e === "" || this.props.values.vital_signs_gcs_v === "" || this.props.values.vital_signs_gcs_m === "" || this.props.values.vital_signs_temp === "" || this.props.values.vital_signs_etco2 === "") {
             this.setState({ message: "required-fields" });
         } else {
             const vitals = "[Hora: " + this.props.values.vital_signs_time + " | Pulso: " + this.props.values.vital_signs_pulse + " | B/P: " + this.props.values.vital_signs_b_p_s + "/" + this.props.values.vital_signs_b_p_d + " | Resp: " + this.props.values.vital_signs_resp + " | Sp02: " + this.props.values.vital_signs_spo2 + " | GCS: E - " + this.props.values.vital_signs_gcs_e + ", V - " + this.props.values.vital_signs_gcs_v + ", M - " + this.props.values.vital_signs_gcs_m + " | Dolor: " + this.props.values.vital_signs_pain + " | Temp: " + this.props.values.vital_signs_temp + " | ETCO2: " + this.props.values.vital_signs_etco2 + "]";
@@ -551,7 +551,7 @@ export default class PhysicalAssessment extends Component {
                                     </tr>
                                     <tr>
                                         <th>B/P</th>
-                                        <td><input type="text" style={{ width: '80px', marginRight: '0px' }} name="vital_signs_b_p_s" pattern="\d*" maxlength="3" value={values.vital_signs_b_p_s} onChange={this.props.handleChange('vital_signs_b_p_s')} /> / <input type="text" style={{ width: '80px', marginRight: '0px' }} name="vital_signs_b_p_d" pattern="\d*" maxlength="3" value={values.vital_signs_b_p_d} onChange={this.props.handleChange('vital_signs_b_p_d')} /></td>
+                                        <td><input type="text" style={{ width: '80px', marginRight: '0px' }} name="vital_signs_b_p_s" pattern="\d*" maxLength="3" value={values.vital_signs_b_p_s} onChange={this.props.handleChange('vital_signs_b_p_s')} /> / <input type="text" style={{ width: '80px', marginRight: '0px' }} name="vital_signs_b_p_d" pattern="\d*" maxLength="3" value={values.vital_signs_b_p_d} onChange={this.props.handleChange('vital_signs_b_p_d')} /></td>
                                         <th>Resp</th>
                                         <td><input type="text" name="vital_signs_resp" value={values.vital_signs_resp} onChange={this.props.handleChange('vital_signs_resp')} /></td>
                                     </tr>
@@ -585,32 +585,32 @@ export default class PhysicalAssessment extends Component {
                                         <th className="top">GCS</th>
                                         <td colSpan="4">
                                             <Row>
-                                                <Col onChange={this.props.handleChange('vital_signs_gcs_e')}>
+                                                <Col>
                                                     <b>{this.context.translate('GCS-e')}</b>
-                                                    <label><input type="radio" name="vital_signs_gcs_e" value="1" defaultChecked checked={values.vital_signs_gcs_e.includes("1")} /> 1 - {this.context.translate('none')}</label>
-                                                    <label><input type="radio" name="vital_signs_gcs_e" value="2" checked={values.vital_signs_gcs_e.includes("2")} /> 2 - {this.context.translate('to-pain')}</label>
-                                                    <label><input type="radio" name="vital_signs_gcs_e" value="3" checked={values.vital_signs_gcs_e.includes("3")} /> 3 - {this.context.translate('to-voice')}</label>
-                                                    <label><input type="radio" name="vital_signs_gcs_e" value="4" checked={values.vital_signs_gcs_e.includes("4")} /> 4 - {this.context.translate('spontaneous')}</label>
+                                                    <label><input type="radio" name="vital_signs_gcs_e" value="1" checked={values.vital_signs_gcs_e.includes("1")} onChange={this.props.handleChange('vital_signs_gcs_e')} /> 1 - {this.context.translate('none')}</label>
+                                                    <label><input type="radio" name="vital_signs_gcs_e" value="2" checked={values.vital_signs_gcs_e.includes("2")} onChange={this.props.handleChange('vital_signs_gcs_e')} /> 2 - {this.context.translate('to-pain')}</label>
+                                                    <label><input type="radio" name="vital_signs_gcs_e" value="3" checked={values.vital_signs_gcs_e.includes("3")} onChange={this.props.handleChange('vital_signs_gcs_e')} /> 3 - {this.context.translate('to-voice')}</label>
+                                                    <label><input type="radio" name="vital_signs_gcs_e" value="4" checked={values.vital_signs_gcs_e.includes("4")} onChange={this.props.handleChange('vital_signs_gcs_e')} /> 4 - {this.context.translate('spontaneous')}</label>
                                                     <label>-</label>
                                                     <label>-</label>
                                                 </Col>
-                                                <Col onChange={this.props.handleChange('vital_signs_gcs_v')}>
+                                                <Col>
                                                     <b>{this.context.translate('GCS-v')}</b>
-                                                    <label><input type="radio" name="vital_signs_gcs_v" value="1" defaultChecked checked={values.vital_signs_gcs_v.includes("1")} /> 1 - {this.context.translate('none')}</label>
-                                                    <label><input type="radio" name="vital_signs_gcs_v" value="2" checked={values.vital_signs_gcs_v.includes("2")} /> 2 - {this.context.translate('inc-sounds')}</label>
-                                                    <label><input type="radio" name="vital_signs_gcs_v" value="3" checked={values.vital_signs_gcs_v.includes("3")} /> 3 - {this.context.translate('ina-words')}</label>
-                                                    <label><input type="radio" name="vital_signs_gcs_v" value="4" checked={values.vital_signs_gcs_v.includes("4")} /> 4 - {this.context.translate('confused')}</label>
-                                                    <label><input type="radio" name="vital_signs_gcs_v" value="5" checked={values.vital_signs_gcs_v.includes("5")} /> 5 - {this.context.translate('oriented')}</label>
+                                                    <label><input type="radio" name="vital_signs_gcs_v" value="1" checked={values.vital_signs_gcs_v.includes("1")} onChange={this.props.handleChange('vital_signs_gcs_v')} /> 1 - {this.context.translate('none')}</label>
+                                                    <label><input type="radio" name="vital_signs_gcs_v" value="2" checked={values.vital_signs_gcs_v.includes("2")} onChange={this.props.handleChange('vital_signs_gcs_v')} /> 2 - {this.context.translate('inc-sounds')}</label>
+                                                    <label><input type="radio" name="vital_signs_gcs_v" value="3" checked={values.vital_signs_gcs_v.includes("3")} onChange={this.props.handleChange('vital_signs_gcs_v')} /> 3 - {this.context.translate('ina-words')}</label>
+                                                    <label><input type="radio" name="vital_signs_gcs_v" value="4" checked={values.vital_signs_gcs_v.includes("4")} onChange={this.props.handleChange('vital_signs_gcs_v')} /> 4 - {this.context.translate('confused')}</label>
+                                                    <label><input type="radio" name="vital_signs_gcs_v" value="5" checked={values.vital_signs_gcs_v.includes("5")} onChange={this.props.handleChange('vital_signs_gcs_v')} /> 5 - {this.context.translate('oriented')}</label>
                                                     <label>-</label>
                                                 </Col>
-                                                <Col onChange={this.props.handleChange('vital_signs_gcs_m')}>
+                                                <Col>
                                                     <b>{this.context.translate('GCS-m')}</b>
-                                                    <label><input type="radio" name="vital_signs_gcs_m" value="1" defaultChecked checked={values.vital_signs_gcs_m.includes("1")} /> 1 - {this.context.translate('none')}</label>
-                                                    <label><input type="radio" name="vital_signs_gcs_m" value="2" checked={values.vital_signs_gcs_m.includes("2")} /> 2 - {this.context.translate('ab-extension')}</label>
-                                                    <label><input type="radio" name="vital_signs_gcs_m" value="3" checked={values.vital_signs_gcs_m.includes("3")} /> 3 - {this.context.translate('ab-flexion')}</label>
-                                                    <label><input type="radio" name="vital_signs_gcs_m" value="4" checked={values.vital_signs_gcs_m.includes("4")} /> 4 - {this.context.translate('withdraw-pain')}</label>
-                                                    <label><input type="radio" name="vital_signs_gcs_m" value="5" checked={values.vital_signs_gcs_m.includes("5")} /> 5 - {this.context.translate('localise-pain')}</label>
-                                                    <label><input type="radio" name="vital_signs_gcs_m" value="6" checked={values.vital_signs_gcs_m.includes("6")} /> 6 - {this.context.translate('obeys-command')}</label>
+                                                    <label><input type="radio" name="vital_signs_gcs_m" value="1" checked={values.vital_signs_gcs_m.includes("1")} onChange={this.props.handleChange('vital_signs_gcs_m')} /> 1 - {this.context.translate('none')}</label>
+                                                    <label><input type="radio" name="vital_signs_gcs_m" value="2" checked={values.vital_signs_gcs_m.includes("2")} onChange={this.props.handleChange('vital_signs_gcs_m')} /> 2 - {this.context.translate('ab-extension')}</label>
+                                                    <label><input type="radio" name="vital_signs_gcs_m" value="3" checked={values.vital_signs_gcs_m.includes("3")} onChange={this.props.handleChange('vital_signs_gcs_m')} /> 3 - {this.context.translate('ab-flexion')}</label>
+                                                    <label><input type="radio" name="vital_signs_gcs_m" value="4" checked={values.vital_signs_gcs_m.includes("4")} onChange={this.props.handleChange('vital_signs_gcs_m')} /> 4 - {this.context.translate('withdraw-pain')}</label>
+                                                    <label><input type="radio" name="vital_signs_gcs_m" value="5" checked={values.vital_signs_gcs_m.includes("5")} onChange={this.props.handleChange('vital_signs_gcs_m')} /> 5 - {this.context.translate('localise-pain')}</label>
+                                                    <label><input type="radio" name="vital_signs_gcs_m" value="6" checked={values.vital_signs_gcs_m.includes("6")} onChange={this.props.handleChange('vital_signs_gcs_m')} /> 6 - {this.context.translate('obeys-command')}</label>
                                                 </Col>
                                             </Row>
                                         </td>
