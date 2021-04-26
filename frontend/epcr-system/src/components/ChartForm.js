@@ -525,7 +525,7 @@ export default class ChartForm extends Component {
             const birth = this.state.birth || null;
             const gender = this.state.gender;
             /* send to backend */
-            const url = 'http://localhost:3000/charts/add';
+            const url = 'api/charts/add';
             const options = {
                 method: 'POST',
                 body: JSON.stringify({

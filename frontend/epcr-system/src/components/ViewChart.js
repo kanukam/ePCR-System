@@ -20,7 +20,7 @@ export default class ViewChart extends Component {
     }
     
     componentDidMount(){
-        this.setState({chartsrc: `http://localhost:3000/charts/${this.props.match.params.id}/pdf?locale=${this.context.language}#scrollbar=1`})
+        this.setState({chartsrc: `api/charts/${this.props.match.params.id}/pdf?locale=${this.context.language}#scrollbar=1`})
     }
 
     toggleCollapse (){
@@ -29,7 +29,7 @@ export default class ViewChart extends Component {
     }
     
     reload(chartId, language){
-        this.setState({chartsrc: `http://localhost:3000/charts/${chartId}/pdf?locale=${language}#scrollbar=1`});
+        this.setState({chartsrc: `api/charts/${chartId}/pdf?locale=${language}#scrollbar=1`});
         this.setState({random: this.state.random + 1});
     }
 

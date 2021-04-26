@@ -25,7 +25,7 @@ export default class Reset extends Component {
         event.preventDefault();
         const { email } = this.state;
         if (email) {
-            const url = 'http://localhost:3000/forgot';
+            const url = 'api/forgot';
             const options = {
                 method: 'POST',
                 body: JSON.stringify({ email }),

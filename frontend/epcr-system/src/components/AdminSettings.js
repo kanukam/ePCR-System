@@ -24,7 +24,7 @@ export default class Settings extends Component {
     componentDidMount() {
         if (this.context.privilege === "admin"){
             // Getting all user data from database
-            const url = 'http://localhost:3000/users';
+            const url = 'api/users';
             const options = {
                 method: 'POST',
                 headers: {
@@ -49,7 +49,7 @@ export default class Settings extends Component {
         if (window.confirm(this.context.translate('delete-user')))
         {
             // Deleting user
-            const url = `http://localhost:3000/users/0/delete`;
+            const url = `api/users/0/delete`;
             const options = {
                 method: 'POST',
                 body: JSON.stringify({ email }),
@@ -77,7 +77,7 @@ export default class Settings extends Component {
     // Update certifications
     updateCertifications = (certifications, email) => {
         // Update user certifications
-        const url = `http://localhost:3000/charts/certifications`;
+        const url = `api/charts/certifications`;
         const options = {
             method: 'POST',
             body: JSON.stringify({ certifications, email }),
@@ -106,7 +106,7 @@ export default class Settings extends Component {
         event.preventDefault();
         const email = this.state.addedUser;
         // Deleting user
-        const url = `http://localhost:3000/users/0/add`;
+        const url = `api/users/0/add`;
         const options = {
             method: 'POST',
             body: JSON.stringify({ email }),
@@ -135,7 +135,7 @@ export default class Settings extends Component {
         event.preventDefault();
         const email = this.state.elevatedUser;
         // Deleting user
-        const url = `http://localhost:3000/users/0/elevate`;
+        const url = `api/users/0/elevate`;
         const options = {
             method: 'POST',
             body: JSON.stringify({ email }),

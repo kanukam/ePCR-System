@@ -60,7 +60,7 @@ export default class ChangePassword extends Component {
         }
         else if (password) {
             if (this.passwordWordCheck(password)) {
-                const url = 'http://localhost:3000/change-password';
+                const url = 'api/change-password';
                 const options = {
                     method: 'POST',
                     body: JSON.stringify({ token, password }),

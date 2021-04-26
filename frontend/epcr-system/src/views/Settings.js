@@ -25,7 +25,7 @@ export default class Settings extends Component {
     remove = event => {
         event.preventDefault();
         if (window.confirm(this.context.translate('delete-self'))){
-            const url = 'http://localhost:3000/users/0/remove';
+            const url = 'api/users/0/remove';
             const options = {
                 method: 'GET',
                 headers: {

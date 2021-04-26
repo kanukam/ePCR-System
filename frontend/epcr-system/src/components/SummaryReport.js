@@ -25,7 +25,7 @@ export default class SummaryReport extends Component {
         const{from, to} = this.props.history.location.state;
         if(from && to){
             // Get summary report data back from server
-            const url = `http://localhost:3000/charts/summary`;
+            const url = `api/charts/summary`;
             const options = {
                 method: 'POST',
                 body: JSON.stringify({ from, to }),

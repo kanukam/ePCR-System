@@ -25,7 +25,7 @@ export default class Login extends Component {
     }
 
     getRole() {
-        const url = 'http://localhost:3000/getUsername';
+        const url = 'api/getUsername';
         const options = {
             method: 'GET',
             headers: {
@@ -54,7 +54,7 @@ export default class Login extends Component {
         const username = this.state.username;
         const password = this.state.password;
         if (username && password) {
-            const url = 'http://localhost:3000/login';
+            const url = 'api/login';
             const options = {
                 method: 'POST',
                 body: JSON.stringify({ username, password }),
@@ -68,6 +68,7 @@ export default class Login extends Component {
                  if (!response.ok) {
                     throw Error(response.status);
                 }
+                console.log(response);
                 this.setState({ errorMessage: "" });
                 this.setState({ authorized: true })
                 this.context.setAuth(true);

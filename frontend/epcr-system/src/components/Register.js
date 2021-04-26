@@ -61,7 +61,7 @@ export default class Register extends Component {
         const name = this.state.name;
         if (username && password && email) {
             if (this.passwordWordCheck(password)) {
-                const url = 'http://localhost:3000/register';
+                const url = 'api/register';
                 const options = {
                     method: 'POST',
                     body: JSON.stringify({ username, password, email, phone, name }),

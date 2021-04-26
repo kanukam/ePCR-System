@@ -22,7 +22,7 @@ export default class Settings extends Component {
 
     componentDidMount() {
         // Getting User data from database
-        const url = `http://localhost:3000/users/${this.context.username}`;
+        const url = `api/users/${this.context.username}`;
         const options = {
             method: 'GET',
             headers: {
@@ -50,7 +50,7 @@ export default class Settings extends Component {
         const name = this.state.name;
         console.log(phone);
         if (name && phone && email) {
-            const url = `http://localhost:3000/users/${this.context.username}/update`;
+            const url = `api/users/${this.context.username}/update`;
             const options = {
                 method: 'POST',
                 body: JSON.stringify({ email, phone, name }),
@@ -106,7 +106,7 @@ export default class Settings extends Component {
             // Send Request if passwords match
             if (newPassword === confirmedPassword) {
                 if (this.passwordWordCheck(newPassword)) {
-                    const url = `http://localhost:3000/users/${this.context.username}/password`;
+                    const url = `api/users/${this.context.username}/password`;
                     const options = {
                         method: 'POST',
                         body: JSON.stringify({ oldPassword, newPassword }),

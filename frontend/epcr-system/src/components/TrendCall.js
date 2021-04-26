@@ -26,7 +26,7 @@ export default class TrendCall extends Component {
         const{from, to} = this.props.history.location.state;
         if(from && to){
             // Get summary report data back from server
-            const url = `http://localhost:3000/charts/calls`;
+            const url = `api/charts/calls`;
             const options = {
                 method: 'POST',
                 body: JSON.stringify({ from, to }),

@@ -18,7 +18,7 @@ app.use(cors({
   origin: 'http://localhost:3001',  // Example React server
   credentials: true
 }));
-app.use(router); // Use /routes/router.js
+app.use('/api', router); // Use /routes/router.js
 const server = http.createServer(app);
 
 server.listen(port, (err) => {
