@@ -68,7 +68,6 @@ export default class Login extends Component {
                  if (!response.ok) {
                     throw Error(response.status);
                 }
-                console.log(response);
                 this.setState({ errorMessage: "" });
                 this.setState({ authorized: true })
                 this.context.setAuth(true);
