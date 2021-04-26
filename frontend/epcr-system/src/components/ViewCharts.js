@@ -41,7 +41,7 @@ export default class ViewCharts extends Component {
     componentDidMount() {
         // Delay slightly to allow server to insert into table
         setTimeout(() => {
-            const url = 'api/charts/patients';
+            const url = 'http://localhost:3000/api/charts/patients';
             const options = {
                 method: 'GET',
                 headers: {

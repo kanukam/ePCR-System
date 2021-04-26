@@ -11,7 +11,7 @@ import '../Sidebar.css'
 export default class MainNav extends Component {
 	static contextType = MainContext;
 	logout = () => {
-		const url = 'api/logout';
+		const url = 'http://localhost:3000/api/logout';
 		const options = {
 			method: 'POST',
 			headers: {

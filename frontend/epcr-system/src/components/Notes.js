@@ -37,7 +37,7 @@ export default class Notes extends Component {
 
     getNotes(){
         /* send to backend */
-        const url = 'api/notes/chart/' + this.props.chartId;
+        const url = 'http://localhost:3000/api/notes/chart/' + this.props.chartId;
         const options = {
             method: 'GET',
             headers: {
@@ -68,7 +68,7 @@ export default class Notes extends Component {
             date = moment(date).format("YYYY-MM-DDTHH:mm");
             this.setState({emptyMessage: null});
             /* send to backend */
-            const url = 'api/notes/chart/' + this.props.chartId + '/add';
+            const url = 'http://localhost:3000/api/notes/chart/' + this.props.chartId + '/add';
             const options = {
                 method: 'POST',
                 body: JSON.stringify({ note, date}),

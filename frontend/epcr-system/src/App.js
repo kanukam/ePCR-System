@@ -60,7 +60,7 @@ class App extends React.Component {
   }
 
   jwtCookie() {
-    const url = 'api/test-auth';
+    const url = 'http://localhost:3000/api/test-auth';
     const options = {
       method: 'GET',
       headers: {
@@ -82,7 +82,7 @@ class App extends React.Component {
   }
 
   getUsername() {
-    const url = 'api/getUsername';
+    const url = 'http://localhost:3000/api/getUsername';
     const options = {
       method: 'GET',
       headers: {

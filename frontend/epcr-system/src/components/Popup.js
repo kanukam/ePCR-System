@@ -22,7 +22,7 @@ export default class Popup extends Component {
     }
 
     componentDidMount() {
-        const url = 'api/users';
+        const url = 'http://localhost:3000/api/users';
         const options = {
             method: 'POST',
             headers: {

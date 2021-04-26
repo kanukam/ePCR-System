@@ -21,7 +21,7 @@ export default class AddPatient extends Component {
     }
 
     componentDidMount() {
-        const url = 'api/patients/';
+        const url = 'http://localhost:3000/api/patients/';
         const options = {
             method: 'GET',
             headers: {

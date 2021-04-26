@@ -25,7 +25,7 @@ export default class Login extends Component {
     }
 
     getRole() {
-        const url = 'api/getUsername';
+        const url = 'http://localhost:3000/api/getUsername';
         const options = {
             method: 'GET',
             headers: {
@@ -54,7 +54,7 @@ export default class Login extends Component {
         const username = this.state.username;
         const password = this.state.password;
         if (username && password) {
-            const url = 'api/login';
+            const url = 'http://localhost:3000/api/login';
             const options = {
                 method: 'POST',
                 body: JSON.stringify({ username, password }),
