@@ -66,7 +66,6 @@ function register(req, res) {
 }
 
 function testAuth(req, res){
-  console.log("A")
   res.status(200).send("If you can see this, you are authenticated");
 }
 
