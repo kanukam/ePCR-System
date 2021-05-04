@@ -169,6 +169,35 @@ export default class ChartForm extends Component {
         };
     }
 
+    getIno = () => {
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        }
+        fetch("http://localhost:3000/api/charts/number", options)
+            .then((response) => {
+                if (response.ok)
+                    return response.json();
+                else
+                    throw Error("Failed");
+            })
+            .then((data) => {
+                let randNo = Math.floor(Math.random() * 10) + 1);
+                let yearLastTwo = new Date().getFullYear() % 100;
+                let r = "" + data;
+                while (r.length < 4) {
+                    r = "0" + r;
+                }
+                this.setState({ino: `${yearLastTwo}-${randNo}-${r}`});
+            })
+            .catch((error) => {
+                console.log(error);
+            }); 
+    }
+
     handleChange = input => event => {
         this.setState({ [input]: event.target.value });
     }
@@ -590,6 +619,7 @@ export default class ChartForm extends Component {
                     handleAssessmentCheckboxes={this.handleAssessmentCheckboxes}
                     handleDate={this.handleDate}
                     handleDateNoTime={this.handleDateNoTime}
+                    getIno={this.getIno}
                     values={values}
                 />
             case 2:
