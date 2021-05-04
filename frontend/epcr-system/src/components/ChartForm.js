@@ -185,7 +185,7 @@ export default class ChartForm extends Component {
                     throw Error("Failed");
             })
             .then((data) => {
-                let randNo = Math.floor(Math.random() * 10) + 1);
+                let randNo = Math.floor(Math.random() * 100) + 1);
                 let yearLastTwo = new Date().getFullYear() % 100;
                 let r = "" + data;
                 while (r.length < 4) {
