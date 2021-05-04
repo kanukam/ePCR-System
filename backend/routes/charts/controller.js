@@ -139,6 +139,13 @@ function downloadPdfTest(req, res){
   })
 }
 
+function getChartNumber(req, res){
+  repo.getChartNumber((err, number) => {
+      err
+        ? res.status(500).json({ error: err })
+        : res.status(200).json({ ino: number })
+  })
+}
 module.exports = { 
   viewChart, 
   viewAllCharts, 
@@ -150,5 +157,6 @@ module.exports = {
   calls,
   downloadPdf,
   downloadPdfTest,
-  updateCerts
+  updateCerts,
+  getChartNumber
 };
