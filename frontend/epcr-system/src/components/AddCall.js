@@ -19,6 +19,8 @@ export default class AddCall extends Component {
 
     componentDidMount() {
         //alert("21-" + Math.floor(Math.random() * 10) + 1);
+        let yearLastTwo = new Date().getFullYear() % 100;
+        
     }
 
     navigate = step => (e) => {
