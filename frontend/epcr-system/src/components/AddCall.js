@@ -18,9 +18,32 @@ export default class AddCall extends Component {
     }
 
     componentDidMount() {
-        //alert("21-" + Math.floor(Math.random() * 10) + 1);
-        let yearLastTwo = new Date().getFullYear() % 100;
-        
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        }
+        fetch("http://localhost:3000/api/charts/number", options)
+            .then((response) => {
+                if (response.ok)
+                    return response.json();
+                else
+                    throw Error("Failed");
+            })
+            .then((data) => {
+                let randNo = Math.floor(Math.random() * 10) + 1);
+                let yearLastTwo = new Date().getFullYear() % 100;
+                let r = "" + data;
+                while (r.length < 4) {
+                    r = "0" + r;
+                }
+                this.props.setState({ino: `${yearLastTwo}-${randNo}-${r}`});
+            })
+            .catch((error) => {
+                console.log(error);
+            }); 
     }
 
     navigate = step => (e) => {
