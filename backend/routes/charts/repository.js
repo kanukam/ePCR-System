@@ -344,6 +344,15 @@ function downloadPdfTest(pipeTo, locale, cb){
     }, locale, pipeTo, cb)
 }
 
+function getChartNumber(cb){
+    db.query('SELECT * FROM charts', (err, results) => {
+      if (err) {
+          return callback(err);
+      }
+      callback(null, results.length + 1);
+  });
+}
+
 module.exports = { 
     viewChart, 
     viewAllCharts, 
@@ -357,5 +366,6 @@ module.exports = {
     summary,
     calls,
     downloadPdf,
-    downloadPdfTest
+    downloadPdfTest,
+    getChartNumber
 };
