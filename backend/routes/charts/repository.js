@@ -351,7 +351,7 @@ function getChartNumber(callback) {
       if (err) {
           return callback(err);
       }
-      callback(null, results.length + 1);
+      callback(null, results + 1);
   });
 }
 
