@@ -193,7 +193,7 @@ export default class ChartForm extends Component {
                 while (r.length < 4) {
                     r = "0" + r;
                 }
-                this.setState({ino: `${yearLastTwo}-${randNo}-${r}`});
+                this.setState({ino: `${yearLastTwo}-${r}`});
             })
             .catch((error) => {
                 console.log(error);
