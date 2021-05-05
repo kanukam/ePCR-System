@@ -344,8 +344,10 @@ function downloadPdfTest(pipeTo, locale, cb){
     }, locale, pipeTo, cb)
 }
 
-function getChartNumber(cb){
-    db.query('SELECT * FROM charts', (err, results) => {
+function getChartNumber(callback) {
+    var year = new Date().getFullYear();
+    const query = `SELECT COUNT(charts.incident_date) FROM charts WHERE charts.incident_date BETWEEN '${year}-01-01' AND '${year}-12-31'`;
+    db.query(query, (err, results) => {
       if (err) {
           return callback(err);
       }

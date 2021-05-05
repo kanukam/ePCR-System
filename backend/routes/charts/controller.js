@@ -140,10 +140,10 @@ function downloadPdfTest(req, res){
 }
 
 function getChartNumber(req, res){
-  repo.getChartNumber((err, number) => {
+  repo.getChartNumber((err, data) => {
       err
         ? res.status(500).json({ error: err })
-        : res.status(200).json({ ino: number })
+        : res.status(200).json({ data })
   })
 }
 module.exports = { 
