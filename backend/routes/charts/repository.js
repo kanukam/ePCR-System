@@ -351,6 +351,7 @@ function getChartNumber(callback) {
       if (err) {
           return callback(err);
       }
+      results = results['COUNT(charts.incident_date)'];
       callback(null, results + 1);
   });
 }
