@@ -188,6 +188,7 @@ export default class ChartForm extends Component {
             .then((data) => {
                 let randNo = Math.floor(Math.random() * 100) + 1;
                 let yearLastTwo = new Date().getFullYear() % 100;
+                console.log(data);
                 let r = "" + data["data"];
                 while (r.length < 4) {
                     r = "0" + r;
