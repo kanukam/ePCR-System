@@ -69,6 +69,7 @@ export default class AddInterventions extends Component {
         };
     }
 
+    // toggle the procedures popup, reset all values
     toggleProc = () => {
         this.setState({
             showProc: !this.state.showProc,
@@ -111,6 +112,7 @@ export default class AddInterventions extends Component {
         });
     }
 
+    // toggle the medications popup, reset all values
     toggleMed = () => {
         this.setState({
             showMed: !this.state.showMed,
@@ -126,23 +128,28 @@ export default class AddInterventions extends Component {
         });
     }
 
+    // navigate to a certain section
     navigate = step => (e) => {
         e.preventDefault();
         this.props.navigate(step);
     }
 
+    // save results and move to next section
     saveAndContinue = (e) => {
         e.preventDefault();
         this.props.nextStep();
     }
 
+    // go back to previous section
     back = (e) => {
         e.preventDefault();
         this.props.prevStep();
     }
 
+    // onchange event for the popups
     changeInter = input => event => { this.setState({ [input]: event.target.value }); }
 
+    // handle the checkboxes that are only in the popups
     handleCheck = input => event => {
         const target = event.target;
         var value = target.value;
@@ -156,6 +163,7 @@ export default class AddInterventions extends Component {
             else if (input === "pFindings") { this.state.pFindings.splice(value, 1); }
         }
     }
+
     handleDate = input => date => {
         var displayedDate = input + "Display";
         this.setState({ [displayedDate]: date });
@@ -170,16 +178,18 @@ export default class AddInterventions extends Component {
         this.setState({ [input]: date });
     }
 
+    // make all inputs empty when selecting new procedure
     makeEmpty = input => { alert(input); this.setState({ [input]: "" }); }
 
+    // function to add the medications with specific format and append it to table
     submitMedication = (event) => {
         event.preventDefault();
+        // check if all required fields are filled, otherwise do not submit values
         if(this.state.mName === "" || this.state.mTime === "" || this.state.mDosage === "" || this.state.mUnit === "" || this.state.mRoute === "" || this.state.mResult === "") {
             this.setState({ message: "required-fields" });
         } else {
             this.setState({ message: "" });
             let medications = "[Medicamento: " + this.state.mName + " | Hora: " + this.state.mTime + " | Dosis: " + this.state.mDosage + " " + this.state.mUnit + " | Tomar: " + this.state.mRoute + " | Resultados: " + this.state.mResult + " | Por: ";
-            // done by
             if(this.state.mBy === "Otro") { medications += this.state.mByOther; }
             else { medications += this.state.mBy; }
             medications += "]";
@@ -188,60 +198,63 @@ export default class AddInterventions extends Component {
         }
     }
 
+    // delete the medication from the table
     deleteMedication = index => (event) => { this.props.deleteMedications(index); }
 
+    // function to add the procedures with specific format and append it to table
     submitProcedure = (event) => {
         event.preventDefault();
+        // check if all required fields are filled, otherwise do not submit values
         if(this.state.pName === "" || this.state.pTime === "") {
             this.setState({ message: "required-fields" });
         } else {
             this.setState({ message: "" });
-        
-        // change to Spanish later
-        let procedures = "[Procedimiento: " + this.state.pName;
-        if (this.state.pName === "Paro cardíaco") {
-            procedures += " | Hora de lo sucedido: " + this.state.pTime + " | Hora de inicio CPR: " + this.state.pCPRstart + " | Tiempo de parar CPR: " + this.state.pCPRstop + " | Resultado: " + this.state.pOutcome;
+            // all values stored in Spanish as requested by sponsor
+            let procedures = "[Procedimiento: " + this.state.pName;
+            if (this.state.pName === "Paro cardíaco") {
+                procedures += " | Hora de lo sucedido: " + this.state.pTime + " | Hora de inicio CPR: " + this.state.pCPRstart + " | Tiempo de parar CPR: " + this.state.pCPRstop + " | Resultado: " + this.state.pOutcome;
+            }
+            else { procedures += " | Hora: " + this.state.pTime; }
+            if (this.state.pLocation !== "") { procedures += " | Ubicación: " + this.state.pLocation; }
+            if (this.state.pType !== "") { procedures += " | Tipo: " + this.state.pType; }
+            if (this.state.pSize !== "") { procedures += " | Tamaño: " + this.state.pSize; }
+            if (this.state.pTube !== "") { procedures += " | Tamaño del tubo: " + this.state.pTube; }
+            if (this.state.pNeedle !== "") { procedures += " | Tamaño de la aguja: " + this.state.pNeedle; }
+            if (this.state.pFluid !== "") { procedures += " | Fluido: " + this.state.pFluid; }
+            if (this.state.pResult !== "") { procedures += " | Resultados: " + this.state.pResult; }
+            if (this.state.pDelivery !== "") { procedures += " | Entrega: " + this.state.pDelivery; }
+            if (this.state.pAmount !== "") { procedures += " | Cantidad: " + this.state.pAmount; }
+            if (this.state.pName === "Vía aérea básica - BVM") { procedures += "| Útilizar: " + this.state.pAdjuncts.join(); }
+            if (this.state.pPhysician !== "") { procedures += " | Médico: " + this.state.pPhysician; }
+            if (this.state.pOrders !== "") { procedures += " | Órdenes: " + this.state.pOrders; }
+            if (this.state.pTeeth !== "") { procedures += " | Profundidad en los dientes: " + this.state.pTeeth; }
+            if (this.state.pName === "Vía aérea avanzada - Intubación") { procedures += "| Confirmación: " + this.state.pConfirm.join(); }
+            if (this.state.pName === "12 Lead EKG") { procedures += " | Resultados: " + this.state.pFindings.join(); }
+            if (this.state.pRhythm !== "") { procedures += " | Cadencia: " + this.state.pRhythm; }
+            if (this.state.pMode !== "") { procedures += " | Clase: " + this.state.pMode; }
+            if (this.state.pRate !== "") { procedures += " | Grado: " + this.state.pRate; }
+            if (this.state.pOutput !== "") { procedures += " | mA Salida: " + this.state.pOutput; }
+            if (this.state.pCapture !== "") { procedures += " | Capturar: " + this.state.pCapture; }
+            if (this.state.pEffective !== "") { procedures += " | Eficaz: " + this.state.pEffective; }
+            if (this.state.pEnergy !== "") { procedures += " | Energía: " + this.state.pEnergy; }
+            if (this.state.pConverted !== "") { procedures += " | Convertido a: " + this.state.pConverted; }
+            if (this.state.pPulseCapture !== "") { procedures += " | Pulso con captura: " + this.state.pPulseCapture; }
+            if (this.state.pName === "Paro cardíaco") { procedures += " | CPR hecho por: " + this.state.pCPRbyName + "]"; }
+            else {
+                procedures += " | Por: ";
+                if(this.state.pBy === "Otro") { procedures += this.state.pByOther; }
+                else { procedures += this.state.pBy; }
+                procedures += "]";
+            }
+            this.props.appendProcedures(procedures);
+            this.toggleProc();
         }
-        else { procedures += " | Hora: " + this.state.pTime; }
-        if (this.state.pLocation !== "") { procedures += " | Ubicación: " + this.state.pLocation; }
-        if (this.state.pType !== "") { procedures += " | Tipo: " + this.state.pType; }
-        if (this.state.pSize !== "") { procedures += " | Tamaño: " + this.state.pSize; }
-        if (this.state.pTube !== "") { procedures += " | Tamaño del tubo: " + this.state.pTube; }
-        if (this.state.pNeedle !== "") { procedures += " | Tamaño de la aguja: " + this.state.pNeedle; }
-        if (this.state.pFluid !== "") { procedures += " | Fluido: " + this.state.pFluid; }
-        if (this.state.pResult !== "") { procedures += " | Resultados: " + this.state.pResult; }
-        if (this.state.pDelivery !== "") { procedures += " | Entrega: " + this.state.pDelivery; }
-        if (this.state.pAmount !== "") { procedures += " | Cantidad: " + this.state.pAmount; }
-        if (this.state.pName === "Vía aérea básica - BVM") { procedures += "| Útilizar: " + this.state.pAdjuncts.join(); }
-        if (this.state.pPhysician !== "") { procedures += " | Médico: " + this.state.pPhysician; }
-        if (this.state.pOrders !== "") { procedures += " | Órdenes: " + this.state.pOrders; }
-        if (this.state.pTeeth !== "") { procedures += " | Profundidad en los dientes: " + this.state.pTeeth; }
-        if (this.state.pName === "Vía aérea avanzada - Intubación") { procedures += "| Confirmación: " + this.state.pConfirm.join(); }
-        if (this.state.pName === "12 Lead EKG") { procedures += " | Resultados: " + this.state.pFindings.join(); }
-        if (this.state.pRhythm !== "") { procedures += " | Cadencia: " + this.state.pRhythm; }
-        if (this.state.pMode !== "") { procedures += " | Clase: " + this.state.pMode; }
-        if (this.state.pRate !== "") { procedures += " | Grado: " + this.state.pRate; }
-        if (this.state.pOutput !== "") { procedures += " | mA Salida: " + this.state.pOutput; }
-        if (this.state.pCapture !== "") { procedures += " | Capturar: " + this.state.pCapture; }
-        if (this.state.pEffective !== "") { procedures += " | Eficaz: " + this.state.pEffective; }
-        if (this.state.pEnergy !== "") { procedures += " | Energía: " + this.state.pEnergy; }
-        if (this.state.pConverted !== "") { procedures += " | Convertido a: " + this.state.pConverted; }
-        if (this.state.pPulseCapture !== "") { procedures += " | Pulso con captura: " + this.state.pPulseCapture; }
-        // done by
-        if (this.state.pName === "Paro cardíaco") { procedures += " | CPR hecho por: " + this.state.pCPRbyName + "]"; }
-        else {
-            procedures += " | Por: ";
-            if(this.state.pBy === "Otro") { procedures += this.state.pByOther; }
-            else { procedures += this.state.pBy; }
-            procedures += "]";
-        }
-        this.props.appendProcedures(procedures);
-        this.toggleProc();
-    }
     }
 
+    // delete the procedure from the table
     deleteProcedure = index => (event) => { this.props.deleteProcedures(index); }
 
+    // display time in requested format
     displayTime(time) {
         var datetime = time.split(" ");
         var date = datetime[0].split("-");
@@ -251,13 +264,14 @@ export default class AddInterventions extends Component {
     render() {
         const { values } = this.props;
         const inter = this.state;
+        // make the procedures display table
         var procedureList = [];
-        var current = ""
-        var time = ""
-        var index = ""
-        var lastIndex = ""
-        var data = ""
-        var by = ""
+        var current = "";
+        var time = "";
+        var index = "";
+        var lastIndex = "";
+        var data = "";
+        var by = "";
         for (var i = 0; i < values.procedures.length; i++) {
             current = values.procedures[i].split(" | ");
             time = current[1].split(": ");
@@ -280,6 +294,7 @@ export default class AddInterventions extends Component {
                 removeText={this.context.translate('remove')}
             />)
         }
+        // make the medications display table
         var medicationList = [];
         for (var i = 0; i < values.medications.length; i++) {
             current = values.medications[i].split(" | ");

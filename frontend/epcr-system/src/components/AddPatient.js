@@ -20,6 +20,7 @@ export default class AddPatient extends Component {
         };
     }
 
+    // get the patients in the system from the backend
     componentDidMount() {
         const url = 'http://localhost:3000/api/patients/';
         const options = {
@@ -44,28 +45,29 @@ export default class AddPatient extends Component {
             });
     }
 
+    // navigate to a certain section
     navigate = step => (e) => {
         e.preventDefault();
         this.props.navigate(step);
     }
 
+    // save results and move to next section
     saveAndContinue = (e) => {
         e.preventDefault();
         this.props.nextStep();
     }
 
+    // go back to previous section
     back = (e) => {
         e.preventDefault();
         this.props.prevStep();
     }
 
-    toggleSearch = () => {
-        this.setState({ showPop: !this.state.showPop });
-    }
+    // toggle the search patient popup
+    toggleSearch = () => { this.setState({ showPop: !this.state.showPop }); }
 
-    hideSearch = () => {
-        this.setState({ showPop: false });
-    }
+    // hide the search patient popup
+    hideSearch = () => { this.setState({ showPop: false }); }
 
     displayTime(time) {
         var index = time.indexOf("-");
@@ -76,23 +78,24 @@ export default class AddPatient extends Component {
         return day + "/" + month + "/" + year;
     }
 
-    selectPatient = index => (event) => {
+    // select the existing patient from the popup and populate the values
+    selectPatient = index => (e) => {
         var patient = this.state.patientList[index];
-        //this.props.selectPatient(patient);
         this.props.setPatient(patient);
         this.hideSearch();
     }
 
-    search(event) {
-        this.setState({ search: event.target.value.substr(0, 20) });
-    }
+    // search function to set the search query
+    search(event) { this.setState({ search: event.target.value.substr(0, 20) }); }
 
     render() {
         const { values } = this.props;
+        // get all the patients from backend to store into list
         for (var i = 0; i < this.state.patients.length; i++) {
             var pat = this.state.patients[i].id + "," + this.state.patients[i]["fname"] + "," + this.state.patients[i]["lname"] + "," + this.state.patients[i]["birth"] + "," + this.state.patients[i]["gender"] + ",;";
             this.state.patientList.push(pat);
         }
+        // search previous patient by full name (reverse name works too)
         let filteredPatients = this.state.patients.filter(
             (patient) => {
                 var fullname = patient["fname"] + " " + patient["lname"];

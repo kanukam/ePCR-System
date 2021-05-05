@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import '../App.css'
 
 export default class PatientRow extends Component {
+    // template for displaying the patient's full name and date of birth on the search popup
     render() {
         return (
             <tr>

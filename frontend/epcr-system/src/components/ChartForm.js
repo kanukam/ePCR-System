@@ -169,6 +169,7 @@ export default class ChartForm extends Component {
         };
     }
 
+    // fetch count of incidents in the current year from backend to generate incident number
     getIno = () => {
         const options = {
             method: 'GET',
@@ -185,9 +186,9 @@ export default class ChartForm extends Component {
                     throw Error("Failed");
             })
             .then((data) => {
-                let randNo = Math.floor(Math.random() * 100) + 1);
+                let randNo = Math.floor(Math.random() * 100) + 1;
                 let yearLastTwo = new Date().getFullYear() % 100;
-                let r = "" + data;
+                let r = "" + data["data"];
                 while (r.length < 4) {
                     r = "0" + r;
                 }
@@ -195,13 +196,13 @@ export default class ChartForm extends Component {
             })
             .catch((error) => {
                 console.log(error);
-            }); 
+            });
     }
 
-    handleChange = input => event => {
-        this.setState({ [input]: event.target.value });
-    }
+    // onchange event for the charts
+    handleChange = input => event => { this.setState({ [input]: event.target.value }); }
 
+    // old function to handle checkboxes
     handleCheckbox = input => event => {
         const target = event.target;
         var value = target.value;
@@ -216,6 +217,7 @@ export default class ChartForm extends Component {
         }
     }
 
+    // function to handle the checkboxes and store their checked states for the charts
     handleAssessmentCheckboxes = boxNumber => event => {
         var bodyPart = event.target.name;
         var vals = this.state[bodyPart];
@@ -245,6 +247,7 @@ export default class ChartForm extends Component {
         //this.calculateBurn(boxNumber);        
     }
 
+    // function to calculate the burn calculations (not used anymore as suggested by sponsor)
     calculateBurn(boxNumber) {
         // handle burn calculations
         var assessmentCheckBoxes = this.state.assessmentCheckBoxes;
@@ -362,6 +365,7 @@ export default class ChartForm extends Component {
         this.setState({ [displayedDate]: date })
     }
 
+    // append added vital signs to the display table
     appendVitals = vitals => {
         var vital_signs = this.state.vital_signs;
         vital_signs.push(vitals);
@@ -383,30 +387,35 @@ export default class ChartForm extends Component {
         });
     }
 
+    // append added procedures to the display table
     appendProcedures = procedure => {
         var procedures = this.state.procedures;
         procedures.push(procedure);
         this.setState({ procedures });
     }
 
+    // delete added procedures from the display table
     deleteProcedures = index => {
         var procedures = this.state.procedures;
         procedures.splice(index, 1);
         this.setState({ procedures });
     }
 
+    // append added medications to the display table
     appendMedications = medication => {
         var medications = this.state.medications;
         medications.push(medication);
         this.setState({ medications });
     }
 
+    // delete added medications from the display table
     deleteMedications = index => {
         var medications = this.state.medications;
         medications.splice(index, 1);
         this.setState({ medications });
     }
 
+    // set the patient based on the existing patient
     setPatient = string => {
         var patient = string.split(",");
         var birthDisplay = null;
@@ -424,10 +433,10 @@ export default class ChartForm extends Component {
         });
     }
 
-    setPain = scale => {
-        this.setState( {vital_signs_pain: scale} );
-    }
+    // set the vital signs pain scale
+    setPain = scale => { this.setState( {vital_signs_pain: scale} ); }
 
+    // submit the entire chart to backend
     handleSubmit = (event) => {
         event.preventDefault();
         if (this.state.idate === "" || this.state.lname === "" || this.state.fname === "" || this.state.gender === "" || this.state.birth === "") {
@@ -548,7 +557,6 @@ export default class ChartForm extends Component {
             }
             /* patient table */
             const patientID = this.state.pid || null;
-            //alert(patientID);
             const fname = this.state.fname;
             const lname = this.state.lname;
             const birth = this.state.birth || null;
@@ -586,6 +594,7 @@ export default class ChartForm extends Component {
         }
     }
 
+    // increment step to the next section
     nextStep = () => {
         const { step } = this.state;
         this.setState({
@@ -593,6 +602,7 @@ export default class ChartForm extends Component {
         })
     }
 
+    // decrement step to the previous section
     prevStep = () => {
         const { step } = this.state;
         this.setState({
@@ -600,6 +610,7 @@ export default class ChartForm extends Component {
         })
     }
 
+    // navigate to a certain section
     navigate = (input) => {
         this.setState({
             step: input

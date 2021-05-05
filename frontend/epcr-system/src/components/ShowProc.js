@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import '../App.css'
 
 export default class ShowProc extends Component {
-
+    // template for displaying appended procedures to the display table
     render() {
         return (
             <tr>

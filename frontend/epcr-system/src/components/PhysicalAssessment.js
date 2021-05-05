@@ -14,21 +14,25 @@ export default class PhysicalAssessment extends Component {
         };
     }
 
+    // navigate to a certain section
     navigate = step => (e) => {
         e.preventDefault();
         this.props.navigate(step);
     }
 
+    // save results and move to next section
     saveAndContinue = (e) => {
         e.preventDefault();
         this.props.nextStep();
     }
 
+    // go back to previous section
     back = (e) => {
         e.preventDefault();
         this.props.prevStep();
     }
 
+    // function to add the vital signs with specific format and append it to table
     addVitals = (e) => {
         e.preventDefault();
         if (this.props.values.vital_signs_time === "" || this.props.values.vital_signs_pulse === "" || this.props.values.vital_signs_b_p_s === "" || this.props.values.vital_signs_b_p_d === "" || this.props.values.vital_signs_resp === "" || this.props.values.vital_signs_spo2 === "" || this.props.values.vital_signs_gcs_e === "" || this.props.values.vital_signs_gcs_v === "" || this.props.values.vital_signs_gcs_m === "" || this.props.values.vital_signs_temp === "" || this.props.values.vital_signs_etco2 === "") {
@@ -40,6 +44,7 @@ export default class PhysicalAssessment extends Component {
         }
     }
 
+    // function to show the option tags for selecting each body type on the assessment
     showOptions = input => event => {
         var labels = document.getElementsByClassName('exam_label');
         var options = document.getElementsByClassName('exam_option');
@@ -55,6 +60,7 @@ export default class PhysicalAssessment extends Component {
         }
     }
     
+    // function to allow user to select pain scale based on div element
     selectPain = input => event => {
         var pain = document.getElementsByClassName('pain');
         for(var i = 0; i < pain.length; i++) {
@@ -68,6 +74,7 @@ export default class PhysicalAssessment extends Component {
 
     render() {
         const { values } = this.props;
+        // make the vital signs display table
         var vitalList = [];
         for (var i = 0; i < values.vital_signs.length; i++) {
             var current = values.vital_signs[i].split(" | ");
@@ -89,36 +96,7 @@ export default class PhysicalAssessment extends Component {
             <div className="assessment">
                 <div className="content">
                     <h2 className="mb-2">{this.context.translate('physical-exam')}</h2>
-                    <h3>{this.context.translate('primary')}</h3>
-                    <table className="cform">
-                        <tbody>
-                            <tr>
-                                <th width="20%">{this.context.translate('airway')}</th>
-                                <td width="30%">
-                                    <select name="pulse_strength" value={values.pulse_strength} onChange={this.props.handleChange('pulse_strength')}>
-                                        <option disabled selected value="">{this.context.translate('select')}</option>
-                                        <option value="Normal">Normal</option>
-                                        <option value="Débil">{this.context.translate('Weak')}</option>
-                                        <option value="Ausente">{this.context.translate('Absent')}</option>
-                                        <option value="Delimitador">{this.context.translate('Bounding')}</option>
-                                    </select>
-                                </td>
-                                <th width="20%">{this.context.translate('breathing')}</th>
-                                <td width="30%">
-                                    <select name="pulse_rate" value={values.pulse_rate} onChange={this.props.handleChange('pulse_rate')}>
-                                        <option disabled selected value="">{this.context.translate('select')}</option>
-                                        <option value="Regular">{this.context.translate('Regular')}</option>
-                                        <option value="Irregular">{this.context.translate('Irregular')}</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>{this.context.translate('circulation')}</th>
-                                <td><input type="number" className="calculation" min="0" max="100" value={values.bsa} onChange={this.props.handleChange('bsa')} /> (BSA%)</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <h3>{this.context.translate('secondary')}</h3>
+                    <h3>{this.context.translate('assessments')}</h3>
                     <Row>
                         <Col>
                             <div className="exam_label active" onClick={this.showOptions(0)}>{this.context.translate('Skin')}</div>

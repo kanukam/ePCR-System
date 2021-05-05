@@ -9,11 +9,7 @@ export default class AddCall extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            message: "",
-            charts: [],
-            mci: "",
-            va: "",
-            jsonData: { "call": [] }
+            message: ""
         };
     }
 
@@ -28,7 +24,6 @@ export default class AddCall extends Component {
 
     saveAndContinue = (e) => {
         e.preventDefault();
-        // this.fetchInput();
         this.props.nextStep();
     }
 

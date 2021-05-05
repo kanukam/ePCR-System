@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import '../App.css'
 
 export default class ShowVital extends Component {
+    // template for displaying appended vital signs to the display table
     render() {
         return (
             <tr>

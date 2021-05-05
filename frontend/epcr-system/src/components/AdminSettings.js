@@ -225,8 +225,6 @@ export default class Settings extends Component {
                 </React.Fragment>
             );
         }
-        else{
-            return null;
-        }
+        else { return null; }
     }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import '../App.css'
 
 export default class ShowMed extends Component {
-
+    // template for displaying appended medications to the display table
     render() {
         return (
             <tr>

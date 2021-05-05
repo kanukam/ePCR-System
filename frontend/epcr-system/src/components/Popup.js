@@ -21,6 +21,7 @@ export default class Popup extends Component {
         };
     }
 
+    // get the users information from backend to display their names and certifications
     componentDidMount() {
         const url = 'http://localhost:3000/api/users';
         const options = {
@@ -40,18 +41,16 @@ export default class Popup extends Component {
             })
     }
 
+    // function to show input fields based on the input checked
     showSomething = input => (e) => {
         if (input === "surgical") {
-            this.setState({
-                surgicalcheck: !this.state.surgicalcheck
-            });
+            this.setState({ surgicalcheck: !this.state.surgicalcheck });
         } else if (input === "needle") {
-            this.setState({
-                needlecheck: !this.state.needlecheck
-            });
+            this.setState({ needlecheck: !this.state.needlecheck });
         }
     }
 
+    // function to render all the procedures based on selected procedure
     renderProc(proc) {
         switch (proc) {
             case "Glucosa en sangre":
@@ -485,6 +484,7 @@ export default class Popup extends Component {
 
     render() {
         const { inter } = this.props;
+        // make the users dropdown
         var userComponents = [];
         for (var i = 0; i < this.state.users.length; i++) {
             var certifications = '';
@@ -534,6 +534,7 @@ export default class Popup extends Component {
                                         <option value="Ritmo cardíaco">{this.context.translate('cardiac_pacing')}</option>
                                     </select>
                                 </div>
+                                {/* display cardiac arrest form here instead (works) - time was not working in renderProc function */}
                                 {inter.pName === "Paro cardíaco" ?
                                     <div>
                                         <div>
