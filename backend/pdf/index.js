@@ -141,6 +141,8 @@ function createChartPDF(info, locale, pipeTo, cb){
                         stroke: false,
                         
                     })
+                    .text(`# ${incident_number}`, 0, 20, {align: "right"})
+                    
                 })  
             doc
                 //Top:
@@ -150,6 +152,7 @@ function createChartPDF(info, locale, pipeTo, cb){
                 .text(` ${fname} ${lname}\n${tags.ePCR}`, {
                     stroke: false, 
                 })
+                .text(`# ${incident_number}`, 0, 20, {align: "right"})
                 
                 .moveDown()
 
