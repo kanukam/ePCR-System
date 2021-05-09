@@ -663,26 +663,17 @@ export default class Popup extends Component {
                                     <input type="number" style={{ width: '23%', marginRight: '10px' }} min="0" name="mDosage" value={inter.mDosage} onChange={this.props.changeInter('mDosage')} />
                                     <select name="mUnit" style={{ width: '30%' }} onChange={this.props.changeInter('mUnit')}>
                                         <option disabled selected value="">{this.context.translate('select')}</option>
-                                        <option value="%">%</option>
-                                        <option value="AU">AU</option>
-                                        <option value="bar">bar</option>
-                                        <option value="BAU">BAU</option>
-                                        <option value="bead">bead</option>
-                                        <option value="BU">BU</option>
                                         <option value="capsule">capsule</option>
-                                        <option value="cc">cc</option>
-                                        <option value="Ci">Ci</option>
                                         <option value="drop">drop</option>
-                                        <option value="g">g</option>
+                                        <option value="gm">gm</option>
                                         <option value="in.">in.</option>
-                                        <option value="IU">IU</option>
                                         <option value="L">L</option>
                                         <option value="LPM">LPM</option>
                                         <option value="kg">kg</option>
+                                        <option value="mcq">mcq</option>
                                         <option value="mEq">mEq</option>
                                         <option value="mg">mg</option>
                                         <option value="mL">mL</option>
-                                        <option value="mmol">mmol</option>
                                         <option value="mol">mol</option>
                                         <option value="puff">puff</option>
                                         <option value="tablet">tablet</option>

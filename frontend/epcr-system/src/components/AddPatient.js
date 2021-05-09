@@ -176,6 +176,7 @@ export default class AddPatient extends Component {
                                         onChange={this.props.handleDateNoTime('birth')}
                                         dateFormat="dd/MM/yyyy"
                                     />
+                                    <input style={{ width: '80px', marginRight: '0px' }} type="number" name="age" value={values.age} onChange={this.props.handleChange('weight')} /> years
                                 </td>
                             </tr>
                             <tr>
@@ -274,11 +275,15 @@ export default class AddPatient extends Component {
                                 <th>{this.context.translate('given-by')}</th>
                                 <td>
                                     <div style={{ margin: '5px' }}>
-                                        <label className="v2"><input type="checkbox" name="historyGiven" value="Paciente" checked={values.assessmentCheckBoxes[274]} onChange={this.props.handleAssessmentCheckboxes(274)} /> {this.context.translate('patient')}</label>
-                                        <label className="v2"><input type="checkbox" name="historyGiven" value="Familia" checked={values.assessmentCheckBoxes[275]} onChange={this.props.handleAssessmentCheckboxes(275)} /> {this.context.translate('family')}</label>
-                                        <label className="v2"><input type="checkbox" name="historyGiven" value="Otro" checked={values.assessmentCheckBoxes[276]} onChange={this.props.handleAssessmentCheckboxes(276)} /> {this.context.translate('other')}</label>
+                                        <label className="v2"><input type="checkbox" name="historyGiven" value="Paciente" checked={values.assessmentCheckBoxes[280]} onChange={this.props.handleAssessmentCheckboxes(280)} /> {this.context.translate('patient')}</label>
+                                        <label className="v2"><input type="checkbox" name="historyGiven" value="Familia" checked={values.assessmentCheckBoxes[281]} onChange={this.props.handleAssessmentCheckboxes(281)} /> {this.context.translate('family')}</label>
+                                        <label className="v2"><input type="checkbox" name="historyGiven" value="Otro" checked={values.assessmentCheckBoxes[282]} onChange={this.props.handleAssessmentCheckboxes(282)} /> {this.context.translate('other')}</label>
                                     </div>
                                 </td>
+                            </tr>
+                            <tr>
+                                <th>{this.context.translate('reg-med')}</th>
+                                <td><input className="block" type="text" name="regMed" placeholder={this.context.translate('seperate-comma')} value={values.regMed} onChange={this.props.handleChange('regMed')} /></td>
                             </tr>
                             <tr>
                                 <th>{this.context.translate('med-allergy')}</th>
@@ -301,66 +306,67 @@ export default class AddPatient extends Component {
                             </tr>
                             <tr>
                                 <td valign="top" width="33%">
-                                    <label><input type="checkbox" name="pastHistory" value="R - Asma" checked={values.assessmentCheckBoxes[277]} onChange={this.props.handleAssessmentCheckboxes(277)} /> R - {this.context.translate('asthma')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="R - Epoc" checked={values.assessmentCheckBoxes[278]} onChange={this.props.handleAssessmentCheckboxes(278)} /> R - {this.context.translate('copd')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="R - Enfisema" checked={values.assessmentCheckBoxes[279]} onChange={this.props.handleAssessmentCheckboxes(279)} /> R - {this.context.translate('emphysema')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="R - Bronquitis crónica" checked={values.assessmentCheckBoxes[280]} onChange={this.props.handleAssessmentCheckboxes(280)} /> R - {this.context.translate('chronicbron')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="R - Tuberculosis" checked={values.assessmentCheckBoxes[281]} onChange={this.props.handleAssessmentCheckboxes(281)} /> R - Tuberculosis</label>
+                                    <label><input type="checkbox" name="pastHistory" value="R - Asma" checked={values.assessmentCheckBoxes[283]} onChange={this.props.handleAssessmentCheckboxes(283)} /> R - {this.context.translate('asthma')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="R - Epoc" checked={values.assessmentCheckBoxes[284]} onChange={this.props.handleAssessmentCheckboxes(284)} /> R - {this.context.translate('copd')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="R - Enfisema" checked={values.assessmentCheckBoxes[285]} onChange={this.props.handleAssessmentCheckboxes(285)} /> R - {this.context.translate('emphysema')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="R - Bronquitis crónica" checked={values.assessmentCheckBoxes[286]} onChange={this.props.handleAssessmentCheckboxes(286)} /> R - {this.context.translate('chronicbron')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="R - Tuberculosis" checked={values.assessmentCheckBoxes[287]} onChange={this.props.handleAssessmentCheckboxes(287)} /> R - Tuberculosis</label>
                                 </td>
                                 <td valign="top" width="33%">
-                                    <label><input type="checkbox" name="pastHistory" value="CV - Hipertensión" checked={values.assessmentCheckBoxes[282]} onChange={this.props.handleAssessmentCheckboxes(282)} /> CV - {this.context.translate('hypertension')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="CV - Ritmo cardíaco anormal" checked={values.assessmentCheckBoxes[283]} onChange={this.props.handleAssessmentCheckboxes(283)} /> CV - {this.context.translate('abheartrhy')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="CV - Ataque cardíaco" checked={values.assessmentCheckBoxes[284]} onChange={this.props.handleAssessmentCheckboxes(284)} /> CV - {this.context.translate('heartatk')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="CV - Angina" checked={values.assessmentCheckBoxes[285]} onChange={this.props.handleAssessmentCheckboxes(285)} /> CV - Angina</label>
-                                    <label><input type="checkbox" name="pastHistory" value="CV - Stent cardíaco / Bypass" checked={values.assessmentCheckBoxes[286]} onChange={this.props.handleAssessmentCheckboxes(286)} /> CV - {this.context.translate('cardiacstent')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="CV - Insuficiencia cardíaca" checked={values.assessmentCheckBoxes[287]} onChange={this.props.handleAssessmentCheckboxes(287)} /> CV - {this.context.translate('heartfail')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="CV - Golpe" checked={values.assessmentCheckBoxes[288]} onChange={this.props.handleAssessmentCheckboxes(288)} /> CV - {this.context.translate('stroke')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="CV - Aneurismo" checked={values.assessmentCheckBoxes[289]} onChange={this.props.handleAssessmentCheckboxes(289)} /> CV - {this.context.translate('aneurysm')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="CV - Arritmia cardíaca" checked={values.assessmentCheckBoxes[290]} onChange={this.props.handleAssessmentCheckboxes(290)} /> CV - {this.context.translate('cardiacarryth')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="CV – Marcapasos / Defib" checked={values.assessmentCheckBoxes[291]} onChange={this.props.handleAssessmentCheckboxes(291)} /> CV - {this.context.translate('pacemaker')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="CV - Defecto de coagulación de la sangre" checked={values.assessmentCheckBoxes[292]} onChange={this.props.handleAssessmentCheckboxes(292)} /> CV - {this.context.translate('bloodclot')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="CV - Hipertensión" checked={values.assessmentCheckBoxes[288]} onChange={this.props.handleAssessmentCheckboxes(288)} /> CV - {this.context.translate('hypertension')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="CV - Ritmo cardíaco anormal" checked={values.assessmentCheckBoxes[289]} onChange={this.props.handleAssessmentCheckboxes(289)} /> CV - {this.context.translate('abheartrhy')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="CV - Ataque cardíaco" checked={values.assessmentCheckBoxes[290]} onChange={this.props.handleAssessmentCheckboxes(290)} /> CV - {this.context.translate('heartatk')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="CV - Angina" checked={values.assessmentCheckBoxes[291]} onChange={this.props.handleAssessmentCheckboxes(291)} /> CV - Angina</label>
+                                    <label><input type="checkbox" name="pastHistory" value="CV - Stent cardíaco / Bypass" checked={values.assessmentCheckBoxes[292]} onChange={this.props.handleAssessmentCheckboxes(292)} /> CV - {this.context.translate('cardiacstent')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="CV - Insuficiencia cardíaca" checked={values.assessmentCheckBoxes[293]} onChange={this.props.handleAssessmentCheckboxes(293)} /> CV - {this.context.translate('heartfail')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="CV - Golpe" checked={values.assessmentCheckBoxes[294]} onChange={this.props.handleAssessmentCheckboxes(294)} /> CV - {this.context.translate('stroke')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="CV - Aneurismo" checked={values.assessmentCheckBoxes[295]} onChange={this.props.handleAssessmentCheckboxes(295)} /> CV - {this.context.translate('aneurysm')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="CV - Arritmia cardíaca" checked={values.assessmentCheckBoxes[296]} onChange={this.props.handleAssessmentCheckboxes(296)} /> CV - {this.context.translate('cardiacarryth')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="CV – Marcapasos / Defib" checked={values.assessmentCheckBoxes[297]} onChange={this.props.handleAssessmentCheckboxes(297)} /> CV - {this.context.translate('pacemaker')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="CV - Defecto de coagulación de la sangre" checked={values.assessmentCheckBoxes[298]} onChange={this.props.handleAssessmentCheckboxes(298)} /> CV - {this.context.translate('bloodclot')}</label>
                                 </td>
                                 <td valign="top" width="33%">
-                                    <label><input type="checkbox" name="pastHistory" value="E - Diabetes" checked={values.assessmentCheckBoxes[293]} onChange={this.props.handleAssessmentCheckboxes(293)} /> E - Diabetes</label>
-                                    <label><input type="checkbox" name="pastHistory" value="E - Cáncer" checked={values.assessmentCheckBoxes[294]} onChange={this.props.handleAssessmentCheckboxes(294)} /> E - {this.context.translate('cancer')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="E - Tiroides" checked={values.assessmentCheckBoxes[295]} onChange={this.props.handleAssessmentCheckboxes(295)} /> E - {this.context.translate('thyroid')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="E - Enfermedad hepática" checked={values.assessmentCheckBoxes[296]} onChange={this.props.handleAssessmentCheckboxes(296)} /> E - {this.context.translate('liverdisease')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="E - Diabetes" checked={values.assessmentCheckBoxes[299]} onChange={this.props.handleAssessmentCheckboxes(299)} /> E - Diabetes</label>
+                                    <label><input type="checkbox" name="pastHistory" value="E - Cáncer" checked={values.assessmentCheckBoxes[300]} onChange={this.props.handleAssessmentCheckboxes(300)} /> E - {this.context.translate('cancer')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="E - Tiroides" checked={values.assessmentCheckBoxes[301]} onChange={this.props.handleAssessmentCheckboxes(301)} /> E - {this.context.translate('thyroid')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="E - Enfermedad hepática" checked={values.assessmentCheckBoxes[302]} onChange={this.props.handleAssessmentCheckboxes(302)} /> E - {this.context.translate('liverdisease')}</label>
                                 </td>
                             </tr>
                             <tr>
                                 <td valign="top">
-                                    <label><input type="checkbox" name="pastHistory" value="GI – Reflujo / Úlcera" checked={values.assessmentCheckBoxes[297]} onChange={this.props.handleAssessmentCheckboxes(297)} /> GI - {this.context.translate('gerd')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="GI - Cálculo biliar" checked={values.assessmentCheckBoxes[298]} onChange={this.props.handleAssessmentCheckboxes(298)} /> GI - {this.context.translate('gallstone')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="GI - Diverticulitis" checked={values.assessmentCheckBoxes[299]} onChange={this.props.handleAssessmentCheckboxes(299)} /> GI - Diverticulitis</label>
-                                    <label><input type="checkbox" name="pastHistory" value="GI - Pancreatitis" checked={values.assessmentCheckBoxes[300]} onChange={this.props.handleAssessmentCheckboxes(300)} /> GI - Pancreatitis</label>
-                                    <label><input type="checkbox" name="pastHistory" value="GI - Enfermedad renal" checked={values.assessmentCheckBoxes[301]} onChange={this.props.handleAssessmentCheckboxes(301)} /> GI - {this.context.translate('kidneydisease')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="GI – Reflujo / Úlcera" checked={values.assessmentCheckBoxes[303]} onChange={this.props.handleAssessmentCheckboxes(303)} /> GI - {this.context.translate('gerd')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="GI - Cálculo biliar" checked={values.assessmentCheckBoxes[304]} onChange={this.props.handleAssessmentCheckboxes(304)} /> GI - {this.context.translate('gallstone')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="GI - Diverticulitis" checked={values.assessmentCheckBoxes[305]} onChange={this.props.handleAssessmentCheckboxes(305)} /> GI - Diverticulitis</label>
+                                    <label><input type="checkbox" name="pastHistory" value="GI - Pancreatitis" checked={values.assessmentCheckBoxes[306]} onChange={this.props.handleAssessmentCheckboxes(306)} /> GI - Pancreatitis</label>
+                                    <label><input type="checkbox" name="pastHistory" value="GI - Enfermedad renal" checked={values.assessmentCheckBoxes[307]} onChange={this.props.handleAssessmentCheckboxes(307)} /> GI - {this.context.translate('kidneydisease')}</label>
                                 </td>
                                 <td valign="top">
-                                    <label><input type="checkbox" name="pastHistory" value="I – Covid / Exposición de Covid" checked={values.assessmentCheckBoxes[302]} onChange={this.props.handleAssessmentCheckboxes(302)} /> I - {this.context.translate('covid')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="I - Influenza" checked={values.assessmentCheckBoxes[303]} onChange={this.props.handleAssessmentCheckboxes(303)} /> I - Influenza</label>
-                                    <label><input type="checkbox" name="pastHistory" value="I - Hepatitis" checked={values.assessmentCheckBoxes[304]} onChange={this.props.handleAssessmentCheckboxes(304)} /> I - Hepatitis</label>
-                                    <label><input type="checkbox" name="pastHistory" value="I - Sida" checked={values.assessmentCheckBoxes[305]} onChange={this.props.handleAssessmentCheckboxes(305)} /> I - {this.context.translate('hiv')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="I - Tuberculosis" checked={values.assessmentCheckBoxes[306]} onChange={this.props.handleAssessmentCheckboxes(306)} /> I - Tuberculosis </label>
+                                    <label><input type="checkbox" name="pastHistory" value="I – Covid / Exposición de Covid" checked={values.assessmentCheckBoxes[308]} onChange={this.props.handleAssessmentCheckboxes(308)} /> I - {this.context.translate('covid')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="I - Influenza" checked={values.assessmentCheckBoxes[309]} onChange={this.props.handleAssessmentCheckboxes(309)} /> I - Influenza</label>
+                                    <label><input type="checkbox" name="pastHistory" value="I - Hepatitis" checked={values.assessmentCheckBoxes[310]} onChange={this.props.handleAssessmentCheckboxes(310)} /> I - Hepatitis</label>
+                                    <label><input type="checkbox" name="pastHistory" value="I - Sida" checked={values.assessmentCheckBoxes[311]} onChange={this.props.handleAssessmentCheckboxes(311)} /> I - {this.context.translate('hiv')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="I - Tuberculosis" checked={values.assessmentCheckBoxes[312]} onChange={this.props.handleAssessmentCheckboxes(312)} /> I - Tuberculosis </label>
                                 </td>
                                 <td valign="top">
-                                    <label><input type="checkbox" name="pastHistory" value="M - Ansiedad" checked={values.assessmentCheckBoxes[307]} onChange={this.props.handleAssessmentCheckboxes(307)} /> M - {this.context.translate('anxiety')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="M - Depresión" checked={values.assessmentCheckBoxes[308]} onChange={this.props.handleAssessmentCheckboxes(308)} /> M - {this.context.translate('depression')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="M - Abuso" checked={values.assessmentCheckBoxes[309]} onChange={this.props.handleAssessmentCheckboxes(309)} /> M - {this.context.translate('substabuse')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="M - Psiquiátrico" checked={values.assessmentCheckBoxes[310]} onChange={this.props.handleAssessmentCheckboxes(310)} /> M - {this.context.translate('Psychiatric')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="M - Ansiedad" checked={values.assessmentCheckBoxes[313]} onChange={this.props.handleAssessmentCheckboxes(313)} /> M - {this.context.translate('anxiety')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="M - Depresión" checked={values.assessmentCheckBoxes[314]} onChange={this.props.handleAssessmentCheckboxes(314)} /> M - {this.context.translate('depression')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="M - Abuso" checked={values.assessmentCheckBoxes[315]} onChange={this.props.handleAssessmentCheckboxes(315)} /> M - {this.context.translate('substabuse')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="M - Psiquiátrico" checked={values.assessmentCheckBoxes[316]} onChange={this.props.handleAssessmentCheckboxes(316)} /> M - {this.context.translate('Psychiatric')}</label>
                                 </td>
                             </tr>
                             <tr>
                                 <td valgin="top">
-                                    <label><input type="checkbox" name="pastHistory" value="N - Migrañas" checked={values.assessmentCheckBoxes[311]} onChange={this.props.handleAssessmentCheckboxes(311)} /> N - {this.context.translate('migraines')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="N - Convulsiones" checked={values.assessmentCheckBoxes[312]} onChange={this.props.handleAssessmentCheckboxes(312)} /> N - {this.context.translate('seizure')}</label>
-                                    <label><input type="checkbox" name="pastHistory" value="N – Parkinson / Demencia" checked={values.assessmentCheckBoxes[313]} onChange={this.props.handleAssessmentCheckboxes(313)} /> N - {this.context.translate('parkinsons')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="N - Migrañas" checked={values.assessmentCheckBoxes[317]} onChange={this.props.handleAssessmentCheckboxes(317)} /> N - {this.context.translate('migraines')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="N - Convulsiones" checked={values.assessmentCheckBoxes[318]} onChange={this.props.handleAssessmentCheckboxes(318)} /> N - {this.context.translate('seizure')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="N – Parkinson / Demencia" checked={values.assessmentCheckBoxes[319]} onChange={this.props.handleAssessmentCheckboxes(319)} /> N - {this.context.translate('parkinsons')}</label>
                                 </td>
                                 <td valign="top">
-                                    <label><input type="checkbox" name="pastHistory" value="OB - Complicaciones del embarazo" checked={values.assessmentCheckBoxes[314]} onChange={this.props.handleAssessmentCheckboxes(314)} /> OB - {this.context.translate('pregnancy')}</label>
+                                    <label><input type="checkbox" name="pastHistory" value="OB - Complicaciones del embarazo" checked={values.assessmentCheckBoxes[320]} onChange={this.props.handleAssessmentCheckboxes(320)} /> OB - {this.context.translate('pregnancy')}</label>
                                 </td>
                                 <td colSpan="2" valign="top">
-                                    <label><input type="checkbox" name="none" value="O - Otro" checked={values.assessmentCheckBoxes[315]} onChange={this.props.handleAssessmentCheckboxes(315)} /> O - {this.context.translate('other')}</label>
-                                    {values.assessmentCheckBoxes[315] ? <input type="text" className="block" name="pastHistoryOther" placeholder={this.context.translate('seperate-comma')} value={values.pastHistoryOther} onChange={this.props.handleChange('pastHistoryOther')} /> : null}
+                                    <label><input type="checkbox" name="none" value="O - Otro" checked={values.assessmentCheckBoxes[321]} onChange={this.props.handleAssessmentCheckboxes(321)} /> O - {this.context.translate('other')}</label>
+                                    {values.assessmentCheckBoxes[321] ? <input type="text" className="block" name="pastHistoryOther" placeholder={this.context.translate('seperate-comma')} value={values.pastHistoryOther} onChange={this.props.handleChange('pastHistoryOther')} /> : null}
+                                    <label><input type="checkbox" name="pastHistory" value="O - None" checked={values.assessmentCheckBoxes[322]} onChange={this.props.handleAssessmentCheckboxes(322)} /> OB - None</label>
                                 </td>
                             </tr>
                         </tbody>

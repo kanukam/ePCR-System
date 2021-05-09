@@ -9,12 +9,29 @@ export default class AddCall extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            message: ""
+            message: "",
+            users: []
         };
     }
 
     componentDidMount() {
         this.props.getIno();
+        const url = 'http://localhost:3000/api/users';
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include'
+        }
+        // Post request
+        fetch(url, options).then(response => response.json())
+            .then(data => {
+                this.setState({ users: data["userInfo"] });
+            })
+            .catch((error) => {
+                this.setState({ errorMessage: this.context.translate('error') });
+            })
     }
 
     navigate = step => (e) => {
@@ -29,6 +46,24 @@ export default class AddCall extends Component {
 
     render() {
         const { values } = this.props;
+        // make the users dropdown
+        var userDropdowns = [];
+        for (var i = 0; i < this.state.users.length; i++) {
+            var certifications = '';
+            if (this.state.users[i]["certifications"] !== null) {
+                certifications = this.state.users[i]["certifications"].split(',');
+                for (var j = 0; j < certifications.length; j++) {
+                    if (certifications[j] === "Enfermera") { certifications[j] = this.context.translate('nurse'); }
+                    else if (certifications[j] === "Paramedico") { certifications[j] = this.context.translate('paramedic'); }
+                }
+                certifications = certifications.join(', ');
+            } else { certifications = "N/A"; }
+            userDropdowns.push(<UserDropdown
+                name={this.state.users[i]["name"]}
+                certification={certifications}
+            />)
+        }
+        //var userComponents = [];
         return (
             <div className="chart">
                 <form id="call">
@@ -142,6 +177,7 @@ export default class AddCall extends Component {
                                         <option value="Hospital Clinica Del Noroeste">Hospital Clinica Del Noroeste</option>
                                         <option value="Hospital San Benito">Hospital San Benito</option>
                                         <option value="Hospital San Jose Guaymas">Hospital San Jose Guaymas</option>
+                                        <option value="Otro">{this.context.translate('other')}</option>
                                     </select>
                                 </td>
                             </tr>
@@ -233,37 +269,36 @@ export default class AddCall extends Component {
                                             <option value="Aviación">{this.context.translate('aviation')}</option>
                                         </select>
                                     </td>
-                                    <th>{this.context.translate('safety-equip')}</th>
-                                    <td>
-                                        <select name="vasafe" value={values.vasafe} onChange={this.props.handleChange('vasafe')}>
-                                            <option disabled selected value="">{this.context.translate('select')}</option>
-                                            <option value="Ninguno">{this.context.translate('none')}</option>
-                                            <option value="Cinturón">{this.context.translate('seatbelt')}</option>
-                                            <option value="Casco">{this.context.translate('helmet')}</option>
-                                            <option value="Bolsas de aire desplegadas">{this.context.translate('airbags-deployed')}</option>
-                                            <option value="Ropa protectora">{this.context.translate('protect-cloth')}</option>
-                                            <option value="Salvavidas">{this.context.translate('life-preserver')}</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                : null}
-                            {values.assessmentCheckBoxes[269] ?
-                                <tr>
-                                    <th rowSpan="2" valign="top">{this.context.translate('impact')}</th>
+                                    <th rowSpan="2" valign="top">{this.context.translate('safety-equip')}</th>
                                     <td rowSpan="2">
                                         <div>
-                                            <label><input type="checkbox" name="vaimpact" value="Frente" checked={values.assessmentCheckBoxes[270]} onChange={this.props.handleAssessmentCheckboxes(270)} /> {this.context.translate('head-on')}</label>
-                                            <label><input type="checkbox" name="vaimpact" value="Lado" checked={values.assessmentCheckBoxes[271]} onChange={this.props.handleAssessmentCheckboxes(271)} /> {this.context.translate('side')}</label>
-                                            <label><input type="checkbox" name="vaimpact" value="Trasero" checked={values.assessmentCheckBoxes[272]} onChange={this.props.handleAssessmentCheckboxes(272)} /> {this.context.translate('rear')}</label>
-                                            <label><input type="checkbox" name="vaimpact" value="Rodar sobre" checked={values.assessmentCheckBoxes[273]} onChange={this.props.handleAssessmentCheckboxes(273)} /> {this.context.translate('roll-over')}</label>
+                                            <label><input type="checkbox" name="vasafe" value="Ninguno" checked={values.assessmentCheckBoxes[270]} onChange={this.props.handleAssessmentCheckboxes(270)} /> {this.context.translate('none')}</label>
+                                            <label><input type="checkbox" name="vasafe" value="Cinturón" checked={values.assessmentCheckBoxes[271]} onChange={this.props.handleAssessmentCheckboxes(271)} /> {this.context.translate('seatbelt')}</label>
+                                            <label><input type="checkbox" name="vasafe" value="Casco" checked={values.assessmentCheckBoxes[272]} onChange={this.props.handleAssessmentCheckboxes(272)} /> {this.context.translate('helmet')}</label>
+                                            <label><input type="checkbox" name="vasafe" value="Bolsas de aire desplegadas" checked={values.assessmentCheckBoxes[273]} onChange={this.props.handleAssessmentCheckboxes(273)} /> {this.context.translate('airbags-deployed')}</label>
+                                            <label><input type="checkbox" name="vasafe" value="Ropa protectora" checked={values.assessmentCheckBoxes[274]} onChange={this.props.handleAssessmentCheckboxes(274)} /> {this.context.translate('protect-cloth')}</label>
+                                            <label><input type="checkbox" name="vasafe" value="Salvavidas" checked={values.assessmentCheckBoxes[275]} onChange={this.props.handleAssessmentCheckboxes(275)} /> {this.context.translate('life-preserver')}</label>
                                         </div>
                                     </td>
-                                    <th>{this.context.translate('est-spd')}</th>
-                                    <td><input style={{ width: '80px', marginRight: '0px' }} type="number" name="vaspd" value={values.vaspd} min="0" onChange={this.props.handleChange('vaspd')} /> {this.context.translate('mph')}</td>
                                 </tr>
                                 : null}
                             {values.assessmentCheckBoxes[269] ?
                                 <tr>
+                                    <th valign="top">{this.context.translate('impact')}</th>
+                                    <td>
+                                        <div>
+                                            <label><input type="checkbox" name="vaimpact" value="Frente" checked={values.assessmentCheckBoxes[276]} onChange={this.props.handleAssessmentCheckboxes(276)} /> {this.context.translate('head-on')}</label>
+                                            <label><input type="checkbox" name="vaimpact" value="Lado" checked={values.assessmentCheckBoxes[277]} onChange={this.props.handleAssessmentCheckboxes(277)} /> {this.context.translate('side')}</label>
+                                            <label><input type="checkbox" name="vaimpact" value="Trasero" checked={values.assessmentCheckBoxes[278]} onChange={this.props.handleAssessmentCheckboxes(278)} /> {this.context.translate('rear')}</label>
+                                            <label><input type="checkbox" name="vaimpact" value="Rodar sobre" checked={values.assessmentCheckBoxes[279]} onChange={this.props.handleAssessmentCheckboxes(279)} /> {this.context.translate('roll-over')}</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                : null}
+                            {values.assessmentCheckBoxes[269] ?
+                                <tr>
+                                    <th>{this.context.translate('est-spd')}</th>
+                                    <td><input style={{ width: '80px', marginRight: '0px' }} type="number" name="vaspd" value={values.vaspd} min="0" onChange={this.props.handleChange('vaspd')} /> {this.context.translate('mph')}</td>
                                     <th>{this.context.translate('eject-vehicle')}</th>
                                     <td>
                                         <label><input type="radio" name="vaeject" value="Sí" checked={values.vaeject.includes("Sí")} onChange={this.props.handleChange('vaeject')} /> {this.context.translate('yes')}</label>
@@ -358,6 +393,47 @@ export default class AddCall extends Component {
                                         timeInputLabel="Time:"
                                         dateFormat="dd/MM/yyyy h:mm aa"
                                         showTimeInput />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h3>{this.context.translate('ambulance-crew')}</h3>
+                    <table className="cform">
+                        <tbody>
+                            <tr>
+                                <th width="20%">{this.context.translate('crew-name')} 1<em>*</em></th>
+                                <td>
+                                    <select name="crew1" value={values.crew1} onChange={this.props.handleChange('crew1')}>
+                                        <option disabled selected value="">{this.context.translate('select')}</option>
+                                        {userDropdowns}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>{this.context.translate('crew-name')} 2</th>
+                                <td>
+                                    <select name="crew2" value={values.crew2} onChange={this.props.handleChange('crew2')}>
+                                        <option disabled selected value="">{this.context.translate('select')}</option>
+                                        {userDropdowns}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>{this.context.translate('crew-name')} 3</th>
+                                <td>
+                                    <select name="crew2" value={values.crew3} onChange={this.props.handleChange('crew3')}>
+                                        <option disabled selected value="">{this.context.translate('select')}</option>
+                                        {userDropdowns}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>{this.context.translate('crew-name')} 4</th>
+                                <td>
+                                    <select name="crew2" value={values.crew4} onChange={this.props.handleChange('crew4')}>
+                                        <option disabled selected value="">{this.context.translate('select')}</option>
+                                        {userDropdowns}
+                                    </select>
                                 </td>
                             </tr>
                         </tbody>

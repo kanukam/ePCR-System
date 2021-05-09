@@ -15,6 +15,7 @@ export default class ShowVital extends Component {
                 <td>{this.props.etco2}</td>
                 <td>{this.props.pain}</td>
                 <td>{this.props.gcs}</td>
+                <td><input type="button" value={this.props.removeText} onClick={this.props.deleteVitals(this.props.index)} /></td>
             </tr>
         )
     }

@@ -373,8 +373,8 @@ export default class AddInterventions extends Component {
                             inter={inter}
                         />
                         : null}
-                    <h3><label className="v2"style={{lineHeight:'40px'}}>{this.context.translate('intake-output')} <input type="checkbox" name="none" value="intake" checked={values.assessmentCheckBoxes[316]} onChange={this.props.handleAssessmentCheckboxes(316)} /></label></h3>
-                    {values.assessmentCheckBoxes[316] ?
+                    <h3><label className="v2"style={{lineHeight:'40px'}}>{this.context.translate('intake-output')} <input type="checkbox" name="none" value="intake" checked={values.assessmentCheckBoxes[323]} onChange={this.props.handleAssessmentCheckboxes(323)} /></label></h3>
+                    {values.assessmentCheckBoxes[323] ?
                         <table className="cform">
                             <tbody>
                                 <tr>
@@ -447,8 +447,8 @@ export default class AddInterventions extends Component {
                                 </tr>
                             </tbody>
                         </table> : null}
-                    <h3><label className="v2" style={{lineHeight:'40px'}}>{this.context.translate('obstetrics')} <input type="checkbox" name="none" value="obstetrics" checked={values.assessmentCheckBoxes[317]} onChange={this.props.handleAssessmentCheckboxes(317)} /></label></h3>
-                    {values.assessmentCheckBoxes[317] ?
+                    <h3><label className="v2" style={{lineHeight:'40px'}}>{this.context.translate('obstetrics')} <input type="checkbox" name="none" value="obstetrics" checked={values.assessmentCheckBoxes[324]} onChange={this.props.handleAssessmentCheckboxes(324)} /></label></h3>
+                    {values.assessmentCheckBoxes[324] ?
                         <table className="cform">
                             <tbody>
                                 <tr>
