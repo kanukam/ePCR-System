@@ -127,10 +127,10 @@ function summary(from, to, callback) {
             results.forEach(element => {
                 const { p_classify, gender, call_nature, location, disposition, destination, trauma_cause, procedures, obstetrics} = element;
                 // Patient classification
-                adults += checkData("Adulto", p_classify);
+                if(p_classify === "Adulto"){adults += 1;}
                 seniors += checkData("Senior", p_classify);
                 pediatrics += checkData("Pediatrica", p_classify);
-                pediatrics += checkData("Neonatal", p_classify);
+                neonatals += checkData("Neonatal", p_classify);
                 // Sex
                 males += checkData("Hombre", gender);
                 females += checkData("Mujer", gender);
@@ -139,7 +139,7 @@ function summary(from, to, callback) {
                 bp += checkData("Comprobación", call_nature);
                 injection += checkData("Inyección", call_nature);
                 medical_other += checkData("Otros médicos", call_nature);
-                cardiac += checkData("Cardíaco", call_nature);
+                cardiac += checkData("Cardíaca", call_nature);
                 pulmonary += checkData("Pulmonar", call_nature);
                 trauma += checkData("Trauma", call_nature);
                 ob += checkData("OB", call_nature);
@@ -157,19 +157,19 @@ function summary(from, to, callback) {
                 other += checkData("Otro", location);
                 // Disposition
                 treat_release += checkData("Tratar", disposition);
-                transport += checkData("Tranportacion", disposition);
+                transport += checkData("Transportacion", disposition);
                 unable += checkData("localizar", disposition);
                 doa += checkData("Muerto", disposition);
                 ama += checkData("Rechazar", disposition);
                 // Destination
-                dest_rescate += checkData("Clínica Rescate ", destination);
+                dest_rescate += checkData("Clínica Rescate", destination);
                 imss += checkData("IMSS", destination);
                 isteson += checkData("ISTESON", destination);
                 semeson += checkData("SEMESON", destination);
                 isste += checkData("ISSSTE", destination);
                 pabellon += checkData("Pabellon Guadalupe", destination);
                 hospital_cima += checkData("Hospital Cima", destination);
-                hospital_clinica += checkData("Hospital Clinica Del Noroeste", destination);
+                hospital_clinica += checkData("Hospital Clinica Del Noro", destination);
                 hospital_san += checkData("Hospital San Benito", destination);
                 // Trauma Cause
                 animal += checkData("Animal", trauma_cause);
