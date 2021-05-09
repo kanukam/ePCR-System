@@ -176,7 +176,7 @@ export default class AddPatient extends Component {
                                         onChange={this.props.handleDateNoTime('birth')}
                                         dateFormat="dd/MM/yyyy"
                                     />
-                                    <input style={{ width: '80px', marginRight: '0px' }} type="number" name="age" value={values.age} onChange={this.props.handleChange('weight')} /> years
+                                    <input style={{ width: '80px', marginRight: '0px' }} type="number" name="age" value={values.age} onChange={this.props.handleChange('age')} /> years
                                 </td>
                             </tr>
                             <tr>
