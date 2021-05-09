@@ -1,23 +1,22 @@
 const mysql = require('mysql');
 
-const con = mysql.createPool({
+const con = mysql.createConnection({
     host: process.env.DB_HOSTNAME,
     user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
     database: process.env.DB_NAME,
-    connectionLimit: 5,
     timezone: 'utc'
 });
 
-con.getConnection((err, connection) => {
+con.connect(err => {
     if (err) {
         return console.log(err);
     }
     console.log("ePCR backend connected to DB");
     console.log("Checking tables...");
 
-    connection.query(`CREATE TABLE IF NOT EXISTS users (
+    con.query(`CREATE TABLE IF NOT EXISTS users (
         id INT(11) UNSIGNED AUTO_INCREMENT, 
         username VARCHAR(255), 
         password VARCHAR(255), 
@@ -32,7 +31,7 @@ con.getConnection((err, connection) => {
         if (res.changedRows > 0) console.log("\t...'users' table created");
         else console.log("\t'users' table up to date.");
     });
-    connection.query(`CREATE TABLE IF NOT EXISTS charts (
+    con.query(`CREATE TABLE IF NOT EXISTS charts (
         id INT(11) UNSIGNED AUTO_INCREMENT,
         incident_number VARCHAR(50) NULL,
         incident_date DATE NULL,
@@ -118,7 +117,7 @@ con.getConnection((err, connection) => {
         else console.log("\t'charts' table up to date.");
     });
 
-    connection.query(`CREATE TABLE IF NOT EXISTS patients (
+    con.query(`CREATE TABLE IF NOT EXISTS patients (
         id INT(11) UNSIGNED AUTO_INCREMENT, 
         fname VARCHAR(255) NULL, 
         lname VARCHAR(255) NULL, 
@@ -131,7 +130,7 @@ con.getConnection((err, connection) => {
         else console.log("\t'patients' table up to date.");
     });
 
-    connection.query(`CREATE TABLE IF NOT EXISTS notes (
+    con.query(`CREATE TABLE IF NOT EXISTS notes (
         id INT(11) UNSIGNED AUTO_INCREMENT, 
         chartID INT(11) UNSIGNED, 
         name VARCHAR(255), 
@@ -145,7 +144,7 @@ con.getConnection((err, connection) => {
         else console.log("\t'notes' table up to date.");
     });
 
-    connection.query(`CREATE TABLE IF NOT EXISTS ratelimiters (
+    con.query(`CREATE TABLE IF NOT EXISTS ratelimiters (
         id INT(11) UNSIGNED AUTO_INCREMENT, 
         ip VARCHAR(255),
         hits INT(11) UNSIGNED,
