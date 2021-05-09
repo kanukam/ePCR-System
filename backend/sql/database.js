@@ -1,22 +1,23 @@
 const mysql = require('mysql');
 
-const con = mysql.createConnection({
+const con = mysql.createPool({
     host: process.env.DB_HOSTNAME,
     user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
     database: process.env.DB_NAME,
+    connectionLimit: 5,
     timezone: 'utc'
 });
 
-con.connect(err => {
+con.getConnection((err, connection) => {
     if (err) {
         return console.log(err);
     }
     console.log("ePCR backend connected to DB");
     console.log("Checking tables...");
 
-    con.query(`CREATE TABLE IF NOT EXISTS users (
+    connection.query(`CREATE TABLE IF NOT EXISTS users (
         id INT(11) UNSIGNED AUTO_INCREMENT, 
         username VARCHAR(255), 
         password VARCHAR(255), 
@@ -31,7 +32,7 @@ con.connect(err => {
         if (res.changedRows > 0) console.log("\t...'users' table created");
         else console.log("\t'users' table up to date.");
     });
-    con.query(`CREATE TABLE IF NOT EXISTS charts (
+    connection.query(`CREATE TABLE IF NOT EXISTS charts (
         id INT(11) UNSIGNED AUTO_INCREMENT,
         incident_number VARCHAR(50) NULL,
         incident_date DATE NULL,
@@ -59,6 +60,7 @@ con.connect(err => {
         vehicle_accident_safety_equipment VARCHAR(30) NULL,
         vehicle_accident_mph VARCHAR(50) NULL,
         vehicle_accident_ejected VARCHAR(50) NULL,
+        ambulance_crew VARCHAR(500) NULL,
         medications MEDIUMTEXT NULL,
         procedures MEDIUMTEXT NULL,
         skin VARCHAR(500) NULL,
@@ -99,6 +101,7 @@ con.connect(err => {
         p_phone VARCHAR(12) NULL,
         p_hpi MEDIUMTEXT NULL,
         p_history_given MEDIUMTEXT NULL,
+        p_regular_medicine MEDIUMTEXT NULL,
         p_medical_allergies MEDIUMTEXT NULL,
         p_environmental_allergies MEDIUMTEXT NULL,
         p_immunizations MEDIUMTEXT NULL,
@@ -115,7 +118,7 @@ con.connect(err => {
         else console.log("\t'charts' table up to date.");
     });
 
-    con.query(`CREATE TABLE IF NOT EXISTS patients (
+    connection.query(`CREATE TABLE IF NOT EXISTS patients (
         id INT(11) UNSIGNED AUTO_INCREMENT, 
         fname VARCHAR(255) NULL, 
         lname VARCHAR(255) NULL, 
@@ -128,7 +131,7 @@ con.connect(err => {
         else console.log("\t'patients' table up to date.");
     });
 
-    con.query(`CREATE TABLE IF NOT EXISTS notes (
+    connection.query(`CREATE TABLE IF NOT EXISTS notes (
         id INT(11) UNSIGNED AUTO_INCREMENT, 
         chartID INT(11) UNSIGNED, 
         name VARCHAR(255), 
@@ -142,7 +145,7 @@ con.connect(err => {
         else console.log("\t'notes' table up to date.");
     });
 
-    con.query(`CREATE TABLE IF NOT EXISTS ratelimiters (
+    connection.query(`CREATE TABLE IF NOT EXISTS ratelimiters (
         id INT(11) UNSIGNED AUTO_INCREMENT, 
         ip VARCHAR(255),
         hits INT(11) UNSIGNED,
