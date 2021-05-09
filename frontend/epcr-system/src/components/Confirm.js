@@ -71,8 +71,8 @@ export default class Confirm extends Component {
                                 <td>
                                     <i>{this.context.translate('vehicle-accident')}</i>{values.assessmentCheckBoxes[269] ? <text><span>Sí</span><br/>
                                         <i>{this.context.translate('type')}</i><span>{values.vatype}</span><br/>
-                                        <i>{this.context.translate('impact')}</i><span>{values.vaimpact}</span><br/>
-                                        <i>{this.context.translate('safety-equip')}</i><span>{values.vasafe}</span><br/>
+                                        <i>{this.context.translate('impact')}</i><span>{values.vaimpact.join()}</span><br/>
+                                        <i>{this.context.translate('safety-equip')}</i><span>{values.vasafe.join()}</span><br/>
                                         <i>{this.context.translate('est-spd')}</i><span>{values.vaspd}</span><br/>
                                         <i>{this.context.translate('eject-vehicle')}</i><span>{values.vaeject}</span>
                                     </text> : <span>No</span>}
@@ -107,6 +107,7 @@ export default class Confirm extends Component {
                                 <td>
                                     <i>{this.context.translate('hpi')}</i><span>{values.hpi}</span><br/>
                                     <i>{this.context.translate('given-by')}</i><span>{values.historyGiven.join()}</span><br/>
+                                    <i>{this.context.translate('reg-med')}</i><span>{values.regMed}</span><br/>
                                     <i>{this.context.translate('med-allergy')}</i><span>{values.medAllergy}</span><br/>
                                     <i>{this.context.translate('env-allergy')}</i><span>{values.envAllergy}</span><br/>
                                     <i>{this.context.translate('immunization')}</i><span>{values.immunization}</span><br/>
@@ -155,6 +156,11 @@ export default class Confirm extends Component {
                             </tr>
                             <tr>
                                 <td>
+                                    <i>{this.context.translate('Additional-findings')}</i><span>{values.extra_findings}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <i>{this.context.translate('vitals')}</i><span>{values.medications && values.vital_signs.map((element, idx) => {
                                         return (
                                             <div>
@@ -163,11 +169,6 @@ export default class Confirm extends Component {
                                             </div>
                                         )
                                     })}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <i>{this.context.translate('Additional-findings')}</i><span>{values.extra_findings}</span>
                                 </td>
                             </tr>
                             <tr><th>{this.context.translate('interventions')}</th></tr>
@@ -226,6 +227,15 @@ export default class Confirm extends Component {
                                         <i>{this.context.translate('born')}</i><span>{values.oBorn}</span><br/>
                                         <i>{this.context.translate('apgar')}</i><span>1 {this.context.translate('minute')}: {values.oAPGAR1} | 5 {this.context.translate('minute')}s: {values.oAPGAR5} | 10 {this.context.translate('minute')}s: {values.oAPGAR10}</span>
                                     </text> : <span>No</span>}
+                                </td>
+                            </tr>
+                            <tr><th>{this.context.translate('ambulance-crew')}</th></tr>
+                            <tr>
+                                <td>
+                                    <i>{values.crew1}</i>{/*<span>Implement signature?</span>*/}<br/>
+                                    <i>{values.crew2}</i><br/>
+                                    <i>{values.crew3}</i><br/>
+                                    <i>{values.crew4}</i>
                                 </td>
                             </tr>
                         </tbody>
