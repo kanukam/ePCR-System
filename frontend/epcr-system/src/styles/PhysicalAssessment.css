@@ -17,7 +17,7 @@
 .assessment input[type="radio"], .assessment input[type="checkbox"] { width:auto; height:auto; }
 .assessment input[type="text"]:disabled { background:none; border:none; }
 .assessment select { margin:5px 5px 5px 0; background:#E5E5E5; border:none; }
-.assessment textarea { width:100%; min-height:100px; }
+.assessment textarea { width:100%; min-height:100px; margin:0; }
 .chartnav { position:fixed; bottom:0; display:flex; clear:both; margin-top:50px; padding:0 50px; width:910px; background:#fff; border-top:1px solid #ddd; font-size:12px; }
 .chartnav .tab { padding:5px; width:100px; height:75px; text-align:center; cursor:pointer; }
 .chartnav .tab.active { background:#eee; }
