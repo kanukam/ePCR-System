@@ -43,7 +43,7 @@ em { color:red; }
 .chart h3 { margin:10px 0; padding:0 10px; font-size:16px; line-height:40px; background:#E5E5E5; }
 .chart span { display:inline-flex; padding:0 10px; vertical-align:top; min-width:35%; height:40px; line-height:40px; color:#576977; }
 .chart strong { display:table-cell; font-weight:normal; font-size:smaller; color:#888; }
-.chart input, .chart select, .chart textarea { width:208px; height:30px; line-height:30px; }
+.chart input, .chart select, .chart textarea { width:192px; height:30px; line-height:30px; }
 .chart input:focus, .chart textarea:focus { border:1px solid #888 ; }
 .chart input[type="text"], .chart input[type="number"], .chart input[type="date"], .chart input[type="datetime-local"], .chart textarea { margin:5px 15px 5px 0; border:1px solid #C4C4C4; }
 .chart input[type="button"] { width:auto; }
@@ -51,7 +51,7 @@ em { color:red; }
 .chart input[type="text"]:disabled { background:none; border:none; }
 .chart select { margin:5px 5px 5px 0; background:#E5E5E5; border:none; }
 .chart textarea { min-height:100px; }
-.chart label { margin:0 10px 0 0 !important; width:120px; line-height:25px; }
+.chart label { margin:0 10px 0 0 !important; line-height:25px; }
 .chart label.v2 { display:inline-block; width:auto; }
 .chart .row { margin:0; }
 .chart .group { display:block; }
@@ -114,13 +114,13 @@ table.history td { padding-bottom:20px; }
 /* confirm styles */
 table.simpleview { width:100%; font-size:13px; }
 table.simpleview th { padding:5px; background:#ddd; text-align:center; font-size:15px; }
-table.simpleview td { vertical-align:top; padding:5px; border-bottom:1px solid #ddd; border-right:1px solid #ddd; }
+table.simpleview td { vertical-align:top; border-bottom:1px solid #ddd; border-right:1px solid #ddd; }
 table.simpleview tr td:last-child { border-right:none; }
 table.simpleview tr:last-child td { border-bottom:none; }
-table.simpleview i { display:inline-block; font-style:normal; font-weight:bold; width:25%; vertical-align:top; }
+table.simpleview i { display:inline-block; padding:5px; font-style:normal; font-weight:bold; width:25%; vertical-align:top; }
 table.simpleview b { display:block; }
 table.simpleview em { color:inherit; font-weight:bold; font-style:normal; display:inline-block; padding-right:5px; }
-table.simpleview span { display:inline-block; width:75%; vertical-align:top; }
+table.simpleview span { display:inline-block; padding:5px; width:75%; vertical-align:top; }
 
 .box { position:relative; min-height:575px; }
 .preview { position:absolute; top:0; left:0; width:100%; height:100%; background:rgb(255,255,255); background:linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 75%, rgba(255,255,255,1) 100%); }
