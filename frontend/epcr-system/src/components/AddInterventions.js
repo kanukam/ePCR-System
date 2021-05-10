@@ -185,7 +185,7 @@ export default class AddInterventions extends Component {
     submitMedication = (event) => {
         event.preventDefault();
         // check if all required fields are filled, otherwise do not submit values
-        if(this.state.mName === "" || this.state.mTime === "" || this.state.mDosage === "" || this.state.mUnit === "" || this.state.mRoute === "" || this.state.mResult === "") {
+        if(this.state.mName === "" || this.state.mTime === "" || this.state.mDosage === "" || this.state.mUnit === "" || this.state.mRoute === "" || this.state.mResult === "" || this.state.mBy === "") {
             this.setState({ message: "required-fields" });
         } else {
             this.setState({ message: "" });
@@ -205,7 +205,7 @@ export default class AddInterventions extends Component {
     submitProcedure = (event) => {
         event.preventDefault();
         // check if all required fields are filled, otherwise do not submit values
-        if(this.state.pName === "" || this.state.pTime === "") {
+        if(this.state.pName === "" || this.state.pTime === "" || this.state.pBy === "") {
             this.setState({ message: "required-fields" });
         } else {
             this.setState({ message: "" });
@@ -328,7 +328,7 @@ export default class AddInterventions extends Component {
                                     <th width="12%">{this.context.translate('Time')}</th>
                                     <th width="20%">{this.context.translate('procedure')}</th>
                                     <th>{this.context.translate('data')}</th>
-                                    <th width="15%">{this.context.translate('by')}</th>
+                                    <th width="20%">{this.context.translate('by')}</th>
                                     <th width="10%">{this.context.translate('action')}</th>
                                 </tr>
                                 {procedureList}
@@ -354,9 +354,9 @@ export default class AddInterventions extends Component {
                                 <tr>
                                     <th width="12%">{this.context.translate('Time')}</th>
                                     <th width="20%">{this.context.translate('medication')}</th>
-                                    <th width="20%">{this.context.translate('dosage')}</th>
+                                    <th width="15%">{this.context.translate('dosage')}</th>
                                     <th>{this.context.translate('route')}</th>
-                                    <th width="15%">{this.context.translate('by')}</th>
+                                    <th width="20%">{this.context.translate('by')}</th>
                                     <th width="10%">{this.context.translate('action')}</th>
                                 </tr>
                                 {medicationList}

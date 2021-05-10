@@ -44,6 +44,10 @@ export default class ChartForm extends Component {
             crew2: "",
             crew3: "",
             crew4: "",
+            crew1other: "",
+            crew2other: "",
+            crew3other: "",
+            crew4other: "",
             // this section must be blank by default
             mci: "",
             ptct: "",
@@ -259,13 +263,14 @@ export default class ChartForm extends Component {
     }
 
     handleDateNoTime = input => date => {
+        var initialDate = date;
         var displayedDate = input + "Display";
         this.setState({ [displayedDate]: date });
         date = moment(date).format("YYYY-MM-DD");
         this.setState({ [input]: date });
         if(input === "birth") {
-            var now = new Date().getFullYear();
-            var theAge = now - date.getFullYear();
+            var now = new Date();
+            var theAge = now.getFullYear() - initialDate.getFullYear();
             this.setState({ age: theAge });
         }
     }
@@ -347,9 +352,12 @@ export default class ChartForm extends Component {
     setPatient = string => {
         var patient = string.split(",");
         var birthDisplay = null;
+        var theAge = "";
         if (patient[3]) {
             birthDisplay = new Date(patient[3]);
             birthDisplay.setDate(birthDisplay.getDate() + 1);
+            var now = new Date();
+            theAge = now.getFullYear() - birthDisplay.getFullYear();
         }
         this.setState({
             pid: patient[0],
@@ -357,6 +365,7 @@ export default class ChartForm extends Component {
             lname: patient[2],
             birth: patient[3],
             gender: patient[4],
+            age: theAge,
             birthDisplay
         });
     }
@@ -367,7 +376,7 @@ export default class ChartForm extends Component {
     // submit the entire chart to backend
     handleSubmit = (event) => {
         event.preventDefault();
-        if (this.state.idate === "" || this.state.lname === "" || this.state.fname === "" || this.state.gender === "" || this.state.birth === "") {
+        if (this.state.idate === "" || this.state.loctype === "" || this.state.loc === "" || this.state.disp === "" || this.state.dest === "" || this.state.unit === "" || this.state.ctype === "" || this.state.nature === "" || this.state.dispatch === "" || this.state.enroute === "" || this.state.arrscn === "" || this.state.contact === "" || this.state.dptscn === "" || this.state.arrdes === "" || this.state.trcare === "" || this.state.crew1 === "" || this.state.lname === "" || this.state.fname === "" || this.state.gender === "" || this.state.birth === "") {
             this.setState({ message: "required-fields" });
         } else {
             /* chart table */
@@ -386,9 +395,19 @@ export default class ChartForm extends Component {
             const arrive_destination_date_time = this.state.arrdes || null;
             const transfer_date_time = this.state.trcare || null;
             let ambulance_crew = this.state.crew1;
-            if(this.state.crew2 !== "") { ambulance_crew += ", " + this.state.crew2; }
-            if(this.state.crew3 !== "") { ambulance_crew += ", " + this.state.crew3; }
-            if(this.state.crew4 !== "") { ambulance_crew += ", " + this.state.crew4; }
+            if(this.state.crew1 === "Otro") { ambulance_crew = this.state.crew1other; }
+            if(this.state.crew2 !== "") {
+                if(this.state.crew2 === "Otro") { ambulance_crew += ", " + this.state.crew2; }
+                else { ambulance_crew += ", " + this.state.crew2; }
+            }
+            if(this.state.crew3 !== "") {
+                if(this.state.crew3 === "Otro") { ambulance_crew += ", " + this.state.crew3; }
+                else { ambulance_crew += ", " + this.state.crew3; }
+            }
+            if(this.state.crew4 !== "") {
+                if(this.state.crew4 === "Otro") { ambulance_crew += ", " + this.state.crew4; }
+                else { ambulance_crew += ", " + this.state.crew4; }
+            }
             const unit_number = this.state.unit;
             const call_type = this.state.ctype;
             const call_nature = this.state.nature;

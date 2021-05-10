@@ -176,8 +176,11 @@ export default class AddPatient extends Component {
                                         onChange={this.props.handleDateNoTime('birth')}
                                         dateFormat="dd/MM/yyyy"
                                     />
-                                    <input style={{ width: '80px', marginRight: '0px' }} type="number" name="age" value={values.age} onChange={this.props.handleChange('age')} /> years
                                 </td>
+                            </tr>
+                            <tr>
+                                <th>{this.context.translate('age')}</th>
+                                <td><input style={{ width: '80px', marginRight: '0px' }} type="number" min="0" name="age" value={values.age} onChange={this.props.handleChange('age')} /> {this.context.translate('years')}</td>
                             </tr>
                             <tr>
                                 <th>{this.context.translate('classify')}<em>*</em></th>
@@ -366,7 +369,7 @@ export default class AddPatient extends Component {
                                 <td colSpan="2" valign="top">
                                     <label><input type="checkbox" name="none" value="O - Otro" checked={values.assessmentCheckBoxes[321]} onChange={this.props.handleAssessmentCheckboxes(321)} /> O - {this.context.translate('other')}</label>
                                     {values.assessmentCheckBoxes[321] ? <input type="text" className="block" name="pastHistoryOther" placeholder={this.context.translate('seperate-comma')} value={values.pastHistoryOther} onChange={this.props.handleChange('pastHistoryOther')} /> : null}
-                                    <label><input type="checkbox" name="pastHistory" value="O - None" checked={values.assessmentCheckBoxes[322]} onChange={this.props.handleAssessmentCheckboxes(322)} /> OB - None</label>
+                                    <label><input type="checkbox" name="pastHistory" value="O - None" checked={values.assessmentCheckBoxes[322]} onChange={this.props.handleAssessmentCheckboxes(322)} /> O - None</label>
                                 </td>
                             </tr>
                         </tbody>

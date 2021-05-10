@@ -538,7 +538,7 @@ export default class PhysicalAssessment extends Component {
                         : null}                    
                     <h3>{this.context.translate('Additional-findings')}</h3>
                     <div>
-                        <textarea type="text" placeholder={this.context.translate('enter-text')} className="mb-3" rows="10" cols="100" onChange={this.props.handleChange('extra_findings')} value={values.extra_findings} />
+                        <textarea type="text" placeholder={this.context.translate('enter-text')} rows="10" cols="100" onChange={this.props.handleChange('extra_findings')} value={values.extra_findings} />
                     </div>
                     <h3><label className="v2" style={{ lineHeight: '40px' }}>{this.context.translate('Vital-Signs')} <input type="checkbox" name="none" value="vitalSigns" checked={values.assessmentCheckBoxes[261]} onChange={this.props.handleAssessmentCheckboxes(261)} /></label></h3>
                     {values.assessmentCheckBoxes[261] ?
@@ -555,6 +555,7 @@ export default class PhysicalAssessment extends Component {
                                         <th>{this.context.translate('ETCO2')}</th>
                                         <th>{this.context.translate('Pain')}</th>
                                         <th>{this.context.translate('GCS')}</th>
+                                        <th>{this.context.translate('action')}</th>
                                     </tr>
                                     {vitalList}
                                 </tbody>
@@ -562,7 +563,7 @@ export default class PhysicalAssessment extends Component {
                             <table className="cform">
                                 <tbody>
                                     <tr>
-                                        <th width="20%">{this.context.translate('Time')}</th>
+                                        <th width="20%">{this.context.translate('Time')}<em>*</em></th>
                                         <td width="30%"><input type="text" name="vital_signs_time" placeholder="--:--" value={values.vital_signs_time} onChange={this.props.handleChange('vital_signs_time')} /></td>
                                         <th width="20%">{this.context.translate('Pulse')}</th>
                                         <td width="30%"><input type="text" name="vital_signs_pulse" value={values.vital_signs_pulse} onChange={this.props.handleChange('vital_signs_pulse')} /></td>
