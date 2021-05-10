@@ -97,6 +97,7 @@
     "next": "Next",
     "remove": "Remove",
     "confirm-chart": "Confirm Chart Report",
+    "signature": "Signature",
     "required-fields": "One or more required fields have been left blank. Please fill them out.",
     "too-many-attempts":"Too many login attempts. Please wait to try again.",
 
@@ -192,6 +193,7 @@
     "trcare": "Transfer of care",
     "ambulance-crew": "Ambulance crew",
     "crew-name": "Crew name",
+    "crew-placeholder": "Name (Certification)",
 
     "patient-info": "Patient Information",
     "patient-search": "Patient Search",
@@ -204,6 +206,8 @@
     "senior-adult": "Senior Adult (>65yr)",
     "pediatric": "Pediatric (28 days - 15yr)",
     "neonatal": "Neonatal (0 - 28 days)",
+    "age": "Age",
+    "years": "years",
     "pbirth": "Date of birth",
     "pweight": "Weight",
     "braslow": "Braslow color",
@@ -213,7 +217,7 @@
     "purple": "Purple",
     "yellow": "Yellow",
     "white": "White",
-    "blue": "Black",
+    "blue": "Blue",
     "orange": "Orange",
     "green": "Green",
     "black": "Black",
