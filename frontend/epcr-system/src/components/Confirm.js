@@ -3,7 +3,6 @@ import Moment from 'react-moment';
 import { MainContext } from '../Auth';
 import '../App.css'
 import ShowUser from './ShowUser'
-import { useRouteMatch } from 'react-router';
 
 export default class Confirm extends Component {
     static contextType = MainContext;
@@ -93,7 +92,8 @@ export default class Confirm extends Component {
                                 <td>
                                     <i>{this.context.translate('mci')}</i>{values.assessmentCheckBoxes[268] ? <text><span>Sí</span><br />
                                         <i>{this.context.translate('num-patients')}</i><span>{values.ptct}</span><br />
-                                        <i>{this.context.translate('triage')}</i><span>{values.triage}</span></text> : <span>No</span>}
+                                        <i>{this.context.translate('triage')}</i><span>{values.triage}</span>
+                                    </text> : <span>No</span>}
                                 </td>
                             </tr>
                             <tr>
@@ -123,6 +123,7 @@ export default class Confirm extends Component {
                                 <td>
                                     <i>{this.context.translate('full-name')}</i><span>{values.lname}, {values.fname}</span><br />
                                     <i>{this.context.translate('pbirth')}</i><span>{values.birth ? <Moment date={values.birth} format="DD-MM-YYYY" /> : null}</span><br />
+                                    <i>{this.context.translate('age')}</i><span>{values.age} {this.context.translate('years')}</span><br />
                                     <i>{this.context.translate('classify')}</i><span>{values.classify}</span><br />
                                     <i>{this.context.translate('psex')}</i><span>{values.gender}</span><br />
                                     <i>{this.context.translate('pweight')}</i><span>{values.weight ? values.weight + " kg" : null} </span><br />
