@@ -4,7 +4,7 @@
 
 ## Installation
 
-1. Specify the port number for the backend server to run on in the process.env file or leave it blank which will default to PORT 3000.
+1. Specify the port number for the backend server to run on in the .env file or leave it blank which will default to PORT 3000.
 
 2. Run npm install in the backend directory to install all required packages.
 
