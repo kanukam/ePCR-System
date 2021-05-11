@@ -320,6 +320,10 @@ export default class SummaryReport extends Component {
                                         <Col xs={2} className="mt-2">
                                             {summary.hospital_san}
                                         </Col>
+                                        <Form.Label column xs={4}>Hospital San Jose Guaymas:</Form.Label>
+                                        <Col xs={2} className="mt-2">
+                                            {summary.hospital_san_jose}
+                                        </Col>
                                     </Form.Group>
                                 </Card.Body>
                             </Card>
