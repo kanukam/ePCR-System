@@ -109,13 +109,13 @@ export default class Confirm extends Component {
                             </tr>
                             <tr>
                                 <td>
-                                    <i>{this.context.translate('dispatch')}</i><span>{values.dispatch ? <Moment date={values.dispatch} format="DD-MM-YYYY hh:mm:ss A" /> : null}</span><br />
-                                    <i>{this.context.translate('enroute')}</i><span>{values.enroute ? <Moment date={values.enroute} format="DD-MM-YYYY hh:mm:ss A" /> : null}</span><br />
-                                    <i>{this.context.translate('arrscn')}</i><span>{values.arrscn ? <Moment date={values.arrscn} format="DD-MM-YYYY hh:mm:ss A" /> : null}</span><br />
-                                    <i>{this.context.translate('pcontact')}</i><span>{values.contact ? <Moment date={values.contact} format="DD-MM-YYYY hh:mm:ss A" /> : null}</span><br />
-                                    <i>{this.context.translate('dptscn')}</i><span>{values.dptscn ? <Moment date={values.dptscn} format="DD-MM-YYYY hh:mm:ss A" /> : null}</span><br />
-                                    <i>{this.context.translate('arrdes')}</i><span>{values.arrdes ? <Moment date={values.arrdes} format="DD-MM-YYYY hh:mm:ss A" /> : null}</span><br />
-                                    <i>{this.context.translate('trcare')}</i><span>{values.trcare ? <Moment date={values.trcare} format="DD-MM-YYYY hh:mm:ss A" /> : null}</span>
+                                    <i>{this.context.translate('dispatch')}</i><span>{values.dispatch ? <Moment date={values.dispatch} format="DD-MM-YYYY THH:mm" /> : null}</span><br />
+                                    <i>{this.context.translate('enroute')}</i><span>{values.enroute ? <Moment date={values.enroute} format="DD-MM-YYYY THH:mm" /> : null}</span><br />
+                                    <i>{this.context.translate('arrscn')}</i><span>{values.arrscn ? <Moment date={values.arrscn} format="DD-MM-YYYY THH:mm" /> : null}</span><br />
+                                    <i>{this.context.translate('pcontact')}</i><span>{values.contact ? <Moment date={values.contact} format="DD-MM-YYYY THH:mm" /> : null}</span><br />
+                                    <i>{this.context.translate('dptscn')}</i><span>{values.dptscn ? <Moment date={values.dptscn} format="DD-MM-YYYY THH:mm" /> : null}</span><br />
+                                    <i>{this.context.translate('arrdes')}</i><span>{values.arrdes ? <Moment date={values.arrdes} format="DD-MM-YYYY THH:mm" /> : null}</span><br />
+                                    <i>{this.context.translate('trcare')}</i><span>{values.trcare ? <Moment date={values.trcare} format="DD-MM-YYYY THH:mm" /> : null}</span>
                                 </td>
                             </tr>
                             <tr><th>{this.context.translate('demographics')}</th></tr>

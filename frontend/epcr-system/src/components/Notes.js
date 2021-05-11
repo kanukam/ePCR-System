@@ -103,7 +103,7 @@ export default class Notes extends Component {
                     <p>{note['note']}</p>
                     <b>{note['name']} - {note['certifications']}</b>
                     <br />
-                    <i>{moment(date).utc().format("DD/MM/YYYY hh:mm:ss A")}</i>
+                    <i>{moment(date).utc().format("DD/MM/YYYY THH:mm")}</i>
                 </Container>
             );
         });
