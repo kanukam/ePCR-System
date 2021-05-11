@@ -1,5 +1,4 @@
 {
-    "Attachments": "Archivos Adjuntos",
     "name": "Nombre",
     "dob": "DOB",
     "phone": "Teléfono",
@@ -577,6 +576,8 @@
     "worse": "Peor",
 
     "add-note": "Añadir la nota",
+    "attach-file": "Adjuntar archivo",
+    "choose-new-file": "Elegir nuevo archivo",
     "enter-text": "Escribir texto",
     "view": "Ver",
     "download": "Descargar",
@@ -585,7 +586,8 @@
     "start-date": "Fecha de Inicio",
     "end-date": "Fecha Final",
     "search": "Búsqueda",
-    "note-title": "Notas:",
+    "note-title": "Addenda",
+    "attachments": "Archivos Adjuntos",
     "care-level": "Nivel de Cuidado",
     "submit": "Entregar",
     "vitals": "Vitales",
