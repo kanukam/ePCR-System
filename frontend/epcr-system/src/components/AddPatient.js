@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Modal from 'react-bootstrap/Modal'
-import { FaSearch } from 'react-icons/fa'
+import { FaBreadSlice, FaSearch } from 'react-icons/fa'
 import PatientRow from './PatientRow'
 import DatePicker from "react-datepicker";
 import '../App.css';
@@ -79,7 +79,13 @@ export default class AddPatient extends Component {
     }
 
     // select the existing patient from the popup and populate the values
-    selectPatient = index => (e) => {
+    selectPatient = id => (e) => {
+        e.preventDefault();
+        var theID = [];
+        for(var i = 0; i < this.state.patientList.length; i++) {
+            theID[i] = this.state.patientList[i].split(",")[0];
+        }
+        var index = theID.indexOf(id.toString());
         var patient = this.state.patientList[index];
         this.props.setPatient(patient);
         this.hideSearch();
@@ -140,8 +146,7 @@ export default class AddPatient extends Component {
                                                 fname={patient["fname"]}
                                                 lname={patient["lname"]}
                                                 dob={patient["birth"] ? this.displayTime(patient["birth"]) : null}
-                                                id={patient.id}
-                                                index={index}
+                                                id={patient["id"]}
                                                 select={this.selectPatient}
                                                 selectText={this.context.translate('select1')}
                                             />
