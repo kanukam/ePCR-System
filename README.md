@@ -17,7 +17,7 @@ npm install
 ```bash
 npm install
 ```
-4. Specify the database connection in the process.env file.
+4. Specify the database connection in the .env file.
 
 5. Start the React server in the frontend folder. Specify the port number of the React server in the package.json file or leave it blank which will default to 3001.
 
