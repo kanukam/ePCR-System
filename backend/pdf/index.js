@@ -336,7 +336,7 @@ function createChartPDF(info, locale, pipeTo, cb){
 
 function formatDateTime(date){
     if(!date) return "";
-    return moment(date).utc().format('DD/MM/YYYY hh:mm A');
+    return moment(date).utc().format('DD/MM/YYYY THH:mm');
 }
 
 function formatDate(date){
