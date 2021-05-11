@@ -1,5 +1,4 @@
 {
-    "Attachments": "Attachments",
     "name": "Name",
     "dob": "DOB",
     "phone": "Phone",
@@ -572,7 +571,9 @@
     "unchanged": "Unchanged",
     "worse": "Worse",
 
-    "add-note": "Add Note",
+    "add-note": "Add note",
+    "attach-file": "Attach file",
+    "choose-new-file": "Choose new file",
     "enter-text": "Enter text",
     "view": "View",
     "download": "Download",
@@ -581,8 +582,9 @@
     "start-date": "Start Date",
     "end-date": "End Date",
     "search": "Search",
-    "note-title": "Notes:",
-    "care-level": "Care Level",
+    "note-title": "Addendums",
+    "attachments": "Attachments",
+    "care-level": "Care level",
     "submit": "Submit",
     "vitals": "Vitals",
     "assessments": "Assessments",
