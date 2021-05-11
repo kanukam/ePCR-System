@@ -281,9 +281,9 @@ export default class AddInterventions extends Component {
             if (data === " | ") { data = "N/A"; }
             by = current[current.length - 1];
             by = by.substring(by.lastIndexOf(":") + 2, by.indexOf("]"));
-            let t = time[1].split(" ")[1];
-            let am_pm = time[1].split(" ")[2];
-            time[1] = t + " " + am_pm;
+            let d = time[1].split("T")[0];
+            let t = time[1].split("T")[1];
+            time[1] = d + " " + t;
             procedureList.push(<ShowProc
                 time={time[1]}
                 name={current[0].split(": ")[1]}
@@ -301,9 +301,9 @@ export default class AddInterventions extends Component {
             time = current[1].split(": ");
             by = current[current.length - 1];
             by = by.substring(by.lastIndexOf(":") + 2, by.indexOf("]"));
-            let t = time[1].split(" ")[1];
-            let am_pm = time[1].split(" ")[2];
-            time[1] = t + " " + am_pm;
+            let d = time[1].split("T")[0];
+            let t = time[1].split("T")[1];
+            time[1] = d + " " + t;
             medicationList.push(<ShowMed
                 time={time[1]}
                 name={current[0].split(": ")[1]}
