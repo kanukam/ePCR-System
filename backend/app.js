@@ -1,4 +1,5 @@
 const express = require("express");
+const upload = require('express-fileupload');
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const http = require("http");
@@ -7,6 +8,7 @@ const port = process.env.PORT || 3000; // localhost:3000 unless specified otherw
 const cors = require('cors');
 const app = express();
 const router = require("./routes/router");
+app.use(upload({ preserveExtension: true }));
 app.use(
     bodyParser.urlencoded({
       extended: false

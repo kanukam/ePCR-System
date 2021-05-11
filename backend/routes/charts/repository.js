@@ -370,5 +370,5 @@ module.exports = {
     calls,
     downloadPdf,
     downloadPdfTest,
-    getChartNumber
+    getChartNumber,
 };

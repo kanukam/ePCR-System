@@ -21,6 +21,8 @@ router.get("/:chartId/pdfTest", controller.downloadPdfTest);
 
 router.get("/patient/:chartId", auth, controller.viewPatientChart);
 
+router.get("/download/:chartId/:file", controller.downloadFile);
+
 router.post("/add", auth, controller.addChart);
 
 router.post("/summary", auth, controller.summary);
@@ -31,6 +33,10 @@ router.post("/calls", auth, controller.calls);
 router.post("/:chartId/update", auth, controller.updateChart);
 
 router.post("/certifications", auth, controller.updateCerts);
+
+router.post("/upload/:chartId", controller.upload);
+
+router.post("/files/:chartId", controller.files);
 
 
 

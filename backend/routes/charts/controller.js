@@ -1,5 +1,7 @@
 // @ts-check
 const repo = require('./repository');
+const fs = require('fs');
+const path = require('path');
 
 function viewChart(req, res){
   const id = req.params.chartId;
@@ -146,6 +148,66 @@ function getChartNumber(req, res){
         : res.status(200).json({ data })
   })
 }
+
+function upload(req, res) {
+  const id = req.params.chartId;
+  var file = req.files.myFile;
+  if(!id || !file){
+    res.status(400).json({ status: "Bad Request" });
+  }
+  else{
+    var filename = file.name;
+    fs.mkdir(path.join(__dirname, '../../', 'attachments'), (error) => {
+      fs.mkdir(path.join(__dirname, '../../', 'attachments', id), (error) => {
+        file.mv(path.join(__dirname, '../../', 'attachments', id, filename), (err) => {
+          if(err){
+            res.status(500).json({ error: "Error" })
+          }
+          else{
+            fs.readdir(path.join(__dirname, '../../', 'attachments', id), (err, files) => {
+              if(err){
+                return res.status(500).json({ error: "Error" });
+              }
+              res.status(200).json(files);
+            })
+          }
+        });
+      });
+    })
+  }
+}
+
+function files(req, res) {
+  const id = req.params.chartId;
+  if (!id) {
+    res.status(400).json({ status: "Bad Request" });
+  }
+  else {
+    fs.readdir(path.join(__dirname, '../../', 'attachments', id), (err, files) => {
+      if (err) {
+        return res.status(500).json({ error: "Error" });
+      }
+      res.status(200).json(files);
+    })
+  }
+}
+
+function downloadFile(req, res) {
+  const chartId = req.params.chartId;
+  const file = req.params.file;
+  if (!chartId || !file) {
+    res.status(400).json({ status: "Bad Request" });
+  }
+  else{
+    const directoryPath = path.join(__dirname, '../../', 'attachments', chartId, file);
+    res.download(directoryPath, (err) => {
+      if(err){
+        return res.status(500).json({ error: "Error" });
+      }
+    })
+  }
+  
+}
 module.exports = { 
   viewChart, 
   viewAllCharts, 
@@ -158,5 +220,8 @@ module.exports = {
   downloadPdf,
   downloadPdfTest,
   updateCerts,
-  getChartNumber
+  getChartNumber,
+  upload,
+  files,
+  downloadFile
 };

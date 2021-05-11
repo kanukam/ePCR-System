@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { MainContext } from '../Auth';
 import MainNav from './MainNav';
 import Notes from './Notes';
+import Attachments from './Attachments';
 import '../App.css'
 
 export default class ViewChart extends Component {
@@ -48,10 +49,9 @@ export default class ViewChart extends Component {
                     toggleCollapse={this.toggleCollapse}
                 />
                 <div style={mystyle}>
-                    <iframe title="chart" id='pdfpreview' src={this.state.chartsrc} key={this.state.random}  type="application/pdf" width={"100%"} style={{width: "100%", height:"700px"}}>
-
-                    </iframe>
+                    <iframe title="chart" id='pdfpreview' src={this.state.chartsrc} key={this.state.random}  type="application/pdf" width={"100%"} style={{width: "100%", height:"700px"}}></iframe>
                     <Notes reload={this.reload} chartId={this.props.match.params.id} />
+                    <Attachments chartId={this.props.match.params.id} />
                 </div>
             </React.Fragment>
         )
