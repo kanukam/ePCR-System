@@ -170,16 +170,17 @@ function createChartPDF(info, locale, pipeTo, cb){
                         ${p_classify}
                     ${tags.DOB}: ${formatDate(birth)}
                     
-                    ${tags.weight}: ${p_weight} kg
-                    ${tags.braslow}: ${p_bcolor}
-                    ${tags.sex}: ${gender}
-                    ${tags.address}: ${p_address}
-                    ${tags.phone}: ${p_phone}
+${tags.weight}: ${p_weight} kg
+${tags.braslow}: ${p_bcolor}
+${tags.sex}: ${gender}
+${tags.address}: ${p_address}
+${tags.phone}: ${p_phone}
                     
                 `, {
                      align: 'left',
                      columns: 2,
-                     height: 80
+                     height: 80,
+                     columnGap:0
                 })
                 .moveDown();
             doc
@@ -194,13 +195,13 @@ function createChartPDF(info, locale, pipeTo, cb){
                     ${tags.incidentDate}: ${formatDate(incident_date)}
                     ${tags.location}: ${location}
 
-                    ${tags.incidentAddress}: ${incident_address}
-                    ${tags.disposition}: ${disposition}
-                    ${tags.destination}: ${destination}
-                    ${tags.agency}: 
-                        ${agencies}
-                    ${tags.trauma}: ${trauma_cause}
-                `, { align: 'left', columns: 2, height: 90 })
+${tags.incidentAddress}: ${incident_address}
+${tags.disposition}: ${disposition}
+${tags.destination}: ${destination}
+${tags.agency}: 
+    ${agencies}
+${tags.trauma}: ${trauma_cause}
+                `, { align: 'left', columns: 2, height: 90, columnGap: 0})
                 .moveDown();
             doc
                 //Mci:
