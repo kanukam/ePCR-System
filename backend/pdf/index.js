@@ -106,31 +106,31 @@ function createChartPDF(info, locale, pipeTo, cb){
             // pipe the document to a blob
             //const stream = doc.pipe(blobStream());
             let physExamBody = "\n";
-            physExamBody += "   " + skin ? tags.skin + ": " + skin + "\n" : "";
-            physExamBody += "   " +  mental ? tags.mental + ": " + mental + "\n" : "";
-            physExamBody += "   " +  neurological ? tags.neurological + ": " + neurological + "\n" : "";
-            physExamBody += "   " +  head ? tags.head + ": " + head + "\n" : "";
-            physExamBody += "   " +  neck ? tags.neck + ": " + neck + "\n" : "";
-            physExamBody += "   " +  chest ? tags.chest + ": " + chest + "\n" : "";
-            physExamBody += "   " +  pulse_strength ? tags.pulse 
+            physExamBody += "   " + (skin ? tags.skin + ": " + skin + "\n" : "");
+            physExamBody += "   " +  (mental ? tags.mental + ": " + mental + "\n" : "");
+            physExamBody += "   " +  (neurological ? tags.neurological + ": " + neurological + "\n" : "");
+            physExamBody += "   " +  (head ? tags.head + ": " + head + "\n" : "");
+            physExamBody += "   " +  (neck ? tags.neck + ": " + neck + "\n" : "");
+            physExamBody += "   " +  (chest ? tags.chest + ": " + chest + "\n" : "");
+            physExamBody += "   " +  (pulse_strength ? tags.pulse 
                 + "\n    " + "   " +  tags.strength + ": " + pulse_strength + "\n    " 
-                + "   " +  tags.rate + ": " + pulse_rate + "\n": "";
-            physExamBody += "   " +  abdomen ? tags.abdomen + ": " + abdomen + "\n" : "";
-            physExamBody += "   " +  pelvis ? tags.pelvis + ": " + pelvis + "\n" : "";
-            physExamBody += "   " +  back ? tags.back + ": " + back + "\n" : "";
-            physExamBody += "   " +  left_upper_arm ? tags.leftUpperArm + ": " + left_upper_arm + "\n" : "";
-            physExamBody += "   " +  left_lower_arm ? tags.leftLowerArm + ": " + left_lower_arm + "\n" : "";
-            physExamBody += "   " +  left_hand_wrist ? tags.leftHandWrist + ": " + left_hand_wrist + "\n" : "";
-            physExamBody += "   " +  right_upper_arm ? tags.rightUpperArm + ": " + right_upper_arm + "\n" : "";
-            physExamBody += "   " +  right_lower_arm ? tags.rightLowerArm + ": " + right_lower_arm + "\n" : "";
-            physExamBody += "   " +  right_hand_wrist ? tags.rightHandWrist + ": " + right_hand_wrist + "\n" : "";
-            physExamBody += "   " +  left_upper_leg ? tags.leftUpperLeg + ": " + left_upper_leg + "\n" : "";
-            physExamBody += "   " +  left_lower_leg ? tags.leftLowerLeg + ": " + left_lower_leg + "\n" : "";
-            physExamBody += "   " +  left_ankle_foot ? tags.leftAnkleFoot + ": " + left_ankle_foot + "\n" : "";
-            physExamBody += "   " +  right_upper_leg ? tags.rightUpperLeg + ": " + right_upper_leg + "\n" : "";
-            physExamBody += "   " +  right_lower_leg ? tags.rightLowerLeg + ": " + right_lower_leg + "\n" : "";
-            physExamBody += "   " +  right_ankle_foot ? tags.rightAnkleFoot + ": " + right_ankle_foot + "\n" : "";
-            physExamBody += "   " +  extra_findings ? tags.additionalFindings + ": " + extra_findings + "\n" : "";
+                + "   " +  tags.rate + ": " + pulse_rate + "\n": "");
+            physExamBody += "   " +  (abdomen ? tags.abdomen + ": " + abdomen + "\n" : "");
+            physExamBody += "   " +  (pelvis ? tags.pelvis + ": " + pelvis + "\n" : "");
+            physExamBody += "   " +  (back ? tags.back + ": " + back + "\n" : "");
+            physExamBody += "   " +  (left_upper_arm ? tags.leftUpperArm + ": " + left_upper_arm + "\n" : "");
+            physExamBody += "   " +  (left_lower_arm ? tags.leftLowerArm + ": " + left_lower_arm + "\n" : "");
+            physExamBody += "   " +  (left_hand_wrist ? tags.leftHandWrist + ": " + left_hand_wrist + "\n" : "");
+            physExamBody += "   " +  (right_upper_arm ? tags.rightUpperArm + ": " + right_upper_arm + "\n" : "");
+            physExamBody += "   " +  (right_lower_arm ? tags.rightLowerArm + ": " + right_lower_arm + "\n" : "");
+            physExamBody += "   " +  (right_hand_wrist ? tags.rightHandWrist + ": " + right_hand_wrist + "\n" : "");
+            physExamBody += "   " +  (left_upper_leg ? tags.leftUpperLeg + ": " + left_upper_leg + "\n" : "");
+            physExamBody += "   " +  (left_lower_leg ? tags.leftLowerLeg + ": " + left_lower_leg + "\n" : "");
+            physExamBody += "   " +  (left_ankle_foot ? tags.leftAnkleFoot + ": " + left_ankle_foot + "\n" : "");
+            physExamBody += "   " +  (right_upper_leg ? tags.rightUpperLeg + ": " + right_upper_leg + "\n" : "");
+            physExamBody += "   " +  (right_lower_leg ? tags.rightLowerLeg + ": " + right_lower_leg + "\n" : "");
+            physExamBody += "   " +  (right_ankle_foot ? tags.rightAnkleFoot + ": " + right_ankle_foot + "\n" : "");
+            physExamBody += "   " +  (extra_findings ? tags.additionalFindings + ": " + extra_findings + "\n" : "");
 
             doc.on('pageAdded', () => {
                 doc
@@ -333,12 +333,15 @@ ${formatDateTime(transfer_date_time)}
 
                 .image('pdf/img/gray.jpg', 0, calc_height += 58 + doc.heightOfString(procedures) - (procedures ? 10 : 0), {width: 1600, height: HEADER_HEIGHT})
                 .text(tags.intakeOutput, HEADERS)
-                .text(`
-                    ${tags.bleeding}: ${intake_bleeding}
-                    ${tags.ivFluids}: ${intake_iv_fluids}
-                    ${tags.oralFluids}: ${intake_oral_fluids}
-                    ${tags.vomit}: ${intake_vomit}
-                `)
+                if(intake_bleeding || intake_iv_fluids || intake_oral_fluids || intake_vomit){
+                    doc
+                        .text(`
+                        ${tags.bleeding}: ${intake_bleeding}
+                        ${tags.ivFluids}: ${intake_iv_fluids}
+                        ${tags.oralFluids}: ${intake_oral_fluids}
+                        ${tags.vomit}: ${intake_vomit}
+                        `)
+                }
 
                 // get a blob when you're done
             doc.addPage();
