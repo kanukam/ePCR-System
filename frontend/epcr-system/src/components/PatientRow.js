@@ -9,7 +9,7 @@ export default class PatientRow extends Component {
                 <td>{this.props.lname}</td>
                 <td>{this.props.fname}</td>
                 <td>{this.props.dob}</td>
-                <td><input type="button" value={this.props.selectText} onClick={this.props.select(this.props.index)}/></td>
+                <td><input type="button" value={this.props.selectText} onClick={this.props.select(this.props.id)}/></td>
             </tr>
         )
     }
