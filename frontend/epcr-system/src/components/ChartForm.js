@@ -414,7 +414,7 @@ export default class ChartForm extends Component {
             const care_level = this.state.care;
             const destination = this.state.dest;
             let trauma_cause = this.state.trauma;
-            if (this.state.trauma === "Fall") { trauma_cause += ", " + this.state.fallht + " m"; }
+            if (this.state.trauma === "Caída") { trauma_cause += ", " + this.state.fallht + " m"; }
             let patient_count = null;
             let triage_color = null;
             if (this.state.assessmentCheckBoxes[268]) {

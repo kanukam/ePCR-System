@@ -83,7 +83,7 @@ export default class Notes extends Component {
                 }
                 this.setState({ message: "Add Successful" });
                 this.setState({noteBox: ''});
-                this.props.reload(this.props.chartId, this.context.language);
+                //this.props.reload(this.props.chartId, this.context.language);
                 this.getNotes();
             }).catch((error) => {
                 console.log(error);

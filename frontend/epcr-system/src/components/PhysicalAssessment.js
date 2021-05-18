@@ -504,7 +504,7 @@ export default class PhysicalAssessment extends Component {
                         <table className="cform">
                             <tbody>
                                 <tr>
-                                    <th width="20%">{this.context.translate('Time-of-onset')}</th>
+                                    <th width="20%">{this.context.translate('Time-of-onset')}<em>*</em></th>
                                     <td width="30%"><input type="text" name="stroke_time" placeholder="--:--" value={values.stroke_time} onChange={this.props.handleChange('stroke_time')} /></td>
                                     <th width="20%">{this.context.translate('Facial-droop')}</th>
                                     <td width="30%">

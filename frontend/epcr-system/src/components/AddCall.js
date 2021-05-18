@@ -141,7 +141,7 @@ export default class AddCall extends Component {
                                 <td>
                                     <select name="nature" value={values.nature} onChange={this.props.handleChange('nature')}>
                                         <option disabled selected value="">{this.context.translate('select')}</option>
-                                        <option value="Comprobación B/P">{this.context.translate('bp-check')}</option>
+                                        <option value="Comprobación B\/P">{this.context.translate('bp-check')}</option>
                                         <option value="Inyección">{this.context.translate('injection')}</option>
                                         <option value="Cardíaca">{this.context.translate('cardiac')}</option>
                                         <option value="OB">OB</option>

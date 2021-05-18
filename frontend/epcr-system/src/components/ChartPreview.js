@@ -75,5 +75,3 @@ function processAddress(address){
 }
 
 export default ChartPreview
-
-
