@@ -37,7 +37,6 @@ export default class ViewChart extends Component {
             credentials: 'include'
         }
         fetch(url, options).then((response) => {
-            console.log(response);
             if (!response.ok) {
                 throw Error;
             }
@@ -69,16 +68,14 @@ export default class ViewChart extends Component {
         html2canvas(input)
             .then((canvas) => {
                 const imgData = canvas.toDataURL('image/png');
-                const doc = new jsPDF({
-                    orientation: 'landscape',
-                });
-                const imgWidth = 290;
-                const pageHeight = 190;
+                const imgWidth = 190;
+                const pageHeight = 290;
                 const imgHeight = (canvas.height * imgWidth) / canvas.width;
                 let heightLeft = imgHeight;
+                const doc = new jsPDF('pt', 'mm');
                 let position = 0;
-                doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight+25);
-                heightLeft -= imgHeight;
+                doc.addImage(imgData, 'PNG', 10, 0, imgWidth, imgHeight + 25);
+                heightLeft -= pageHeight;
                 while (heightLeft >= 0) {
                     position = heightLeft - imgHeight;
                     doc.addPage();
@@ -467,7 +464,6 @@ export default class ViewChart extends Component {
                             
                             <tbody>
                                 {chart.vital_signs && chart.vital_signs.map((element, idx) => {
-                                    console.log(chart);
                                     element = element.replace('[', '');
                                     element = element.replace(']', '');
                                     var sepereated = element.split('|');
