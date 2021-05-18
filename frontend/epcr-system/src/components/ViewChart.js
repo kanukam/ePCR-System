@@ -124,7 +124,7 @@ export default class ViewChart extends Component {
             let date = note['dateAdded'];
             notesComps.push(
                 <div>
-                    <p>{note['note']}</p>
+                    <br/><p>{note['note']}</p>
                     <b>{note['name']} - {note['certifications']}</b> - <i>{moment(date).utc().format("DD/MM/YYYY THH:mm")}</i>
                 </div>
             );
