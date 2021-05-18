@@ -87,20 +87,7 @@ export default class ViewChart extends Component {
                     heightLeft -= pageHeight;
                 }
                 doc.save('download.pdf');
-                /*
-                const imgData = canvas.toDataURL('image/png');
-                const pdf = new jsPDF({
-                    orientation: 'landscape',
-                });
-                const imgProps = pdf.getImageProperties(imgData);
-                const pdfWidth = pdf.internal.pageSize.getWidth();
-                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-                
-                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-                pdf.save('download.pdf');
-                */
             });
-        //style={{backgroundColor: '#f5f5f5',width: '210mm',minHeight: '297mm',marginLeft: 'auto',marginRight: 'auto'}}
     }
 
     render() {
