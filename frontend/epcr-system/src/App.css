@@ -160,18 +160,19 @@ table.simpleview span { display:inline-block; padding:5px; width:75%; vertical-a
 
 @media only screen and (max-width: 640px) {
     .top { padding:0; }
+    .navbar { position:fixed; top:0; left:0; }
     .ml-auto.navbar-nav { display:none; }
+    .main-content { margin-top:46px; padding:10px; }
     .chart form, .confirm form { margin:120px auto; padding:0; width:100%; background:none; }
     .chart input, .chart select, .chart textarea { max-width:100%; }
     .chart input[type="button"] { margin-bottom:15px; }
+    .chartnav { height:55px; }
+    .chartnav .tab { width:90px; height:55px; }
+    .chartnav .tab b { display:none; }
     table.cform th, table.cform td { display:block; padding:5px !important; width:100%; }
     table.cform th { padding-top:10px !important; border-top:1px solid #eee; }
     table.history td { display:block; width:100%; }
     table.treatment th, table.treatment td { padding:5px; }
-    .navbar { position:fixed; top:0; left:0; }
-    .chartnav { height:55px; }
-    .chartnav .tab { width:90px; height:55px; }
-    .chartnav .tab b { display:none; }
     .popup { position:fixed; top:5%; left:5%; width:90%; }
     .popup h2 { font-size:22px; }
     .popup input, .popup select, .popup textarea { width:61%; }
