@@ -60,7 +60,7 @@ export default class ViewChart extends Component {
     }
 
     generatePDF(number) {
-        window.print();
+        //window.print();
     }
 
     render() {
@@ -79,13 +79,13 @@ export default class ViewChart extends Component {
                     contentSpacing={this.state.contentSpacing}
                     toggleCollapse={this.toggleCollapse}
                 />
-                <div className="printable" style={mystyle}>
+                <div className="printable">
                     {/*<iframe title="chart" id='pdfpreview' src={this.state.chartsrc} key={this.state.random}  type="application/pdf" width={"100%"} style={{width: "100%", height:"700px"}}></iframe>*/}
                     <div style={{marginTop:'15px', width:'80%', textAlign:'right'}}>
                         <input type="button" onClick={this.generatePDF(chart["incident_number"])} value="Save PDF"/>
                     </div>
                 </div>
-                <div className="printable" id="printable" style={mystyle}>
+                <div className="printable" id="printable">
                     <div className="header">
                         <span>{/* patient name */}</span>
                         <span>RESCATE DE SAN CARLOS</span>
