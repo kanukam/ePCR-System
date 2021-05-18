@@ -25,12 +25,11 @@ em { color:red; }
 .message { margin:5px 0; display:block; color:red; font-size:smaller; text-align:center; }
 
 /* navbar styles */
-.navbar { width:100%; background-color:#16A8DC !important; color:#fff !important; z-index:999; }
+.navbar { width:100%; background-color:#16A8DC !important; color:#fff !important; z-index:9; }
 .light { background:#fff !important; }
 .menu { cursor:pointer; }
 .menu span { float:left; padding:0 15px; text-transform:uppercase; font-size:20px; font-weight:500; }
 .menu img { float:left; }
-.dropdown-menu { left:-50px; }
 a#basic-nav-dropdown { min-width:100px; }
 
 /* authentication pages styles */
