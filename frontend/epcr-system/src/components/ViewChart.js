@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import { MainContext } from '../Auth';
 import MainNav from './MainNav';
 import Notes from './Notes';
 import Attachments from './Attachments';
-import '../App.css'
+import '../App.css';
+import '../Print.css';
 
 export default class ViewChart extends Component {
     static contextType = MainContext;
@@ -56,6 +59,10 @@ export default class ViewChart extends Component {
         this.setState({ random: this.state.random + 1 });
     }
 
+    generatePDF(number) {
+        window.print();
+    }
+
     render() {
         const chart = this.state.chart;
         var spacing = (this.state.contentSpacing === '0 0 0 150px') ? "0 0 0 150px" : "0 25px 0 25px";
@@ -74,6 +81,11 @@ export default class ViewChart extends Component {
                 />
                 <div className="printable" style={mystyle}>
                     {/*<iframe title="chart" id='pdfpreview' src={this.state.chartsrc} key={this.state.random}  type="application/pdf" width={"100%"} style={{width: "100%", height:"700px"}}></iframe>*/}
+                    <div style={{marginTop:'15px', width:'80%', textAlign:'right'}}>
+                        <input type="button" onClick={this.generatePDF(chart["incident_number"])} value="Save PDF"/>
+                    </div>
+                </div>
+                <div className="printable" id="printable" style={mystyle}>
                     <div className="header">
                         <span>{/* patient name */}</span>
                         <span>RESCATE DE SAN CARLOS</span>
@@ -416,7 +428,7 @@ export default class ViewChart extends Component {
                             {chart["obstetrics"] !== "" ? <tr><td colSpan="4">{chart["obstetrics"]}</td></tr> : null}
                             <tr><th colSpan="4" className="heading">{this.context.translate('ambulance-crew')}</th></tr>
                             <tr>
-                                <td colSpan="4">{chart["ambulance_crew"]}</td>
+                                <td colSpan="4" style={{textAlign:'center'}}>{chart["ambulance_crew"]}</td>
                             </tr>
                         </tbody>
                     </table>

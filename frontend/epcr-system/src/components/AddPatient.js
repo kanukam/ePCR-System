@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Modal from 'react-bootstrap/Modal'
-import { FaBreadSlice, FaSearch } from 'react-icons/fa'
+import { FaSearch } from 'react-icons/fa'
 import PatientRow from './PatientRow'
 import DatePicker from "react-datepicker";
 import '../App.css';
