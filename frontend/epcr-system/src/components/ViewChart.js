@@ -75,11 +75,10 @@ export default class ViewChart extends Component {
                 const imgWidth = 290;
                 const pageHeight = 190;
                 const imgHeight = (canvas.height * imgWidth) / canvas.width;
-                console.log(imgHeight);
                 let heightLeft = imgHeight;
                 let position = 0;
-                doc.addImage(imgData, 'PNG', 10, 0, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
+                doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight+25);
+                heightLeft -= imgHeight;
                 while (heightLeft >= 0) {
                     position = heightLeft - imgHeight;
                     doc.addPage();
