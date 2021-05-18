@@ -24,6 +24,7 @@ export default class ViewChart extends Component {
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
         this.reload = this.reload.bind(this);
+        this.generatePDF = this.generatePDF.bind(this);
     }
 
     componentDidMount() {
