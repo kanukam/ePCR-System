@@ -1,0 +1,5 @@
+@media print {
+    body { margin:0; background:#000; }
+    .sidebar, .chart, .container { display:none; }
+    .printable .header, .printable table { width:95%; }
+}

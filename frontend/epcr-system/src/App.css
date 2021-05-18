@@ -39,11 +39,11 @@ em { color:red; }
 
 /* view chart pages styles */
 .printable { text-align:center; }
-.printable .header { margin:0 auto; padding:10px; width:65%; display:flex; font-weight:bold; }
+.printable .header { margin:0 auto; padding:10px; width:80%; display:flex; font-weight:bold; }
 .printable .header span { display:inline-block; width:60%; text-align:center; }
 .printable .header span:first-child { width:20%; text-align:left; }
 .printable .header span:last-child { width:20%; text-align:right; }
-.printable table { width:65%; margin:0 auto; border:1px solid #ddd; text-align:left; font-size:smaller; }
+.printable table { width:80%; margin:0 auto; border:1px solid #ddd; text-align:left; font-size:smaller; }
 .printable th { background:#eee; text-align:center; }
 .printable td { padding:2px 5px; vertical-align:top; }
 .printable td:nth-child(odd) { width:20%; text-align:right; }
