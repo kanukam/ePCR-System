@@ -24,7 +24,7 @@ export default class ViewChart extends Component {
             notes: []
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
-        this.reload = this.reload.bind(this);
+        //this.reload = this.reload.bind(this);
         this.generatePDF = this.generatePDF.bind(this);
     }
 
@@ -80,12 +80,12 @@ export default class ViewChart extends Component {
         this.setState({ contentSpacing: (this.state.sidebarHide ? '0 0 0 0' : '0 0 0 150px') })
         this.setState({ sidebarHide: !this.state.sidebarHide });
     }
-
+    /*
     reload(chartId, language) {
         this.setState({ chartsrc: `http://localhost:3000/api/charts/${chartId}/pdf?locale=${language}#scrollbar=1` });
         this.setState({ random: this.state.random + 1 });
     }
-
+    */
     generatePDF() {
         const input = document.getElementById('printable');
         html2canvas(input)

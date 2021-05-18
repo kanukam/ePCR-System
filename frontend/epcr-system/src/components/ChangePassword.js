@@ -54,7 +54,6 @@ export default class ChangePassword extends Component {
     handleSubmit = (event => {
         event.preventDefault();
         const { password, confirmedPassword, token } = this.state;
-        console.log(token);
         if (password !== confirmedPassword) {
             this.setState({ message: this.context.translate('passwordMismatch') });
         }
