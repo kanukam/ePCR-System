@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
-//import jsPDF from 'jspdf';
-//import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import { MainContext } from '../Auth';
 import MainNav from './MainNav';
 import Notes from './Notes';
 import Attachments from './Attachments';
 import '../App.css';
 import '../Print.css';
+import Table from 'react-bootstrap/Table'
 
 export default class ViewChart extends Component {
     static contextType = MainContext;
@@ -41,9 +42,9 @@ export default class ViewChart extends Component {
             }
             return response.json();
         }).then(data => {
-            data.procedures = data.procedures.split('],');
-            data.medications = data.medications.split('],');
-            console.log(data);
+            if(data.procedures){data.procedures = data.procedures.split('],');}
+            if(data.medications){data.medications = data.medications.split('],');}
+            if(data.vital_signs){data.vital_signs = data.vital_signs.split('],');}
             this.setState({ chart: data });
         })
             .catch((error) => {
@@ -62,8 +63,21 @@ export default class ViewChart extends Component {
         this.setState({ random: this.state.random + 1 });
     }
 
-    generatePDF(number) {
-        //window.print();
+    generatePDF() {
+        const input = document.getElementById('printable');
+        html2canvas(input)
+            .then((canvas) => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF({
+                    orientation: 'landscape',
+                });
+                const imgProps = pdf.getImageProperties(imgData);
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                pdf.save('download.pdf');
+            });
+        //style={{backgroundColor: '#f5f5f5',width: '210mm',minHeight: '297mm',marginLeft: 'auto',marginRight: 'auto'}}
     }
 
     render() {
@@ -85,10 +99,11 @@ export default class ViewChart extends Component {
                 <div className="printable">
                     {/*<iframe title="chart" id='pdfpreview' src={this.state.chartsrc} key={this.state.random}  type="application/pdf" width={"100%"} style={{width: "100%", height:"700px"}}></iframe>*/}
                     <div style={{marginTop:'15px', width:'80%', textAlign:'right'}}>
-                        <input type="button" onClick={this.generatePDF(chart["incident_number"])} value="Save PDF"/>
+                        <input type="button" onClick={this.generatePDF} value={this.context.translate('save')}/>
                     </div>
                 </div>
                 <div className="printable" id="printable">
+                
                     <div className="header">
                         <span>{/* patient name */}</span>
                         <span>RESCATE DE SAN CARLOS</span>
@@ -238,30 +253,43 @@ export default class ViewChart extends Component {
                     <table>
                         <tbody>
                             <tr><th colSpan="4" className="heading">{this.context.translate('assessments')}</th></tr>
+                            {chart.skin ?
                             <tr>
                                 <td><b>{this.context.translate('Skin')}</b></td>
                                 <td colSpan="3" className="long">{chart["skin"]}</td>
                             </tr>
+                            : null}
+                            {chart.mental ?
                             <tr>
                                 <td><b>{this.context.translate('Mental')}</b></td>
                                 <td colSpan="3" className="long">{chart["mental"]}</td>
                             </tr>
+                                : null}
+                            {chart.neurological ?
                             <tr>
                                 <td><b>{this.context.translate('Neurological')}</b></td>
                                 <td colSpan="3" className="long">{chart["neurological"]}</td>
                             </tr>
+                                : null}
+                            {chart.head ?
                             <tr>
                                 <td><b>{this.context.translate('Head')}</b></td>
                                 <td colSpan="3" className="long">{chart["head"]}</td>
                             </tr>
+                            : null}
+                            {chart.neck ?
                             <tr>
                                 <td><b>{this.context.translate('Neck')}</b></td>
                                 <td colSpan="3" className="long">{chart["neck"]}</td>
                             </tr>
+                            : null}
+                            {chart.chest ?
                             <tr>
                                 <td><b>{this.context.translate('Chest')}</b></td>
                                 <td colSpan="3" className="long">{chart["chest"]}</td>
                             </tr>
+                            : null}
+                            {chart.pulse_strength || chart.pulse_rate ?
                             <tr>
                                 <td><b>{this.context.translate('Pulse')}</b></td>
                                 <td colSpan="3" className="long">
@@ -269,66 +297,97 @@ export default class ViewChart extends Component {
                                     {this.context.translate('Pulse-Rate')}: {chart["pulse_rate"]}
                                 </td>
                             </tr>
+                            : null}
+                            {chart.abdomen ?
                             <tr>
                                 <td><b>{this.context.translate('Abdomen')}</b></td>
                                 <td colSpan="3" className="long">{chart["abdomen"]}</td>
                             </tr>
+                            : null}
+                            {chart.pelvis ?
                             <tr>
                                 <td><b>{this.context.translate('Pelvis')}</b></td>
                                 <td colSpan="3" className="long">{chart["pelvis"]}</td>
                             </tr>
+                            : null}
+                            {chart.back ?
                             <tr>
                                 <td><b>{this.context.translate('Back')}</b></td>
                                 <td colSpan="3" className="long">{chart["back"]}</td>
                             </tr>
+                            : null}
+                            {chart.left_upper_arm ?
                             <tr>
                                 <td><b>{this.context.translate('Left-upper-arm')}</b></td>
                                 <td colSpan="3" className="long">{chart["left_upper_arm"]}</td>
                             </tr>
+                            : null}
+                            {chart.left_lower_arm ?
                             <tr>
                                 <td><b>{this.context.translate('Left-lower-arm')}</b></td>
                                 <td colSpan="3" className="long">{chart["left_lower_arm"]}</td>
                             </tr>
+                            : null}
+                            {chart.left_hand_wrist ?
                             <tr>
                                 <td><b>{this.context.translate('Left-hand-/-wrist')}</b></td>
                                 <td colSpan="3" className="long">{chart["left_hand_wrist"]}</td>
                             </tr>
+                            : null}
+                            {chart.left_upper_leg ?
                             <tr>
                                 <td><b>{this.context.translate('Left-upper-leg')}</b></td>
                                 <td colSpan="3" className="long">{chart["left_upper_leg"]}</td>
                             </tr>
+                            : null}
+                            {chart.left_lower_leg ?
                             <tr>
                                 <td><b>{this.context.translate('Left-lower-leg')}</b></td>
                                 <td colSpan="3" className="long">{chart["left_lower_leg"]}</td>
                             </tr>
+                            : null}
+                            {chart.left_ankle_foot ?
                             <tr>
                                 <td><b>{this.context.translate('Left-ankle-/-foot')}</b></td>
                                 <td colSpan="3" className="long">{chart["left_ankle_foot"]}</td>
                             </tr>
+                            : null}
+                            {chart.right_upper_arm ?
                             <tr>
                                 <td><b>{this.context.translate('Right-upper-arm')}</b></td>
                                 <td colSpan="3" className="long">{chart["right_upper_arm"]}</td>
                             </tr>
+                            : null}
+                            {chart.right_lower_arm ?
                             <tr>
                                 <td><b>{this.context.translate('Right-lower-arm')}</b></td>
                                 <td colSpan="3" className="long">{chart["right_lower_arm"]}</td>
                             </tr>
+                            : null}
+                            {chart.right_hand_wrist ?
                             <tr>
                                 <td><b>{this.context.translate('Right-hand-/-wrist')}</b></td>
                                 <td colSpan="3" className="long">{chart["right_hand_wrist"]}</td>
                             </tr>
+                            : null}
+                            {chart.right_upper_leg ?
                             <tr>
                                 <td><b>{this.context.translate('Right-upper-leg')}</b></td>
                                 <td colSpan="3" className="long">{chart["right_upper_leg"]}</td>
                             </tr>
+                            : null}
+                            {chart.right_lower_leg ?
                             <tr>
                                 <td><b>{this.context.translate('Right-lower-leg')}</b></td>
                                 <td colSpan="3" className="long">{chart["right_lower_leg"]}</td>
                             </tr>
+                            : <br/>}
+                            {chart.right_ankle_foot ?
                             <tr>
                                 <td><b>{this.context.translate('Right-ankle-/-foot')}</b></td>
                                 <td colSpan="3" className="long">{chart["right_ankle_foot"]}</td>
                             </tr>
+                            : null}
                             <tr><th colSpan="4">{this.context.translate('Additional-findings')}</th></tr>
                             <tr><td colSpan="4" style={{textAlign:'center'}}>{chart["extra_findings"]}</td></tr>
                             {chart["burn_calculation"] !== "0" ? <tr><th colSpan="4">{this.context.translate('burn-calculation')}</th></tr> : null}
@@ -381,9 +440,9 @@ export default class ViewChart extends Component {
                             </tr>
                         </tbody>
                     </table>
-                    {chart["vital_signs"] !== "" ?
-                        <table>
-                            <tbody>
+                    {chart.vital_signs ?
+                        <Table striped bordered>
+                            <thead>
                                 <tr><th colSpan="8" className="heading">{this.context.translate('Vitals')}</th></tr>
                                 <tr>
                                     <th>{this.context.translate('Time')}</th>
@@ -395,12 +454,54 @@ export default class ViewChart extends Component {
                                     <th>{this.context.translate('ETCO2')}</th>
                                     <th>{this.context.translate('GCS')}</th>
                                 </tr>
-                                <tr>
-                                    <td colSpan="8" style={{textAlign:'center'}}>{chart["vital_signs"]}</td>
-                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                {chart.vital_signs && chart.vital_signs.map((element, idx) => {
+                                    console.log(chart);
+                                    element = element.replace('[', '');
+                                    element = element.replace(']', '');
+                                    var sepereated = element.split('|');
+                                    sepereated[0] = sepereated[0].replace('Hora:', '');
+                                    sepereated[1] = sepereated[1].replace('Pulso:', '');
+                                    sepereated[2] = sepereated[2].replace('B/P:', '');
+                                    sepereated[3] = sepereated[3].replace('Resp:', '');
+                                    sepereated[4] = sepereated[4].replace('Sp02:', '');
+                                    sepereated[5] = sepereated[5].replace('GCS:', '');
+                                    sepereated[6] = sepereated[6].replace('Dolor:', '');
+                                    sepereated[7] = sepereated[7].replace('Temp:', '');
+                                    return (
+                                        <tr>
+                                            <td>
+                                                {sepereated[0]}
+                                            </td>
+                                            <td>
+                                                {sepereated[1]}
+                                            </td>
+                                            <td>
+                                                {sepereated[2]}
+                                            </td>
+                                            <td>
+                                                {sepereated[3]}
+                                            </td>
+                                            <td>
+                                                {sepereated[4]}
+                                            </td>
+                                            <td>
+                                                {sepereated[7]}
+                                            </td>
+                                            <td>
+                                                {sepereated[6]}
+                                            </td>
+                                            <td>
+                                                {sepereated[5]}
+                                            </td>
+                                        </tr>
+                                    )
+                                })}
                             </tbody>
-                        </table>
-                        : null}
+                            </Table>
+                            : null}
                     <table>
                         <tbody>
                             <tr><th colSpan="4" className="heading">{this.context.translate('interventions')}</th></tr>

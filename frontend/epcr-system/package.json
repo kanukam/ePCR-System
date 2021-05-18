@@ -15,7 +15,9 @@
     "canvasjs": "^1.8.3",
     "canvasjs-react-charts": "^1.0.5",
     "date-fns": "^2.17.0",
+    "html2canvas": "^1.0.0-rc.7",
     "i18next": "^19.8.9",
+    "jspdf": "^2.3.1",
     "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
@@ -28,8 +30,6 @@
     "react-scripts": "4.0.0",
     "web-vitals": "^0.2.4"
   },
-  
-  
   "scripts": {
     "start": "set PORT=3001 && react-scripts start",
     "build": "react-scripts build",
@@ -55,5 +55,3 @@
     ]
   }
 }
-
-
