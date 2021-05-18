@@ -69,18 +69,22 @@ export default class ViewChart extends Component {
         html2canvas(input)
             .then((canvas) => {
                 const imgData = canvas.toDataURL('image/png');
-                const imgWidth = 190;
-                const pageHeight = 290;
+                const imgWidth = 295;
+                const pageHeight = 210;
                 const imgHeight = (canvas.height * imgWidth) / canvas.width;
                 let heightLeft = imgHeight;
-                const doc = new jsPDF('pt', 'mm');
-                let position = 0;
-                doc.addImage(imgData, 'PNG', 10, 0, imgWidth, imgHeight + 25);
+                const doc = new jsPDF({
+                    format: 'a4',
+                    unit: 'mm',
+                    orientation:'l'
+                })
+                let position = 10;
+                doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
                 heightLeft -= pageHeight;
                 while (heightLeft >= 0) {
-                    position = heightLeft - imgHeight;
+                    position += heightLeft - imgHeight;
                     doc.addPage();
-                    doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight + 25);
+                    doc.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
                     heightLeft -= pageHeight;
                 }
                 doc.save(`${this.state.chart.incident_number}-${this.state.chart.lname},${this.state.chart.fname}.pdf`);
@@ -109,8 +113,7 @@ export default class ViewChart extends Component {
                         <input type="button" onClick={this.generatePDF} value={this.context.translate('save')}/>
                     </div>
                 </div>
-                <div className="printable" id="printable">
-                
+                <div className="printable" id="printable" style={{fontSize: 20}}>
                     <div className="header">
                         <span>{/* patient name */}</span>
                         <span>RESCATE DE SAN CARLOS</span>
