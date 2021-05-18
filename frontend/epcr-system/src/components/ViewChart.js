@@ -113,7 +113,7 @@ export default class ViewChart extends Component {
                         <input type="button" onClick={this.generatePDF} value={this.context.translate('save')}/>
                     </div>
                 </div>
-                <div className="printable" id="printable" style={{fontSize: 20}}>
+                <div className="printable" id="printable">
                     <div className="header">
                         <span>{/* patient name */}</span>
                         <span>RESCATE DE SAN CARLOS</span>
