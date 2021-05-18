@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Moment from 'react-moment';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import domToPdf from 'dom-to-pdf';
+import moment from 'moment'
 import { MainContext } from '../Auth';
 import MainNav from './MainNav';
 import Notes from './Notes';
@@ -21,6 +21,7 @@ export default class ViewChart extends Component {
             chart: [],
             chartsrc: "",
             random: 100,
+            notes: []
         };
         this.toggleCollapse = this.toggleCollapse.bind(this);
         this.reload = this.reload.bind(this);
@@ -30,7 +31,7 @@ export default class ViewChart extends Component {
     componentDidMount() {
         //this.setState({ chartsrc: `http://localhost:3000/api/charts/${this.props.match.params.id}/pdf?locale=${this.context.language}#scrollbar=1` });
         let url = `http://localhost:3000/api/charts/${this.props.match.params.id}`;
-        const options = {
+        let options = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -51,7 +52,28 @@ export default class ViewChart extends Component {
             .catch((error) => {
                 this.setState({ message: this.context.translate('error') });
             })
-
+        //Notes
+        url = 'http://localhost:3000/api/notes/chart/' + this.props.match.params.id;
+        options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        }
+        fetch(url, options)
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                }
+                else
+                    throw Error("Failed");
+            })
+            .then((data) => {
+                this.setState({ notes: data });
+            })
+            .catch((error) => {
+            });
     }
 
     toggleCollapse() {
@@ -97,7 +119,16 @@ export default class ViewChart extends Component {
         const mystyle = {
             padding: spacing
         };
-
+        let notesComps = [];
+        this.state.notes.forEach(note => {
+            let date = note['dateAdded'];
+            notesComps.push(
+                <div>
+                    <p>{note['note']}</p>
+                    <b>{note['name']} - {note['certifications']}</b> - <i>{moment(date).utc().format("DD/MM/YYYY THH:mm")}</i>
+                </div>
+            );
+        });
         return (
             <React.Fragment>
                 <MainNav
@@ -113,7 +144,7 @@ export default class ViewChart extends Component {
                         <input type="button" onClick={this.generatePDF} value={this.context.translate('save')}/>
                     </div>
                 </div>
-                <div className="printable" id="printable">
+                <div className="printable" id="printable" style={{fontSize: 20}}>
                     <div className="header">
                         <span>{/* patient name */}</span>
                         <span>RESCATE DE SAN CARLOS</span>
@@ -556,6 +587,10 @@ export default class ViewChart extends Component {
                             <tr><th colSpan="4" className="heading">{this.context.translate('ambulance-crew')}</th></tr>
                             <tr>
                                 <td colSpan="4" style={{textAlign:'center'}}>{chart["ambulance_crew"]}</td>
+                            </tr>
+                            <tr><th colSpan="4" className="heading">{this.context.translate('note-title')}</th></tr>
+                            <tr>
+                                <td colSpan="4" style={{ textAlign: 'left' }}>{notesComps}</td>
                             </tr>
                         </tbody>
                     </table>
