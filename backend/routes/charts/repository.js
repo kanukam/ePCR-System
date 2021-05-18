@@ -53,7 +53,7 @@ function viewAllCharts(callback) {
 }
 
 function viewChart(id, callback){
-    db.query(`SELECT * FROM charts where id=${id}`, (err, res) => {
+    db.query(`SELECT * FROM charts INNER JOIN patients on charts.id =${id} AND charts.patientID = patients.id;`, (err, res) => {
         return err
             ? callback(err)
             : callback(false, res[0]);

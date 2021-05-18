@@ -77,7 +77,6 @@ export default class ViewChart extends Component {
                 pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
                 pdf.save('download.pdf');
             });
-        //style={{backgroundColor: '#f5f5f5',width: '210mm',minHeight: '297mm',marginLeft: 'auto',marginRight: 'auto'}}
     }
 
     render() {
