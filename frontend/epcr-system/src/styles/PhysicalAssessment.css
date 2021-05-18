@@ -34,6 +34,7 @@ label { display:block; margin-bottom:0; }
     .assessment .exam_label, .assessment .exam_split { display:block; width:100%; }
     .assessment .exam_label.v2, .assessment .exam_label.v3 { width:50%; }
     .assessment input, .assessment select, .assessment textarea { max-width:100%; }
-    .chartnav .tab { width:60px; height:55px; }
+    .chartnav { height:55px; }
+    .chartnav .tab { width:90px; height:55px; }
     .chartnav .tab b { display:none; }
 }
