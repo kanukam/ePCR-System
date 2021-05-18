@@ -82,7 +82,7 @@ export default class ViewChart extends Component {
                     doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight + 25);
                     heightLeft -= pageHeight;
                 }
-                doc.save('download.pdf');
+                doc.save(`${this.state.chart.incident_number}-${this.state.chart.lname},${this.state.chart.fname}.pdf`);
             });
     }
 
