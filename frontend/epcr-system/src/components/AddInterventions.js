@@ -185,12 +185,12 @@ export default class AddInterventions extends Component {
     submitMedication = (event) => {
         event.preventDefault();
         // check if all required fields are filled, otherwise do not submit values
-        if(this.state.mName === "" || this.state.mTime === "" || this.state.mDosage === "" || this.state.mUnit === "" || this.state.mRoute === "" || this.state.mResult === "" || this.state.mBy === "") {
+        if (this.state.mName === "" || this.state.mTime === "" || this.state.mDosage === "" || this.state.mUnit === "" || this.state.mRoute === "" || this.state.mResult === "" || this.state.mBy === "") {
             this.setState({ message: "required-fields" });
         } else {
             this.setState({ message: "" });
             let medications = "[Medicamento: " + this.state.mName + " | Hora: " + this.state.mTime + " | Dosis: " + this.state.mDosage + " " + this.state.mUnit + " | Tomar: " + this.state.mRoute + " | Resultados: " + this.state.mResult + " | Por: ";
-            if(this.state.mBy === "Otro") { medications += this.state.mByOther; }
+            if (this.state.mBy === "Otro") { medications += this.state.mByOther; }
             else { medications += this.state.mBy; }
             medications += "]";
             this.props.appendMedications(medications);
@@ -205,7 +205,7 @@ export default class AddInterventions extends Component {
     submitProcedure = (event) => {
         event.preventDefault();
         // check if all required fields are filled, otherwise do not submit values
-        if(this.state.pName === "" || this.state.pTime === "" || this.state.pBy === "") {
+        if (this.state.pName === "" || this.state.pTime === "" || this.state.pBy === "") {
             this.setState({ message: "required-fields" });
         } else {
             this.setState({ message: "" });
@@ -242,7 +242,7 @@ export default class AddInterventions extends Component {
             if (this.state.pName === "Paro cardíaco") { procedures += " | CPR hecho por: " + this.state.pCPRbyName + "]"; }
             else {
                 procedures += " | Por: ";
-                if(this.state.pBy === "Otro") { procedures += this.state.pByOther; }
+                if (this.state.pBy === "Otro") { procedures += this.state.pByOther; }
                 else { procedures += this.state.pBy; }
                 procedures += "]";
             }
@@ -317,298 +317,302 @@ export default class AddInterventions extends Component {
         }
 
         return (
-            <div className="chart">
-                <form id="interventions">
-                    <h2>{this.context.translate('inter-treatment')}</h2>
-                    <h3>{this.context.translate('procedures')}</h3>
-                    {values.procedures.length >= 1 ?
-                        <table className="treatment">
-                            <tbody>
-                                <tr>
-                                    <th width="12%">{this.context.translate('Time')}</th>
-                                    <th width="20%">{this.context.translate('procedure')}</th>
-                                    <th>{this.context.translate('data')}</th>
-                                    <th width="20%">{this.context.translate('by')}</th>
-                                    <th width="10%">{this.context.translate('action')}</th>
-                                </tr>
-                                {procedureList}
-                            </tbody>
-                        </table> : null}
-                    <div style={{ textAlign: 'center' }}><input type="button" value={this.context.translate('add-proc')} onClick={this.toggleProc} /></div>
-                    {this.state.showProc ?
-                        <Popup
-                            text="add-proc"
-                            changeInter={this.changeInter}
-                            handleCheck={this.handleCheck}
-                            handleDate={this.handleDate}
-                            makeEmpty={this.makeEmpty}
-                            closePopup={this.toggleProc}
-                            submitProcedure={this.submitProcedure}
-                            inter={inter}
-                        />
-                        : null}
-                    <h3>{this.context.translate('medications')}</h3>
-                    {values.medications.length >= 1 ?
-                        <table className="treatment">
-                            <tbody>
-                                <tr>
-                                    <th width="12%">{this.context.translate('Time')}</th>
-                                    <th width="20%">{this.context.translate('medication')}</th>
-                                    <th width="15%">{this.context.translate('dosage')}</th>
-                                    <th>{this.context.translate('route')}</th>
-                                    <th width="20%">{this.context.translate('by')}</th>
-                                    <th width="10%">{this.context.translate('action')}</th>
-                                </tr>
-                                {medicationList}
-                            </tbody>
-                        </table> : null}
-                    <div style={{ textAlign: 'center' }}><input type="button" value={this.context.translate('add-med')} onClick={this.toggleMed} /></div>
-                    {this.state.showMed ?
-                        <Popup
-                            text="add-med"
-                            changeInter={this.changeInter}
-                            handleDate={this.handleDate}
-                            closePopup={this.toggleMed}
-                            submitMedication={this.submitMedication}
-                            inter={inter}
-                        />
-                        : null}
-                    <h3><label className="v2"style={{lineHeight:'40px'}}>{this.context.translate('intake-output')} <input type="checkbox" name="none" value="intake" checked={values.assessmentCheckBoxes[323]} onChange={this.props.handleAssessmentCheckboxes(323)} /></label></h3>
-                    {values.assessmentCheckBoxes[323] ?
-                        <table className="cform">
-                            <tbody>
-                                <tr>
-                                    <th className="top" width="25%">{this.context.translate('bleeding')}</th>
-                                    <td colSpan="3" width="75%">
-                                        <div style={{ display: 'inline-block' }}>
-                                            <input type="number" className="calculation" name="ioBleedPT" min="0" max="9999" value={values.ioBleedPT} onChange={this.props.handleChange('ioBleedPT')} />
-                                            <strong>{this.context.translate('bpre-transport')}</strong>
-                                        </div>
-                                        <div style={{ display: 'inline-block' }}>
-                                            <input type="number" className="calculation" name="ioBleedT" min="0" max="9999" value={values.ioBleedT} onChange={this.props.handleChange('ioBleedT')} />
-                                            <strong>{this.context.translate('btransport')}</strong>
-                                        </div>
-                                        <div style={{ display: 'inline-block' }}>
-                                            <input type="number" className="calculation" disabled value={parseInt(values.ioBleedPT) + parseInt(values.ioBleedT)} />
-                                            <strong>Total</strong>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th className="top">{this.context.translate('iv-fluid')}</th>
-                                    <td colSpan="3">
-                                        <div style={{ display: 'inline-block' }}>
-                                            <input type="number" className="calculation" name="ioIVPT" min="0" max="9999" value={values.ioIVPT} onChange={this.props.handleChange('ioIVPT')} />
-                                            <strong>{this.context.translate('bpre-transport')}</strong>
-                                        </div>
-                                        <div style={{ display: 'inline-block' }}>
-                                            <input type="number" className="calculation" name="ioIVT" min="0" max="9999" value={values.ioIVT} onChange={this.props.handleChange('ioIVT')} />
-                                            <strong>{this.context.translate('btransport')}</strong>
-                                        </div>
-                                        <div style={{ display: 'inline-block' }}>
-                                            <input type="number" className="calculation" disabled value={parseInt(values.ioIVPT) + parseInt(values.ioIVT)} />
-                                            <strong>Total</strong>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th className="top">{this.context.translate('oral-fluid')}</th>
-                                    <td colSpan="3">
-                                        <div style={{ display: 'inline-block' }}>
-                                            <input type="number" className="calculation" name="ioOralPT" min="0" max="9999" value={values.ioOralPT} onChange={this.props.handleChange('ioOralPT')} />
-                                            <strong>{this.context.translate('bpre-transport')}</strong>
-                                        </div>
-                                        <div style={{ display: 'inline-block' }}>
-                                            <input type="number" className="calculation" name="ioOralT" min="0" max="9999" value={values.ioOralT} onChange={this.props.handleChange('ioOralT')} />
-                                            <strong>{this.context.translate('btransport')}</strong>
-                                        </div>
-                                        <div style={{ display: 'inline-block' }}>
-                                            <input type="number" className="calculation" disabled value={parseInt(values.ioOralPT) + parseInt(values.ioOralT)} />
-                                            <strong>Total</strong>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th className="top">{this.context.translate('vomit')}</th>
-                                    <td colSpan="3">
-                                        <div style={{ display: 'inline-block' }}>
-                                            <input type="number" className="calculation" name="ioVomitPT" min="0" max="9999" value={values.ioVomitPT} onChange={this.props.handleChange('ioVomitPT')} />
-                                            <strong>{this.context.translate('bpre-transport')}</strong>
-                                        </div>
-                                        <div style={{ display: 'inline-block' }}>
-                                            <input type="number" className="calculation" name="ioVomitT" min="0" max="9999" value={values.ioVomitT} onChange={this.props.handleChange('ioVomitT')} />
-                                            <strong>{this.context.translate('btransport')}</strong>
-                                        </div>
-                                        <div style={{ display: 'inline-block' }}>
-                                            <input type="number" className="calculation" disabled value={parseInt(values.ioVomitPT) + parseInt(values.ioVomitT)} />
-                                            <strong>Total</strong>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table> : null}
-                    <h3><label className="v2" style={{lineHeight:'40px'}}>{this.context.translate('obstetrics')} <input type="checkbox" name="none" value="obstetrics" checked={values.assessmentCheckBoxes[324]} onChange={this.props.handleAssessmentCheckboxes(324)} /></label></h3>
-                    {values.assessmentCheckBoxes[324] ?
-                        <table className="cform">
-                            <tbody>
-                                <tr>
-                                    <th width="25%">{this.context.translate('gravid')}</th>
-                                    <td width="75%"><input type="number" className="calculation" name="oGravid" min="0" max="99" value={values.oGravid} onChange={this.props.handleChange('oGravid')} /></td>
-                                </tr>
-                                <tr>
-                                    <th>{this.context.translate('para')}</th>
-                                    <td><input type="number" className="calculation" name="oPara" min="0" max="99" value={values.oPara} onChange={this.props.handleChange('oPara')} /></td>
-                                </tr>
-                                <tr>
-                                    <th>{this.context.translate('abortion')}</th>
-                                    <td><input type="number" className="calculation" name="oAbortion" min="0" max="99" value={values.oAbortion} onChange={this.props.handleChange('oAbortion')} /></td>
-                                </tr>
-                                <tr>
-                                    <th>{this.context.translate('due-date')}</th>
-                                    <td>
-                                        <DatePicker
-                                            selected={values.oDuedateDisplay ? values.oDuedateDisplay : false}
-                                            placeholderText="dd/mm/yyyy"
-                                            onChange={this.props.handleDate('oDuedate')}
-                                            timeInputLabel="Time:"
-                                            dateFormat="dd/MM/yyyy h:mm aa"
-                                            showTimeInput
-                                        />
-                                    </td>
-                                </tr>
-                                <tr><th>{this.context.translate('gestation')}</th>
-                                    <td><input type="text" style={{ width: '80px', marginRight: '0' }} name="oGestation" value={values.oGestation} onChange={this.props.handleChange('oGestation')} /> {this.context.translate('week')}s</td>
-                                </tr>
-                                <tr>
-                                    <th>{this.context.translate('vaginal-bleed')}</th>
-                                    <td>
-                                        <div style={{ margin: '7.5px' }}>
-                                            <label className="v2"><input type="radio" name="oVaginalBleed" value="Sí" checked={values.oVaginalBleed.includes("Sí")} onChange={this.props.handleChange('oVaginalBleed')} /> {this.context.translate('yes')}</label>
-                                            <label className="v2"><input type="radio" name="oVaginalBleed" value="No" checked={values.oVaginalBleed.includes("No")} onChange={this.props.handleChange('oVaginalBleed')} /> No</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>{this.context.translate('contraction')}</th>
-                                    <td><input type="text" name="oContraction" value={values.oContraction} onChange={this.props.handleChange('oContraction')} /></td>
-                                </tr>
-                                <tr>
-                                    <th>{this.context.translate('frequency')}</th>
-                                    <td><input type="text" style={{ width: '80px', marginRight: '0' }} name="oFrequency" value={values.oFrequency} onChange={this.props.handleChange('oFrequency')} /> {this.context.translate('minute')}s</td>
-                                </tr>
-                                <tr>
-                                    <th>{this.context.translate('duration')}</th>
-                                    <td><input type="text" style={{ width: '80px', marginRight: '0' }} name="oDuration" value={values.oDuration} onChange={this.props.handleChange('oDuration')} /> {this.context.translate('minute')}s</td>
-                                </tr>
-                                <tr>
-                                    <th>{this.context.translate('water-rupture')}</th>
-                                    <td>
-                                        <div style={{ margin: '7.5px' }}>
-                                            <label className="v2"><input type="radio" name="oWaterRupture" value="Sí" checked={values.oWaterRupture.includes("Sí")} onChange={this.props.handleChange('oWaterRupture')} /> {this.context.translate('yes')}</label>
-                                            <label className="v2"><input type="radio" name="oWaterRupture" value="No" checked={values.oWaterRupture.includes("No")} onChange={this.props.handleChange('oWaterRupture')} /> No</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                {values.oWaterRupture === "Sí" ?
+            <div>
+                <div className="chart">
+                    <form id="interventions">
+                        <h2>{this.context.translate('inter-treatment')}</h2>
+                        <h3>{this.context.translate('procedures')}</h3>
+                        {values.procedures.length >= 1 ?
+                            <table className="treatment">
+                                <tbody>
                                     <tr>
-                                        <th>{this.context.translate('water-color')}</th>
-                                        <td>
-                                            <div style={{ margin: '7.5px' }}>
-                                                <label className="v2"><input type="radio" name="oWaterColor" value="Claro" checked={values.oWaterColor.includes("Claro")} onChange={this.props.handleChange('oWaterColor')} /> {this.context.translate('clear')}</label>
-                                                <label className="v2"><input type="radio" name="oWaterColor" value="Sangrienta" checked={values.oWaterColor.includes("Sangrienta")} onChange={this.props.handleChange('oWaterColor')} /> {this.context.translate('bloody')}</label>
-                                                <label className="v2"><input type="radio" name="oWaterColor" value="Meconio" checked={values.oWaterColor.includes("Meconio")} onChange={this.props.handleChange('oWaterColor')} /> {this.context.translate('meconium')}</label>
+                                        <th width="12%">{this.context.translate('Time')}</th>
+                                        <th width="20%">{this.context.translate('procedure')}</th>
+                                        <th>{this.context.translate('data')}</th>
+                                        <th width="20%">{this.context.translate('by')}</th>
+                                        <th width="10%">{this.context.translate('action')}</th>
+                                    </tr>
+                                    {procedureList}
+                                </tbody>
+                            </table> : null}
+                        <div style={{ textAlign: 'center' }}><input type="button" value={this.context.translate('add-proc')} onClick={this.toggleProc} /></div>
+                        {this.state.showProc ?
+                            <Popup
+                                text="add-proc"
+                                changeInter={this.changeInter}
+                                handleCheck={this.handleCheck}
+                                handleDate={this.handleDate}
+                                makeEmpty={this.makeEmpty}
+                                closePopup={this.toggleProc}
+                                submitProcedure={this.submitProcedure}
+                                inter={inter}
+                            />
+                            : null}
+                        <h3>{this.context.translate('medications')}</h3>
+                        {values.medications.length >= 1 ?
+                            <table className="treatment">
+                                <tbody>
+                                    <tr>
+                                        <th width="12%">{this.context.translate('Time')}</th>
+                                        <th width="20%">{this.context.translate('medication')}</th>
+                                        <th width="15%">{this.context.translate('dosage')}</th>
+                                        <th>{this.context.translate('route')}</th>
+                                        <th width="20%">{this.context.translate('by')}</th>
+                                        <th width="10%">{this.context.translate('action')}</th>
+                                    </tr>
+                                    {medicationList}
+                                </tbody>
+                            </table> : null}
+                        <div style={{ textAlign: 'center' }}><input type="button" value={this.context.translate('add-med')} onClick={this.toggleMed} /></div>
+                        {this.state.showMed ?
+                            <Popup
+                                text="add-med"
+                                changeInter={this.changeInter}
+                                handleDate={this.handleDate}
+                                closePopup={this.toggleMed}
+                                submitMedication={this.submitMedication}
+                                inter={inter}
+                            />
+                            : null}
+                        <h3><label className="v2" style={{ lineHeight: '40px' }}>{this.context.translate('intake-output')} <input type="checkbox" name="none" value="intake" checked={values.assessmentCheckBoxes[323]} onChange={this.props.handleAssessmentCheckboxes(323)} /></label></h3>
+                        {values.assessmentCheckBoxes[323] ?
+                            <table className="cform">
+                                <tbody>
+                                    <tr>
+                                        <th className="top" width="25%">{this.context.translate('bleeding')}</th>
+                                        <td colSpan="3" width="75%">
+                                            <div style={{ display: 'inline-block' }}>
+                                                <input type="number" className="calculation" name="ioBleedPT" min="0" max="9999" value={values.ioBleedPT} onChange={this.props.handleChange('ioBleedPT')} />
+                                                <strong>{this.context.translate('bpre-transport')}</strong>
+                                            </div>
+                                            <div style={{ display: 'inline-block' }}>
+                                                <input type="number" className="calculation" name="ioBleedT" min="0" max="9999" value={values.ioBleedT} onChange={this.props.handleChange('ioBleedT')} />
+                                                <strong>{this.context.translate('btransport')}</strong>
+                                            </div>
+                                            <div style={{ display: 'inline-block' }}>
+                                                <input type="number" className="calculation" disabled value={parseInt(values.ioBleedPT) + parseInt(values.ioBleedT)} />
+                                                <strong>Total</strong>
                                             </div>
                                         </td>
                                     </tr>
-                                    : null}
-                                <tr>
-                                    <th>{this.context.translate('baby-moving')}</th>
-                                    <td>
-                                        <div style={{ margin: '7.5px' }}>
-                                            <label className="v2"><input type="radio" name="oBabyMoving" value="Sí" checked={values.oBabyMoving.includes("Sí")} onChange={this.props.handleChange('oBabyMoving')} /> {this.context.translate('yes')}</label>
-                                            <label className="v2"><input type="radio" name="oBabyMoving" value="No" checked={values.oBabyMoving.includes("No")} onChange={this.props.handleChange('oBabyMoving')} /> No</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>{this.context.translate('delivery-time')}</th>
-                                    <td><input type="number" className="calculation" name="oDelivery" min="0" max="99" value={values.oDelivery} onChange={this.props.handleChange('oDelivery')} /></td>
-                                </tr>
-                                <tr>
-                                    <th>{this.context.translate('placenta')}</th>
-                                    <td>
-                                        <div style={{ margin: '7.5px' }}>
-                                            <label className="v2"><input type="radio" name="oPlacenta" value="Sí" checked={values.oPlacenta.includes("Sí")} onChange={this.props.handleChange('oPlacenta')} /> {this.context.translate('yes')}</label>
-                                            <label className="v2"><input type="radio" name="oPlacenta" value="No" checked={values.oPlacenta.includes("No")} onChange={this.props.handleChange('oPlacenta')} /> No</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>{this.context.translate('baby-sex')}</th>
-                                    <td>
-                                        <div style={{ margin: '7.5px' }}>
-                                            <label className="v2"><input type="radio" name="oBabySex" value="Hombre" checked={values.oBabySex.includes("Hombre")} onChange={this.props.handleChange('oBabySex')} /> {this.context.translate('male')}</label>
-                                            <label className="v2"><input type="radio" name="oBabySex" value="Mujer" checked={values.oBabySex.includes("Mujer")} onChange={this.props.handleChange('oBabySex')} /> {this.context.translate('female')}</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>{this.context.translate('born')}</th>
-                                    <td>
-                                        <div style={{ margin: '7.5px' }}>
-                                            <label className="v2"><input type="radio" name="oBorn" value="Vivo" checked={values.oBorn.includes("Vivo")} onChange={this.props.handleChange('oBorn')} /> {this.context.translate('alive')}</label>
-                                            <label className="v2"><input type="radio" name="oBorn" value="Muerto" checked={values.oBorn.includes("Muerto")} onChange={this.props.handleChange('oBorn')} /> {this.context.translate('dead')}</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th className="top">{this.context.translate('apgar')}</th>
-                                    <td>
-                                        <div style={{ margin: '7.5px' }}>
-                                            <img width="600px" alt="APGAR Scoring System" src="https://1q3nfm4evj5z1sgm624e93ka-wpengine.netdna-ssl.com/wp-content/uploads/2016/06/Apgar-Scoring-System-Diagnosing-Birth-Injuries.jpg" /><br />
-                                            <div style={{ display: 'block' }}>
-                                                <input type="text" style={{ width: '80px' }} name="oAPGAR1" value={values.oAPGAR1} onChange={this.props.handleChange('oAPGAR1')} />
-                                                <strong>1 {this.context.translate('minute')}</strong>
+                                    <tr>
+                                        <th className="top">{this.context.translate('iv-fluid')}</th>
+                                        <td colSpan="3">
+                                            <div style={{ display: 'inline-block' }}>
+                                                <input type="number" className="calculation" name="ioIVPT" min="0" max="9999" value={values.ioIVPT} onChange={this.props.handleChange('ioIVPT')} />
+                                                <strong>{this.context.translate('bpre-transport')}</strong>
                                             </div>
-                                            <div style={{ display: 'block' }}>
-                                                <input type="text" style={{ width: '80px' }} name="oAPGAR5" value={values.oAPGAR5} onChange={this.props.handleChange('oAPGAR5')} />
-                                                <strong>5 {this.context.translate('minute')}s</strong>
+                                            <div style={{ display: 'inline-block' }}>
+                                                <input type="number" className="calculation" name="ioIVT" min="0" max="9999" value={values.ioIVT} onChange={this.props.handleChange('ioIVT')} />
+                                                <strong>{this.context.translate('btransport')}</strong>
                                             </div>
-                                            <div style={{ display: 'block' }}>
-                                                <input type="text" style={{ width: '80px' }} name="oAPGAR10" value={values.oAPGAR10} onChange={this.props.handleChange('oAPGAR10')} />
-                                                <strong>10 {this.context.translate('minute')}s</strong>
+                                            <div style={{ display: 'inline-block' }}>
+                                                <input type="number" className="calculation" disabled value={parseInt(values.ioIVPT) + parseInt(values.ioIVT)} />
+                                                <strong>Total</strong>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table> : null}
-                    {/*<input type="text" name="pName" value={this.state.pName} />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th className="top">{this.context.translate('oral-fluid')}</th>
+                                        <td colSpan="3">
+                                            <div style={{ display: 'inline-block' }}>
+                                                <input type="number" className="calculation" name="ioOralPT" min="0" max="9999" value={values.ioOralPT} onChange={this.props.handleChange('ioOralPT')} />
+                                                <strong>{this.context.translate('bpre-transport')}</strong>
+                                            </div>
+                                            <div style={{ display: 'inline-block' }}>
+                                                <input type="number" className="calculation" name="ioOralT" min="0" max="9999" value={values.ioOralT} onChange={this.props.handleChange('ioOralT')} />
+                                                <strong>{this.context.translate('btransport')}</strong>
+                                            </div>
+                                            <div style={{ display: 'inline-block' }}>
+                                                <input type="number" className="calculation" disabled value={parseInt(values.ioOralPT) + parseInt(values.ioOralT)} />
+                                                <strong>Total</strong>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th className="top">{this.context.translate('vomit')}</th>
+                                        <td colSpan="3">
+                                            <div style={{ display: 'inline-block' }}>
+                                                <input type="number" className="calculation" name="ioVomitPT" min="0" max="9999" value={values.ioVomitPT} onChange={this.props.handleChange('ioVomitPT')} />
+                                                <strong>{this.context.translate('bpre-transport')}</strong>
+                                            </div>
+                                            <div style={{ display: 'inline-block' }}>
+                                                <input type="number" className="calculation" name="ioVomitT" min="0" max="9999" value={values.ioVomitT} onChange={this.props.handleChange('ioVomitT')} />
+                                                <strong>{this.context.translate('btransport')}</strong>
+                                            </div>
+                                            <div style={{ display: 'inline-block' }}>
+                                                <input type="number" className="calculation" disabled value={parseInt(values.ioVomitPT) + parseInt(values.ioVomitT)} />
+                                                <strong>Total</strong>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table> : null}
+                        <h3><label className="v2" style={{ lineHeight: '40px' }}>{this.context.translate('obstetrics')} <input type="checkbox" name="none" value="obstetrics" checked={values.assessmentCheckBoxes[324]} onChange={this.props.handleAssessmentCheckboxes(324)} /></label></h3>
+                        {values.assessmentCheckBoxes[324] ?
+                            <table className="cform">
+                                <tbody>
+                                    <tr>
+                                        <th width="25%">{this.context.translate('gravid')}</th>
+                                        <td width="75%"><input type="number" className="calculation" name="oGravid" min="0" max="99" value={values.oGravid} onChange={this.props.handleChange('oGravid')} /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>{this.context.translate('para')}</th>
+                                        <td><input type="number" className="calculation" name="oPara" min="0" max="99" value={values.oPara} onChange={this.props.handleChange('oPara')} /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>{this.context.translate('abortion')}</th>
+                                        <td><input type="number" className="calculation" name="oAbortion" min="0" max="99" value={values.oAbortion} onChange={this.props.handleChange('oAbortion')} /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>{this.context.translate('due-date')}</th>
+                                        <td>
+                                            <DatePicker
+                                                selected={values.oDuedateDisplay ? values.oDuedateDisplay : false}
+                                                placeholderText="dd/mm/yyyy"
+                                                onChange={this.props.handleDate('oDuedate')}
+                                                timeInputLabel="Time:"
+                                                dateFormat="dd/MM/yyyy h:mm aa"
+                                                showTimeInput
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr><th>{this.context.translate('gestation')}</th>
+                                        <td><input type="text" style={{ width: '80px', marginRight: '0' }} name="oGestation" value={values.oGestation} onChange={this.props.handleChange('oGestation')} /> {this.context.translate('week')}s</td>
+                                    </tr>
+                                    <tr>
+                                        <th>{this.context.translate('vaginal-bleed')}</th>
+                                        <td>
+                                            <div style={{ margin: '7.5px' }}>
+                                                <label className="v2"><input type="radio" name="oVaginalBleed" value="Sí" checked={values.oVaginalBleed.includes("Sí")} onChange={this.props.handleChange('oVaginalBleed')} /> {this.context.translate('yes')}</label>
+                                                <label className="v2"><input type="radio" name="oVaginalBleed" value="No" checked={values.oVaginalBleed.includes("No")} onChange={this.props.handleChange('oVaginalBleed')} /> No</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>{this.context.translate('contraction')}</th>
+                                        <td><input type="text" name="oContraction" value={values.oContraction} onChange={this.props.handleChange('oContraction')} /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>{this.context.translate('frequency')}</th>
+                                        <td><input type="text" style={{ width: '80px', marginRight: '0' }} name="oFrequency" value={values.oFrequency} onChange={this.props.handleChange('oFrequency')} /> {this.context.translate('minute')}s</td>
+                                    </tr>
+                                    <tr>
+                                        <th>{this.context.translate('duration')}</th>
+                                        <td><input type="text" style={{ width: '80px', marginRight: '0' }} name="oDuration" value={values.oDuration} onChange={this.props.handleChange('oDuration')} /> {this.context.translate('minute')}s</td>
+                                    </tr>
+                                    <tr>
+                                        <th>{this.context.translate('water-rupture')}</th>
+                                        <td>
+                                            <div style={{ margin: '7.5px' }}>
+                                                <label className="v2"><input type="radio" name="oWaterRupture" value="Sí" checked={values.oWaterRupture.includes("Sí")} onChange={this.props.handleChange('oWaterRupture')} /> {this.context.translate('yes')}</label>
+                                                <label className="v2"><input type="radio" name="oWaterRupture" value="No" checked={values.oWaterRupture.includes("No")} onChange={this.props.handleChange('oWaterRupture')} /> No</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {values.oWaterRupture === "Sí" ?
+                                        <tr>
+                                            <th>{this.context.translate('water-color')}</th>
+                                            <td>
+                                                <div style={{ margin: '7.5px' }}>
+                                                    <label className="v2"><input type="radio" name="oWaterColor" value="Claro" checked={values.oWaterColor.includes("Claro")} onChange={this.props.handleChange('oWaterColor')} /> {this.context.translate('clear')}</label>
+                                                    <label className="v2"><input type="radio" name="oWaterColor" value="Sangrienta" checked={values.oWaterColor.includes("Sangrienta")} onChange={this.props.handleChange('oWaterColor')} /> {this.context.translate('bloody')}</label>
+                                                    <label className="v2"><input type="radio" name="oWaterColor" value="Meconio" checked={values.oWaterColor.includes("Meconio")} onChange={this.props.handleChange('oWaterColor')} /> {this.context.translate('meconium')}</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        : null}
+                                    <tr>
+                                        <th>{this.context.translate('baby-moving')}</th>
+                                        <td>
+                                            <div style={{ margin: '7.5px' }}>
+                                                <label className="v2"><input type="radio" name="oBabyMoving" value="Sí" checked={values.oBabyMoving.includes("Sí")} onChange={this.props.handleChange('oBabyMoving')} /> {this.context.translate('yes')}</label>
+                                                <label className="v2"><input type="radio" name="oBabyMoving" value="No" checked={values.oBabyMoving.includes("No")} onChange={this.props.handleChange('oBabyMoving')} /> No</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>{this.context.translate('delivery-time')}</th>
+                                        <td><input type="number" className="calculation" name="oDelivery" min="0" max="99" value={values.oDelivery} onChange={this.props.handleChange('oDelivery')} /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>{this.context.translate('placenta')}</th>
+                                        <td>
+                                            <div style={{ margin: '7.5px' }}>
+                                                <label className="v2"><input type="radio" name="oPlacenta" value="Sí" checked={values.oPlacenta.includes("Sí")} onChange={this.props.handleChange('oPlacenta')} /> {this.context.translate('yes')}</label>
+                                                <label className="v2"><input type="radio" name="oPlacenta" value="No" checked={values.oPlacenta.includes("No")} onChange={this.props.handleChange('oPlacenta')} /> No</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>{this.context.translate('baby-sex')}</th>
+                                        <td>
+                                            <div style={{ margin: '7.5px' }}>
+                                                <label className="v2"><input type="radio" name="oBabySex" value="Hombre" checked={values.oBabySex.includes("Hombre")} onChange={this.props.handleChange('oBabySex')} /> {this.context.translate('male')}</label>
+                                                <label className="v2"><input type="radio" name="oBabySex" value="Mujer" checked={values.oBabySex.includes("Mujer")} onChange={this.props.handleChange('oBabySex')} /> {this.context.translate('female')}</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>{this.context.translate('born')}</th>
+                                        <td>
+                                            <div style={{ margin: '7.5px' }}>
+                                                <label className="v2"><input type="radio" name="oBorn" value="Vivo" checked={values.oBorn.includes("Vivo")} onChange={this.props.handleChange('oBorn')} /> {this.context.translate('alive')}</label>
+                                                <label className="v2"><input type="radio" name="oBorn" value="Muerto" checked={values.oBorn.includes("Muerto")} onChange={this.props.handleChange('oBorn')} /> {this.context.translate('dead')}</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th className="top">{this.context.translate('apgar')}</th>
+                                        <td>
+                                            <div style={{ margin: '7.5px' }}>
+                                                <img width="600px" alt="APGAR Scoring System" src="https://1q3nfm4evj5z1sgm624e93ka-wpengine.netdna-ssl.com/wp-content/uploads/2016/06/Apgar-Scoring-System-Diagnosing-Birth-Injuries.jpg" /><br />
+                                                <div style={{ display: 'block' }}>
+                                                    <input type="text" style={{ width: '80px' }} name="oAPGAR1" value={values.oAPGAR1} onChange={this.props.handleChange('oAPGAR1')} />
+                                                    <strong>1 {this.context.translate('minute')}</strong>
+                                                </div>
+                                                <div style={{ display: 'block' }}>
+                                                    <input type="text" style={{ width: '80px' }} name="oAPGAR5" value={values.oAPGAR5} onChange={this.props.handleChange('oAPGAR5')} />
+                                                    <strong>5 {this.context.translate('minute')}s</strong>
+                                                </div>
+                                                <div style={{ display: 'block' }}>
+                                                    <input type="text" style={{ width: '80px' }} name="oAPGAR10" value={values.oAPGAR10} onChange={this.props.handleChange('oAPGAR10')} />
+                                                    <strong>10 {this.context.translate('minute')}s</strong>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table> : null}
+                        {/*<input type="text" name="pName" value={this.state.pName} />
                     <hr/>*/}
-                    <input type="button" className="left" onClick={this.back} value={this.context.translate('previous')} />
-                    <input type="button" className="right" onClick={this.saveAndContinue} value={this.context.translate('next')} />
-                </form>
+                        <input type="button" className="left" onClick={this.back} value={this.context.translate('previous')} />
+                        <input type="button" className="right" onClick={this.saveAndContinue} value={this.context.translate('next')} />
+                    </form>
+                </div>
                 {/* Bottom chart navigation */}
                 <div className="chartnav">
-                <div className="tab" onClick={this.navigate(1)}>
-                        <img src="/callIcon.png" alt="Call" />
-                        <b>{this.context.translate('call')}</b>
-                    </div>
-                    <div className="tab" onClick={this.navigate(2)}>
-                        <img src="/patientIcon.png" alt="Patient" />
-                        <b>{this.context.translate('patient')}</b>
-                    </div>
-                    <div className="tab" onClick={this.navigate(3)}>
-                        <img src="/assessmentIcon.png" alt="Physical Exam" />
-                        <b>{this.context.translate('physical-exam')}</b>
-                    </div>
-                    <div className="tab active" onClick={this.navigate(4)}>
-                        <img src="/interventionsIcon.png" alt="Interventions" />
-                        <b>{this.context.translate('interventions')}</b>
-                    </div>
-                    <div className="tab" onClick={this.navigate(5)}>
-                        <img src="/confirmIcon.png" alt="Confirm" />
-                        <b>{this.context.translate('confirm')}</b>
+                    <div className="tabs">
+                        <div className="tab" onClick={this.navigate(1)}>
+                            <img src="/callIcon.png" alt="Call" />
+                            <b>{this.context.translate('call')}</b>
+                        </div>
+                        <div className="tab" onClick={this.navigate(2)}>
+                            <img src="/patientIcon.png" alt="Patient" />
+                            <b>{this.context.translate('patient')}</b>
+                        </div>
+                        <div className="tab" onClick={this.navigate(3)}>
+                            <img src="/assessmentIcon.png" alt="Physical Exam" />
+                            <b>{this.context.translate('physical-exam')}</b>
+                        </div>
+                        <div className="tab active" onClick={this.navigate(4)}>
+                            <img src="/interventionsIcon.png" alt="Interventions" />
+                            <b>{this.context.translate('interventions')}</b>
+                        </div>
+                        <div className="tab" onClick={this.navigate(5)}>
+                            <img src="/confirmIcon.png" alt="Confirm" />
+                            <b>{this.context.translate('confirm')}</b>
+                        </div>
                     </div>
                 </div>
             </div>
