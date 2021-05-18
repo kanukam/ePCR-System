@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+//import jsPDF from 'jspdf';
+//import html2canvas from 'html2canvas';
 import { MainContext } from '../Auth';
 import MainNav from './MainNav';
 import Notes from './Notes';
@@ -25,7 +25,7 @@ export default class ViewChart extends Component {
     }
 
     componentDidMount() {
-        this.setState({ chartsrc: `http://localhost:3000/api/charts/${this.props.match.params.id}/pdf?locale=${this.context.language}#scrollbar=1` });
+        //this.setState({ chartsrc: `http://localhost:3000/api/charts/${this.props.match.params.id}/pdf?locale=${this.context.language}#scrollbar=1` });
         let url = `http://localhost:3000/api/charts/${this.props.match.params.id}`;
         const options = {
             method: 'GET',
@@ -41,6 +41,9 @@ export default class ViewChart extends Component {
             }
             return response.json();
         }).then(data => {
+            data.procedures = data.procedures.split('],');
+            data.medications = data.medications.split('],');
+            console.log(data);
             this.setState({ chart: data });
         })
             .catch((error) => {
@@ -96,13 +99,13 @@ export default class ViewChart extends Component {
                             <tr><th colSpan="4" className="heading">{this.context.translate('patient-info')}</th></tr>
                             <tr>
                                 <td><b>{this.context.translate('full-name')}</b></td>
-                                <td>{/* patient name */}</td>
+                                <td>{chart.lname}, {chart.fname}</td>
                                 <td><b>{this.context.translate('pbirth')}</b></td>
-                                <td>{/* patient birth */}</td>
+                                <td>{chart.birth ? <Moment date={chart.birth} format="DD-MM-YYYY" /> : null}</td>
                             </tr>
                             <tr>
                                 <td><b>{this.context.translate('psex')}</b></td>
-                                <td>{/* patient sex */}</td>
+                                <td>{chart.gender}</td>
                                 <td><b>{this.context.translate('classify')}</b></td>
                                 <td>{chart["p_classify"]}</td>
                             </tr>
@@ -402,9 +405,23 @@ export default class ViewChart extends Component {
                         <tbody>
                             <tr><th colSpan="4" className="heading">{this.context.translate('interventions')}</th></tr>
                             <tr><th colSpan="4">{this.context.translate('procedures')}</th></tr>
-                            <tr><td colSpan="4" style={{textAlign:'center'}}>{chart["procedures"]}</td></tr>
+                            <tr><td colSpan="4" style={{ textAlign: 'center' }}>{chart.procedures && chart.procedures.map((element, idx) => {
+                                return (
+                                    <div>
+                                        {element}
+                                        <br />
+                                    </div>
+                                )
+                            })}</td></tr>
                             <tr><th colSpan="4">{this.context.translate('medications')}</th></tr>
-                            <tr><td colSpan="4" style={{textAlign:'center'}}>{chart["medications"]}</td></tr>
+                            <tr><td colSpan="4" style={{ textAlign: 'center' }}>{chart.medications && chart.medications.map((element, idx) => {
+                                return (
+                                    <div>
+                                        {element}
+                                        <br />
+                                    </div>
+                                )
+                            })}</td></tr>
                             {chart["intake_bleeding"] !== "" || chart["intake_iv_fluids"] !== "" || chart["intake_oral_fluids"] !== "" || chart["intake_vomit"] !== "" ?
                                 <tr><th colSpan="4" className="heading">{this.context.translate('intake-output')}</th></tr>
                                 : null}
