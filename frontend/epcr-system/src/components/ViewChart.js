@@ -140,13 +140,13 @@ export default class ViewChart extends Component {
                 />
                 <div className="printable">
                     {/*<iframe title="chart" id='pdfpreview' src={this.state.chartsrc} key={this.state.random}  type="application/pdf" width={"100%"} style={{width: "100%", height:"700px"}}></iframe>*/}
-                    <div style={{marginTop:'15px', width:'80%', textAlign:'right'}}>
+                    <div style={{marginTop:'15px auto 0', width:'90%', textAlign:'right'}}>
                         <input type="button" onClick={this.generatePDF} value={this.context.translate('save')}/>
                     </div>
                 </div>
-                <div className="printable" id="printable" style={{fontSize: 20}}>
+                <div className="printable" id="printable" style={{fontSize: 20, padding:this.state.contentSpacing}}>
                     <div className="header">
-                        <span>{/* patient name */}</span>
+                        <span>{chart.lname}, {chart.fname}</span>
                         <span>RESCATE DE SAN CARLOS</span>
                         <span>{chart["incident_number"]}</span>
                     </div>
@@ -595,8 +595,10 @@ export default class ViewChart extends Component {
                         </tbody>
                     </table>
                 </div>
-                <Notes /*reload={this.reload}*/ chartId={this.props.match.params.id} />
-                <Attachments chartId={this.props.match.params.id} />
+                <div style={{padding:this.state.contentSpacing}}>
+                    <Notes /*reload={this.reload}*/ chartId={this.props.match.params.id} />
+                    <Attachments chartId={this.props.match.params.id} />
+                </div>
             </React.Fragment >
         )
 

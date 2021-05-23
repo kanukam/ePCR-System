@@ -17,7 +17,7 @@
 .active { background-color: #dee2e6; }
 .active .nav-link { color:#0056b3; }
 
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 768px) {
     .sidebar { position:absolute; top:46px; max-width:100%; width:100%; min-height:100px !important; height:130px; border-bottom:2px solid #dee2e6; }
     .nav-link { padding:5px 10px; font-size:15px; }
 }

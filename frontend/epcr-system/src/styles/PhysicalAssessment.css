@@ -29,8 +29,9 @@
 .content input[type="checkbox"] { width:auto; height:auto; }
 label { display:block; margin-bottom:0; }
 
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 768px) {
     .content { margin:120px auto; padding:0; width:100%; }
+    .assessment { padding:0; }
     .assessment .exam_label, .assessment .exam_split { display:block; width:100%; }
     .assessment .exam_label.v2, .assessment .exam_label.v3 { width:50%; }
     .assessment input, .assessment select, .assessment textarea { max-width:100%; }

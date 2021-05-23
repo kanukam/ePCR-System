@@ -103,7 +103,7 @@ export default class Confirm extends Component {
                                             <i>{this.context.translate('type')}</i><span>{values.vatype}</span><br />
                                             <i>{this.context.translate('impact')}</i><span>{values.vaimpact.join()}</span><br />
                                             <i>{this.context.translate('safety-equip')}</i><span>{values.vasafe.join()}</span><br />
-                                            <i>{this.context.translate('est-spd')}</i><span>{values.vaspd}</span><br />
+                                            <i>{this.context.translate('est-spd')}</i><span>{values.vaspd} {this.context.translate('mph')}</span><br />
                                             <i>{this.context.translate('eject-vehicle')}</i><span>{values.vaeject}</span>
                                         </text> : <span>No</span>}
                                     </td>
@@ -142,7 +142,7 @@ export default class Confirm extends Component {
                                         <i>{this.context.translate('med-allergy')}</i><span>{values.medAllergy}</span><br />
                                         <i>{this.context.translate('env-allergy')}</i><span>{values.envAllergy}</span><br />
                                         <i>{this.context.translate('immunization')}</i><span>{values.immunization}</span><br />
-                                        <i>{this.context.translate('past-history')}</i><span>{values.pastHistory}{values.assessmentCheckBoxes[315] ? ",O - Other" + values.pastHistoryOther : null}</span>
+                                        <i>{this.context.translate('past-history')}</i><span>{values.pastHistory.join()}{values.assessmentCheckBoxes[321] ? ",O - Other" + values.pastHistoryOther : null}</span>
                                     </td>
                                 </tr>
                                 <tr><th>{this.context.translate('assessments')}</th></tr>
@@ -177,7 +177,7 @@ export default class Confirm extends Component {
                                 </tr>
                                 <tr>
                                     <td>
-                                        <i>{this.context.translate('Stroke-')}</i>{values.assessmentCheckBoxes[259] ? <text><span>Sí</span><br />
+                                        <i>{this.context.translate('Stroke-')}</i>{values.assessmentCheckBoxes[260] ? <text><span>Sí</span><br />
                                             <i>{this.context.translate('Time-of-onset')}</i><span>{values.stroke_time}</span><br />
                                             <i>{this.context.translate('Facial-droop')}</i><span>{values.stroke_facial_droop}</span><br />
                                             <i>{this.context.translate('Arm-Drift')}</i><span>{values.stroke_arm_drift}</span><br />
@@ -229,7 +229,7 @@ export default class Confirm extends Component {
                                 </tr>
                                 <tr>
                                     <td>
-                                        <i>{this.context.translate('intake-output')}</i>{values.assessmentCheckBoxes[316] ? <text><span>Sí</span><br />
+                                        <i>{this.context.translate('intake-output')}</i>{values.assessmentCheckBoxes[323] ? <text><span>Sí</span><br />
                                             <i>{this.context.translate('bleeding')}</i><span>{this.context.translate('bpre-transport')}: {values.ioBleedPT} | {this.context.translate('btransport')}: {values.ioBleedT} | Total : {parseInt(values.ioBleedPT) + parseInt(values.ioBleedT)}</span><br />
                                             <i>{this.context.translate('iv-fluid')}</i><span>{this.context.translate('bpre-transport')}: {values.ioIVPT} | {this.context.translate('btransport')}: {values.ioIVT} | Total : {parseInt(values.ioIVPT) + parseInt(values.ioIVT)}</span><br />
                                             <i>{this.context.translate('oral-fluid')}</i><span>{this.context.translate('bpre-transport')}: {values.ioOralPT} | {this.context.translate('btransport')}: {values.ioOralT} | Total: {parseInt(values.ioOralPT) + parseInt(values.ioOralT)}</span><br />
@@ -239,7 +239,7 @@ export default class Confirm extends Component {
                                 </tr>
                                 <tr>
                                     <td>
-                                        <i>{this.context.translate('obstetrics')}</i>{values.assessmentCheckBoxes[317] ? <text><span>Sí</span><br />
+                                        <i>{this.context.translate('obstetrics')}</i>{values.assessmentCheckBoxes[324] ? <text><span>Sí</span><br />
                                             <i>{this.context.translate('gravid')}</i><span>{values.oGravid}</span><br />
                                             <i>{this.context.translate('para')}</i><span>{values.oPara}</span><br />
                                             <i>{this.context.translate('abortion')}</i><span>{values.oAbortion}</span><br />
