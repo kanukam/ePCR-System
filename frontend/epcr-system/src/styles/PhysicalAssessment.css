@@ -1,5 +1,5 @@
 .assessment { position:relative; padding:25px; }
-.content { width:900px; min-height:200px; margin:30px auto 100px; padding:25px; background:#fff; font-size:14px; }
+.content { width:900px; min-height:200px; margin:0 auto 100px; padding:25px; background:#fff; font-size:14px; }
 .assessment h2, .assessment h3 { margin-bottom:10px; font-size:25px; display:flex; text-transform:uppercase; text-align:center; }
 .assessment h3 { margin:10px 0; padding:0 10px; font-size:16px; line-height:40px; background:#E5E5E5; }
 .assessment .exam_label, .assessment .exam_split { margin:0 5px; padding:2px 10px; border-bottom:1px solid #E5E5E5; font-size:14px; font-weight:500; cursor:pointer; }
@@ -29,8 +29,12 @@
 .content input[type="checkbox"] { width:auto; height:auto; }
 label { display:block; margin-bottom:0; }
 
+@media only screen and (max-width: 992px) {
+    .content { margin:30px auto 100px; padding:0; width:100%; }
+}
+
 @media only screen and (max-width: 768px) {
-    .content { margin:120px auto; padding:0; width:100%; }
+    .content { margin:120px auto; }
     .assessment { padding:0; }
     .assessment .exam_label, .assessment .exam_split { display:block; width:100%; }
     .assessment .exam_label.v2, .assessment .exam_label.v3 { width:50%; }
