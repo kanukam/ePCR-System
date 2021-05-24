@@ -13,7 +13,7 @@ em { color:red; }
 /* content styles */
 .container { padding:10px; width:auto; max-width:100%; }
 .block { display:block !important; width:100% !important; }
-.shadow { margin:30px auto; box-shadow:0 12px 15px rgba(0,0,0,0.15), 0 0 3.5px rgba(0,0,0,0.15), 0 2px 2px rgba(0,0,0,0.25); }
+.shadow { margin:30px auto; padding:25px !important; max-width:900px; box-shadow:0 12px 15px rgba(0,0,0,0.15), 0 0 3.5px rgba(0,0,0,0.15), 0 2px 2px rgba(0,0,0,0.25); }
 .multiple { box-shadow:0px 1px 1px 1px rgba(0,0,0,0.25); margin:0; }
 .danger { margin-bottom:5rem; background:rgba(220,53,69,0.8) !important; }
 .danger:hover { background:rgba(220,53,69,1) !important; }
@@ -60,7 +60,7 @@ a#basic-nav-dropdown { min-width:100px; }
 
 /* chart pages styles */
 .chart, .confirm { position:relative; padding:25px; }
-.chart form, .confirm form { width:900px; min-height:200px; margin:30px auto 100px; padding:25px; background:none; font-size:14px; }
+.chart form, .confirm form { max-width:900px; min-height:200px; margin:30px auto 100px; padding:25px; background:none; font-size:14px; }
 .chart h2, .chart h3, .confirm h2 { margin-bottom:10px; font-size:25px; display:flex; text-transform:uppercase; text-align:center; }
 .chart h3 { margin:10px 0; padding:0 10px; font-size:16px; line-height:40px; background:#E5E5E5; }
 .chart span { display:inline-flex; padding:0 10px; vertical-align:top; min-width:35%; height:40px; line-height:40px; color:#576977; }
@@ -161,17 +161,17 @@ table.simpleview span { display:inline-block; padding:5px; width:75%; vertical-a
 @media only screen and (max-width: 992px) {
     .main-content { padding:10px; }
     .container { max-width:100%; width:100%; }
-    .shadow { padding:25px; width:95% !important; }
+    .shadow { width:95% !important; }
     .chart, .confirm { padding:0; }
-    .chart form, .confirm form { width:auto; }
+    .chart form, .confirm form { padding:0; width:auto; }
 }
 
 @media only screen and (max-width: 768px) {
     .top { padding:0; }
     .navbar { position:fixed; top:0; left:0; }
     .ml-auto.navbar-nav { display:none; }
-    .main-content { margin-top:46px; padding:10px; }
-    .chart form, .confirm form { margin:120px auto; padding:0; width:100%; background:none; }
+    .main-content { margin-top:46px; padding:10px !important; }
+    .chart form, .confirm form { margin:120px auto; padding:0; width:100%; }
     .chart input, .chart select, .chart textarea { max-width:100%; }
     .chart input[type="button"] { margin-bottom:15px; }
     .chartnav { height:55px; }
