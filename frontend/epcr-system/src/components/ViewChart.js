@@ -90,7 +90,7 @@ export default class ViewChart extends Component {
         const input = document.getElementById('printable');
         html2canvas(input)
             .then((canvas) => {
-                const imgData = canvas.toDataURL('image/png');
+                const imgData = canvas.toDataURL('image/jpeg', 1.0);
                 const imgWidth = 295;
                 const pageHeight = 210;
                 const imgHeight = (canvas.height * imgWidth) / canvas.width;
@@ -100,11 +100,11 @@ export default class ViewChart extends Component {
                     unit: 'mm',
                     orientation:'l'
                 })
-                let position = 10;
-                doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                let position = 0;
+                doc.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
                 heightLeft -= pageHeight;
                 while (heightLeft >= 0) {
-                    position += heightLeft - imgHeight;
+                    position = heightLeft - imgHeight;
                     doc.addPage();
                     doc.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
                     heightLeft -= pageHeight;
