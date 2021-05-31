@@ -116,8 +116,8 @@ function summary(from, to, callback) {
             var treat_release, transport, unable, doa, ama;
             treat_release = transport = unable = doa = ama = 0;
             // Destination
-            var dest_rescate, imss, isteson, semeson, isste, pabellon, hospital_cima, hospital_clinica, hospital_san, hospital_san_jose;
-            dest_rescate = imss = isteson = semeson = isste = pabellon = hospital_cima = hospital_clinica = hospital_san = hospital_san_jose = 0;
+            var dest_rescate, imss, isteson, semeson, isste, pabellon, hospital_cima, hospital_clinica, hospital_san, hospital_san_jose, otro;
+            dest_rescate = imss = isteson = semeson = isste = pabellon = hospital_cima = hospital_clinica = hospital_san = hospital_san_jose = otro = 0;
             // Trauma Cause
             var animal, assault, motor, bike, boat, drown, electrical, explosion, fall, fire, gun, tools, stabbing, struck, toxic, vehicle, trauma_other;
             animal = assault = motor = bike = boat = drown = electrical = explosion = fall = fire = gun = tools = stabbing = struck = toxic = vehicle = trauma_other = 0;
@@ -172,6 +172,7 @@ function summary(from, to, callback) {
                 hospital_clinica += checkData("Hospital Clinica Del Noro", destination);
                 hospital_san += checkData("Hospital San Benito", destination);
                 hospital_san_jose += checkData("Guaymas", destination);
+                otro += checkData("Otro", destination);
                 // Trauma Cause
                 animal += checkData("Animal", trauma_cause);
                 assault += checkData("Asalto", trauma_cause);
@@ -203,7 +204,7 @@ function summary(from, to, callback) {
                 if (obstetrics) { procedure_ob += 1;}
             });
             const chartSummary = {
-                adults, seniors, pediatrics, neonatals, males, females, other_sex, bp, injection, medical_other, cardiac, pulmonary, trauma, ob, il_rescate, home, business, road, construction, ocean, beach, marina, medical_office, school, other, treat_release, transport, unable, doa, ama, dest_rescate, imss, isteson, semeson, isste, pabellon, hospital_cima, hospital_clinica, hospital_san, animal, assault, motor, bike, boat, drown, electrical, explosion, fall, fire, gun, tools, stabbing, struck, toxic, vehicle, trauma_other, io, pleural, airway_lma, airway_intub, crico, cardiac_arrest, cardiac_defib_aed, cardiac_defib_manual, cardiac_pacing, procedure_ob, hospital_san_jose
+                adults, seniors, pediatrics, neonatals, males, females, other_sex, bp, injection, medical_other, cardiac, pulmonary, trauma, ob, il_rescate, home, business, road, construction, ocean, beach, marina, medical_office, school, other, treat_release, transport, unable, doa, ama, dest_rescate, imss, isteson, semeson, isste, pabellon, hospital_cima, hospital_clinica, hospital_san, animal, assault, motor, bike, boat, drown, electrical, explosion, fall, fire, gun, tools, stabbing, struck, toxic, vehicle, trauma_other, io, pleural, airway_lma, airway_intub, crico, cardiac_arrest, cardiac_defib_aed, cardiac_defib_manual, cardiac_pacing, procedure_ob, hospital_san_jose, otro
             }
             callback(null, chartSummary);
         }
