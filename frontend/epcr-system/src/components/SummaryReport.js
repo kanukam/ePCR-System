@@ -324,6 +324,10 @@ export default class SummaryReport extends Component {
                                         <Col xs={2} className="mt-2">
                                             {summary.hospital_san_jose}
                                         </Col>
+                                        <Form.Label column xs={4}> {this.context.translate('other')}:</Form.Label>
+                                        <Col xs={2} className="mt-2">
+                                            {summary.otro}
+                                        </Col>
                                     </Form.Group>
                                 </Card.Body>
                             </Card>
