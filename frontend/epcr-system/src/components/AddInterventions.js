@@ -205,7 +205,7 @@ export default class AddInterventions extends Component {
     submitProcedure = (event) => {
         event.preventDefault();
         // check if all required fields are filled, otherwise do not submit values
-        if (this.state.pName === "" || this.state.pTime === "" || this.state.pBy === "") {
+        if (this.state.pTime === "") {
             this.setState({ message: "required-fields" });
         } else {
             this.setState({ message: "" });

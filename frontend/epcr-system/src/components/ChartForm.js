@@ -268,11 +268,6 @@ export default class ChartForm extends Component {
         this.setState({ [displayedDate]: date });
         date = moment(date).format("YYYY-MM-DD");
         this.setState({ [input]: date });
-        if(input === "birth") {
-            var now = new Date();
-            var theAge = now.getFullYear() - initialDate.getFullYear();
-            this.setState({ age: theAge });
-        }
     }
 
     displayTime(time) {
@@ -376,7 +371,7 @@ export default class ChartForm extends Component {
     // submit the entire chart to backend
     handleSubmit = (event) => {
         event.preventDefault();
-        if (this.state.idate === "" || this.state.loctype === "" || this.state.loc === "" || this.state.disp === "" || this.state.dest === "" || this.state.unit === "" || this.state.ctype === "" || this.state.nature === "" || this.state.dispatch === "" || this.state.enroute === "" || this.state.arrscn === "" || this.state.contact === "" || this.state.dptscn === "" || this.state.arrdes === "" || this.state.trcare === "" || this.state.crew1 === "" || this.state.lname === "" || this.state.fname === "" || this.state.gender === "" || this.state.birth === "") {
+        if (this.state.idate === "" || this.state.loctype === "" || this.state.loc === "" || this.state.disp === "" || this.state.dest === "" || this.state.unit === "" || this.state.ctype === "" || this.state.nature === "" || this.state.dispatch === "" || this.state.enroute === "" || this.state.arrscn === "" || this.state.contact === "" || this.state.dptscn === "" || this.state.arrdes === "" || this.state.trcare === "" || this.state.crew1 === "" || this.state.lname === "" || this.state.fname === "" || this.state.gender === "" || (this.state.birth === "" && this.state.age === "")) {
             this.setState({ message: "required-fields" });
         } else {
             /* chart table */
@@ -393,6 +388,7 @@ export default class ChartForm extends Component {
             const patient_contact_date_time = this.state.contact || null;
             const depart_date_time = this.state.dptscn || null;
             const arrive_destination_date_time = this.state.arrdes || null;
+            const estimated_age = this.state.age;
             const transfer_date_time = this.state.trcare || null;
             let ambulance_crew = this.state.crew1;
             if(this.state.crew1 === "Otro") { ambulance_crew = this.state.crew1other; }
@@ -519,7 +515,7 @@ export default class ChartForm extends Component {
                 method: 'POST',
                 body: JSON.stringify({
                     body: {
-                        incident_number, incident_date, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, arrive_destination_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, ambulance_crew, medications, procedures, skin, mental, neurological, head, neck, chest, pulse_strength, pulse_rate, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot, burn_calculation, extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech, vital_signs, p_weight, p_classify, p_bcolor, p_address, p_phone, p_hpi, p_history_given, p_regular_medicine, p_medical_allergies, p_environmental_allergies, p_immunizations, p_past_medical_history, intake_bleeding, intake_iv_fluids, intake_oral_fluids, intake_vomit, obstetrics
+                        incident_number, incident_date, estimated_age, location, incident_address, disposition, agencies, patient_count, triage_color, dispatch_date_time, enroute_date_time, arrive_date_time, patient_contact_date_time, depart_date_time, arrive_destination_date_time, transfer_date_time, unit_number, call_type, call_nature, care_level, destination, trauma_cause, vehicle_accident_type, vehicle_accident_impact, vehicle_accident_safety_equipment, vehicle_accident_mph, vehicle_accident_ejected, ambulance_crew, medications, procedures, skin, mental, neurological, head, neck, chest, pulse_strength, pulse_rate, abdomen, pelvis, back, left_upper_arm, left_lower_arm, left_hand_wrist, left_upper_leg, left_lower_leg, left_ankle_foot, right_upper_arm, right_lower_arm, right_hand_wrist, right_upper_leg, right_lower_leg, right_ankle_foot, burn_calculation, extra_findings, stroke_time, stroke_facial_droop, stroke_arm_drift, stroke_abnormal_speech, vital_signs, p_weight, p_classify, p_bcolor, p_address, p_phone, p_hpi, p_history_given, p_regular_medicine, p_medical_allergies, p_environmental_allergies, p_immunizations, p_past_medical_history, intake_bleeding, intake_iv_fluids, intake_oral_fluids, intake_vomit, obstetrics
                     },
                     pbody: { fname, lname, birth, gender },
                     patientID: patientID
@@ -529,9 +525,7 @@ export default class ChartForm extends Component {
                 },
                 credentials: 'include'
             }
-            console.log(options);
             fetch(url, options).then((response) => {
-                console.log(response);
                 if (!response.ok) {
                     throw Error;
                 }

@@ -132,7 +132,6 @@ export default class ViewCharts extends Component {
 
     render() {
         let searchPadding = '5px 0 5px ' + this.state.contentSpacing.slice(6);
-
         return (
             <React.Fragment>
                 <MainNav 
@@ -224,15 +223,15 @@ export default class ViewCharts extends Component {
                 <Container className="main-content" style={{padding: this.state.contentSpacing}}>
                     {this.state.isData === false && <div><br /><h2 style={{textAlign:"center"}}>There are currently no patient charts in the system</h2></div>}
 
-                    {this.state.charts && !this.state.filter && this.state.charts.map(({ fname, lname, birth, p_address, p_phone, id, call_type, incident_date, location}, idx) => {
+                    {this.state.charts && !this.state.filter && this.state.charts.map(({ estimated_age, fname, lname, birth, p_address, p_phone, id, call_type, incident_date, location}, idx) => {
                         return (
-                            <ChartPreview fname={fname} lname={lname} birth={birth} address={p_address} phone={p_phone} id={id} call_type={call_type} incident_date={incident_date} location={location} key={idx} />
+                            <ChartPreview fname={fname} estimated_age={estimated_age} lname={lname} birth={birth} address={p_address} phone={p_phone} id={id} call_type={call_type} incident_date={incident_date} location={location} key={idx} />
                         )
                     })}
 
-                    {this.state.charts && this.state.filter && this.state.filtered.map(({ fname, lname, birth, p_address, p_phone, id, call_type, incident_date, location }, idx) => {
+                    {this.state.charts && this.state.filter && this.state.filtered.map(({estimated_age, fname, lname, birth, p_address, p_phone, id, call_type, incident_date, location }, idx) => {
                         return (
-                            <ChartPreview fname={fname} lname={lname} birth={birth} address={p_address} phone={p_phone} id={id} call_type={call_type} incident_date={incident_date} location={location} key={idx} />
+                            <ChartPreview fname={fname} estimated_age={estimated_age} lname={lname} birth={birth} address={p_address} phone={p_phone} id={id} call_type={call_type} incident_date={incident_date} location={location} key={idx} />
                         )
                     })}
 

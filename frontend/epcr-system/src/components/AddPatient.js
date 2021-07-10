@@ -185,7 +185,7 @@ export default class AddPatient extends Component {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>{this.context.translate('age')}</th>
+                                    <th>{this.context.translate('estimated-age')}<em>*</em></th>
                                     <td><input style={{ width: '80px', marginRight: '0px' }} type="number" min="0" name="age" value={values.age} onChange={this.props.handleChange('age')} /> {this.context.translate('years')}</td>
                                 </tr>
                                 <tr>

@@ -44,6 +44,7 @@ export default class ViewChart extends Component {
             }
             return response.json();
         }).then(data => {
+            console.log(data.vital_signs);
             if(data.procedures){data.procedures = data.procedures.split('],');}
             if(data.medications){data.medications = data.medications.split('],');}
             if(data.vital_signs){data.vital_signs = data.vital_signs.split('],');}
@@ -156,8 +157,8 @@ export default class ViewChart extends Component {
                             <tr>
                                 <td><b>{this.context.translate('full-name')}</b></td>
                                 <td>{chart.lname}, {chart.fname}</td>
-                                <td><b>{this.context.translate('pbirth')}</b></td>
-                                <td>{chart.birth ? <Moment date={chart.birth} format="DD-MM-YYYY" /> : null}</td>
+                                <td><b>{chart.birth ? this.context.translate('pbirth'): this.context.translate('estimated-age') }</b></td>
+                                <td>{chart.birth ? <Moment date={chart.birth} format="DD-MM-YYYY" /> : chart.estimated_age}</td>
                             </tr>
                             <tr>
                                 <td><b>{this.context.translate('psex')}</b></td>
@@ -461,7 +462,7 @@ export default class ViewChart extends Component {
                             </tr>
                             <tr>
                                 <td><b>{this.context.translate('med-allergy')}</b></td>
-                                <td colSpan="3" className="long">{chart["p_medication_allergies"]}</td>
+                                <td colSpan="3" className="long">{chart["p_medical_allergies"]}</td>
                             </tr>
                             <tr>
                                 <td><b>{this.context.translate('env-allergy')}</b></td>
@@ -484,7 +485,7 @@ export default class ViewChart extends Component {
                     {chart.vital_signs ?
                         <Table striped bordered>
                             <thead>
-                                <tr><th colSpan="8" className="heading">{this.context.translate('Vitals')}</th></tr>
+                                <tr><th colSpan="9" className="heading">{this.context.translate('Vitals')}</th></tr>
                                 <tr>
                                     <th>{this.context.translate('Time')}</th>
                                     <th>{this.context.translate('Pulse')}</th>
@@ -494,6 +495,7 @@ export default class ViewChart extends Component {
                                     <th>{this.context.translate('Temp')}</th>
                                     <th>{this.context.translate('ETCO2')}</th>
                                     <th>{this.context.translate('GCS')}</th>
+                                    <th>{this.context.translate('Pain')}</th>
                                 </tr>
                             </thead>
                             
@@ -510,31 +512,35 @@ export default class ViewChart extends Component {
                                     sepereated[5] = sepereated[5].replace('GCS:', '');
                                     sepereated[6] = sepereated[6].replace('Dolor:', '');
                                     sepereated[7] = sepereated[7].replace('Temp:', '');
+                                    sepereated[8] = sepereated[8].replace('ETCO2:', '');
                                     return (
                                         <tr>
-                                            <td>
+                                            <td className="text-center">
                                                 {sepereated[0]}
                                             </td>
-                                            <td>
+                                            <td className="text-center">
                                                 {sepereated[1]}
                                             </td>
-                                            <td>
+                                            <td className="text-center">
                                                 {sepereated[2]}
                                             </td>
-                                            <td>
+                                            <td className="text-center">
                                                 {sepereated[3]}
                                             </td>
-                                            <td>
+                                            <td className="text-center">
                                                 {sepereated[4]}
                                             </td>
-                                            <td>
+                                            <td className="text-center">
                                                 {sepereated[7]}
                                             </td>
-                                            <td>
-                                                {sepereated[6]}
+                                            <td className="text-center">
+                                                {sepereated[8]}
                                             </td>
-                                            <td>
+                                            <td className="text-center">
                                                 {sepereated[5]}
+                                            </td>
+                                            <td className="text-center">
+                                                {sepereated[6]}
                                             </td>
                                         </tr>
                                     )

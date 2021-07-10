@@ -26,8 +26,8 @@ export class ChartPreview extends Component {
                         <b>{this.context.translate('name')}: </b>
                         {this.props.fname} {this.props.lname}
                         <br />
-                        <b>{this.context.translate('dob')}: </b>
-                        {this.props.birth && this.year(this.props.birth)}
+                        <b>{this.props.birth? this.context.translate('dob'): this.context.translate('estimated-age')}: </b>
+                        {this.props.birth? (this.props.birth && this.year(this.props.birth)): this.props.estimated_age}
                         <br />
                         <b>{this.context.translate('address')}: </b>
                         {processAddress(this.props.address)}

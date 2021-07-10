@@ -124,7 +124,7 @@ export default class Confirm extends Component {
                                     <td>
                                         <i>{this.context.translate('full-name')}</i><span>{values.lname}, {values.fname}</span><br />
                                         <i>{this.context.translate('pbirth')}</i><span>{values.birth ? <Moment date={values.birth} format="DD-MM-YYYY" /> : null}</span><br />
-                                        <i>{this.context.translate('age')}</i><span>{values.age} {this.context.translate('years')}</span><br />
+                                        <i>{this.context.translate('estimated-age')}</i><span>{values.age} {this.context.translate('years')}</span><br />
                                         <i>{this.context.translate('classify')}</i><span>{values.classify}</span><br />
                                         <i>{this.context.translate('psex')}</i><span>{values.gender}</span><br />
                                         <i>{this.context.translate('pweight')}</i><span>{values.weight ? values.weight + " kg" : null} </span><br />
@@ -268,7 +268,6 @@ export default class Confirm extends Component {
                                 <tr>
                                     <th width="25%">{this.context.translate('full-name')}</th>
                                     <th width="30%">{this.context.translate('cert')}</th>
-                                    <th width="45%">{this.context.translate('signature')}</th>
                                 </tr>
                                 {userTable}
                             </tbody>
