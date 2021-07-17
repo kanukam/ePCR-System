@@ -234,6 +234,16 @@ export default class SummaryReport extends Component {
                                             {summary.school}
                                         </Col>
 
+                                        <Form.Label column xs={4}>{this.context.translate('recreation')}:</Form.Label>
+                                        <Col xs={2} className="mt-2">
+                                            {summary.recreation}
+                                        </Col>
+
+                                        <Form.Label column xs={4}>{this.context.translate('public')}:</Form.Label>
+                                        <Col xs={2} className="mt-2">
+                                            {summary.public}
+                                        </Col>
+
                                         <Form.Label column xs={4}>{this.context.translate('other')}:</Form.Label>
                                         <Col xs={2} className="mt-2">
                                             {summary.other}

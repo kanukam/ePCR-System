@@ -110,8 +110,8 @@ function summary(from, to, callback) {
             var bp, injection, medical_other, cardiac, pulmonary, trauma, ob;
             bp = injection = medical_other = cardiac = pulmonary = trauma = ob = 0;
             // Incident Location
-            var il_rescate, home, business, road, construction, ocean, beach, marina, medical_office, school, other;
-            il_rescate = home = business = road = construction = ocean = beach = marina = medical_office = school = other = 0;
+            var il_rescate, home, business, road, construction, ocean, beach, marina, medical_office, school, other, public, recreation;
+            il_rescate = home = business = road = construction = ocean = beach = marina = medical_office = school = other = public = recreation = 0;
             // Disposition
             var treat_release, transport, unable, doa, ama;
             treat_release = transport = unable = doa = ama = 0;
@@ -155,6 +155,9 @@ function summary(from, to, callback) {
                 medical_office += checkData("médica", location);
                 school += checkData("Escuela", location);
                 other += checkData("Otro", location);
+                public += checkData("Publico", location);
+                recreation += checkData("recreación", location);
+                recreation += 
                 // Disposition
                 treat_release += checkData("Tratar", disposition);
                 transport += checkData("Transportacion", disposition);
@@ -192,7 +195,7 @@ function summary(from, to, callback) {
                 vehicle += checkData("vehículo", trauma_cause);
                 trauma_other += checkData("Otro", trauma_cause);
                 // Procedures
-                io += checkData("Intravenosa", procedures);
+                io += checkData("IO Intravenosa", procedures);
                 pleural += checkData("Descompresión", procedures);
                 airway_lma += checkData("LMA", procedures);
                 airway_intub += checkData("Intubación", procedures);
@@ -204,7 +207,7 @@ function summary(from, to, callback) {
                 if (obstetrics) { procedure_ob += 1;}
             });
             const chartSummary = {
-                adults, seniors, pediatrics, neonatals, males, females, other_sex, bp, injection, medical_other, cardiac, pulmonary, trauma, ob, il_rescate, home, business, road, construction, ocean, beach, marina, medical_office, school, other, treat_release, transport, unable, doa, ama, dest_rescate, imss, isteson, semeson, isste, pabellon, hospital_cima, hospital_clinica, hospital_san, animal, assault, motor, bike, boat, drown, electrical, explosion, fall, fire, gun, tools, stabbing, struck, toxic, vehicle, trauma_other, io, pleural, airway_lma, airway_intub, crico, cardiac_arrest, cardiac_defib_aed, cardiac_defib_manual, cardiac_pacing, procedure_ob, hospital_san_jose, otro
+                public, recreation, adults, seniors, pediatrics, neonatals, males, females, other_sex, bp, injection, medical_other, cardiac, pulmonary, trauma, ob, il_rescate, home, business, road, construction, ocean, beach, marina, medical_office, school, other, treat_release, transport, unable, doa, ama, dest_rescate, imss, isteson, semeson, isste, pabellon, hospital_cima, hospital_clinica, hospital_san, animal, assault, motor, bike, boat, drown, electrical, explosion, fall, fire, gun, tools, stabbing, struck, toxic, vehicle, trauma_other, io, pleural, airway_lma, airway_intub, crico, cardiac_arrest, cardiac_defib_aed, cardiac_defib_manual, cardiac_pacing, procedure_ob, hospital_san_jose, otro
             }
             callback(null, chartSummary);
         }
