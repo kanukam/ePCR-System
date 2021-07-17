@@ -157,7 +157,6 @@ function summary(from, to, callback) {
                 other += checkData("Otro", location);
                 public += checkData("Publico", location);
                 recreation += checkData("recreación", location);
-                recreation += 
                 // Disposition
                 treat_release += checkData("Tratar", disposition);
                 transport += checkData("Transportacion", disposition);
