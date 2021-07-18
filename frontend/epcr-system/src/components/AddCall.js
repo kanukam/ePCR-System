@@ -16,6 +16,7 @@ export default class AddCall extends Component {
     }
 
     componentDidMount() {
+        this.props.jwtcookie();
         this.props.getIno();
         const url = 'http://localhost:3000/api/users';
         const options = {

@@ -14,6 +14,10 @@ export default class PhysicalAssessment extends Component {
         };
     }
 
+    componentDidMount(){
+        this.props.jwtcookie();
+    }
+
     // navigate to a certain section
     navigate = step => (e) => {
         e.preventDefault();
