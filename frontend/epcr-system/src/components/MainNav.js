@@ -135,6 +135,14 @@ export default class MainNav extends Component {
 				                </Nav.Link>
 							</Nav.Item>
 						}
+						<Nav.Item>
+							<NavDropdown title={this.props.username} id="basic-nav-dropdown">
+								<NavDropdown.Item onClick={this.logout}>{this.context.translate('logout')}</NavDropdown.Item>
+								<NavDropdown.Divider />
+								<NavDropdown.Item onClick={this.toggleLanguage("en")}>English</NavDropdown.Item>
+								<NavDropdown.Item onClick={this.toggleLanguage("es")}>Espanol</NavDropdown.Item>
+							</NavDropdown>
+						</Nav.Item>
 			        </Navbar>
 		        : null}
 	        </div>
