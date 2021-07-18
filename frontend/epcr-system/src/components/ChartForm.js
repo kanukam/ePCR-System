@@ -178,7 +178,7 @@ export default class ChartForm extends Component {
             none: [],
         };
     }
-    
+
     componentDidMount(){
         this.jwtCookie();
     }
@@ -567,7 +567,7 @@ export default class ChartForm extends Component {
         })
     }
 
-    jwtCookie() {
+    jwtCookie = () => {
         const url = 'http://localhost:3000/api/test-auth';
         const options = {
           method: 'GET',
@@ -593,6 +593,7 @@ export default class ChartForm extends Component {
             case 1:
                 return <AddCall
                     nextStep={this.nextStep}
+                    jwtCookie={this.jwtCookie}
                     navigate={this.navigate}
                     handleChange={this.handleChange}
                     handleCheckbox={this.handleCheckbox}
@@ -605,6 +606,7 @@ export default class ChartForm extends Component {
             case 2:
                 return <AddPatient
                     nextStep={this.nextStep}
+                    jwtCookie={this.jwtCookie}
                     prevStep={this.prevStep}
                     navigate={this.navigate}
                     handleChange={this.handleChange}
@@ -619,6 +621,7 @@ export default class ChartForm extends Component {
             case 3:
                 return <PhysicalAssessment
                     nextStep={this.nextStep}
+                    jwtCookie={this.jwtCookie}
                     prevStep={this.prevStep}
                     navigate={this.navigate}
                     handleChange={this.handleChange}
@@ -631,6 +634,7 @@ export default class ChartForm extends Component {
             case 4:
                 return <AddInterventions
                     nextStep={this.nextStep}
+                    jwtCookie={this.jwtCookie}
                     prevStep={this.prevStep}
                     navigate={this.navigate}
                     handleChange={this.handleChange}
@@ -645,6 +649,7 @@ export default class ChartForm extends Component {
             case 5:
                 return <Confirm
                     nextStep={this.nextStep}
+                    jwtCookie={this.jwtCookie}
                     prevStep={this.prevStep}
                     navigate={this.navigate}
                     handleSubmit={this.handleSubmit}
