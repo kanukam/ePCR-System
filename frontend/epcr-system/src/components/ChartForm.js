@@ -178,6 +178,10 @@ export default class ChartForm extends Component {
             none: [],
         };
     }
+    
+    componentDidMount(){
+        this.jwtCookie();
+    }
 
     // fetch count of incidents in the current year from backend to generate incident number
     getIno = () => {
@@ -562,6 +566,25 @@ export default class ChartForm extends Component {
             step: input
         })
     }
+
+    jwtCookie() {
+        const url = 'http://localhost:3000/api/test-auth';
+        const options = {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include'
+        }
+    
+        fetch(url, options).then((response) => {
+          if (!response.ok) {
+            throw Error("Failed");
+          }
+        }).catch((error) => {
+            this.context.setAuth(false);
+        })
+      }
 
     render() {
         const { step } = this.state;
