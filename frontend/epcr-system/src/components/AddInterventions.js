@@ -69,7 +69,7 @@ export default class AddInterventions extends Component {
         };
     }
     componentDidMount(){
-        this.props.jwtcookie();
+        this.props.jwtCookie();
     }
     // toggle the procedures popup, reset all values
     toggleProc = () => {

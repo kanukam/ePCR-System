@@ -22,7 +22,7 @@ export default class AddPatient extends Component {
 
     // get the patients in the system from the backend
     componentDidMount() {
-        this.props.jwtcookie();
+        this.props.jwtCookie();
         const url = 'http://localhost:3000/api/patients/';
         const options = {
             method: 'GET',

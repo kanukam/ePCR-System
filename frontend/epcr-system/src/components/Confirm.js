@@ -14,9 +14,9 @@ export default class Confirm extends Component {
     }
 
     componentDidMount(){
-        this.props.jwtcookie();
+        this.props.jwtCookie();
     }
-    
+
     navigate = step => (e) => {
         e.preventDefault();
         this.props.navigate(step);
