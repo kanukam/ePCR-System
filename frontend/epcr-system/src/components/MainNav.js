@@ -135,9 +135,6 @@ export default class MainNav extends Component {
 				                </Nav.Link>
 							</Nav.Item>
 						}
-						<Nav.Item>
-							<Nav.Link onClick={this.logout}>{this.context.translate('logout')}</Nav.Link>
-				        </Nav.Item>
 			        </Navbar>
 		        : null}
 	        </div>
