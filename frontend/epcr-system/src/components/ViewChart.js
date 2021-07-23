@@ -44,7 +44,6 @@ export default class ViewChart extends Component {
             }
             return response.json();
         }).then(data => {
-            console.log(data.vital_signs);
             if(data.procedures){data.procedures = data.procedures.split('],');}
             if(data.medications){data.medications = data.medications.split('],');}
             if(data.vital_signs){data.vital_signs = data.vital_signs.split('],');}

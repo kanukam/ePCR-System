@@ -77,7 +77,7 @@ class App extends React.Component {
         this.setAuth(true);
       }
     }).catch((error) => {
-
+      this.setAuth(true);
     })
   }
 
@@ -126,8 +126,8 @@ class App extends React.Component {
             <ProtectedRoute exact path="/ViewCharts" auth={this.state.auth} component={ViewCharts} />
             <ProtectedRoute exact path="/ViewChart/:id" auth={this.state.auth} component={ViewChart} />
             <ProtectedRoute exact path="/SummaryReport" auth={this.state.auth} component={SummaryReport} />
-            <ProtectedRoute exact path="/Settings" auth={this.state.auth} component={Settings} />
-            <ProtectedRoute exact path="/Statistics" auth={this.state.auth} component={Statistics} />
+            <ProtectedRoute exact path="/Settings" jwtCookie={this.jwtCookie} auth={this.state.auth} component={Settings} />
+            <ProtectedRoute exact path="/Statistics" jwtCookie={this.jwtCookie} auth={this.state.auth} component={Statistics} />
             <ProtectedRoute exact path="/TrendCall" auth={this.state.auth} component={TrendCall} />
             <Route exact path="/Register" component={Register} />
             <Route exact path="/Reset" component={Reset} />
