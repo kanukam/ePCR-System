@@ -32,10 +32,6 @@ class Statistics extends Component {
         this.toggleCollapse = this.toggleCollapse.bind(this);
     }
 
-    componentDidMount(){
-        this.props.jwtCookie();
-    }
-
     toggleCollapse() {
         this.setState({ contentSpacing: (this.state.sidebarHide ? '0 0 0 0' : '0 0 0 150px') })
         this.setState({ sidebarHide: !this.state.sidebarHide });
